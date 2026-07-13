@@ -3,12 +3,12 @@ import { GraduationCap, ShieldCheck, Wallet, Coins } from 'lucide-react'
 export function Card({ icon, title, desc, route }: { icon: React.ReactNode; title: string; desc: string; route: string }) {
   return (
     <div className="border rounded-lg p-8 text-center hover:shadow-lg transition-shadow">
-      <div className="flex justify-center mb-4 text-[#e67e22]">
+      <div className="flex justify-center mb-4 text-[#2563eb]">
         {icon}
       </div>
       <h3 className="text-xl font-bold text-foreground uppercase mb-4">{title}</h3>
       <p className="text-gray-500 mb-6">{desc}</p>
-      <a href={route} className="inline-block bg-[#e67e22] text-white px-6 py-2 rounded hover:bg-[#d35400] transition-colors">
+      <a href={route} className="inline-block bg-[#2563eb] text-white px-6 py-2 rounded hover:bg-[#1d4ed8] transition-colors">
         Learn more
       </a>
     </div>

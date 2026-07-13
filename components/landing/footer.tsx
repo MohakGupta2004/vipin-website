@@ -70,7 +70,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-[#2c3e50] text-white">
+    <footer className="bg-[#0f1f4c] text-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
           <FooterSection title="SECURITIES" links={securitiesLinks} />
@@ -113,7 +113,7 @@ export default function Footer() {
             />
             <Button
               type="submit"
-              className="bg-[#e67e22] text-white hover:bg-[#d35400] rounded-sm"
+              className="bg-[#2563eb] text-white hover:bg-[#1d4ed8] rounded-sm"
             >
               Sign up
             </Button>
@@ -121,7 +121,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-gray-600 bg-[#1a252f] py-4">
+      <div className="border-t border-gray-600 bg-[#0a1533] py-4">
         <div className="mx-auto max-w-7xl px-4 text-center text-xs text-gray-400 sm:px-6 lg:px-8">
           <p>
             Copyright © 2026 Business Career College All rights reserved · RapidLMS, LearnerVerified, and the LearnerVerified double checkmark logo are trademarks of We Know Training.

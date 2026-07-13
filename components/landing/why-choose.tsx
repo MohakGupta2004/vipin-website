@@ -17,7 +17,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-[#f0f4f8] py-16 px-8">
+    <section className="bg-[#eef3fc] py-16 px-8">
       <div className="max-w-6xl mx-auto grid grid-cols-2 gap-12">
         <div>
           <h2 className="text-4xl font-bold text-gray-800 mb-6">Why choose Vipin Garg</h2>
@@ -29,14 +29,14 @@ My coaching style is practical, exam-focused and career-oriented. I help student
           <p className="text-gray-600 mb-8">
             We focus on clarity, structure, and readiness, so learners know what to focus on and can move forward with confidence.
           </p>
-          <a href="/about" className="inline-block bg-[#e67e22] text-white px-8 py-3 rounded hover:bg-[#d35400] transition-colors font-medium">
+          <a href="/about" className="inline-block bg-[#2563eb] text-white px-8 py-3 rounded hover:bg-[#1d4ed8] transition-colors font-medium">
             About Us
           </a>
         </div>
         <div className="space-y-6">
           {features.map((feature, index) => (
             <div key={index} className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full border-2 border-[#e67e22] flex items-center justify-center text-[#e67e22]">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full border-2 border-[#2563eb] flex items-center justify-center text-[#2563eb]">
                 <Check size={20} />
               </div>
               <div>

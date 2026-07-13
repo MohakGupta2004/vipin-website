@@ -40,7 +40,7 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   return (
-    <section className="bg-[#e8f5e9] py-16 px-8">
+    <section className="bg-[#f5f8fd] py-16 px-8">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
           Vipin Garg is trusted by professionals across Canada
