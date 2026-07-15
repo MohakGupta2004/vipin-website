@@ -2,36 +2,36 @@ import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const reviews = [
   {
-    name: "Emily Thun",
-    initials: "ET",
-    rating: 5,
-    time: "a month ago",
-    text: "I took the LLQP online courses and they were really helpful. Responsive customer support and lots of resources for studying."
-  },
-  {
-    name: "Amit Gogia",
-    initials: "AG",
+    name: "Emily Thum",
     rating: 5,
     time: "2 months ago",
-    text: "Nice team to help and courses to persue your career, Andy replied to my queries swiftly which helped me make a decision on the spot, I purchased the course and already started, Thank You Vipin"
+    text: "I took the LLQP online courses and they were really helpful. Responsive instructors, great study materials, and lots of resources for studying.",
+    bg: "#f2f6fb"
+  },
+  {
+    name: "Amit Gogja",
+    rating: 5,
+    time: "2 months ago",
+    text: "Nice team to help and courses to prepare your exams. After helped me to pass my exam, I upgraded the decision in the spot. I purchased the course and already started.",
+    bg: "#edf7fa"
   },
   {
     name: "Shaopeng Woo",
-    initials: "SW",
     rating: 5,
     time: "3 months ago",
-    text: "Appreciate your prompt support"
+    text: "Appreciate your prompt support throughout the process.",
+    bg: "#fdf3ec"
   }
 ]
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 mb-4">
       {[1, 2, 3, 4, 5].map((star) => (
         <Star
           key={star}
           size={16}
-          className={star <= rating ? "fill-[#f59e0b] text-[#f59e0b]" : "text-gray-300"}
+          className={star <= rating ? "fill-[#fbbf24] text-[#fbbf24]" : "fill-gray-200 text-gray-200"}
         />
       ))}
     </div>
@@ -40,41 +40,43 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   return (
-    <section className="bg-[#f5f8fd] py-16 px-8">
+    <section className="bg-white py-20 px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1e2a4a] mb-14">
           Vipin Garg is trusted by professionals across Canada
         </h2>
-        
+
         <div className="relative">
-          <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors z-10">
-            <ChevronLeft size={24} className="text-gray-600" />
+          <button
+            aria-label="Previous testimonials"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 w-11 h-11 bg-[#e5f1f7] rounded-full flex items-center justify-center hover:bg-[#d3e7f1] transition-colors z-10"
+          >
+            <ChevronLeft size={22} className="text-[#219ebc]" />
           </button>
-          
-          <div className="grid grid-cols-3 gap-6 px-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 md:px-14">
             {reviews.map((review, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-white font-medium">
-                    {review.initials}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">{review.name}</h4>
-                    <StarRating rating={review.rating} />
-                  </div>
-                </div>
-                <p className="text-gray-500 text-sm mb-3">{review.time}</p>
-                <p className="text-gray-700">{review.text}</p>
+              <div
+                key={index}
+                className="rounded-xl p-7"
+                style={{ backgroundColor: review.bg }}
+              >
+                <StarRating rating={review.rating} />
+                <h4 className="font-bold text-[#1e2a4a] text-sm">{review.name}</h4>
+                <p className="text-gray-500 text-xs mt-1 mb-5">{review.time}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{review.text}</p>
               </div>
             ))}
           </div>
-          
-          <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors z-10">
-            <ChevronRight size={24} className="text-gray-600" />
+
+          <button
+            aria-label="Next testimonials"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 w-11 h-11 bg-[#fdeae5] rounded-full flex items-center justify-center hover:bg-[#fbd9d1] transition-colors z-10"
+          >
+            <ChevronRight size={22} className="text-[#f45b4e]" />
           </button>
         </div>
       </div>
     </section>
   )
 }
-

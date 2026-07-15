@@ -1,50 +1,58 @@
-import { Check } from 'lucide-react'
-
 const features = [
   {
     title: "Exam-aligned preparation for regulated industries",
-    desc: "Our programs are built around real exam requirements and regulatory standards, so learners focus on what actually matters, not just what's available to study."
+    desc: "Our programs are built around real exam requirements and regulatory standards to ensure you are test-ready.",
+    color: "#219ebc"
   },
   {
     title: "Structured learning with clear outcomes",
-    desc: "We don't leave learners guessing. Each program is designed with a clear path, defined objectives, and practical milestones that support real progress."
+    desc: "We offer live classes, assignments, mock exams, and practical insights designed with a clear goal.",
+    color: "#ffd28c"
   },
   {
     title: "Built for credibility that lasts",
-    desc: "We focus on long-term professional readiness and confidence, not quick wins or surface-level completion."
+    desc: "We focus on long-term professional readiness and confidence, not quick wins or shortcuts.",
+    color: "#f45b4e"
   }
 ]
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-[#eef3fc] py-16 px-8">
-      <div className="max-w-6xl mx-auto grid grid-cols-2 gap-12">
+    <section className="bg-[#eaf5fa] py-20 px-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div>
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">Why choose Vipin Garg</h2>
-          <p className="text-gray-600 mb-4">
-            I am a CFA Charterholder, finance educator, and industry professional with over a decade of experience teaching finance subjects, mentoring certification candidates, and helping students and professionals understand capital markets, banking, investment products, regulatory frameworks and advisory practices.
-
-My coaching style is practical, exam-focused and career-oriented. I help students understand not just what to study, but how concepts apply in real banking, wealth management, insurance and investment advisory roles.
+          <h2 className="text-4xl font-bold text-[#1a7f99] leading-tight mb-6">
+            Why choose
+            <br />
+            Vipin Garg
+          </h2>
+          <p className="text-gray-600 leading-relaxed mb-8 max-w-md">
+            I am a CFA Charterholder, finance educator, and industry professional with over a decade of experience teaching finance subjects, mentoring certification candidates, and helping students and professionals understand capital markets, tax planning, and investment strategies.
           </p>
-          <p className="text-gray-600 mb-8">
-            We focus on clarity, structure, and readiness, so learners know what to focus on and can move forward with confidence.
-          </p>
-          <a href="/about" className="inline-block bg-[#2563eb] text-white px-8 py-3 rounded hover:bg-[#1d4ed8] transition-colors font-medium">
+          <a
+            href="/about"
+            className="inline-block bg-[#219ebc] text-white px-7 py-3 rounded-lg hover:bg-[#1a7f99] transition-colors font-semibold text-sm"
+          >
             About Us
           </a>
         </div>
-        <div className="space-y-6">
-          {features.map((feature, index) => (
-            <div key={index} className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full border-2 border-[#2563eb] flex items-center justify-center text-[#2563eb]">
-                <Check size={20} />
+
+        <div className="relative">
+          <div className="absolute left-[7px] top-3 bottom-3 border-l-2 border-dotted border-gray-300" />
+          <div className="space-y-12">
+            {features.map((feature, index) => (
+              <div key={index} className="relative flex gap-8">
+                <span
+                  className="relative z-10 flex-shrink-0 w-4 h-4 rounded-full mt-1.5"
+                  style={{ backgroundColor: feature.color }}
+                />
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-bold text-gray-800 mb-1">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.desc}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

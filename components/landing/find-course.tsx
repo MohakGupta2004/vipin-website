@@ -1,25 +1,28 @@
-import { GraduationCap, ShieldCheck, Wallet, Coins } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
-export function Card({ icon, title, desc, route }: { icon: React.ReactNode; title: string; desc: string; route: string }) {
+export function Card({ accent, title, desc, route }: { accent: string; title: string; desc: string; route: string }) {
   return (
-    <div className="border rounded-lg p-8 text-center hover:shadow-lg transition-shadow">
-      <div className="flex justify-center mb-4 text-[#2563eb]">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold text-foreground uppercase mb-4">{title}</h3>
-      <p className="text-gray-500 mb-6">{desc}</p>
-      <a href={route} className="inline-block bg-[#2563eb] text-white px-6 py-2 rounded hover:bg-[#1d4ed8] transition-colors">
+    <div className="bg-card rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow">
+      <div className="h-1 w-10 rounded-full mb-6" style={{ backgroundColor: accent }} />
+      <h3 className="text-xl font-bold text-foreground mb-4">{title}</h3>
+      <p className="text-gray-500 leading-relaxed mb-8">{desc}</p>
+      <a
+        href={route}
+        className="inline-flex items-center gap-2 text-sm font-medium group"
+        style={{ color: accent }}
+      >
         Learn more
+        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
       </a>
     </div>
   )
 }
 
 const links = [
-  { icon: <GraduationCap size={64} />, title: "Securities", desc: "Prepare for CIRO securities exams with confidence. CIRE and RSE Exam Prep are live on ReadyEngine™. Know when you're ready to pass before you book.", route: "/securities" },
-  { icon: <ShieldCheck size={64} />, title: "Insurance", desc: "Get licensed with confidence through our LLQP and Accident & Sickness (A&S) insurance courses. Build a rewarding career in life, health, or general insurance while helping clients protect what matters most.", route: "/insurance" },
-  { icon: <Wallet size={64} />, title: "Financial Planning", desc: "Level up your career in the financial services sector with our CFP or QAFP Exam Prep programs. Become a trusted expert and help your clients plan for a bright future.", route: "/financial-planning" },
-  { icon: <Coins size={64} />, title: "Digital Assets", desc: "With the new Certified Digital Asset Advisor (CDAA) designation you will gain the knowledge to guide Canadians through the world of digital assets and cryptocurrency.", route: "/digital-asset-financial-advisor" },
+  { accent: "#219ebc", title: "Securities", desc: "Prepare for CIRO securities exams with confidence. CIRE and RSE Exam Prep are live on ReadyEngine™. Know when you're ready to pass before you book.", route: "/securities" },
+  { accent: "#023047", title: "Insurance", desc: "Get licensed with confidence through our LLQP and Accident & Sickness (A&S) insurance courses. Build a rewarding career in life, health, or general insurance while helping clients protect what matters most.", route: "/insurance" },
+  { accent: "#ffb703", title: "Financial Planning", desc: "Level up your career in the financial services sector with our CFP or QAFP Exam Prep programs. Become a trusted expert and help your clients plan for a bright future.", route: "/financial-planning" },
+  { accent: "#fb8500", title: "Digital Assets", desc: "With the new Certified Digital Asset Advisor (CDAA) designation you will gain the knowledge to guide Canadians through the world of digital assets and cryptocurrency.", route: "/digital-asset-financial-advisor" },
 ]
 
 export default function ChooseSuccessPath() {
@@ -27,7 +30,7 @@ export default function ChooseSuccessPath() {
     <section className="py-16 px-4">
       <h1 className="text-4xl font-bold text-center text-foreground mb-4">Choose Your Path to Success</h1>
       <p className="text-center text-gray-500 mb-12">Find the course that's right for you.</p>
-      <div className="grid grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {links.map((link, index) => (
           <Card key={index} {...link} />
         ))}

@@ -2,39 +2,41 @@ import { ArrowRight } from 'lucide-react'
 
 const cards = [
   {
-    category: "SECURITIES",
     title: "Prepare for CIRO proficiency and registration exams with certainty.",
-    route: "/securities"
+    route: "/securities",
+    className: "bg-[#2c7d9e] hover:bg-[#256b88] text-white"
   },
   {
-    category: "FINANCIAL PLANNING",
     title: "Discover BCC's industry-leading CFP® and QAFP™ Exam Prep Programs.",
-    route: "/financial-planning"
+    route: "/financial-planning",
+    className: "bg-[#7cc4cd] hover:bg-[#68b4bf] text-white"
   },
   {
-    category: "INSURANCE",
     title: "Accelerate your growth with BCC's LLQP and GLQP Programs.",
-    route: "/insurance"
+    route: "/insurance",
+    className: "bg-[#fbe8bc] hover:bg-[#f7dda3] text-[#1e2a4a]"
+  },
+  {
+    title: "Stay ahead in the future of finance with digital asset expertise.",
+    route: "/digital-assets",
+    className: "bg-[#e05a4f] hover:bg-[#cc4c42] text-white"
   }
 ]
 
 export default function LearnMore() {
   return (
-    <section className="bg-[#2563eb] py-0">
-      <div className="grid grid-cols-3">
+    <section>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card, index) => (
           <a
             key={index}
             href={card.route}
-            className="p-12 text-white hover:bg-[#1d4ed8] transition-colors group"
+            className={`group p-10 transition-colors ${card.className}`}
           >
-            <p className="text-sm font-medium tracking-wider mb-4 opacity-90">{card.category}</p>
-            <h3 className="text-2xl font-light mb-8 leading-relaxed">{card.title}</h3>
-            <div className="flex items-center gap-3 group-hover:gap-4 transition-all">
-              <span className="font-medium">Learn more</span>
-              <div className="w-8 h-8 rounded-full border border-white flex items-center justify-center group-hover:bg-white group-hover:text-[#2563eb] transition-colors">
-                <ArrowRight size={16} />
-              </div>
+            <h3 className="text-base leading-relaxed mb-6">{card.title}</h3>
+            <div className="flex items-center gap-2 text-sm font-semibold">
+              <span>Learn more</span>
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </div>
           </a>
         ))}
