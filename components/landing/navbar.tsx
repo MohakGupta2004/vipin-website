@@ -4,6 +4,7 @@ import Link from "next/link"
 import { NavigationMenu } from "@base-ui/react/navigation-menu"
 
 import { Button } from "@/components/ui/button"
+import { usePathname, useRouter } from "next/navigation"
 
 const securitiesLinks = [
   { name: "Securities Courses", route: "/securities" },
@@ -75,6 +76,8 @@ function DropdownMenu({ label, items }: { label: string; items: { name: string; 
 }
 
 export default function Navbar() {
+  const pathname = usePathname()
+
   return (
     <header className="sticky top-0 z-50 bg-background">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
@@ -106,15 +109,15 @@ export default function Navbar() {
             </NavigationMenu.Positioner>
           </NavigationMenu.Portal>
         </NavigationMenu.Root>
-
+{pathname !== "/contact" && 
         <Button
           size="lg"
           className="h-11 rounded-lg px-6 text-[15px] font-semibold"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
-          Contact Us
-        </Button>
+        <>Contact Us</>
+        </Button>}
       </div>
     </header>
   )
