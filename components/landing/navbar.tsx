@@ -104,7 +104,7 @@ export default function Navbar() {
             <NavigationMenu.Positioner
               sideOffset={8}
               collisionPadding={{ top: 5, bottom: 5, left: 20, right: 20 }}
-              className="transition-[top,left,right,bottom] duration-200 ease-out before:absolute before:content-[''] data-instant:transition-none data-[side=bottom]:before:top-[-8px] data-[side=bottom]:before:left-0 data-[side=bottom]:before:right-0 data-[side=bottom]:before:h-2"
+              className="z-[100] transition-[top,left,right,bottom] duration-200 ease-out before:absolute before:content-[''] data-instant:transition-none data-[side=bottom]:before:top-[-8px] data-[side=bottom]:before:left-0 data-[side=bottom]:before:right-0 data-[side=bottom]:before:h-2"
             >
               <NavigationMenu.Popup className="relative origin-[var(--transform-origin)] data-starting-style:scale-90 data-starting-style:opacity-0 data-ending-style:scale-90 data-ending-style:opacity-0 data-ending-style:duration-150 data-ending-style:ease-ease transition-[opacity,transform,width,height] duration-200 ease-out">
                 <NavigationMenu.Viewport className="relative h-full w-full overflow-hidden rounded-xl" />
