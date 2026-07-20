@@ -22,7 +22,7 @@ const links = [
   { accent: "#219ebc", title: "Securities", desc: "Prepare for CIRO securities exams with confidence. CIRE and RSE Exam Prep are live on ReadyEngine™. Know when you're ready to pass before you book.", route: "/securities" },
   { accent: "#023047", title: "Insurance", desc: "Get licensed with confidence through our LLQP and Accident & Sickness (A&S) insurance courses. Build a rewarding career in life, health, or general insurance while helping clients protect what matters most.", route: "/insurance" },
   { accent: "#ffb703", title: "Financial Planning", desc: "Level up your career in the financial services sector with our CFP or QAFP Exam Prep programs. Become a trusted expert and help your clients plan for a bright future.", route: "/financial-planning" },
-  { accent: "#fb8500", title: "Digital Assets", desc: "With the new Certified Digital Asset Advisor (CDAA) designation you will gain the knowledge to guide Canadians through the world of digital assets and cryptocurrency.", route: "/digital-asset-financial-advisor" },
+  { accent: "#fb8500", title: "Digital Assets", desc: "With the new Certified Digital Asset Advisor (CDAA) designation you will gain the knowledge to guide Canadians through the world of digital assets and cryptocurrency.", route: "/certified-digital-asset-advisor-designation" },
 ]
 
 export default function ChooseSuccessPath() {

@@ -4,26 +4,29 @@ import Link from "next/link"
 import { NavigationMenu } from "@base-ui/react/navigation-menu"
 
 import { Button } from "@/components/ui/button"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 const securitiesLinks = [
   { name: "Securities Courses", route: "/securities" },
 ]
 
 const insuranceLinks = [
+  { name: "Insurance Overview", route: "/insurance" },
   { name: "LLQP", route: "/life-license-qualification-program" },
   { name: "PQAL", route: "/programme-de-qualification-en-assurance-de-personnes" },
   { name: "GLQP", route: "/general-level-1-insurance-qualification-program" },
 ]
 
 const financialPlanningLinks = [
+  { name: "Financial Planning Overview", route: "/financial-planning" },
   { name: "CFP Exam Prep", route: "/certified-financial-planner" },
   { name: "QAFP", route: "/qualified-associate-financial-planner" },
 ]
 
 const digitalAssetsLinks = [
-  { name: "CDAA", route: "/digital-asset-financial-advisor" },
-  { name: "CDAA Enterprise", route: "/digital-asset-corporate-training" },
+  { name: "CDAA Designation", route: "/certified-digital-asset-advisor-designation" },
+  { name: "CDAA for Advisors", route: "/digital-asset-financial-advisor" },
+  { name: "CDAA for Enterprise", route: "/digital-asset-corporate-training" },
 ]
 
 function NavLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
