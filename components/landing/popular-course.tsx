@@ -178,9 +178,10 @@ export default function PopularCourses() {
           ))}
         </div>
       </div>
+      <div className="mx-auto mt-12 max-w-7xl text-center">
           <Link
             href="/exam-prep-programs"
-            className="group/all mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            className=" group/all mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
           >
             View all programs
             <ArrowRight
@@ -188,6 +189,7 @@ export default function PopularCourses() {
               className="size-4 transition-transform duration-300 ease-out group-hover/all:translate-x-1 motion-reduce:transition-none"
             />
           </Link>
+          </div>
     </section>
   )
 }
