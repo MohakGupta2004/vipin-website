@@ -84,24 +84,24 @@ const Hero = () => (
       style={{ backgroundImage: 'radial-gradient(#8ecae6 2px, transparent 2px)', backgroundSize: '22px 22px' }}
     />
 
-    <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:py-20 sm:px-6 lg:px-8 lg:py-28">
       <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
         <ShieldCheck className="size-4" />
         CFP® &middot; QAFP™ Exam Prep
       </span>
       <h1
-        className="mt-6 max-w-3xl text-balance text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+        className="mt-6 max-w-3xl text-balance text-3xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         style={HEADING_FONT}
       >
         Financial Planning Courses
       </h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-foreground/70">
+      <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-foreground/70 sm:mt-6 sm:text-lg">
         Level up your financial services career with a CFP® or QAFP™ designation.
       </p>
-      <div className="mt-10 flex flex-wrap gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
         <Button
           size="lg"
-          className="h-13 rounded-lg px-8 text-base font-semibold"
+          className="h-13 w-full rounded-lg px-8 text-base font-semibold sm:w-auto"
           nativeButton={false}
           render={<a href="#pathways" />}
         >
@@ -110,7 +110,7 @@ const Hero = () => (
         <Button
           variant="outline"
           size="lg"
-          className="h-13 rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold text-primary hover:bg-primary/5 hover:text-primary"
+          className="h-13 w-full rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold sm:w-auto text-primary hover:bg-primary/5 hover:text-primary"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
@@ -121,7 +121,7 @@ const Hero = () => (
     </div>
 
     <svg
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-[#8ecae6]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full text-[#8ecae6] sm:h-24"
       viewBox="0 0 1440 120"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -132,7 +132,7 @@ const Hero = () => (
 );
 
 const Pathways = () => (
-  <section id="pathways" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
+  <section id="pathways" className="scroll-mt-24 px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-6xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
@@ -146,11 +146,11 @@ const Pathways = () => (
         </h2>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="mt-10 grid sm:mt-14 grid-cols-1 gap-6 md:grid-cols-2">
         {PATHWAYS.map((path) => (
           <article
             key={path.program}
-            className="group flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-10"
+            className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8 lg:p-10 transition-shadow duration-300 hover:shadow-lg"
           >
             <span
               className="inline-block self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-white"
@@ -178,7 +178,7 @@ const Pathways = () => (
 );
 
 const WhyChooseUs = () => (
-  <section className="bg-[#023047] px-4 py-24 text-white sm:px-6 lg:px-8">
+  <section className="bg-[#023047] px-4 py-14 sm:py-20 lg:py-24 text-white sm:px-6 lg:px-8">
     <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
       <div>
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8ecae6]">
@@ -195,7 +195,7 @@ const WhyChooseUs = () => (
         </p>
         <Button
           size="lg"
-          className="mt-8 h-13 rounded-lg bg-[#fb8500] px-8 text-base font-semibold text-white hover:bg-[#fb8500]/90"
+          className="mt-8 h-13 w-full rounded-lg bg-[#fb8500] px-8 sm:w-auto text-base font-semibold text-white hover:bg-[#fb8500]/90"
           nativeButton={false}
           render={<Link href="/exam-prep-programs" />}
         >
@@ -218,7 +218,7 @@ const WhyChooseUs = () => (
 );
 
 const Designations = () => (
-  <section className="bg-[#eaf5fa] px-4 py-24 sm:px-6 lg:px-8">
+  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
@@ -238,14 +238,14 @@ const Designations = () => (
 );
 
 const ContactCta = () => (
-  <section className="px-4 py-20 sm:px-6 lg:px-8">
-    <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 rounded-3xl bg-[#023047] px-8 py-14 text-center text-white sm:flex-row sm:justify-between sm:px-14 sm:text-left">
+  <section className="px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
+    <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 rounded-3xl bg-[#023047] px-6 py-10 text-center text-white sm:flex-row sm:justify-between sm:px-14 sm:py-14 sm:text-left">
       <p className="max-w-xl text-xl font-semibold leading-snug" style={HEADING_FONT}>
         If you have any questions, please reach out. We&rsquo;re here to help!
       </p>
       <Button
         size="lg"
-        className="h-13 shrink-0 rounded-lg bg-[#fb8500] px-8 text-base font-semibold text-white hover:bg-[#fb8500]/90"
+        className="h-13 w-full shrink-0 rounded-lg bg-[#fb8500] px-8 sm:w-auto text-base font-semibold text-white hover:bg-[#fb8500]/90"
         nativeButton={false}
         render={<Link href="/contact" />}
       >
@@ -265,12 +265,12 @@ const MarketingBanners = () => (
       >
         Keep building your credentials
       </h2>
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-8 grid sm:mt-12 grid-cols-1 gap-6 md:grid-cols-3">
         {MARKETING_BANNERS.map((banner) => (
           <Link
             key={banner.category}
             href={banner.route}
-            className="group flex flex-col justify-between rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border transition-shadow duration-300 hover:shadow-lg"
+            className="group flex flex-col justify-between rounded-2xl bg-card p-6 shadow-sm sm:p-8 ring-1 ring-border transition-shadow duration-300 hover:shadow-lg"
           >
             <div>
               <span

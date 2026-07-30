@@ -173,20 +173,20 @@ export default function ContactPage() {
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 pb-28 pt-16 sm:px-6 lg:px-8 lg:pb-36 lg:pt-24">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-12 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8 lg:pb-36 lg:pt-24">
           <div className="max-w-2xl animate-rise">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-[#1a7f99] ring-1 ring-[#8ecae6]/60 backdrop-blur">
               <span className="size-2 rounded-full bg-[#219ebc]" />
               We usually reply within a business day
             </span>
             <h1
-              className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+              className="mt-6 text-3xl font-bold leading-[1.15] tracking-tight text-balance text-foreground sm:text-5xl sm:leading-[1.1] lg:text-6xl"
               style={jost}
             >
               Let&apos;s map out your{' '}
               <span className="text-primary">next step</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-foreground/70">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-foreground/70 sm:text-lg">
               Questions about licensing, exam prep, or the right designation
               pathway? Tell us where you are and where you want to be — a real
               advisor will point you in the right direction.
@@ -196,7 +196,7 @@ export default function ContactPage() {
 
         {/* Teal wave sweeping the bottom */}
         <svg
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 w-full text-[#8ecae6]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-12 w-full text-[#8ecae6] sm:h-24"
           viewBox="0 0 1440 120"
           preserveAspectRatio="none"
           aria-hidden="true"
@@ -284,6 +284,9 @@ export default function ContactPage() {
                       onChange={update('firstName')}
                       aria-invalid={!!errors.firstName}
                       placeholder="Jordan"
+                      autoComplete="given-name"
+                      autoCapitalize="words"
+                      enterKeyHint="next"
                       className={fieldClass}
                     />
                   </Field>
@@ -300,6 +303,9 @@ export default function ContactPage() {
                       onChange={update('lastName')}
                       aria-invalid={!!errors.lastName}
                       placeholder="Reyes"
+                      autoComplete="family-name"
+                      autoCapitalize="words"
+                      enterKeyHint="next"
                       className={fieldClass}
                     />
                   </Field>
@@ -317,6 +323,12 @@ export default function ContactPage() {
                       onChange={update('email')}
                       aria-invalid={!!errors.email}
                       placeholder="you@email.com"
+                      autoComplete="email"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      inputMode="email"
+                      enterKeyHint="next"
                       className={fieldClass}
                     />
                   </Field>
@@ -328,6 +340,9 @@ export default function ContactPage() {
                       value={form.phone}
                       onChange={update('phone')}
                       placeholder="Optional"
+                      autoComplete="tel"
+                      inputMode="tel"
+                      enterKeyHint="next"
                       className={fieldClass}
                     />
                   </Field>
@@ -370,6 +385,7 @@ export default function ContactPage() {
                       aria-invalid={!!errors.message}
                       rows={5}
                       placeholder="Tell us a little about your goals or your question…"
+                      enterKeyHint="enter"
                       className={`${fieldClass} h-auto resize-y py-3 leading-relaxed`}
                     />
                   </Field>
@@ -418,7 +434,7 @@ export default function ContactPage() {
                       <p className="text-xs font-semibold uppercase tracking-wide text-foreground/50">
                         {label}
                       </p>
-                      <p className="mt-0.5 font-semibold text-foreground">
+                      <p className="mt-0.5 font-semibold break-words text-foreground">
                         {value}
                       </p>
                       <p className="mt-0.5 text-sm text-foreground/60">{note}</p>
@@ -452,7 +468,7 @@ export default function ContactPage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="mt-4 h-11 rounded-xl border-white/25 bg-transparent px-5 text-[15px] font-semibold text-white hover:bg-white/10 hover:text-white"
+                    className="mt-4 h-12 w-full rounded-xl border-white/25 bg-transparent px-5 text-[15px] font-semibold text-white hover:bg-white/10 hover:text-white sm:h-11 sm:w-auto"
                     nativeButton={false}
                     render={<Link href="/events" />}
                   >

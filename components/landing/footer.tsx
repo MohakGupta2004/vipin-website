@@ -45,13 +45,13 @@ const legalLinks = [
 function FooterSection({ title, links }: { title: string; links: { name: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="text-sm font-bold tracking-wide text-white mb-4">{title}</h3>
-      <ul className="space-y-2">
+      <h3 className="text-sm font-bold tracking-wide text-white mb-3 sm:mb-4">{title}</h3>
+      <ul className="space-y-0.5 sm:space-y-2">
         {links.map((link) => (
           <li key={link.name}>
             <Link
               href={link.href}
-              className="text-sm text-gray-300 hover:text-white transition-colors"
+              className="-mx-2 flex min-h-11 items-center rounded-md px-2 text-sm text-gray-300 hover:text-white active:bg-white/5 transition-colors sm:mx-0 sm:min-h-0 sm:px-0 sm:py-0"
             >
               {link.name}
             </Link>
@@ -81,8 +81,8 @@ export default function Footer() {
         <div className="flex-1 bg-[#e05a4f]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:gap-8 md:grid-cols-3 lg:grid-cols-6">
           <FooterSection title="SECURITIES" links={securitiesLinks} />
           <FooterSection title="INSURANCE" links={insuranceLinks} />
           <FooterSection title="FINANCIAL PLANNING" links={financialPlanningLinks} />
@@ -91,7 +91,7 @@ export default function Footer() {
           <FooterSection title="LEGAL" links={legalLinks} />
         </div>
 
-        <div className="mt-12 border-t border-white/15 pt-8">
+        <div className="mt-10 border-t border-white/15 pt-8 sm:mt-12">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"
@@ -111,7 +111,7 @@ export default function Footer() {
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="h-11 w-full sm:w-40 bg-white text-gray-900 placeholder:text-gray-500 rounded-sm border-0"
+                className="h-12 sm:h-11 w-full sm:w-40 bg-white text-gray-900 placeholder:text-gray-500 rounded-sm border-0"
               />
               <Input
                 type="text"
@@ -119,7 +119,7 @@ export default function Footer() {
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="h-11 w-full sm:w-40 bg-white text-gray-900 placeholder:text-gray-500 rounded-sm border-0"
+                className="h-12 sm:h-11 w-full sm:w-40 bg-white text-gray-900 placeholder:text-gray-500 rounded-sm border-0"
               />
               <Input
                 type="email"
@@ -127,11 +127,11 @@ export default function Footer() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-11 w-full sm:w-48 bg-white text-gray-900 placeholder:text-gray-500 rounded-sm border-0"
+                className="h-12 sm:h-11 w-full sm:w-48 bg-white text-gray-900 placeholder:text-gray-500 rounded-sm border-0"
               />
               <Button
                 type="submit"
-                className="h-11 px-7 bg-[#e05a4f] text-white hover:bg-[#cc4c42] rounded-sm font-semibold"
+                className="h-12 w-full sm:h-11 sm:w-auto px-7 bg-[#e05a4f] text-white hover:bg-[#cc4c42] active:bg-[#cc4c42] rounded-sm font-semibold"
               >
                 Sign up
               </Button>
@@ -141,7 +141,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-gray-400 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 pt-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] text-xs text-gray-400 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
           <p>© 2026 Business Career College. All rights reserved.</p>
           <p>Proudly Canadian. Learning for a brighter future.</p>
         </div>

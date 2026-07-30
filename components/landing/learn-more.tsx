@@ -31,9 +31,9 @@ export default function LearnMore() {
           <a
             key={index}
             href={card.route}
-            className={`group p-10 transition-colors ${card.className}`}
+            className={`group p-7 transition-colors sm:p-10 ${card.className}`}
           >
-            <h3 className="text-base leading-relaxed mb-6">{card.title}</h3>
+            <h3 className="text-base leading-relaxed text-pretty mb-5 sm:mb-6">{card.title}</h3>
             <div className="flex items-center gap-2 text-sm font-semibold">
               <span>Learn more</span>
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

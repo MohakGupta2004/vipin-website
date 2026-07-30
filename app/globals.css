@@ -151,9 +151,42 @@
     }
   body {
     @apply bg-background text-foreground;
+    /* Respect display cutouts — viewportFit is set to "cover". */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
     }
   html {
     @apply font-sans;
+    /* Stop iOS Safari from inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Kill rubber-band chaining behind fixed overlays (drawer, sticky nav). */
+    overscroll-behavior-y: none;
+    }
+  /* No grey flash box on tap; we style :active states explicitly instead. */
+  html, body {
+    -webkit-tap-highlight-color: transparent;
+    }
+  /* Touch targets: anything interactive gets a comfortable hit area on coarse
+     pointers, without changing the desktop layout. */
+  @media (pointer: coarse) {
+    a, button, [role="button"], summary, select, input[type="checkbox"], input[type="radio"] {
+      touch-action: manipulation;
+      }
+    }
+  /* iOS zooms the page when a focused field is under 16px. */
+  input, select, textarea {
+    font-size: max(1rem, 100%);
+    }
+  /* Media should never be the cause of a horizontal scrollbar. */
+  img, svg, video, canvas, iframe {
+    max-width: 100%;
+    }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+      }
     }
 }
 

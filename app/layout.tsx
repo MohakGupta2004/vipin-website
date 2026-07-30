@@ -1,4 +1,5 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -13,6 +14,31 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+export const metadata: Metadata = {
+  title: {
+    default: "Vipin Garg — Financial Services, Insurance & Securities Education",
+    template: "%s | Vipin Garg",
+  },
+  description:
+    "Licensing, exam prep, and designation pathways trusted by Canadian professionals for over 25 years.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Vipin Garg",
+  },
+  formatDetection: { telephone: false },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#011a28" },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,10 +50,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
     >
-      <body>
-      <Navbar/>
+      <body className="min-h-dvh overflow-x-clip">
+        <Navbar />
         <ThemeProvider>{children}</ThemeProvider>
-        <Footer/>
+        <Footer />
       </body>
     </html>
   )

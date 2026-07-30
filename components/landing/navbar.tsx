@@ -5,29 +5,13 @@ import { NavigationMenu } from "@base-ui/react/navigation-menu"
 
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
-
-const securitiesLinks = [
-  { name: "Securities Courses", route: "/securities" },
-]
-
-const insuranceLinks = [
-  { name: "Insurance Overview", route: "/insurance" },
-  { name: "LLQP", route: "/life-license-qualification-program" },
-  { name: "PQAL", route: "/programme-de-qualification-en-assurance-de-personnes" },
-  { name: "GLQP", route: "/general-level-1-insurance-qualification-program" },
-]
-
-const financialPlanningLinks = [
-  { name: "Financial Planning Overview", route: "/financial-planning" },
-  { name: "CFP Exam Prep", route: "/certified-financial-planner" },
-  { name: "QAFP", route: "/qualified-associate-financial-planner" },
-]
-
-const digitalAssetsLinks = [
-  { name: "CDAA Designation", route: "/certified-digital-asset-advisor-designation" },
-  { name: "CDAA for Advisors", route: "/digital-asset-financial-advisor" },
-  { name: "CDAA for Enterprise", route: "/digital-asset-corporate-training" },
-]
+import MobileNav from "@/components/landing/mobile-nav"
+import {
+  digitalAssetsLinks,
+  financialPlanningLinks,
+  insuranceLinks,
+  securitiesLinks,
+} from "@/components/landing/nav-links"
 
 function NavLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
   return (
@@ -82,11 +66,11 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 bg-background">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20 lg:gap-8 lg:px-8">
         <Link
           href="/"
-          className="text-2xl font-bold tracking-tight text-foreground"
+          className="text-xl font-bold tracking-tight text-foreground sm:text-2xl"
           style={{ fontFamily: "Jost, sans-serif" }}
         >
           Vipin<span className="text-primary">G</span>arg
@@ -112,15 +96,19 @@ export default function Navbar() {
             </NavigationMenu.Positioner>
           </NavigationMenu.Portal>
         </NavigationMenu.Root>
-{pathname !== "/contact" && 
-        <Button
-          size="lg"
-          className="h-11 rounded-lg px-6 text-[15px] font-semibold"
-          nativeButton={false}
-          render={<Link href="/contact" />}
-        >
-        <>Contact Us</>
-        </Button>}
+        <div className="flex items-center gap-1">
+          {pathname !== "/contact" && (
+            <Button
+              size="lg"
+              className="hidden h-11 rounded-lg px-6 text-[15px] font-semibold sm:inline-flex"
+              nativeButton={false}
+              render={<Link href="/contact" />}
+            >
+              <>Contact Us</>
+            </Button>
+          )}
+          <MobileNav />
+        </div>
       </div>
     </header>
   )

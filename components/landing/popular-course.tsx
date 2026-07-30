@@ -77,9 +77,9 @@ const courses: Course[] = [
 
 function CourseCard({ course }: { course: Course }) {
   return (
-    <article className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-xl motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+    <article className="group flex w-[82vw] max-w-sm shrink-0 snap-start flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-[transform,box-shadow] duration-300 ease-out hover:shadow-xl sm:w-auto sm:max-w-none sm:p-6 sm:hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
       <span
-        className="mb-6 inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold"
+        className="mb-5 inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold sm:mb-6"
         style={{ backgroundColor: course.badgeBg, color: course.badgeText }}
       >
         {course.status}
@@ -144,7 +144,7 @@ function CourseCard({ course }: { course: Course }) {
 
       <Link
         href={course.route}
-        className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-border text-sm font-semibold text-foreground transition-colors hover:border-transparent hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none"
+        className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-border text-sm font-semibold text-foreground transition-colors hover:border-transparent hover:bg-primary hover:text-primary-foreground active:bg-primary active:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none"
       >
         Open course
         <ArrowRight
@@ -159,29 +159,30 @@ function CourseCard({ course }: { course: Course }) {
 
 export default function PopularCourses() {
   return (
-    <section className="px-4 py-16 sm:px-6 lg:px-8">
+    <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col items-center text-center">
-          <h2 className="max-w-2xl text-4xl font-bold text-balance text-foreground">
+        <div className="mb-8 flex flex-col items-center text-center sm:mb-12">
+          <h2 className="max-w-2xl text-3xl font-bold text-balance text-foreground sm:text-4xl">
             Our most popular courses
           </h2>
-          <p className="mt-4 max-w-xl leading-relaxed text-pretty text-gray-500">
+          <p className="mt-3 max-w-xl leading-relaxed text-pretty text-gray-500 sm:mt-4">
             Live, instructor-led programs for the licensing and designation
             exams Canadian professionals sit most often.
           </p>
 
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Swipeable on touch, grid from sm up. */}
+        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
           {courses.map((course) => (
             <CourseCard key={course.title} course={course} />
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-12 max-w-7xl text-center">
+      <div className="mx-auto mt-10 max-w-7xl text-center sm:mt-12">
           <Link
             href="/exam-prep-programs"
-            className=" group/all mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            className="group/all inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-primary hover:underline"
           >
             View all programs
             <ArrowRight

@@ -18,20 +18,20 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-[#eaf5fa] py-20 px-8">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+    <section className="bg-[#eaf5fa] py-14 px-4 sm:px-6 sm:py-20 lg:px-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
         <div>
-          <h2 className="text-4xl font-bold text-[#1a7f99] leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#1a7f99] leading-tight text-balance mb-5 sm:mb-6">
             Why choose
-            <br />
+            <br className="hidden sm:inline" />{" "}
             Vipin Garg
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-8 max-w-md">
+          <p className="text-gray-600 leading-relaxed text-pretty mb-7 sm:mb-8 max-w-md">
             I am a CFA Charterholder, finance educator, and industry professional with over a decade of experience teaching finance subjects, mentoring certification candidates, and helping students and professionals understand capital markets, tax planning, and investment strategies.
           </p>
           <a
             href="/about"
-            className="inline-block bg-[#219ebc] text-white px-7 py-3 rounded-lg hover:bg-[#1a7f99] transition-colors font-semibold text-sm"
+            className="inline-flex h-12 w-full sm:w-auto items-center justify-center bg-[#219ebc] text-white px-7 rounded-lg hover:bg-[#1a7f99] active:bg-[#1a7f99] transition-colors font-semibold text-sm"
           >
             About Us
           </a>
@@ -39,9 +39,9 @@ export default function WhyChooseUs() {
 
         <div className="relative">
           <div className="absolute left-[7px] top-3 bottom-3 border-l-2 border-dotted border-gray-300" />
-          <div className="space-y-12">
+          <div className="space-y-10 sm:space-y-12">
             {features.map((feature, index) => (
-              <div key={index} className="relative flex gap-8">
+              <div key={index} className="relative flex gap-5 sm:gap-8">
                 <span
                   className="relative z-10 flex-shrink-0 w-4 h-4 rounded-full mt-1.5"
                   style={{ backgroundColor: feature.color }}

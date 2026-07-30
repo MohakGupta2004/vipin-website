@@ -69,13 +69,13 @@ const Hero = () => (
       style={{ backgroundImage: 'radial-gradient(#8ecae6 2px, transparent 2px)', backgroundSize: '22px 22px' }}
     />
 
-    <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:py-20 sm:px-6 lg:px-8 lg:py-28">
       <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
         <ShieldCheck className="size-4" />
         The Future is Here
       </span>
       <h1
-        className="mt-6 max-w-4xl text-balance text-4xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+        className="mt-6 max-w-4xl text-balance text-3xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         style={HEADING_FONT}
       >
         Certified Digital Asset Advisor (CDAA) Designation
@@ -84,10 +84,10 @@ const Hero = () => (
         Cryptocurrency is changing how Canadians invest. Gain the knowledge to guide them through the world of
         digital assets and decentralized finance.
       </p>
-      <div className="mt-10 flex flex-wrap gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
         <Button
           size="lg"
-          className="h-13 rounded-lg px-8 text-base font-semibold"
+          className="h-13 w-full rounded-lg px-8 text-base font-semibold sm:w-auto"
           nativeButton={false}
           render={<a href="#streams" />}
         >
@@ -96,7 +96,7 @@ const Hero = () => (
         <Button
           variant="outline"
           size="lg"
-          className="h-13 rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold text-primary hover:bg-primary/5 hover:text-primary"
+          className="h-13 w-full rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold sm:w-auto text-primary hover:bg-primary/5 hover:text-primary"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
@@ -107,7 +107,7 @@ const Hero = () => (
     </div>
 
     <svg
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-[#8ecae6]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full text-[#8ecae6] sm:h-24"
       viewBox="0 0 1440 120"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -118,7 +118,7 @@ const Hero = () => (
 );
 
 const Intro = () => (
-  <section className="px-4 py-24 sm:px-6 lg:px-8">
+  <section className="px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">Why It Matters</p>
       <h2
@@ -138,7 +138,7 @@ const Intro = () => (
 );
 
 const Streams = () => (
-  <section id="streams" className="scroll-mt-24 bg-[#eaf5fa] px-4 py-24 sm:px-6 lg:px-8">
+  <section id="streams" className="scroll-mt-24 bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-5xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">Two Paths</p>
@@ -150,14 +150,14 @@ const Streams = () => (
         </h2>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="mt-10 grid sm:mt-14 grid-cols-1 gap-6 md:grid-cols-2">
         {STREAMS.map((stream) => {
           const Icon = stream.icon;
           return (
             <Link
               key={stream.id}
               href={stream.route}
-              className="group flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-10"
+              className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8 lg:p-10 transition-shadow duration-300 hover:shadow-lg"
             >
               <span
                 className="flex size-14 items-center justify-center rounded-2xl text-white shadow-sm"
@@ -185,7 +185,7 @@ const Streams = () => (
 );
 
 const MarketingBanners = () => (
-  <section className="px-4 py-24 sm:px-6 lg:px-8">
+  <section className="px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
@@ -193,12 +193,12 @@ const MarketingBanners = () => (
       >
         Keep building your credentials
       </h2>
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-8 grid sm:mt-12 grid-cols-1 gap-6 md:grid-cols-3">
         {MARKETING_BANNERS.map((banner) => (
           <Link
             key={banner.category}
             href={banner.route}
-            className="group flex flex-col justify-between rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border transition-shadow duration-300 hover:shadow-lg"
+            className="group flex flex-col justify-between rounded-2xl bg-card p-6 shadow-sm sm:p-8 ring-1 ring-border transition-shadow duration-300 hover:shadow-lg"
           >
             <div>
               <span

@@ -95,24 +95,24 @@ const Hero = ({ data }: { data: any }) => (
       style={{ backgroundImage: 'radial-gradient(#8ecae6 2px, transparent 2px)', backgroundSize: '22px 22px' }}
     />
 
-    <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:py-20 sm:px-6 lg:px-8 lg:py-28">
       <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
         <Sparkles className="size-4" />
         CFP® &amp; QAFP™ Exam Prep
       </span>
       <h1
-        className="mt-6 max-w-3xl text-balance text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+        className="mt-6 max-w-3xl text-balance text-3xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         style={{ fontFamily: 'Jost, sans-serif' }}
       >
         {data.heading}
       </h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-foreground/70">
+      <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-foreground/70 sm:mt-6 sm:text-lg">
         {data.subheading}
       </p>
-      <div className="mt-10 flex flex-wrap gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
         <Button
           size="lg"
-          className="h-13 rounded-lg px-8 text-base font-semibold"
+          className="h-13 w-full rounded-lg px-8 text-base font-semibold sm:w-auto"
           nativeButton={false}
           render={<a href="#prep-styles" />}
         >
@@ -121,7 +121,7 @@ const Hero = ({ data }: { data: any }) => (
         <Button
           variant="outline"
           size="lg"
-          className="h-13 rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold text-primary hover:bg-primary/5 hover:text-primary"
+          className="h-13 w-full rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold sm:w-auto text-primary hover:bg-primary/5 hover:text-primary"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
@@ -133,7 +133,7 @@ const Hero = ({ data }: { data: any }) => (
 
     {/* Teal wave sweeping across the bottom */}
     <svg
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-[#8ecae6]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full text-[#8ecae6] sm:h-24"
       viewBox="0 0 1440 120"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -144,7 +144,7 @@ const Hero = ({ data }: { data: any }) => (
 );
 
 const PrepStyles = ({ data }: { data: any }) => (
-  <section id="prep-styles" className="scroll-mt-24 px-4 py-20 sm:px-6 lg:px-8">
+  <section id="prep-styles" className="scroll-mt-24 px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{data.tagline}</p>
@@ -156,13 +156,13 @@ const PrepStyles = ({ data }: { data: any }) => (
         </h2>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="mt-10 grid sm:mt-14 grid-cols-1 gap-6 md:grid-cols-2">
         {data.options.map((opt: any, idx: number) => {
           const accent = OPTION_ACCENTS[idx % OPTION_ACCENTS.length];
           return (
             <article
               key={opt.id}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8 transition-shadow duration-300 hover:shadow-lg"
             >
               <span className="h-1.5 w-12 rounded-full" style={{ backgroundColor: accent }} />
               <h3 className="mt-6 text-xl font-bold text-foreground">{opt.title}</h3>
@@ -190,7 +190,7 @@ const PrepStyles = ({ data }: { data: any }) => (
 );
 
 const Benefits = ({ data }: { data: any }) => (
-  <section className="bg-[#023047] px-4 py-24 text-white sm:px-6 lg:px-8">
+  <section className="bg-[#023047] px-4 py-14 sm:py-20 lg:py-24 text-white sm:px-6 lg:px-8">
     <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
       <div>
         <h2
@@ -217,7 +217,7 @@ const Benefits = ({ data }: { data: any }) => (
 );
 
 const FAQs = ({ data }: { data: any }) => (
-  <section className="px-4 py-20 sm:px-6 lg:px-8">
+  <section className="px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <h2
         className="text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
@@ -243,7 +243,7 @@ const FAQs = ({ data }: { data: any }) => (
 );
 
 const Promos = ({ data }: { data: any }) => (
-  <section className="bg-[#eaf5fa] px-4 py-20 sm:px-6 lg:px-8">
+  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
@@ -251,14 +251,14 @@ const Promos = ({ data }: { data: any }) => (
       >
         {data.heading}
       </h2>
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-8 grid sm:mt-12 grid-cols-1 gap-6 md:grid-cols-3">
         {data.items.map((promo: any, idx: number) => {
           const accent = PROMO_ACCENTS[idx % PROMO_ACCENTS.length];
           return (
             <Link
               key={promo.id}
               href={promo.route}
-              className="group flex flex-col justify-between rounded-2xl bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+              className="group flex flex-col justify-between rounded-2xl bg-card p-6 shadow-sm sm:p-8 transition-shadow duration-300 hover:shadow-lg"
             >
               <div>
                 <span

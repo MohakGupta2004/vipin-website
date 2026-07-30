@@ -147,24 +147,24 @@ const Hero = () => (
       style={{ backgroundImage: 'radial-gradient(#8ecae6 2px, transparent 2px)', backgroundSize: '22px 22px' }}
     />
 
-    <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:py-20 sm:px-6 lg:px-8 lg:py-28">
       <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
         <ShieldCheck className="size-4" />
         CFP® Exam Prep
       </span>
       <h1
-        className="mt-6 max-w-3xl text-balance text-4xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+        className="mt-6 max-w-3xl text-balance text-3xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         style={HEADING_FONT}
       >
         Certified Financial Planner®
       </h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-foreground/70">
+      <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-foreground/70 sm:mt-6 sm:text-lg">
         Take your advanced financial services career to the top with our CFP® certification paths.
       </p>
-      <div className="mt-10 flex flex-wrap gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
         <Button
           size="lg"
-          className="h-13 rounded-lg px-8 text-base font-semibold"
+          className="h-13 w-full rounded-lg px-8 text-base font-semibold sm:w-auto"
           nativeButton={false}
           render={<a href="#courses" />}
         >
@@ -173,7 +173,7 @@ const Hero = () => (
         <Button
           variant="outline"
           size="lg"
-          className="h-13 rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold text-primary hover:bg-primary/5 hover:text-primary"
+          className="h-13 w-full rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold sm:w-auto text-primary hover:bg-primary/5 hover:text-primary"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
@@ -184,7 +184,7 @@ const Hero = () => (
     </div>
 
     <svg
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-[#8ecae6]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full text-[#8ecae6] sm:h-24"
       viewBox="0 0 1440 120"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -195,7 +195,7 @@ const Hero = () => (
 );
 
 const Courses = () => (
-  <section id="courses" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
+  <section id="courses" className="scroll-mt-24 px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-5xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">
@@ -212,17 +212,17 @@ const Courses = () => (
         </p>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="mt-10 grid sm:mt-14 grid-cols-1 gap-6 md:grid-cols-2">
         {EXAM_PREP_PROGRAM.courses.map((course) => (
           <article
             key={course.id}
-            className="group relative flex flex-col overflow-hidden rounded-2xl border bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-10"
+            className="group relative flex flex-col overflow-hidden rounded-2xl border bg-card p-6 shadow-sm sm:p-8 lg:p-10 transition-shadow duration-300 hover:shadow-lg"
             style={{ borderColor: course.featured ? course.accent : 'var(--border)' }}
           >
             <span className="h-1.5 w-12 rounded-full" style={{ backgroundColor: course.accent }} />
             {course.badge && (
               <span
-                className="absolute top-8 right-8 rounded-full px-3 py-1 text-xs font-bold tracking-wider text-white uppercase sm:top-10 sm:right-10"
+                className="absolute top-6 right-6 rounded-full px-3 py-1 text-xs font-bold tracking-wider text-white uppercase sm:top-8 sm:right-8 lg:top-10 lg:right-10"
                 style={{ backgroundColor: course.accent }}
               >
                 {course.badge}
@@ -282,7 +282,7 @@ const Courses = () => (
 );
 
 const Roadmap = () => (
-  <section className="bg-[#eaf5fa] px-4 py-24 sm:px-6 lg:px-8">
+  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">Your Roadmap</p>
@@ -294,12 +294,12 @@ const Roadmap = () => (
         </h2>
       </div>
 
-      <ol className="mt-16 space-y-0">
+      <ol className="mt-10 space-y-0 sm:mt-16">
         {HOW_TO_BECOME_STEPS.map((item, idx) => {
           const Icon = item.icon;
           const isLast = idx === HOW_TO_BECOME_STEPS.length - 1;
           return (
-            <li key={item.step} className="relative flex gap-6 pb-12 last:pb-0">
+            <li key={item.step} className="relative flex gap-4 pb-10 sm:gap-6 sm:pb-12 last:pb-0">
               {!isLast && (
                 <span
                   className="absolute top-14 left-7 -ml-px h-[calc(100%-2.5rem)] w-0.5"
@@ -348,7 +348,7 @@ const Roadmap = () => (
 );
 
 const WhyChooseUs = () => (
-  <section className="bg-[#023047] px-4 py-24 text-white sm:px-6 lg:px-8">
+  <section className="bg-[#023047] px-4 py-14 sm:py-20 lg:py-24 text-white sm:px-6 lg:px-8">
     <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
       <div>
         <p className="text-sm font-semibold tracking-[0.18em] text-[#8ecae6] uppercase">Why Vipin Garg</p>
@@ -363,7 +363,7 @@ const WhyChooseUs = () => (
         </p>
         <Button
           size="lg"
-          className="mt-8 h-13 rounded-lg bg-[#fb8500] px-8 text-base font-semibold text-white hover:bg-[#fb8500]/90"
+          className="mt-8 h-13 w-full rounded-lg bg-[#fb8500] px-8 sm:w-auto text-base font-semibold text-white hover:bg-[#fb8500]/90"
           nativeButton={false}
           render={<Link href="/exam-prep-programs" />}
         >
@@ -386,7 +386,7 @@ const WhyChooseUs = () => (
 );
 
 const Designations = () => (
-  <section className="px-4 py-24 sm:px-6 lg:px-8">
+  <section className="px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
@@ -407,13 +407,13 @@ const Designations = () => (
 
 const ContactCta = () => (
   <section className="px-4 pb-20 sm:px-6 lg:px-8">
-    <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 rounded-3xl bg-[#023047] px-8 py-14 text-center text-white sm:flex-row sm:justify-between sm:px-14 sm:text-left">
+    <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 rounded-3xl bg-[#023047] px-6 py-10 text-center text-white sm:flex-row sm:justify-between sm:px-14 sm:py-14 sm:text-left">
       <p className="max-w-xl text-xl leading-snug font-semibold" style={HEADING_FONT}>
         If you have any questions, please reach out. We&rsquo;re here to help!
       </p>
       <Button
         size="lg"
-        className="h-13 shrink-0 rounded-lg bg-[#fb8500] px-8 text-base font-semibold text-white hover:bg-[#fb8500]/90"
+        className="h-13 w-full shrink-0 rounded-lg bg-[#fb8500] px-8 sm:w-auto text-base font-semibold text-white hover:bg-[#fb8500]/90"
         nativeButton={false}
         render={<Link href="/contact" />}
       >
@@ -425,7 +425,7 @@ const ContactCta = () => (
 );
 
 const MarketingBanners = () => (
-  <section className="bg-[#eaf5fa] px-4 py-20 sm:px-6 lg:px-8">
+  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
@@ -433,12 +433,12 @@ const MarketingBanners = () => (
       >
         Keep building your credentials
       </h2>
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-8 grid sm:mt-12 grid-cols-1 gap-6 md:grid-cols-3">
         {MARKETING_BANNERS.map((banner) => (
           <Link
             key={banner.category}
             href={banner.route}
-            className="group flex flex-col justify-between rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border transition-shadow duration-300 hover:shadow-lg"
+            className="group flex flex-col justify-between rounded-2xl bg-card p-6 shadow-sm sm:p-8 ring-1 ring-border transition-shadow duration-300 hover:shadow-lg"
           >
             <div>
               <span

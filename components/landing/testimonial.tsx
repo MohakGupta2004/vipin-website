@@ -1,4 +1,4 @@
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Star } from 'lucide-react'
 
 const reviews = [
   {
@@ -40,42 +40,27 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   return (
-    <section className="bg-white py-20 px-8">
+    <section className="bg-white py-14 px-4 sm:px-6 sm:py-20 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1e2a4a] mb-14">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-balance text-[#1e2a4a] mb-8 sm:mb-14">
           Vipin Garg is trusted by professionals across Canada
         </h2>
 
-        <div className="relative">
-          <button
-            aria-label="Previous testimonials"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 w-11 h-11 bg-[#e5f1f7] rounded-full flex items-center justify-center hover:bg-[#d3e7f1] transition-colors z-10"
-          >
-            <ChevronLeft size={22} className="text-[#219ebc]" />
-          </button>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 md:px-14">
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                className="rounded-xl p-7"
-                style={{ backgroundColor: review.bg }}
-              >
-                <StarRating rating={review.rating} />
-                <h4 className="font-bold text-[#1e2a4a] text-sm">{review.name}</h4>
-                <p className="text-gray-500 text-xs mt-1 mb-5">{review.time}</p>
-                <p className="text-gray-600 text-sm leading-relaxed">{review.text}</p>
-              </div>
-            ))}
-          </div>
-
-          <button
-            aria-label="Next testimonials"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 w-11 h-11 bg-[#fdeae5] rounded-full flex items-center justify-center hover:bg-[#fbd9d1] transition-colors z-10"
-          >
-            <ChevronRight size={22} className="text-[#f45b4e]" />
-          </button>
-        </div>
+        {/* Swipeable on touch, three-up from md. */}
+        <ul className="-mx-4 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">
+          {reviews.map((review, index) => (
+            <li
+              key={index}
+              className="w-[82vw] max-w-sm shrink-0 snap-start rounded-xl p-6 sm:p-7 md:w-auto md:max-w-none"
+              style={{ backgroundColor: review.bg }}
+            >
+              <StarRating rating={review.rating} />
+              <h4 className="font-bold text-[#1e2a4a] text-sm">{review.name}</h4>
+              <p className="text-gray-500 text-xs mt-1 mb-5">{review.time}</p>
+              <p className="text-gray-600 text-sm leading-relaxed text-pretty">{review.text}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

@@ -148,25 +148,25 @@ const Hero = () => (
       style={{ backgroundImage: 'radial-gradient(#8ecae6 2px, transparent 2px)', backgroundSize: '22px 22px' }}
     />
 
-    <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:py-20 sm:px-6 lg:px-8 lg:py-28">
       <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
         <ShieldCheck className="size-4" />
         Life License Qualification Program
       </span>
       <h1
-        className="mt-6 max-w-3xl text-balance text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+        className="mt-6 max-w-3xl text-balance text-3xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         style={HEADING_FONT}
       >
         Get licensed to sell life insurance in Canada.
       </h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-foreground/70">
+      <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-foreground/70 sm:mt-6 sm:text-lg">
         Advance your career with industry-recognized certifications and training programs, built to
         prepare you for exam day and a thriving practice.
       </p>
-      <div className="mt-10 flex flex-wrap gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
         <Button
           size="lg"
-          className="h-13 rounded-lg px-8 text-base font-semibold"
+          className="h-13 w-full rounded-lg px-8 text-base font-semibold sm:w-auto"
           nativeButton={false}
           render={<a href="#courses" />}
         >
@@ -175,7 +175,7 @@ const Hero = () => (
         <Button
           variant="outline"
           size="lg"
-          className="h-13 rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold text-primary hover:bg-primary/5 hover:text-primary"
+          className="h-13 w-full rounded-lg border-primary/40 bg-transparent px-8 text-base font-semibold sm:w-auto text-primary hover:bg-primary/5 hover:text-primary"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
@@ -187,7 +187,7 @@ const Hero = () => (
 
     {/* Teal wave sweeping across the bottom */}
     <svg
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-[#8ecae6]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full text-[#8ecae6] sm:h-24"
       viewBox="0 0 1440 120"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -198,7 +198,7 @@ const Hero = () => (
 );
 
 const Features = () => (
-  <section className="px-4 py-20 sm:px-6 lg:px-8">
+  <section className="px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
@@ -212,13 +212,13 @@ const Features = () => (
         </h2>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 grid sm:mt-14 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {FEATURES.map((feature) => {
           const Icon = feature.icon;
           return (
             <article
               key={feature.title}
-              className="group flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+              className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8 transition-shadow duration-300 hover:shadow-lg"
             >
               <span
                 className="inline-flex size-12 items-center justify-center rounded-xl text-white transition-transform duration-300 group-hover:-translate-y-0.5"
@@ -239,7 +239,7 @@ const Features = () => (
 );
 
 const LearningPaths = () => (
-  <section className="bg-[#eaf5fa] px-4 py-24 sm:px-6 lg:px-8">
+  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-4xl">
       <div className="max-w-2xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
@@ -300,7 +300,7 @@ const LearningPaths = () => (
 );
 
 const Courses = () => (
-  <section id="courses" className="scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
+  <section id="courses" className="scroll-mt-24 px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Our Courses</p>
@@ -326,7 +326,7 @@ const Courses = () => (
               {section.courses.map((course) => (
                 <article
                   key={course.id}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8 transition-shadow duration-300 hover:shadow-lg"
                 >
                   <span className="h-1.5 w-12 rounded-full" style={{ backgroundColor: course.accent }} />
                   <h4 className="mt-6 text-xl font-bold text-foreground" style={HEADING_FONT}>
@@ -359,7 +359,7 @@ const Courses = () => (
 );
 
 const ValueProposition = () => (
-  <section className="bg-[#023047] px-4 py-24 text-white sm:px-6 lg:px-8">
+  <section className="bg-[#023047] px-4 py-14 sm:py-20 lg:py-24 text-white sm:px-6 lg:px-8">
     <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
       <div>
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8ecae6]">
@@ -387,7 +387,7 @@ const ValueProposition = () => (
 );
 
 const Faqs = () => (
-  <section className="bg-[#eaf5fa] px-4 py-24 sm:px-6 lg:px-8">
+  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">FAQs</p>
@@ -420,8 +420,8 @@ const Faqs = () => (
 );
 
 const ContactCta = () => (
-  <section className="px-4 py-24 sm:px-6 lg:px-8">
-    <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-[#023047] px-8 py-16 text-center text-white sm:px-16">
+  <section className="px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-[#023047] px-6 py-12 text-center text-white sm:px-16 sm:py-16">
       <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl" style={HEADING_FONT}>
         Have questions? Let&rsquo;s talk.
       </h2>
@@ -429,10 +429,10 @@ const ContactCta = () => (
         Reach out to our support team for assistance and take the first step toward your life
         insurance license.
       </p>
-      <div className="mt-10 flex flex-wrap justify-center gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
         <Button
           size="lg"
-          className="h-13 rounded-lg bg-[#fb8500] px-8 text-base font-semibold text-white hover:bg-[#fb8500]/90"
+          className="h-13 w-full rounded-lg bg-[#fb8500] px-8 sm:w-auto text-base font-semibold text-white hover:bg-[#fb8500]/90"
           nativeButton={false}
           render={<Link href="/contact" />}
         >
@@ -442,7 +442,7 @@ const ContactCta = () => (
         <Button
           variant="outline"
           size="lg"
-          className="h-13 rounded-lg border-white/30 bg-transparent px-8 text-base font-semibold text-white hover:bg-white/10 hover:text-white"
+          className="h-13 w-full rounded-lg border-white/30 bg-transparent px-8 sm:w-auto text-base font-semibold text-white hover:bg-white/10 hover:text-white"
           nativeButton={false}
           render={<a href="#courses" />}
         >
