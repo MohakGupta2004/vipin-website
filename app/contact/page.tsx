@@ -66,7 +66,7 @@ const details = [
 ]
 
 const fieldClass =
-  'h-12 w-full min-w-0 rounded-xl border border-border bg-white px-4 text-base text-foreground transition-[color,box-shadow] duration-200 outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20'
+  'h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 text-base text-foreground transition-[color,box-shadow] duration-200 outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20'
 
 type FormState = {
   firstName: string
@@ -157,7 +157,7 @@ export default function ContactPage() {
   return (
     <main>
       {/* ---- Hero band ---- */}
-      <section className="relative overflow-hidden bg-[#fdf9ec]">
+      <section className="relative overflow-hidden bg-hero">
         {/* Coral blob, top right */}
         <div className="pointer-events-none absolute -top-24 right-28 z-0 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
         {/* Amber wedge, right edge */}
@@ -175,7 +175,7 @@ export default function ContactPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-12 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8 lg:pb-36 lg:pt-24">
           <div className="max-w-2xl animate-rise">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-[#1a7f99] ring-1 ring-[#8ecae6]/60 backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-[#1a7f99] ring-1 ring-[#8ecae6]/60 backdrop-blur dark:bg-white/10 dark:text-[#8ecae6]">
               <span className="size-2 rounded-full bg-[#219ebc]" />
               We usually reply within a business day
             </span>

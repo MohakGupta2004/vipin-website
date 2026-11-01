@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Star } from 'lucide-react'
 
 const reviews = [
@@ -40,9 +41,9 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   return (
-    <section className="bg-white py-14 px-4 sm:px-6 sm:py-20 lg:px-8">
+    <section className="bg-background py-14 px-4 sm:px-6 sm:py-20 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-balance text-[#1e2a4a] mb-8 sm:mb-14">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-balance text-foreground mb-8 sm:mb-14">
           Vipin Garg is trusted by professionals across Canada
         </h2>
 
@@ -51,13 +52,13 @@ export default function Testimonials() {
           {reviews.map((review, index) => (
             <li
               key={index}
-              className="w-[82vw] max-w-sm shrink-0 snap-start rounded-xl p-6 sm:p-7 md:w-auto md:max-w-none"
-              style={{ backgroundColor: review.bg }}
+              className="w-[82vw] max-w-sm shrink-0 snap-start rounded-xl bg-[var(--review-bg)] p-6 sm:p-7 md:w-auto md:max-w-none dark:bg-card"
+              style={{ "--review-bg": review.bg } as CSSProperties}
             >
               <StarRating rating={review.rating} />
-              <h4 className="font-bold text-[#1e2a4a] text-sm">{review.name}</h4>
-              <p className="text-gray-500 text-xs mt-1 mb-5">{review.time}</p>
-              <p className="text-gray-600 text-sm leading-relaxed text-pretty">{review.text}</p>
+              <h4 className="font-bold text-[#1e2a4a] text-sm dark:text-foreground">{review.name}</h4>
+              <p className="text-foreground/55 text-xs mt-1 mb-5">{review.time}</p>
+              <p className="text-foreground/70 text-sm leading-relaxed text-pretty">{review.text}</p>
             </li>
           ))}
         </ul>

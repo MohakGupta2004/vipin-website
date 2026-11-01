@@ -6,6 +6,7 @@ import { NavigationMenu } from "@base-ui/react/navigation-menu"
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
 import MobileNav from "@/components/landing/mobile-nav"
+import { ThemeToggle } from "@/components/theme-toggle"
 import {
   digitalAssetsLinks,
   financialPlanningLinks,
@@ -97,6 +98,7 @@ export default function Navbar() {
           </NavigationMenu.Portal>
         </NavigationMenu.Root>
         <div className="flex items-center gap-1">
+          <ThemeToggle />
           {pathname !== "/contact" && (
             <Button
               size="lg"

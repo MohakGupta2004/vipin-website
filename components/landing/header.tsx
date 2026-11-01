@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Header() {
   return (
-    <section className="relative overflow-hidden bg-[#fdf9ec]">
+    <section className="relative overflow-hidden bg-hero">
       {/* Coral blob, top right */}
       <div className="pointer-events-none absolute -top-24 right-24 z-20 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
       {/* Amber wedge, right edge */}

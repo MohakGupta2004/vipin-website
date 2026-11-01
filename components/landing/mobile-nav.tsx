@@ -6,6 +6,7 @@ import { Drawer } from "@base-ui/react/drawer"
 import { ArrowRight, Menu, X } from "lucide-react"
 
 import { navGroups } from "@/components/landing/nav-links"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function MobileNav() {
   const pathname = usePathname()
@@ -75,6 +76,7 @@ export default function MobileNav() {
             </Drawer.Content>
 
             <div className="sticky bottom-0 shrink-0 border-t border-border bg-background px-5 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+              <ThemeToggle variant="switch" className="mb-3" />
               <Drawer.Close
                 nativeButton={false}
                 render={<Link href="/contact" />}

@@ -5,7 +5,7 @@ export function Card({ accent, title, desc, route }: { accent: string; title: st
     <div className="bg-card rounded-xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow">
       <div className="h-1 w-10 rounded-full mb-5 sm:mb-6" style={{ backgroundColor: accent }} />
       <h3 className="text-xl font-bold text-foreground mb-3 sm:mb-4">{title}</h3>
-      <p className="text-gray-500 leading-relaxed text-pretty mb-6 sm:mb-8">{desc}</p>
+      <p className="text-foreground/60 leading-relaxed text-pretty mb-6 sm:mb-8">{desc}</p>
       <a
         href={route}
         className="inline-flex min-h-11 items-center gap-2 text-sm font-medium group"
@@ -29,7 +29,7 @@ export default function ChooseSuccessPath() {
   return (
     <section className="py-14 px-4 sm:px-6 sm:py-16 lg:px-8">
       <h1 className="text-3xl sm:text-4xl font-bold text-center text-balance text-foreground mb-3 sm:mb-4">Choose Your Path to Success</h1>
-      <p className="text-center text-gray-500 mb-8 sm:mb-12">Find the course that&apos;s right for you.</p>
+      <p className="text-center text-foreground/60 mb-8 sm:mb-12">Find the course that&apos;s right for you.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
         {links.map((link, index) => (
           <Card key={index} {...link} />

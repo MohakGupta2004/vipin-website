@@ -135,7 +135,7 @@ const HEADING_FONT = { fontFamily: 'Jost, sans-serif' } as const;
 // --- Sections ---
 
 const Hero = () => (
-  <section className="relative overflow-hidden bg-[#fdf9ec]">
+  <section className="relative overflow-hidden bg-hero">
     {/* Coral blob, top right */}
     <div className="pointer-events-none absolute -top-24 right-24 z-20 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
     {/* Amber wedge, right edge */}
@@ -239,7 +239,7 @@ const Features = () => (
 );
 
 const LearningPaths = () => (
-  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
+  <section className="bg-muted px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-4xl">
       <div className="max-w-2xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
@@ -387,7 +387,7 @@ const ValueProposition = () => (
 );
 
 const Faqs = () => (
-  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
+  <section className="bg-muted px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-3xl">
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">FAQs</p>

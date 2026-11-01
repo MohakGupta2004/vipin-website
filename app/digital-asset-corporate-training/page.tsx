@@ -98,7 +98,7 @@ const HEADING_FONT = { fontFamily: 'Jost, sans-serif' } as const;
 // --- Sections ---
 
 const Hero = () => (
-  <section className="relative overflow-hidden bg-[#fdf9ec]">
+  <section className="relative overflow-hidden bg-hero">
     <div className="pointer-events-none absolute -top-24 right-24 z-20 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
     <div className="pointer-events-none absolute -top-10 -right-16 z-20 hidden size-64 rounded-full bg-[#ffb703] lg:block" />
     <div className="pointer-events-none absolute -right-32 -bottom-40 hidden size-[38rem] rounded-full bg-[#8ecae6]/70 lg:block" />
@@ -185,7 +185,7 @@ const Adoption = () => (
 );
 
 const Introducing = () => (
-  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
+  <section className="bg-muted px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold tracking-[0.18em] text-primary uppercase">Introducing</p>
@@ -313,7 +313,7 @@ const Discovery = () => (
 );
 
 const MarketingBanners = () => (
-  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
+  <section className="bg-muted px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

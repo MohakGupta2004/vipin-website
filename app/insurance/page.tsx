@@ -70,7 +70,7 @@ const navBlocks = [
 // --- Sections ---
 
 const Hero = () => (
-  <section className="relative overflow-hidden bg-[#fdf9ec]">
+  <section className="relative overflow-hidden bg-hero">
     {/* Coral blob, top right */}
     <div className="pointer-events-none absolute -top-24 right-24 z-20 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
     {/* Amber wedge, right edge */}
@@ -201,7 +201,7 @@ const Benefits = () => (
 );
 
 const NavBlocks = () => (
-  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
+  <section className="bg-muted px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

@@ -115,7 +115,7 @@ const HEADING_FONT = { fontFamily: 'Jost, sans-serif' } as const;
 // --- Sections ---
 
 const Hero = () => (
-  <section className="relative overflow-hidden bg-[#fdf9ec]">
+  <section className="relative overflow-hidden bg-hero">
     <div className="pointer-events-none absolute -top-24 right-24 z-20 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
     <div className="pointer-events-none absolute -top-10 -right-16 z-20 hidden size-64 rounded-full bg-[#ffb703] lg:block" />
     <div className="pointer-events-none absolute -right-32 -bottom-40 hidden size-[38rem] rounded-full bg-[#8ecae6]/70 lg:block" />
@@ -199,7 +199,7 @@ const Pathways = () => (
         ))}
       </div>
 
-      <div className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-2xl bg-[#eaf5fa] px-6 py-4 text-center">
+      <div className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-2xl bg-muted px-6 py-4 text-center">
         <p className="leading-relaxed text-foreground/70">
           Do you want to study for your PQAP in English? Take the LLQP course in English.
         </p>
@@ -216,7 +216,7 @@ const Pathways = () => (
 );
 
 const CourseCatalog = () => (
-  <section id="courses" className="scroll-mt-24 bg-[#eaf5fa] px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
+  <section id="courses" className="scroll-mt-24 bg-muted px-4 py-14 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-5xl">
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Course Catalog</p>

@@ -82,7 +82,7 @@ const PROMO_ACCENTS = ['#219ebc', '#fb8500', '#023047'];
 // --- Reusable Sub-Components ---
 
 const Hero = ({ data }: { data: any }) => (
-  <section className="relative overflow-hidden bg-[#fdf9ec]">
+  <section className="relative overflow-hidden bg-hero">
     {/* Coral blob, top right */}
     <div className="pointer-events-none absolute -top-24 right-24 z-20 hidden size-72 rounded-full bg-[#f4795b] lg:block" />
     {/* Amber wedge, right edge */}
@@ -180,7 +180,7 @@ const PrepStyles = ({ data }: { data: any }) => (
         })}
       </div>
 
-      <div className="mt-12 rounded-2xl bg-[#eaf5fa] px-6 py-8 sm:px-10 sm:py-10">
+      <div className="mt-12 rounded-2xl bg-muted px-6 py-8 sm:px-10 sm:py-10">
         <p className="mx-auto max-w-4xl text-center text-lg leading-relaxed text-foreground/75">
           {data.summary}
         </p>
@@ -243,7 +243,7 @@ const FAQs = ({ data }: { data: any }) => (
 );
 
 const Promos = ({ data }: { data: any }) => (
-  <section className="bg-[#eaf5fa] px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
+  <section className="bg-muted px-4 py-14 sm:py-20 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-7xl">
       <h2
         className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

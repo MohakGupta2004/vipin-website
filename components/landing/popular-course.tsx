@@ -89,7 +89,7 @@ function CourseCard({ course }: { course: Course }) {
         {course.title}
       </h3>
 
-      <p className="mt-4 text-sm leading-relaxed text-pretty text-gray-500">
+      <p className="mt-4 text-sm leading-relaxed text-pretty text-foreground/60">
         {course.desc}
       </p>
 
@@ -128,7 +128,7 @@ function CourseCard({ course }: { course: Course }) {
           <p className="text-2xl font-bold" style={{ color: course.accent }}>
             {course.sessions}
           </p>
-          <p className="mt-0.5 text-[0.7rem] font-semibold tracking-wide text-gray-500 uppercase">
+          <p className="mt-0.5 text-[0.7rem] font-semibold tracking-wide text-foreground/60 uppercase">
             Sessions
           </p>
         </div>
@@ -136,7 +136,7 @@ function CourseCard({ course }: { course: Course }) {
           <p className="text-2xl font-bold" style={{ color: course.accent }}>
             {course.price}
           </p>
-          <p className="mt-0.5 text-[0.7rem] font-semibold tracking-wide text-gray-500 uppercase">
+          <p className="mt-0.5 text-[0.7rem] font-semibold tracking-wide text-foreground/60 uppercase">
             Plus taxes
           </p>
         </div>
@@ -165,7 +165,7 @@ export default function PopularCourses() {
           <h2 className="max-w-2xl text-3xl font-bold text-balance text-foreground sm:text-4xl">
             Our most popular courses
           </h2>
-          <p className="mt-3 max-w-xl leading-relaxed text-pretty text-gray-500 sm:mt-4">
+          <p className="mt-3 max-w-xl leading-relaxed text-pretty text-foreground/60 sm:mt-4">
             Live, instructor-led programs for the licensing and designation
             exams Canadian professionals sit most often.
           </p>

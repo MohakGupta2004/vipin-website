@@ -51,9 +51,11 @@ export default function RootLayout({
       className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
     >
       <body className="min-h-dvh overflow-x-clip">
-        <Navbar />
-        <ThemeProvider>{children}</ThemeProvider>
-        <Footer />
+        <ThemeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )
