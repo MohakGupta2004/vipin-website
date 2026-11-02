@@ -15,7 +15,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#023047",
+          background: "#102a42",
           color: "#ffffff",
           padding: 72,
         }}
@@ -27,7 +27,7 @@ export default function OpengraphImage() {
           </div>
           <div style={{ fontSize: 34, color: "#a9c4d2" }}>IFC · CSC · CIRE · RSE · LLQP</div>
         </div>
-        <div style={{ display: "flex", height: 8, width: 160, background: "#fb8500" }} />
+        <div style={{ display: "flex", height: 8, width: 160, background: "#2463eb" }} />
       </div>
     ),
     { ...size }

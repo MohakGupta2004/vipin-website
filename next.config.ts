@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       permanent("/exam-prep-programs", "/courses"),
+      permanent("/how-it-works", "/"),
       permanent("/life-license-qualification-program", "/insurance/llqp"),
       permanent("/certified-financial-planner", "/financial-planning/cfp"),
       permanent("/qualified-associate-financial-planner", "/financial-planning/qafp"),

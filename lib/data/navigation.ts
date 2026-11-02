@@ -17,7 +17,6 @@ export type StaticRoute =
   | "/upcoming"
   | "/find-my-course"
   | "/licensing-pathways"
-  | "/how-it-works"
   | "/schedule"
   | "/masterclass"
   | "/free-diagnostic"
@@ -148,7 +147,6 @@ export const megaMenu: MegaMenuGroup[] = [
 
 /** Simple top-level links beside the mega menu. */
 export const primaryLinks: NavLink[] = [
-  { label: "How it works", href: "/how-it-works" },
   { label: "About", href: "/about" },
 ];
 
@@ -196,8 +194,7 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: "Find my course", href: "/find-my-course" },
       { label: "Licensing pathways", href: "/licensing-pathways" },
-      { label: "How it works", href: "/how-it-works" },
-      { label: "Schedule", href: "/schedule" },
+          { label: "Schedule", href: "/schedule" },
       { label: "Free masterclass", href: "/masterclass" },
       { label: "Free diagnostic", href: "/free-diagnostic" },
       { label: "Upcoming programmes", href: "/upcoming" },

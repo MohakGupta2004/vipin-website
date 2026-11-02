@@ -26,7 +26,7 @@ export function Hero() {
   const intake = nextIntake()
   // Secondary CTA target follows the feature flags; falls back to the catalogue page.
   const findHref = isEnabled("homeCourseSearch") ? "#courses" : isEnabled("examFinder") ? "#find-my-course" : "/courses"
-  const { name, role, portrait, credentials } = siteConfig.instructor
+  const { name, portrait, credentials } = siteConfig.instructor
   return (
     <section className="container-site grid gap-10 pt-16 pb-16 md:pt-20 lg:grid-cols-12 lg:gap-8 lg:pt-24 lg:pb-20">
       <div className="lg:col-span-7">
@@ -61,22 +61,26 @@ export function Hero() {
         )}
       </div>
 
-      <figure className="lg:col-span-5">
-        <div className="relative aspect-[4/5] max-h-[420px] overflow-hidden rounded-lg border border-border bg-surface-2 lg:max-h-none">
-          {/* PLACEHOLDER: replace with real photo of Vipin Garg teaching (4:5, ≥1200×1500) — set siteConfig.instructor.portrait */}
+      <figure className="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+        {/* Layered composition: sage frame offset behind the portrait, info card overlapping the corner. */}
+        <div aria-hidden="true" className="absolute -right-3 -bottom-3 left-6 top-6 rounded-2xl bg-brand-teal/35 sm:-right-5 sm:-bottom-5" />
+        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-surface-2 shadow-float">
           <Image
-            src={portrait ?? "/images/hero-placeholder.png"}
-            alt={portrait ? "Vipin Garg teaching a live online class" : "Student studying for a Canadian finance exam (placeholder photo)"}
+            src={portrait ?? "/images/vipin-garg.jpg"}
+            alt="Vipin Garg, finance exam coach"
             fill
             priority
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover object-top"
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="object-cover object-[50%_20%]"
           />
         </div>
-        <figcaption className="mt-3 text-sm">
-          <span className="font-semibold text-heading">{name}</span>
-          {credentials[0] ? `, ${credentials[0]}` : ""}
-          <span className="block text-muted-foreground">{role === "Founder & Instructor" ? "Lead instructor" : role}</span>
+        <figcaption className="absolute -bottom-6 left-4 rounded-xl border border-border bg-surface px-4 py-3 text-sm shadow-float sm:left-[-1.5rem]">
+          <span className="block font-heading text-base font-bold text-heading">{name}</span>
+          {credentials[0] ? <span className="block text-muted-foreground">{credentials[0]}</span> : null}
+          <span className="mt-1 flex items-center gap-2 text-muted-foreground">
+            <span aria-hidden="true" className="size-2 rounded-full bg-success" />
+            Live online classes
+          </span>
         </figcaption>
       </figure>
     </section>

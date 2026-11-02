@@ -16,9 +16,14 @@ function ActiveBar({ active }: { active: boolean }) {
   return active ? <span aria-hidden="true" className="absolute inset-x-3 -bottom-px h-0.5 bg-brand-teal" /> : null
 }
 
+type Mode = "closed" | "hover" | "pinned"
+
 export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: NavLink[] }) {
   const pathname = usePathname()
-  const [open, setOpen] = React.useState(false)
+  // hover = opened by pointer hover (closes when the pointer leaves); pinned = opened by click/keyboard
+  // (stays until outside press, Esc, focus-out, link click or a second click).
+  const [mode, setMode] = React.useState<Mode>("closed")
+  const open = mode !== "closed"
   const rootRef = React.useRef<HTMLDivElement>(null)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
   const panelRef = React.useRef<HTMLDivElement>(null)
@@ -33,41 +38,72 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Close on route change, outside click, Escape.
+  // Close on route change.
   const [lastPath, setLastPath] = React.useState(pathname)
   if (lastPath !== pathname) {
     setLastPath(pathname)
-    setOpen(false)
+    setMode("closed")
   }
 
   React.useEffect(() => {
     if (!open) return
-    const onDown = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
+    const close = () => {
+      window.clearTimeout(hoverTimer.current)
+      setMode("closed")
+    }
+    // Any press outside the nav + panel closes it (capture: page code cannot swallow it).
+    const onDown = (e: Event) => {
+      if (!rootRef.current?.contains(e.target as Node)) close()
     }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setOpen(false)
+        close()
         triggerRef.current?.focus()
       }
     }
-    document.addEventListener("mousedown", onDown)
+    document.addEventListener("pointerdown", onDown, true)
+    document.addEventListener("mousedown", onDown, true)
+    document.addEventListener("touchstart", onDown, true)
     document.addEventListener("keydown", onKey)
+    window.addEventListener("blur", close)
+    window.addEventListener("resize", close)
     return () => {
-      document.removeEventListener("mousedown", onDown)
+      document.removeEventListener("pointerdown", onDown, true)
+      document.removeEventListener("mousedown", onDown, true)
+      document.removeEventListener("touchstart", onDown, true)
       document.removeEventListener("keydown", onKey)
+      window.removeEventListener("blur", close)
+      window.removeEventListener("resize", close)
     }
+  }, [open])
+
+  // Keep the panel inside the viewport: max height = space below the header's actual bottom edge.
+  React.useEffect(() => {
+    if (!open) return
+    const fit = () => {
+      const header = document.getElementById("site-header")
+      const panel = panelRef.current
+      if (!header || !panel) return
+      panel.style.maxHeight = `${Math.max(240, window.innerHeight - header.getBoundingClientRect().bottom)}px`
+    }
+    fit()
+    window.addEventListener("scroll", fit, { passive: true })
+    return () => window.removeEventListener("scroll", fit)
   }, [open])
 
   const hoverOpen = (e: React.PointerEvent) => {
     if (e.pointerType !== "mouse") return
     window.clearTimeout(hoverTimer.current)
-    hoverTimer.current = window.setTimeout(() => setOpen(true), 150)
+    if (mode === "closed") hoverTimer.current = window.setTimeout(() => setMode("hover"), 150)
   }
   const hoverClose = (e: React.PointerEvent) => {
     if (e.pointerType !== "mouse") return
     window.clearTimeout(hoverTimer.current)
-    hoverTimer.current = window.setTimeout(() => setOpen(false), 150)
+    hoverTimer.current = window.setTimeout(() => setMode((m) => (m === "hover" ? "closed" : m)), 200)
+  }
+  const toggle = () => {
+    window.clearTimeout(hoverTimer.current)
+    setMode((m) => (m === "pinned" ? "closed" : "pinned"))
   }
 
   const inCourses = groups.some((g) => pathname === g.href || pathname.startsWith(g.href + "/")) || pathname === "/courses"
@@ -78,15 +114,14 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
   const upcoming = groups.find((g) => g.id === "upcoming")
 
   return (
+    <div className="hidden flex-1 lg:block">
     <div
       ref={rootRef}
-      className="hidden flex-1 lg:block"
-      onPointerEnter={hoverOpen}
-      onPointerLeave={hoverClose}
+      className="inline-block"
       onBlur={(e) => {
         // Close when focus leaves the trigger and the panel (keyboard users tabbing away).
         const next = e.relatedTarget as Node | null
-        if (open && next && !panelRef.current?.contains(next) && next !== triggerRef.current) setOpen(false)
+        if (open && next && !panelRef.current?.contains(next) && next !== triggerRef.current) setMode("closed")
       }}
     >
       <nav aria-label="Main" className="flex items-center">
@@ -95,7 +130,9 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
           type="button"
           aria-expanded={open}
           aria-controls="mega-menu"
-          onClick={() => setOpen((v) => !v)}
+          onClick={toggle}
+          onPointerEnter={hoverOpen}
+          onPointerLeave={hoverClose}
           className={navItem}
         >
           Courses
@@ -110,6 +147,13 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
           <div
             ref={panelRef}
             id="mega-menu"
+            onPointerEnter={(e) => {
+              if (e.pointerType === "mouse") window.clearTimeout(hoverTimer.current)
+            }}
+            onPointerLeave={hoverClose}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest("a")) setMode("closed")
+            }}
             className="vg-enter-up absolute inset-x-0 top-full z-30 max-h-[calc(100dvh-var(--header-h))] overflow-y-auto overscroll-contain border-b border-border bg-surface shadow-float"
           >
             <div className="container-wide grid grid-cols-[2.2fr_1.2fr_1.2fr_14rem] gap-8 py-8">
@@ -148,6 +192,7 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
         })}
       </nav>
 
+    </div>
     </div>
   )
 }

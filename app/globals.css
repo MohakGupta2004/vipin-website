@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-display), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-serif);
 
   --color-background: var(--background);
@@ -86,71 +86,71 @@
 }
 
 :root {
-  --background: #fbfcfd;
-  --foreground: #0c1f2b;
+  --background: #ffffff;
+  --foreground: #48566a;
   --surface: #ffffff;
-  --surface-2: #eef3f6;
-  --surface-inverse: #023047;
-  --heading: #023047;
-  --placeholder: #5b6f7b;
+  --surface-2: #f4f7fa;
+  --surface-inverse: #102a42;
+  --heading: #102a42;
+  --placeholder: #65758b;
 
   --card: var(--surface);
   --card-foreground: var(--foreground);
   --popover: var(--surface);
   --popover-foreground: var(--foreground);
 
-  --primary: #023047;
+  --primary: #2463eb;
   --primary-foreground: #ffffff;
   --secondary: var(--surface-2);
-  --secondary-foreground: #023047;
+  --secondary-foreground: #102a42;
   --muted: var(--surface-2);
-  --muted-foreground: #4a5f6c;
-  --accent: #eef3f6;
-  --accent-foreground: #0c1f2b;
+  --muted-foreground: #5d6d82;
+  --accent: #e5efff;
+  --accent-foreground: #1d4fd7;
 
-  --border: #d5dfe5;
-  --border-strong: #788e9b;
-  --input: #788e9b;
-  --ring: #126b84;
+  --border: #dae3ec;
+  --border-strong: #7a8ca1;
+  --input: #7a8ca1;
+  --ring: #2463eb;
 
-  --link: #126b84;
-  --brand-teal: #219ebc;
-  --teal-tint: #e3f1f6;
+  --link: #2463eb;
+  --brand-teal: #80b79c;
+  --teal-tint: #e9f6f0;
 
-  --cta: #fb8500;
-  --cta-foreground: #0a1f2c;
-  --cta-hover: #ff9a2e;
+  --cta: #2463eb;
+  --cta-foreground: #ffffff;
+  --cta-hover: #1d4fd7;
 
-  --success: #166534;
-  --success-bg: #e8f3ec;
+  --success: #1f6f4f;
+  --success-bg: #e9f6f0;
   --warning: #92400e;
   --warning-bg: #fdf3e3;
-  --destructive: #b91c1c;
+  --destructive: #dc2828;
   --destructive-bg: #fbeaea;
 
   --inverse-fg: #ffffff;
-  --inverse-muted: #a9c4d2;
-  --inverse-link: #8ecae6;
+  --inverse-muted: #b8c7d9;
+  --inverse-link: #9cc0ff;
 
-  --chart-1: #023047;
-  --chart-2: #219ebc;
-  --chart-3: #8ecae6;
-  --chart-4: #4a5f6c;
-  --chart-5: #126b84;
+  --chart-1: #102a42;
+  --chart-2: #2463eb;
+  --chart-3: #80b79c;
+  --chart-4: #2f7f7f;
+  --chart-5: #65758b;
 
-  --sidebar: #023047;
+  --sidebar: #102a42;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #8ecae6;
-  --sidebar-primary-foreground: #023047;
-  --sidebar-accent: #12384a;
+  --sidebar-primary: #9cc0ff;
+  --sidebar-primary-foreground: #102a42;
+  --sidebar-accent: #1a3a57;
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #12384a;
-  --sidebar-ring: #8ecae6;
+  --sidebar-border: #1a3a57;
+  --sidebar-ring: #9cc0ff;
 
-  --radius: 0.375rem;
-  --shadow-float: 0 1px 2px rgb(2 48 71 / 0.06), 0 8px 24px -6px rgb(2 48 71 / 0.16);
-  --shadow-modal: 0 24px 64px -12px rgb(2 48 71 / 0.28);
-  --scrim: rgb(7 20 28 / 0.6);
+  --radius: 0.625rem;
+  --shadow-float: 0 0 0 .5px #00000012, 0 4px 14px -6px #0000001a, 0 12px 32px -12px rgb(16 42 66 / 0.18);
+  --shadow-modal: 0 24px 64px -12px rgb(16 42 66 / 0.30);
+  --scrim: rgb(11 22 34 / 0.6);
   --header-h: 3.75rem;
 }
 
@@ -161,60 +161,60 @@
 }
 
 .dark {
-  --background: #07141c;
-  --foreground: #e6eef2;
-  --surface: #0d2230;
-  --surface-2: #132c3c;
-  --surface-inverse: #12384a;
-  --heading: #f3f7f9;
-  --placeholder: #9fb4c0;
+  --background: #0b1622;
+  --foreground: #e3e9f0;
+  --surface: #111f2e;
+  --surface-2: #172838;
+  --surface-inverse: #1a3550;
+  --heading: #f5f8fb;
+  --placeholder: #9aa9ba;
 
-  --primary: #8ecae6;
-  --primary-foreground: #07141c;
+  --primary: #7aa5ff;
+  --primary-foreground: #0b1622;
   --secondary: var(--surface-2);
-  --secondary-foreground: #e6eef2;
-  --muted-foreground: #9fb4c0;
-  --accent: #132c3c;
-  --accent-foreground: #e6eef2;
+  --secondary-foreground: #e3e9f0;
+  --muted-foreground: #9aa9ba;
+  --accent: #172838;
+  --accent-foreground: #e3e9f0;
 
-  --border: #1d3a4a;
-  --border-strong: #627f90;
-  --input: #627f90;
-  --ring: #8ecae6;
+  --border: #223447;
+  --border-strong: #6b809a;
+  --input: #6b809a;
+  --ring: #7aa5ff;
 
-  --link: #5cc1dd;
-  --brand-teal: #219ebc;
-  --teal-tint: #0f3347;
+  --link: #7aa5ff;
+  --brand-teal: #80b79c;
+  --teal-tint: #15302a;
 
-  --cta: #fb8500;
-  --cta-foreground: #07141c;
-  --cta-hover: #ff9a2e;
+  --cta: #2463eb;
+  --cta-foreground: #ffffff;
+  --cta-hover: #1d4fd7;
 
-  --success: #6fcf97;
-  --success-bg: #12301f;
+  --success: #80b79c;
+  --success-bg: #15302a;
   --warning: #f2b35a;
   --warning-bg: #3a2a12;
   --destructive: #f28b82;
   --destructive-bg: #3a1414;
 
-  --inverse-fg: #e6eef2;
-  --inverse-muted: #a9c4d2;
-  --inverse-link: #8ecae6;
+  --inverse-fg: #e3e9f0;
+  --inverse-muted: #b8c7d9;
+  --inverse-link: #9cc0ff;
 
-  --chart-1: #8ecae6;
-  --chart-2: #219ebc;
-  --chart-3: #e6eef2;
-  --chart-4: #9fb4c0;
-  --chart-5: #5cc1dd;
+  --chart-1: #7aa5ff;
+  --chart-2: #80b79c;
+  --chart-3: #e3e9f0;
+  --chart-4: #9aa9ba;
+  --chart-5: #2f7f7f;
 
-  --sidebar: #12384a;
+  --sidebar: #1a3550;
   --sidebar-foreground: #e6eef2;
-  --sidebar-primary: #8ecae6;
-  --sidebar-primary-foreground: #07141c;
-  --sidebar-accent: #132c3c;
+  --sidebar-primary: #7aa5ff;
+  --sidebar-primary-foreground: #0b1622;
+  --sidebar-accent: #172838;
   --sidebar-accent-foreground: #e6eef2;
-  --sidebar-border: #1d3a4a;
-  --sidebar-ring: #8ecae6;
+  --sidebar-border: #223447;
+  --sidebar-ring: #7aa5ff;
 
   /* Dark: no visible shadows. Separation comes from borders and lighter surfaces. */
   --shadow-float: 0 0 0 1px var(--border-strong);
@@ -254,7 +254,11 @@
   }
   h1, h2 {
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 800;
+  }
+  h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
   }
   h1 {
     font-size: clamp(2.125rem, 1.7rem + 1.7vw, 3rem);
@@ -346,7 +350,7 @@
   }
   .text-price {
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 800;
     font-size: clamp(2rem, 1.8rem + 0.8vw, 2.5rem);
     line-height: 1;
     letter-spacing: -0.01em;

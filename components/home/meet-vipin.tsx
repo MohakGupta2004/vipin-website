@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Check } from "lucide-react"
 
@@ -15,14 +16,14 @@ export function MeetVipin() {
   return (
     <section className="container-site grid gap-10 py-16 md:py-20 lg:grid-cols-12 lg:gap-12 lg:py-24">
       <div className="lg:col-span-5">
-        {/* PLACEHOLDER: portrait of Vipin Garg (4:5) — set siteConfig.instructor.portrait */}
-        <div
-          role="img"
-          aria-label={portrait ? `Portrait of ${name}` : "Photo of Vipin Garg coming soon"}
-          className="flex aspect-[4/5] max-h-[420px] w-full flex-col items-center justify-center rounded-lg border border-border bg-surface-2 lg:max-h-none"
-        >
-          <span aria-hidden="true" className="font-heading text-[6rem] leading-none font-semibold text-border-strong">VG</span>
-          <span className="mt-3 text-sm text-muted-foreground">Photo coming soon</span>
+        <div className="relative aspect-[4/5] max-h-[460px] w-full overflow-hidden rounded-2xl bg-surface-2 shadow-float lg:max-h-none">
+          <Image
+            src={portrait ?? "/images/vipin-garg.jpg"}
+            alt={`Portrait of ${name}`}
+            fill
+            sizes="(min-width: 1024px) 35vw, 100vw"
+            className="object-cover object-[50%_20%]"
+          />
         </div>
       </div>
       <div className="lg:col-span-7 lg:pt-4">

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Public_Sans, Source_Serif_4 } from "next/font/google"
+import { Arimo, Manrope } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -12,16 +12,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { JsonLd, organizationLd, personLd, websiteLd } from "@/components/seo/json-ld";
 import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/seo";
 
-const publicSans = Public_Sans({
+// Body matches the learning app (app.vipingarg.com uses Arimo); headings use Manrope.
+const bodyFont = Arimo({
   subsets: ["latin"],
-  variable: "--font-public-sans",
+  variable: "--font-body",
   display: "swap",
 })
 
-const sourceSerif = Source_Serif_4({
+const displayFont = Manrope({
   subsets: ["latin"],
-  axes: ["opsz"],
-  variable: "--font-source-serif",
+  variable: "--font-display",
   display: "swap",
 })
 
@@ -56,8 +56,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfcfd" },
-    { media: "(prefers-color-scheme: dark)", color: "#07141c" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1622" },
   ],
 }
 
@@ -71,7 +71,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={cn("antialiased font-sans", publicSans.variable, sourceSerif.variable)}
+      className={cn("antialiased font-sans", bodyFont.variable, displayFont.variable)}
     >
       <body className="min-h-dvh overflow-x-clip">
         <ThemeProvider>

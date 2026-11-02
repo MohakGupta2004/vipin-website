@@ -66,7 +66,7 @@ export const siteFaqs: SiteFaq[] = [
     question: "Are the classes really live?",
     answer:
       "Yes. Vipin Garg teaches live online, explains the reasoning behind each answer, works through examples and takes your questions. Class dates, time zone and session length are confirmed before you enroll.",
-    link: { label: "How it works", href: "/how-it-works" },
+    link: { label: "See upcoming classes", href: "/schedule" },
     home: true,
   },
   {

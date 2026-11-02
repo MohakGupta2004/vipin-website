@@ -14,18 +14,13 @@ const staticRoutes = [
   "/upcoming",
   "/find-my-course",
   "/licensing-pathways",
-  "/how-it-works",
   "/schedule",
   "/masterclass",
   "/free-diagnostic",
-  "/guarantee",
   "/for-firms",
   "/about",
   "/faq",
   "/contact",
-  "/terms",
-  "/privacy",
-  "/refund-policy",
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
