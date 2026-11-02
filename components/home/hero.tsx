@@ -77,13 +77,13 @@ export function Hero() {
               taught by {name}.
             </p>
 
-            <ul className="mt-8 grid gap-3 sm:grid-cols-3">
+            <ul className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-stretch">
               {categories.map((c) => (
-                <li key={c.label}>
+                <li key={c.label} className="flex">
                   <Link
                     href={c.href}
                     className={cn(
-                      "group flex min-h-16 items-center justify-between gap-3 rounded-lg bg-primary px-4 py-3 text-primary-foreground transition-colors duration-150 hover:bg-cta-hover motion-reduce:transition-none",
+                      "group flex min-h-16 w-full items-center justify-between gap-4 rounded-lg bg-primary px-5 py-3 whitespace-nowrap sm:w-auto text-primary-foreground transition-colors duration-150 hover:bg-cta-hover motion-reduce:transition-none",
                       focusRing
                     )}
                   >
