@@ -325,18 +325,27 @@
   @media (min-width: 1024px) {
     .container-site, .container-wide, .container-prose { padding-inline: 2.5rem; }
   }
+  @media (min-width: 1280px) {
+    .container-site { max-width: 80rem; }
+    .container-wide { max-width: 80rem; }
+    .container-site, .container-wide { padding-inline: 3rem; }
+  }
+  @media (min-width: 1536px) {
+    .container-site { max-width: 90rem; }
+    .container-wide { max-width: 90rem; }
+  }
 
   .text-display {
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+    font-size: clamp(2.5rem, 1.75rem + 3vw, 5rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--heading);
     text-wrap: balance;
   }
   .text-lead {
-    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
     line-height: 1.55;
     color: var(--muted-foreground);
   }
@@ -386,3 +395,5 @@
   }
   .vg-enter-up, .vg-enter-left { animation-name: vg-fade; animation-duration: 120ms !important; }
 }
+/* rebuild */
+/* r2 */

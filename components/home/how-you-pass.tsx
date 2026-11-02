@@ -19,7 +19,7 @@ const steps = [
 
 export function HowYouPass() {
   return (
-    <section className="bg-surface-2 py-16 md:py-20 lg:py-24">
+    <section className="bg-surface-2 py-16 md:py-20 lg:py-24 xl:py-28">
       <div className="container-site">
         <h2 className="max-w-[24ch]">How you&apos;ll pass</h2>
         <ol className="mt-10 grid gap-8 md:grid-cols-4 md:gap-6">
