@@ -9,7 +9,7 @@ import type { MegaMenuGroup, NavLink } from "@/lib/data/navigation"
 import { cn } from "@/lib/utils"
 
 const navItem =
-  "relative inline-flex h-11 items-center gap-1 rounded-md px-2.5 text-[0.9375rem] font-semibold text-heading hover:text-link outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring xl:px-3"
+  "relative inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-md px-2.5 text-[0.9375rem] font-semibold text-heading hover:text-link outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring xl:px-3"
 
 /** Short trigger labels, BCC-style ("Securities", not "Securities & CIRO"). */
 const shortLabel: Record<string, string> = {

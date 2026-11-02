@@ -28,7 +28,7 @@ export function Hero() {
   const findHref = isEnabled("homeCourseSearch") ? "#courses" : isEnabled("examFinder") ? "#find-my-course" : "/courses"
   const { name, portrait, credentials } = siteConfig.instructor
   return (
-    <section className="container-site grid gap-10 pt-16 pb-16 md:pt-20 lg:grid-cols-12 lg:gap-8 lg:pt-24 lg:pb-20">
+    <section className="container-site grid gap-12 pt-14 pb-20 md:pt-20 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pt-20 lg:pb-24">
       <div className="lg:col-span-7">
         <h1 className="text-display">Canadian finance exam prep, taught live by Vipin Garg.</h1>
         <p className="text-lead mt-6 max-w-[56ch]">

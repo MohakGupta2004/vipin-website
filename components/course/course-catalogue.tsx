@@ -116,7 +116,7 @@ export function CourseCatalogue({
   };
 
   const Heading = headingLevel;
-  const filtered = area !== "all" || input !== "";
+  const filtered = area !== startArea || input !== "";
 
   return (
     <div id={id} className={cn("scroll-mt-28", className)}>
@@ -247,23 +247,24 @@ export function CourseCatalogue({
         </Button>
       ) : null}
 
-      <a
-        href={appUrl("courses", { campaign: "catalogue" })}
-        rel="noopener"
-        className={cn("mt-8 inline-flex min-h-11 items-center gap-1.5 rounded-sm text-[15px] font-medium text-link underline underline-offset-4", focusRing)}
-      >
-        Browse all courses in the app <ExternalLink className="size-4" aria-hidden="true" />
-      </a>
-
-      {filtered && shown.length > 0 ? (
-        <button
-          type="button"
-          onClick={reset}
-          className={cn("mt-6 block min-h-11 rounded-sm text-[15px] font-medium text-link underline underline-offset-4", focusRing)}
+      <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
+        <a
+          href={appUrl("courses", { campaign: "catalogue" })}
+          rel="noopener"
+          className={cn("inline-flex min-h-11 items-center gap-1.5 rounded-sm text-[15px] font-semibold text-link underline underline-offset-4", focusRing)}
         >
-          Reset search and filters
-        </button>
-      ) : null}
+          Browse all courses in the app <ExternalLink className="size-4" aria-hidden="true" />
+        </a>
+        {filtered && shown.length > 0 ? (
+          <button
+            type="button"
+            onClick={reset}
+            className={cn("min-h-11 rounded-sm text-[15px] font-medium text-muted-foreground underline underline-offset-4 hover:text-link", focusRing)}
+          >
+            Reset search and filters
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }

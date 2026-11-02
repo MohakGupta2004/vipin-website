@@ -25,14 +25,14 @@ export function PriceBox({ course }: { course: Course }) {
   return (
     <div
       id="price-box"
-      className="rounded-lg border border-border bg-surface p-6 text-foreground"
+      className="rounded-2xl border border-border bg-surface p-6 text-foreground shadow-float"
     >
-      <h2 className="font-sans text-lg font-semibold">Choose how you study</h2>
+      <h2 className="text-lg font-bold">Choose how you study</h2>
 
       <div
         role="radiogroup"
         aria-label="Study format"
-        className="mt-4 grid grid-cols-3 gap-px overflow-hidden rounded-md border border-border-strong bg-border-strong"
+        className="mt-4 flex flex-col gap-2"
       >
         {tiers.map((t) => {
           const id = `${uid}-${t.id}`;
@@ -41,9 +41,9 @@ export function PriceBox({ course }: { course: Course }) {
               key={t.id}
               htmlFor={id}
               className={cn(
-                "flex min-h-11 flex-col items-center justify-center gap-0.5 px-1 py-1.5 text-center text-sm font-semibold leading-tight",
+                "flex min-h-11 items-center gap-3 rounded-lg border px-3 py-2 text-[0.9375rem] font-semibold transition-colors motion-reduce:transition-none",
                 t.available ? "cursor-pointer" : "cursor-not-allowed text-muted-foreground",
-                tierId === t.id ? "bg-primary text-primary-foreground" : "bg-surface hover:bg-accent",
+                tierId === t.id ? "border-primary bg-accent text-heading ring-1 ring-primary" : "border-border bg-surface hover:border-border-strong",
                 "has-focus-visible:outline-2 has-focus-visible:-outline-offset-2 has-focus-visible:outline-ring",
               )}
             >
@@ -57,8 +57,19 @@ export function PriceBox({ course }: { course: Course }) {
                 onChange={() => setTierId(t.id)}
                 className="sr-only"
               />
-              <span>{t.label}</span>
-              {!t.available ? <span className="text-[13px] font-normal">Coming</span> : null}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "flex size-4 shrink-0 items-center justify-center rounded-full border-2",
+                  tierId === t.id ? "border-primary" : "border-border-strong",
+                )}
+              >
+                {tierId === t.id ? <span className="size-2 rounded-full bg-primary" /> : null}
+              </span>
+              <span className="flex-1 whitespace-nowrap">{t.label}</span>
+              {!t.available ? (
+                <span className="shrink-0 rounded-full bg-surface-2 px-2 py-0.5 text-[13px] font-medium text-muted-foreground">Soon</span>
+              ) : null}
             </label>
           );
         })}

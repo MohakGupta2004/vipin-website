@@ -1,6 +1,5 @@
-import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Check } from "lucide-react"
+import { ArrowRight, Check, Play } from "lucide-react"
 
 import { siteConfig } from "@/lib/site-config"
 
@@ -10,31 +9,21 @@ const points = [
   "Preparation shaped around your exam",
 ]
 
+/** Meet Vipin: founder introduction video beside a short intro. Video only (no portrait here). */
 export function MeetVipin() {
-  const { name, bio, portrait } = siteConfig.instructor
+  const { bio } = siteConfig.instructor
   const video = siteConfig.founderVideo
   return (
-    <section className="container-site grid gap-10 py-16 md:py-20 lg:grid-cols-12 lg:gap-12 lg:py-24">
+    <section className="container-site grid items-center gap-10 py-16 md:py-20 lg:grid-cols-12 lg:gap-14 lg:py-24">
       <div className="lg:col-span-5">
-        <div className="relative aspect-[4/5] max-h-[460px] w-full overflow-hidden rounded-2xl bg-surface-2 shadow-float lg:max-h-none">
-          <Image
-            src={portrait ?? "/images/vipin-garg.jpg"}
-            alt={`Portrait of ${name}`}
-            fill
-            sizes="(min-width: 1024px) 35vw, 100vw"
-            className="object-cover object-[50%_20%]"
-          />
-        </div>
-      </div>
-      <div className="lg:col-span-7 lg:pt-4">
         <h2>Meet your instructor</h2>
-        <p className="text-lead mt-4 max-w-[60ch]">
+        <p className="text-lead mt-4 max-w-[52ch]">
           {bio ?? "Work through financial ideas with Vipin Garg, from the underlying principles to their application in exam scenarios."}
         </p>
         <ul className="mt-6 flex flex-col gap-3">
           {points.map((p) => (
             <li key={p} className="flex items-start gap-3">
-              <Check aria-hidden="true" strokeWidth={1.75} className="mt-1 size-4 shrink-0 text-link" />
+              <Check aria-hidden="true" strokeWidth={2} className="mt-1 size-4 shrink-0 text-link" />
               <span>{p}</span>
             </li>
           ))}
@@ -46,14 +35,29 @@ export function MeetVipin() {
           About Vipin
           <ArrowRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
         </Link>
+      </div>
+
+      <div className="lg:col-span-7">
         {video ? (
-          <video controls preload="none" poster={video.poster} className="mt-8 aspect-video w-full rounded-lg border border-border bg-surface-inverse">
+          <video
+            controls
+            preload="none"
+            poster={video.poster}
+            className="aspect-video w-full rounded-2xl bg-surface-inverse shadow-float"
+          >
             <source src={video.src} />
             {video.captionsUrl && <track kind="captions" src={video.captionsUrl} default />}
           </video>
         ) : (
-          <div className="mt-8 flex aspect-video w-full items-center justify-center rounded-lg bg-surface-inverse text-sm text-inverse-muted">
-            Introduction video coming soon
+          // PLACEHOLDER: founder introduction video — set siteConfig.founderVideo { src: "/media/vipin-intro.mp4", poster, captionsUrl }
+          <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl bg-surface-inverse text-center shadow-float">
+            <span aria-hidden="true" className="flex size-16 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
+              <Play strokeWidth={1.75} className="ml-1 size-7 text-inverse-fg/80" />
+            </span>
+            <div>
+              <p className="font-heading text-lg font-bold text-inverse-fg">A short introduction from Vipin</p>
+              <p className="mt-1 text-sm text-inverse-muted">Video coming soon</p>
+            </div>
           </div>
         )}
       </div>

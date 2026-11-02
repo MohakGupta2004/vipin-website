@@ -256,7 +256,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
           {question.prompt}
         </legend>
         {/* Native radios with one name: Tab enters the group, arrow keys move and select. */}
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2">
           {question.options.map((o) => {
             const id = `${uid}-${question.id}-${o.value}`;
             return (
