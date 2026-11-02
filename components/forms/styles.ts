@@ -19,5 +19,5 @@ export const textLink = `inline-flex min-h-11 items-center gap-1 rounded-sm font
 
 /** Text input, select and textarea. 48px tall, 16px text. */
 export const controlBase =
-  "w-full min-w-0 rounded-sm border border-border-strong bg-surface px-3 text-base md:text-base text-foreground placeholder:text-placeholder outline-none transition-colors focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:opacity-50";
+  "w-full min-w-0 rounded-sm border border-border-strong bg-surface px-3 text-base md:text-base text-foreground placeholder:text-placeholder outline-hidden transition-colors focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:opacity-50";
 export const controlHeight = "h-12";

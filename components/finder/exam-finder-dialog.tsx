@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 import { ctaButton } from "@/components/forms/styles";
+import { isEnabled } from "@/lib/feature-flags";
 import { cn } from "@/lib/utils";
 
 import { ExamFinder } from "./exam-finder";
@@ -20,6 +21,7 @@ export function ExamFinderDialog({
   triggerClassName?: string;
 }) {
   const [open, setOpen] = React.useState(false);
+  if (!isEnabled("examFinder")) return null;
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -29,7 +31,7 @@ export function ExamFinderDialog({
       <Dialog.Portal>
         <Dialog.Backdrop className="vg-enter-fade fixed inset-0 z-50 bg-(--scrim)" />
         <Dialog.Popup
-          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-(--shadow-modal) outline-none sm:p-8"
+          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-(--shadow-modal) outline-hidden sm:p-8"
         >
           <div className="mb-4 flex items-start justify-between gap-4">
             <Dialog.Title className="text-xl font-semibold text-heading">Find my course</Dialog.Title>

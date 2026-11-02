@@ -1,0 +1,38 @@
+{
+  "announcementBar": {
+    "enabled": true,
+    "id": "cfa-launch-2026-11",
+    "message": "New course launching soon: CFA exam preparation with Vipin.",
+    "linkLabel": "Join the waitlist",
+    "linkHref": "/upcoming",
+    "dismissible": true
+  },
+  "homeCourseSearch": {
+    "enabled": true
+  },
+  "examFinder": {
+    "enabled": true
+  },
+  "exitIntentPopup": {
+    "enabled": true
+  },
+  "diagnosticSlideIn": {
+    "enabled": true
+  },
+  "masterclassSignup": {
+    "enabled": true
+  },
+  "appSignupPrompt": {
+    "enabled": true,
+    "delaySeconds": 20,
+    "cooldownMinutes": 30,
+    "maxDismissals": 3,
+    "afterMaxDismissals": "sticky-bar",
+    "excludePaths": [
+      "/contact",
+      "/terms",
+      "/privacy",
+      "/refund-policy"
+    ]
+  }
+}

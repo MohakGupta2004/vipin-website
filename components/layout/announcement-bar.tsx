@@ -23,6 +23,7 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
             </Link>
           )}
         </p>
+        {announcement.dismissible !== false && (
         <button
           type="button"
           onClick={dismiss}
@@ -31,6 +32,7 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
         >
           <X aria-hidden="true" strokeWidth={1.75} className="size-4" />
         </button>
+        )}
       </div>
     </div>
   )

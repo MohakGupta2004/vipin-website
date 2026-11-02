@@ -3,6 +3,8 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { buttonVariants } from "@/components/ui/button"
+import { appUrl } from "@/components/layout/app-links"
+import { isEnabled } from "@/lib/feature-flags"
 import { liveGroupCourses, nextCohort } from "@/lib/data/courses"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
@@ -22,6 +24,8 @@ function nextIntake() {
 
 export function Hero() {
   const intake = nextIntake()
+  // Secondary CTA target follows the feature flags; falls back to the catalogue page.
+  const findHref = isEnabled("homeCourseSearch") ? "#courses" : isEnabled("examFinder") ? "#find-my-course" : "/courses"
   const { name, role, portrait, credentials } = siteConfig.instructor
   return (
     <section className="container-site grid gap-10 pt-16 pb-16 md:pt-20 lg:grid-cols-12 lg:gap-8 lg:pt-24 lg:pb-20">
@@ -32,14 +36,18 @@ export function Hero() {
           readiness before you book the exam.
         </p>
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-          <Link href="#find-my-course" className={cn(buttonVariants({ variant: "cta", size: "lg" }), "w-full sm:w-auto")}>
-            Find my course
-          </Link>
+          <a
+            href={appUrl("signup", { campaign: "home-hero" })}
+            rel="noopener"
+            className={cn(buttonVariants({ variant: "cta", size: "lg" }), "w-full sm:w-auto")}
+          >
+            Create free account
+          </a>
           <Link
-            href="/masterclass"
+            href={findHref}
             className="group inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold text-link"
           >
-            Join a free masterclass
+            Find my course
             <ArrowRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
           </Link>
         </div>

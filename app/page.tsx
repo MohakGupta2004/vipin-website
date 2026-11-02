@@ -9,6 +9,7 @@ import { MasterclassBand } from "@/components/home/masterclass-band"
 import { MeetVipin } from "@/components/home/meet-vipin"
 import { Programmes } from "@/components/home/programmes"
 import { TrustStrip } from "@/components/home/trust-strip"
+import { isEnabled } from "@/lib/feature-flags"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
@@ -24,13 +25,13 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustStrip />
-      <FinderSection />
-      <Programmes />
+      {isEnabled("examFinder") && <FinderSection />}
+      {isEnabled("homeCourseSearch") && <Programmes />}
       <HowYouPass />
       <MeetVipin />
       <GuaranteeTeaser />
       <CareerPathways />
-      <MasterclassBand />
+      {isEnabled("masterclassSignup") && <MasterclassBand />}
       <HomeFaq />
       <FirmsTeaser />
     </>

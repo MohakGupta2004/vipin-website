@@ -1,18 +1,19 @@
-import Link from "next/link";
-import { ArrowRight, Check, TriangleAlert } from "lucide-react";
+import Link from "next/link"
+import { ArrowRight, Check, TriangleAlert } from "lucide-react"
 
-import { Breadcrumbs } from "@/components/layout/breadcrumbs";
-import { JsonLd, courseLd } from "@/components/seo/json-ld";
-import { LeadForm } from "@/components/forms/lead-form";
-import { focusRing, textLink } from "@/components/forms/styles";
-import { getSiblings, nextCohort, type Course } from "@/lib/data/courses";
-import { siteConfig } from "@/lib/site-config";
-import { cn } from "@/lib/utils";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs"
+import { JsonLd, courseLd } from "@/components/seo/json-ld"
+import { LeadForm } from "@/components/forms/lead-form"
+import { focusRing, textLink } from "@/components/forms/styles"
+import { getSiblings, nextCohort, type Course } from "@/lib/data/courses"
+import { appUrl } from "@/lib/app-links"
+import { siteConfig } from "@/lib/site-config"
+import { cn } from "@/lib/utils"
 
-import { CourseCard, CourseGrid } from "./course-card";
-import { DiagnosticCta } from "./diagnostic-cta";
-import { ExternalLinkText, FactsTable, type FactRow } from "./facts-table";
-import { FaqList } from "./faq-list";
+import { CourseCard, CourseGrid } from "./course-card"
+import { DiagnosticCta } from "./diagnostic-cta"
+import { ExternalLinkText, FactsTable, type FactRow } from "./facts-table"
+import { FaqList } from "./faq-list"
 import {
   areaLabel,
   courseH1,
@@ -24,45 +25,51 @@ import {
   hostOf,
   lowestPrice,
   formatCad,
-} from "./format";
-import { IncludedList } from "./included-list";
-import { MobileCourseBar } from "./mobile-course-bar";
-import { PriceBox } from "./price-box";
+} from "./format"
+import { IncludedList } from "./included-list"
+import { MobileCourseBar } from "./mobile-course-bar"
+import { VipinPhoto } from "./vipin-photo"
+import { PriceBox } from "./price-box"
 
 const hubOf = (area: Course["area"]) =>
-  area === "securities" ? "/securities" : area === "insurance" ? "/insurance" : "/financial-planning";
+  area === "securities"
+    ? "/securities"
+    : area === "insurance"
+      ? "/insurance"
+      : "/financial-planning"
 
 function Section({
   id,
   title,
   children,
 }: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
+  id: string
+  title: string
+  children: React.ReactNode
 }) {
   return (
     <section id={id} aria-labelledby={`${id}-h`} className="scroll-mt-28">
       <h2 id={`${id}-h`}>{title}</h2>
       <div className="mt-6 lg:mt-8">{children}</div>
     </section>
-  );
+  )
 }
 
 export type CoursePageProps = {
-  course: Course;
+  course: Course
   /** Extra section rendered after "What you'll learn" (e.g. LLQP region matrix). */
-  extras?: React.ReactNode;
-};
+  extras?: React.ReactNode
+}
 
 /** One template for every course page. Data-driven; unknown values render as "Announced soon". */
 export function CoursePage({ course, extras }: CoursePageProps) {
-  const c = course;
-  const siblings = getSiblings(c);
-  const cohort = nextCohort(c);
-  const price = lowestPrice(c);
-  const feeLabel = price !== null ? `From ${formatCad(price)}` : "Fee announced soon";
-  const body = examBody(c);
+  const c = course
+  const siblings = getSiblings(c)
+  const cohort = nextCohort(c)
+  const price = lowestPrice(c)
+  const feeLabel =
+    price !== null ? `From ${formatCad(price)}` : "Fee announced soon"
+  const body = examBody(c)
 
   const officialRows: FactRow[] = [
     { label: "Exam provider", value: body },
@@ -76,12 +83,18 @@ export function CoursePage({ course, extras }: CoursePageProps) {
       value: c.examFormat.duration ?? "To be confirmed",
       muted: !c.examFormat.duration,
     },
-    ...(c.examFormat.notes ? [{ label: "Notes", value: c.examFormat.notes }] : []),
+    ...(c.examFormat.notes
+      ? [{ label: "Notes", value: c.examFormat.notes }]
+      : []),
     {
       label: "Official page",
-      value: <ExternalLinkText href={c.officialUrl}>{hostOf(c.officialUrl)}</ExternalLinkText>,
+      value: (
+        <ExternalLinkText href={c.officialUrl}>
+          {hostOf(c.officialUrl)}
+        </ExternalLinkText>
+      ),
     },
-  ];
+  ]
 
   const coachingRows: FactRow[] = [
     { label: "Format", value: formatLabel(c) },
@@ -93,29 +106,37 @@ export function CoursePage({ course, extras }: CoursePageProps) {
     },
     ...(cohort ? [{ label: "Schedule", value: cohort.schedule }] : []),
     { label: "Fee", value: feeLabel, muted: price === null },
-    { label: "Recordings", value: "Planned. Your offer confirms what is included.", muted: true },
+    {
+      label: "Recordings",
+      value: "Planned. Your offer confirms what is included.",
+      muted: true,
+    },
     {
       label: "Official registration",
       value: "Separate. Not included unless your offer says so in writing.",
     },
-  ];
+  ]
 
   const included = [
     {
       label: `Live online classes with ${siteConfig.instructor.name}`,
-      detail: "Class dates, time zone and session length are confirmed before you enroll.",
+      detail:
+        "Class dates, time zone and session length are confirmed before you enroll.",
     },
     {
       label: "Guided examples and live discussion",
-      detail: "Work through examples together and ask questions as they come up.",
+      detail:
+        "Work through examples together and ask questions as they come up.",
     },
     {
       label: `Preparation shaped around the ${c.code}`,
-      detail: "Time goes to the topics that need attention for the exam you are taking.",
+      detail:
+        "Time goes to the topics that need attention for the exam you are taking.",
     },
     {
       label: "Class recordings",
-      detail: "Recorded courses are planned. Your coaching offer states what you receive.",
+      detail:
+        "Recorded courses are planned. Your coaching offer states what you receive.",
       planned: true,
     },
     ...(c.practiceTests === "in-development"
@@ -128,12 +149,12 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           },
         ]
       : []),
-  ];
+  ]
 
   const breadcrumbItems = [
     { name: areaLabel(c.area), href: hubOf(c.area) },
     { name: courseH1(c), href: c.route },
-  ];
+  ]
 
   return (
     <div className="pb-24 lg:pb-0">
@@ -144,7 +165,10 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           name: `${c.name} (${c.code}) coaching`,
           description: c.summary,
           price: price ?? undefined,
-          cohorts: c.cohorts.map((x) => ({ startDate: x.startDate, endDate: x.endDate })),
+          cohorts: c.cohorts.map((x) => ({
+            startDate: x.startDate,
+            endDate: x.endDate,
+          })),
         })}
       />
 
@@ -156,20 +180,31 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           <p className="text-eyebrow">{eyebrow(c)}</p>
           <h1 className="mt-3">{courseH1(c)}</h1>
           <p className="mt-2 text-lg text-muted-foreground">{c.name}</p>
-          <p className="mt-6 max-w-[60ch] text-lead">{c.summary}</p>
+          <p className="text-lead mt-6 max-w-[60ch]">{c.summary}</p>
           <p className="mt-5 text-[15px] font-medium text-foreground">
             {formatLabel(c)} · Online · {siteConfig.instructor.name}
           </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Last reviewed <time dateTime={c.lastReviewed}>{formatReviewed(c.lastReviewed)}</time> by{" "}
-            {siteConfig.instructor.name}
+          <p className="mt-3 flex items-center gap-3 text-sm text-muted-foreground">
+            <VipinPhoto size={32} round />
+            <span>
+              Last reviewed{" "}
+              <time dateTime={c.lastReviewed}>
+                {formatReviewed(c.lastReviewed)}
+              </time>{" "}
+              by {siteConfig.instructor.name}
+            </span>
           </p>
           {c.ciro2026Note ? (
             <div className="mt-6 flex max-w-[68ch] items-start gap-3 rounded-md bg-warning-bg p-4 text-[15px] text-foreground">
-              <TriangleAlert className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden="true" />
+              <TriangleAlert
+                className="mt-0.5 size-4 shrink-0 text-warning"
+                aria-hidden="true"
+              />
               <div>
                 <p>{c.ciro2026Note.text}</p>
-                <ExternalLinkText href={c.ciro2026Note.href}>{c.ciro2026Note.linkLabel}</ExternalLinkText>
+                <ExternalLinkText href={c.ciro2026Note.href}>
+                  {c.ciro2026Note.linkLabel}
+                </ExternalLinkText>
               </div>
             </div>
           ) : null}
@@ -189,7 +224,10 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             <ul className="max-w-[68ch] space-y-3">
               {c.whoFor.map((w) => (
                 <li key={w} className="flex gap-3 text-[17px]">
-                  <Check className="mt-1.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                  <Check
+                    className="mt-1.5 size-4 shrink-0 text-success"
+                    aria-hidden="true"
+                  />
                   <span>{w}</span>
                 </li>
               ))}
@@ -201,20 +239,26 @@ export function CoursePage({ course, extras }: CoursePageProps) {
               <>
                 <ol className="grid gap-x-8 sm:grid-cols-2">
                   {c.topics.map((t, i) => (
-                    <li key={t} className="flex gap-3 border-b border-border py-3 text-[17px]">
-                      <span className="w-6 shrink-0 tabular-nums text-muted-foreground">{i + 1}</span>
+                    <li
+                      key={t}
+                      className="flex gap-3 border-b border-border py-3 text-[17px]"
+                    >
+                      <span className="w-6 shrink-0 text-muted-foreground tabular-nums">
+                        {i + 1}
+                      </span>
                       <span>{t}</span>
                     </li>
                   ))}
                 </ol>
                 <p className="mt-4 max-w-[68ch] text-sm text-muted-foreground">
-                  This is an overview of the subject areas. Consult the official provider’s syllabus for the
-                  complete examinable content.
+                  This is an overview of the subject areas. Consult the official
+                  provider’s syllabus for the complete examinable content.
                 </p>
               </>
             ) : (
               <p className="max-w-[68ch] text-[17px] text-muted-foreground">
-                Syllabus overview to be confirmed. See the official page for the current requirements.
+                Syllabus overview to be confirmed. See the official page for the
+                current requirements.
               </p>
             )}
           </Section>
@@ -224,29 +268,44 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           <Section id="career" title={`Where does the ${c.code} apply?`}>
             <p className="max-w-[68ch] text-[17px]">{c.careerUse}</p>
             <p className="mt-3 max-w-[68ch] text-sm text-muted-foreground">
-              An examination is one part of a professional pathway. Registration, experience, education and
-              employer requirements may also apply.
+              An examination is one part of a professional pathway.
+              Registration, experience, education and employer requirements may
+              also apply.
             </p>
             <Link href="/licensing-pathways" className={cn(textLink, "mt-2")}>
-              Explore career &amp; designation pathways <ArrowRight className="size-4" aria-hidden="true" />
+              Explore career &amp; designation pathways{" "}
+              <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </Section>
 
           <Section id="exam" title={`How does the ${c.code} exam work?`}>
             <p className="mb-4 max-w-[68ch] text-sm text-muted-foreground">
               Official exam details, set by {body}. Last checked{" "}
-              <time dateTime={c.lastReviewed}>{formatReviewed(c.lastReviewed)}</time> by{" "}
-              {siteConfig.instructor.name}. Confirm on the official page before you book.
+              <time dateTime={c.lastReviewed}>
+                {formatReviewed(c.lastReviewed)}
+              </time>{" "}
+              by {siteConfig.instructor.name}. Confirm on the official page
+              before you book.
             </p>
-            <FactsTable caption={`Official ${c.code} exam details`} rows={officialRows} />
+            <FactsTable
+              caption={`Official ${c.code} exam details`}
+              rows={officialRows}
+            />
           </Section>
 
-          <Section id="coaching" title={`How does our ${c.code} coaching work?`}>
-            <FactsTable caption={`${c.code} coaching details`} rows={coachingRows} />
+          <Section
+            id="coaching"
+            title={`How does our ${c.code} coaching work?`}
+          >
+            <FactsTable
+              caption={`${c.code} coaching details`}
+              rows={coachingRows}
+            />
             <h3 className="mt-10 mb-4 font-sans text-lg">What’s included</h3>
             <IncludedList items={included} />
             <p className="mt-3 max-w-[68ch] text-sm text-muted-foreground">
-              Resources vary by programme. Your coaching offer lists exactly what you receive.
+              Resources vary by programme. Your coaching offer lists exactly
+              what you receive.
             </p>
           </Section>
 
@@ -256,18 +315,28 @@ export function CoursePage({ course, extras }: CoursePageProps) {
                 <table className="w-full min-w-[28rem] border-collapse text-[15px]">
                   <thead>
                     <tr className="bg-surface-2 text-left">
-                      <th scope="col" className="px-3 py-3 font-semibold">Start</th>
-                      <th scope="col" className="px-3 py-3 font-semibold">Schedule</th>
-                      <th scope="col" className="px-3 py-3 font-semibold">Seats</th>
+                      <th scope="col" className="px-3 py-3 font-semibold">
+                        Start
+                      </th>
+                      <th scope="col" className="px-3 py-3 font-semibold">
+                        Schedule
+                      </th>
+                      <th scope="col" className="px-3 py-3 font-semibold">
+                        Seats
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {c.cohorts.map((x) => (
                       <tr key={x.id} className="border-b border-border">
-                        <td className="px-3 py-3 tabular-nums">{formatDate(x.startDate)}</td>
+                        <td className="px-3 py-3 tabular-nums">
+                          {formatDate(x.startDate)}
+                        </td>
                         <td className="px-3 py-3">{x.schedule}</td>
                         <td className="px-3 py-3 tabular-nums">
-                          {x.seatsLeft !== undefined ? `${x.seatsLeft} left` : "—"}
+                          {x.seatsLeft !== undefined
+                            ? `${x.seatsLeft} left`
+                            : "—"}
                         </td>
                       </tr>
                     ))}
@@ -276,16 +345,23 @@ export function CoursePage({ course, extras }: CoursePageProps) {
               </div>
             ) : (
               <div className="max-w-[68ch]">
-                <h3 className="font-sans">No cohorts are scheduled right now</h3>
+                <h3 className="font-sans">
+                  No cohorts are scheduled right now
+                </h3>
                 <p className="mt-2 text-[17px]">
-                  Dates for the {c.code} are announced soon. Register your interest and we will email you
-                  first.
+                  Dates for the {c.code} are announced soon. Register your
+                  interest and we will email you first.
                 </p>
               </div>
             )}
-            <div id="register-interest" className="mt-10 scroll-mt-28 border-t border-border pt-8">
+            <div
+              id="register-interest"
+              className="mt-10 scroll-mt-28 border-t border-border pt-8"
+            >
               <h3 className="font-sans text-lg">
-                {c.offerConfirmed ? `Register interest in the ${c.code}` : `Tell me when ${c.code} coaching is confirmed`}
+                {c.offerConfirmed
+                  ? `Register interest in the ${c.code}`
+                  : `Tell me when ${c.code} coaching is confirmed`}
               </h3>
               <LeadForm
                 kind="interest"
@@ -298,19 +374,31 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             </div>
           </Section>
 
-          <DiagnosticCta courseSlug={c.slug} code={c.code} sourcePath={c.route} />
+          <DiagnosticCta
+            courseSlug={c.slug}
+            code={c.code}
+            sourcePath={c.route}
+          />
 
           <Section id="instructor" title="Who teaches the course?">
-            <div className="max-w-[68ch]">
-              <p className="text-lg font-semibold text-heading">{siteConfig.instructor.name}</p>
-              <p className="text-sm text-muted-foreground">{siteConfig.instructor.role}</p>
-              <p className="mt-3 text-[17px]">
-                {siteConfig.instructor.bio ??
-                  `${siteConfig.name} brings live instruction to Canadian financial exam preparation, with an emphasis on understanding concepts and how they apply.`}
-              </p>
-              <Link href="/about" className={cn(textLink, "mt-1")}>
-                About Vipin <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
+            <div className="flex max-w-[68ch] flex-col gap-5 sm:flex-row">
+              <VipinPhoto size={120} />
+              <div>
+                <p className="text-lg font-semibold text-heading">
+                  {siteConfig.instructor.name}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {siteConfig.instructor.role}
+                </p>
+                <p className="mt-3 text-[17px]">
+                  {siteConfig.instructor.bio ??
+                    `${siteConfig.name} brings live instruction to Canadian financial exam preparation, with an emphasis on understanding concepts and how they apply.`}
+                </p>
+                <Link href="/about" className={cn(textLink, "mt-1")}>
+                  About Vipin{" "}
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
           </Section>
 
@@ -324,7 +412,8 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             <section aria-labelledby="next-h" className="scroll-mt-28">
               <h2 id="next-h">Taking {siblings[0].code} next?</h2>
               <p className="mt-3 max-w-[68ch] text-[17px] text-muted-foreground">
-                Related exams that many learners study alongside or after the {c.code}.
+                Related exams that many learners study alongside or after the{" "}
+                {c.code}.
               </p>
               <CourseGrid className="mt-6 sm:grid-cols-2 lg:grid-cols-2">
                 {siblings.slice(0, 2).map((s) => (
@@ -336,14 +425,27 @@ export function CoursePage({ course, extras }: CoursePageProps) {
 
           <aside className="rounded-lg border border-border p-5 text-[15px]">
             Studying through your employer?{" "}
-            <Link href="/for-firms" className={cn("font-medium text-link underline underline-offset-4", focusRing)}>
+            <Link
+              href="/for-firms"
+              className={cn(
+                "font-medium text-link underline underline-offset-4",
+                focusRing
+              )}
+            >
               Ask about group cohorts →
             </Link>
           </aside>
         </div>
       </div>
 
-      <MobileCourseBar code={c.code} feeLabel={feeLabel} />
+      <MobileCourseBar
+        code={c.code}
+        feeLabel={feeLabel}
+        signupHref={appUrl("signup", {
+          campaign: `course-${c.slug}`,
+          content: "mobile-bar",
+        })}
+      />
     </div>
-  );
+  )
 }

@@ -4,7 +4,7 @@
  * Course links are generated from `courses.ts` so they cannot drift.
  */
 
-import { siteConfig } from "@/lib/site-config";
+import { appUrl } from "@/lib/app-links";
 import { courses, type Course } from "./courses";
 
 export type StaticRoute =
@@ -152,9 +152,16 @@ export const primaryLinks: NavLink[] = [
   { label: "About", href: "/about" },
 ];
 
+/** "Log in" to the learning app. */
 export const studentLogin: ExternalLink = {
-  label: "Student login",
-  href: siteConfig.studentLoginUrl,
+  label: "Log in",
+  href: appUrl("login", { campaign: "header" }),
+};
+
+/** Primary header button: create an account in the learning app. */
+export const headerSignup: ExternalLink = {
+  label: "Sign up free",
+  href: appUrl("signup", { campaign: "header" }),
 };
 
 export const headerCta: NavLink = {
@@ -206,8 +213,13 @@ export const footerColumns: FooterColumn[] = [
       { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
       {
-        label: "Student login",
-        href: siteConfig.studentLoginUrl,
+        label: "Log in",
+        href: appUrl("login", { campaign: "footer" }),
+        external: true,
+      },
+      {
+        label: "Create account",
+        href: appUrl("signup", { campaign: "footer" }),
         external: true,
       },
     ],

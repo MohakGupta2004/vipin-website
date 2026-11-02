@@ -8,6 +8,8 @@ import { ArrowRight, TriangleAlert } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { focusRing, primaryButton, secondaryButton, textLink } from "@/components/forms/styles";
 import { getCourse, nextCohort } from "@/lib/data/courses";
+import { VipinPhoto } from "@/components/course/vipin-photo";
+import { isEnabled } from "@/lib/feature-flags";
 import {
   finderQuestions,
   recommendCourse,
@@ -81,6 +83,9 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
 
   const complete = answers.goal && answers.province && answers.timing;
 
+  // Feature flag: renders nothing (no layout gap) when switched off in config/feature-flags.json.
+  if (!isEnabled("examFinder")) return null;
+
   if (showResult && complete) {
     const rec = recommendCourse(answers as FinderAnswers);
     const primary = rec.primary ? getCourse(rec.primary) : undefined;
@@ -103,7 +108,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
               focusRef.current = el;
             }}
             tabIndex={-1}
-            className="mt-1 text-xl font-semibold text-heading outline-none"
+            className="mt-1 text-xl font-semibold text-heading outline-hidden"
           >
             {rec.headline}
           </h3>
@@ -179,6 +184,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
                 See {primary.code} course
               </Link>
               <Link href={`/contact?course=${primary.slug}`} onClick={onNavigate} className={textLink}>
+                <VipinPhoto size={28} round />
                 Talk to Vipin <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </>
@@ -245,7 +251,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
             focusRef.current = el;
           }}
           tabIndex={-1}
-          className="mb-3 text-lg font-medium text-heading outline-none"
+          className="mb-3 text-lg font-medium text-heading outline-hidden"
         >
           {question.prompt}
         </legend>

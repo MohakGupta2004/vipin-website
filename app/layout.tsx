@@ -70,6 +70,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={cn("antialiased font-sans", publicSans.variable, sourceSerif.variable)}
     >
       <body className="min-h-dvh overflow-x-clip">
@@ -84,7 +85,7 @@ export default function RootLayout({
             </a>
             <SiteAnnouncement />
             <Header />
-            <main id="main">{children}</main>
+            <main id="main" tabIndex={-1} className="outline-hidden">{children}</main>
             <OverlayHost />
           </TooltipProvider>
           <Footer />

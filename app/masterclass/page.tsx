@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
 import { formatDate } from "@/components/course/format";
+import { VipinPhoto } from "@/components/course/vipin-photo";
 import { PageSection, PageShell } from "@/components/course/page-shell";
-import { LeadForm } from "@/components/forms/lead-form";
+import { MasterclassSignup } from "@/components/forms/masterclass-signup";
+import { isEnabled } from "@/lib/feature-flags";
 import { buildMetadata } from "@/lib/seo";
 import { hasUpcomingMasterclass, siteConfig } from "@/lib/site-config";
 
@@ -56,9 +58,22 @@ export default function MasterclassPage() {
                 sessions are currently open for booking.
               </p>
             )}
-            <LeadForm kind="masterclass" sourcePath="/masterclass" className="mt-6" />
+            {isEnabled("masterclassSignup") ? (
+              <MasterclassSignup sourcePath="/masterclass" className="mt-6" />
+            ) : (
+              <p className="mt-6 max-w-[60ch] text-[17px] text-muted-foreground">
+                Masterclass registration is closed right now.
+              </p>
+            )}
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
+            <div className="mb-8 flex items-center gap-4">
+              <VipinPhoto size={72} />
+              <p className="text-[15px]">
+                <span className="block text-sm text-muted-foreground">Hosted by</span>
+                <span className="font-semibold text-heading">Vipin Garg</span>
+              </p>
+            </div>
             <h2 className="font-sans text-2xl">Topics in development</h2>
             <ul className="mt-4 divide-y divide-border border-y border-border">
               {sessions.map((s) => (

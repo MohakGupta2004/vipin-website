@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageSection, PageShell } from "@/components/course/page-shell";
 import { ExamFinder } from "@/components/finder/exam-finder";
 import { textLink } from "@/components/forms/styles";
+import { isEnabled } from "@/lib/feature-flags";
 import { buildMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +24,16 @@ export default function FindMyCoursePage() {
     >
       <PageSection>
         <div className="max-w-4xl">
-          <ExamFinder heading="Find the right exam in three questions" />
+          {isEnabled("examFinder") ? (
+            <ExamFinder heading="Find the right exam in three questions" />
+          ) : (
+            <p className="max-w-[60ch] text-[17px]">
+              The course finder is not available right now.{" "}
+              <Link href="/courses" className={cn(textLink, "underline")}>
+                Browse all courses
+              </Link>
+            </p>
+          )}
           <p className="mt-8 text-[17px]">
             Not sure which examination you need?{" "}
             <Link href="/licensing-pathways" className={cn(textLink, "underline")}>

@@ -72,8 +72,14 @@ export const siteConfig = {
     bio: null as string | null,
     // PLACEHOLDER: verified credentials, only if client confirms — ["CFA charterholder", "CFP®"]
     credentials: [] as string[],
-    // PLACEHOLDER: portrait for hero and About page — "/images/vipin-garg.jpg"
-    portrait: null as string | null,
+    /** Official photo (800×800). Use via next/image. `portrait` is the same file as a plain path, kept for older code. */
+    photo: {
+      src: "/images/vipin-garg.jpg",
+      width: 800,
+      height: 800,
+      alt: "Vipin Garg, finance exam coach",
+    } as { src: string; width: number; height: number; alt: string } | null,
+    portrait: "/images/vipin-garg.jpg" as string | null,
   },
 
   contact: {
@@ -99,7 +105,19 @@ export const siteConfig = {
   // PLACEHOLDER: timezone for class times — "America/Vancouver" (BC) or "America/Toronto"
   timezone: "America/Vancouver",
 
-  /** Student learning app. Verified in reference site (all "Student login" links). */
+  /**
+   * The learning app. Sending visitors here is the site's main goal.
+   * Routes /signup, /login and /courses are confirmed. Always build links with appUrl() (lib/app-links.ts) so UTM params are added.
+   */
+  // PLACEHOLDER: does the app support deep links such as /courses/<slug> or ?course=<slug>? — "https://app.vipingarg.com/courses/cire"
+  app: {
+    base: "https://app.vipingarg.com",
+    signup: "https://app.vipingarg.com/signup",
+    login: "https://app.vipingarg.com/login",
+    courses: "https://app.vipingarg.com/courses",
+  },
+
+  /** DEPRECATED: same as `app.base`. Use `siteConfig.app` and appUrl(). */
   studentLoginUrl: "https://app.vipingarg.com",
 
   /** Empty in reference `media.json` → null → hidden in the UI. */
@@ -115,8 +133,7 @@ export const siteConfig = {
   // PLACEHOLDER: founder video + poster — { src: "/media/founder.mp4", poster: "/media/founder.jpg" }
   founderVideo: null as FounderVideo,
 
-  /** Sticky announcement bar. `null` hides the bar. */
-  // PLACEHOLDER: next intake or masterclass announcement — { text: "Next CIRE cohort starts 12 January", href: "/schedule", linkLabel: "See dates" }
+  /** DEPRECATED: the announcement bar now reads only from config/feature-flags.json (`getAnnouncement()` in lib/feature-flags.ts). Always null. */
   announcement: null as Announcement,
 
   /** Next free live masterclass. `null` shows "dates announced soon". */

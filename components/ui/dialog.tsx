@@ -17,7 +17,7 @@ function DialogCloseButton({ className }: { className?: string }) {
     <DialogPrimitive.Close
       aria-label="Close"
       className={cn(
-        "absolute top-2 right-2 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+        "absolute top-2 right-2 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground outline-hidden hover:bg-accent hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         className
       )}
     >
@@ -38,7 +38,7 @@ function DialogContent({
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-120 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-modal transition-[opacity,translate] duration-[180ms] ease-out outline-none data-[ending-style]:opacity-0 data-[starting-style]:translate-y-[calc(-50%+8px)] data-[starting-style]:opacity-0 sm:p-8 motion-reduce:transition-opacity motion-reduce:data-[starting-style]:translate-y-[-50%]",
+          "fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-120 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-modal transition-[opacity,translate] duration-[180ms] ease-out outline-hidden data-[ending-style]:opacity-0 data-[starting-style]:translate-y-[calc(-50%+8px)] data-[starting-style]:opacity-0 sm:p-8 motion-reduce:transition-opacity motion-reduce:data-[starting-style]:translate-y-[-50%]",
           className
         )}
         {...props}

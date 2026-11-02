@@ -219,7 +219,7 @@ export function LeadForm<K extends LeadKind>({
         role="status"
         aria-live="polite"
         className={cn(
-          "flex max-w-120 items-start gap-3 rounded-lg border border-success/30 bg-success-bg p-5 text-foreground outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+          "flex max-w-120 items-start gap-3 rounded-lg border border-success/30 bg-success-bg p-5 text-foreground outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           className,
         )}
       >
@@ -339,10 +339,7 @@ export function LeadForm<K extends LeadKind>({
         </>
       )}
 
-      <ConsentCheckbox />
-      {errors.caslConsent ? (
-        <p className="text-sm font-medium text-destructive">{errors.caslConsent}</p>
-      ) : null}
+      <ConsentCheckbox required={kind === "newsletter"} error={errors.caslConsent} />
 
       <div
         role="alert"

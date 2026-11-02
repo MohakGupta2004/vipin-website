@@ -17,7 +17,21 @@ export type OverlayGateOptions = {
 }
 
 /** True when this overlay may be shown now: not suppressed, and no other overlay shown this session. */
+export const OVERLAY_ATTR = "data-vg-overlay"
+
+/** True while any lead overlay (including the app prompt) is on screen. */
+export function isAnyOverlayOpen(): boolean {
+  return typeof document !== "undefined" && document.documentElement.hasAttribute(OVERLAY_ATTR)
+}
+
+export function markOverlayOpen(id: string | null): void {
+  if (typeof document === "undefined") return
+  if (id) document.documentElement.setAttribute(OVERLAY_ATTR, id)
+  else document.documentElement.removeAttribute(OVERLAY_ATTR)
+}
+
 export function canShowOverlay(id: string, suppressDays: number): boolean {
+  if (isAnyOverlayOpen()) return false
   if (readStorage("session", SESSION_KEY)) return false
   const raw = readStorage("local", dismissKey(id))
   if (raw) {
@@ -39,12 +53,14 @@ export function useOverlayGate({ id, suppressDays, enabled = true }: OverlayGate
     if (!enabled || opened.current || !canShowOverlay(id, suppressDays)) return false
     opened.current = true
     writeStorage("session", SESSION_KEY, id)
+    markOverlayOpen(id)
     setIsOpen(true)
     return true
   }, [enabled, id, suppressDays])
 
   const close = useCallback(() => {
     writeStorage("local", dismissKey(id), String(Date.now()))
+    markOverlayOpen(null)
     setIsOpen(false)
   }, [id])
 

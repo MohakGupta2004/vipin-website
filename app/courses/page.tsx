@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 
-import { CourseCatalogue, type CatalogueItem } from "@/components/course/course-catalogue";
-import { examSummary } from "@/components/course/format";
+import { CourseCatalogue } from "@/components/course/course-catalogue";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
-import { courses, upcomingPrograms } from "@/lib/data/courses";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -12,35 +10,6 @@ export const metadata: Metadata = buildMetadata({
     "Browse live IFC, CSC, CIRE, RSE and LLQP classes plus CIRO, planning and professional exam coaching with Vipin Garg. Filter by area and format.",
   path: "/courses",
 });
-
-const items: CatalogueItem[] = [
-  ...courses.map((c): CatalogueItem => ({
-    key: c.slug,
-    kind: "course",
-    code: c.code,
-    name: c.name,
-    blurb: c.blurb ?? c.tagline,
-    href: c.route,
-    area: c.area,
-    type: c.status === "upcoming" ? "upcoming" : c.status,
-    exam: examSummary(c),
-    confirmed: c.offerConfirmed,
-    haystack: [c.code, c.name, c.tagline, c.category, ...c.topics].join(" ").toLowerCase(),
-  })),
-  ...upcomingPrograms.map((u): CatalogueItem => ({
-    key: u.slug,
-    kind: "upcoming",
-    code: u.name,
-    name: u.name,
-    blurb: u.summary,
-    href: "/upcoming",
-    area: null,
-    type: "upcoming",
-    exam: null,
-    confirmed: false,
-    haystack: [u.name, u.summary].join(" ").toLowerCase(),
-  })),
-];
 
 export default function CoursesPage() {
   return (
@@ -57,7 +26,7 @@ export default function CoursesPage() {
         </div>
       </header>
       <section aria-label="Course catalogue" className="container-site pb-16 lg:pb-24">
-        <CourseCatalogue items={items} />
+        <CourseCatalogue headingLevel="h2" id="catalogue" />
       </section>
     </div>
   );

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * Bottom bar on small screens. Hidden while the inline price box is visible
  * (IntersectionObserver on #price-box, not scroll position).
  */
-export function MobileCourseBar({ code, feeLabel }: { code: string; feeLabel: string }) {
+export function MobileCourseBar({ code, feeLabel, signupHref }: { code: string; feeLabel: string; signupHref: string }) {
   const [boxVisible, setBoxVisible] = React.useState(true);
 
   React.useEffect(() => {
@@ -32,10 +32,11 @@ export function MobileCourseBar({ code, feeLabel }: { code: string; feeLabel: st
           <span className="text-muted-foreground"> · {feeLabel}</span>
         </p>
         <a
-          href="#register-interest"
+          href={signupHref}
+          rel="noopener"
           className={cn(buttonVariants(), ctaButton, "shrink-0 px-4")}
         >
-          Register interest
+          Sign up free
         </a>
       </div>
     </div>

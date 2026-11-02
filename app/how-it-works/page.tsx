@@ -5,7 +5,7 @@ import { PageSection, PageShell } from "@/components/course/page-shell";
 import { buttonVariants } from "@/components/ui/button";
 import { primaryButton } from "@/components/forms/styles";
 import { buildMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site-config";
+import { appUrl } from "@/lib/app-links";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
@@ -75,7 +75,7 @@ export default function HowItWorksPage() {
               enrolled courses and available learning resources.
             </p>
             <a
-              href={siteConfig.studentLoginUrl}
+              href={appUrl("login", { campaign: "how-it-works" })}
               className={cn(buttonVariants({ variant: "outline" }), "mt-5 h-11 rounded-md px-5 text-[15px] font-semibold")}
             >
               Open the learning app

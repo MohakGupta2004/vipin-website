@@ -3,8 +3,8 @@
  * Front-end only: nothing is stored or sent until a provider is connected.
  *
  * CASL: every payload carries `caslConsent`, an explicit boolean taken from an
- * unchecked-by-default checkbox. `false` is a valid answer (the person can
- * still send the form); it just means no marketing email.
+ * unchecked-by-default checkbox. `false` is a valid answer for every form
+ * except `newsletter`, whose only purpose is email and so needs `true`.
  */
 
 export type LeadKind =
@@ -133,6 +133,8 @@ export function validateLead<K extends LeadKind>(
       break;
     case "newsletter":
       requireEmail();
+      // The only purpose of this form is marketing email, so consent must be given.
+      if (p.caslConsent === false) errors.caslConsent = "Please confirm you’d like to receive emails.";
       break;
     case "interest":
       requireEmail();

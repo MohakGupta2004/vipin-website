@@ -12,6 +12,8 @@ export type Announcement = {
   message: string
   href?: string
   linkLabel?: string
+  /** false = no close button. */
+  dismissible?: boolean
 }
 
 /**

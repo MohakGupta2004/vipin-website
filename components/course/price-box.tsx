@@ -5,8 +5,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
-import { ctaButton, focusRing, textLink } from "@/components/forms/styles";
+import { ctaButton, textLink } from "@/components/forms/styles";
 import { nextCohort, type Course } from "@/lib/data/courses";
+import { appUrl } from "@/lib/app-links";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +20,7 @@ export function PriceBox({ course }: { course: Course }) {
   const [tierId, setTierId] = React.useState<string>(tiers[0].id);
   const tier = tiers.find((t) => t.id === tierId) ?? tiers[0];
   const cohort = nextCohort(course);
-  const ctaLabel = "Register interest";
+  const signupHref = appUrl("signup", { campaign: `course-${course.slug}`, content: "price-box" });
 
   return (
     <div
@@ -98,16 +99,21 @@ export function PriceBox({ course }: { course: Course }) {
 
       <div className="mt-5 flex flex-col gap-1">
         <a
-          href="#register-interest"
+          href={signupHref}
+          rel="noopener"
           className={cn(buttonVariants(), ctaButton, "h-12 w-full justify-center px-6")}
         >
-          {ctaLabel}
+          Sign up free
         </a>
+        <p className="text-center text-sm text-muted-foreground">Create your account in the learning app.</p>
         <Link href={`/contact?course=${course.slug}`} className={cn(textLink, "justify-center")}>
-          Talk to Vipin about this course <ArrowRight className="size-4" aria-hidden="true" />
+          Ask Vipin a question <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
+        <a href="#register-interest" className={cn(textLink, "justify-center text-sm")}>
+          Or register interest in the {course.code}
+        </a>
         {siteConfig.guarantee ? (
-          <Link href="/guarantee" className={cn("text-sm text-link underline underline-offset-4", focusRing)}>
+          <Link href="/guarantee" className={cn(textLink, "justify-center text-sm")}>
             Read the guarantee terms
           </Link>
         ) : null}

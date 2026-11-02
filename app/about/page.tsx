@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import { VipinPhoto } from "@/components/course/vipin-photo";
 import { MediaSlot, PageSection, PageShell } from "@/components/course/page-shell";
 import { buttonVariants } from "@/components/ui/button";
 import { primaryButton } from "@/components/forms/styles";
@@ -42,8 +43,13 @@ export default function AboutPage() {
       <PageSection>
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="text-lg font-semibold text-heading">Vipin Garg</p>
-            <p className="text-sm text-muted-foreground">Founder &amp; Instructor</p>
+            <div className="flex items-center gap-4">
+              <VipinPhoto size={96} priority />
+              <div>
+                <p className="text-lg font-semibold text-heading">Vipin Garg</p>
+                <p className="text-sm text-muted-foreground">Founder &amp; Instructor</p>
+              </div>
+            </div>
             <h2 className="mt-6">A personal approach to professional education.</h2>
             <p className="mt-5 max-w-[68ch] text-[17px]">
               {siteConfig.instructor.bio ??

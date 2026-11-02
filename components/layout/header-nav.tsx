@@ -10,7 +10,7 @@ import type { MegaMenuGroup, NavLink } from "@/lib/data/navigation"
 import { cn } from "@/lib/utils"
 
 const navItem =
-  "relative inline-flex h-11 items-center gap-1 px-3 text-[0.9375rem] font-medium text-foreground hover:text-link outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
+  "relative inline-flex h-11 items-center gap-1 px-3 text-[0.9375rem] font-medium text-foreground hover:text-link outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
 
 function ActiveBar({ active }: { active: boolean }) {
   return active ? <span aria-hidden="true" className="absolute inset-x-3 -bottom-px h-0.5 bg-brand-teal" /> : null
@@ -21,6 +21,7 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
   const [open, setOpen] = React.useState(false)
   const rootRef = React.useRef<HTMLDivElement>(null)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
+  const panelRef = React.useRef<HTMLDivElement>(null)
   const hoverTimer = React.useRef<number | undefined>(undefined)
 
   // Border appears after 8px scroll.
@@ -77,7 +78,17 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
   const upcoming = groups.find((g) => g.id === "upcoming")
 
   return (
-    <div ref={rootRef} className="hidden flex-1 lg:block" onPointerEnter={hoverOpen} onPointerLeave={hoverClose}>
+    <div
+      ref={rootRef}
+      className="hidden flex-1 lg:block"
+      onPointerEnter={hoverOpen}
+      onPointerLeave={hoverClose}
+      onBlur={(e) => {
+        // Close when focus leaves the trigger and the panel (keyboard users tabbing away).
+        const next = e.relatedTarget as Node | null
+        if (open && next && !panelRef.current?.contains(next) && next !== triggerRef.current) setOpen(false)
+      }}
+    >
       <nav aria-label="Main" className="flex items-center">
         <button
           ref={triggerRef}
@@ -95,6 +106,37 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
           />
           <ActiveBar active={inCourses} />
         </button>
+      {open && (
+          <div
+            ref={panelRef}
+            id="mega-menu"
+            className="vg-enter-up absolute inset-x-0 top-full z-30 max-h-[calc(100dvh-var(--header-h))] overflow-y-auto overscroll-contain border-b border-border bg-surface shadow-float"
+          >
+            <div className="container-wide grid grid-cols-[2.2fr_1.2fr_1.2fr_14rem] gap-8 py-8">
+              {securities && <Column group={securities} wide />}
+              <div className="flex flex-col gap-8">
+                {insurance && <Column group={insurance} />}
+                {upcoming && (
+                  <div>
+                    <p className="text-eyebrow mb-3">Upcoming</p>
+                    <MenuLink href="/upcoming" code="" name="CFA prep, AI & Finance and more" />
+                  </div>
+                )}
+              </div>
+              {planning && <Column group={planning} />}
+              <aside className="-my-8 bg-surface-2 p-6">
+                <p className="text-base font-semibold text-heading">Not sure which exam you need?</p>
+                <p className="mt-2 text-sm text-muted-foreground">Answer 3 quick questions.</p>
+                <Link href="/find-my-course" className={cn(buttonVariants({ variant: "secondary" }), "mt-4 w-full")}>
+                  Start the finder
+                </Link>
+                <Link href="/courses" className="mt-4 inline-block text-sm font-medium text-link underline underline-offset-3 hover:decoration-2">
+                  Browse all courses
+                </Link>
+              </aside>
+            </div>
+          </div>
+        )}
         {allLinks.map((l) => {
           const active = pathname === l.href
           return (
@@ -106,36 +148,6 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
         })}
       </nav>
 
-      {open && (
-        <div
-          id="mega-menu"
-          className="vg-enter-up absolute inset-x-0 top-full z-30 border-b border-border bg-surface shadow-float"
-        >
-          <div className="container-wide grid grid-cols-[2.2fr_1.2fr_1.2fr_14rem] gap-8 py-8">
-            {securities && <Column group={securities} wide />}
-            <div className="flex flex-col gap-8">
-              {insurance && <Column group={insurance} />}
-              {upcoming && (
-                <div>
-                  <p className="text-eyebrow mb-3">Upcoming</p>
-                  <MenuLink href="/upcoming" code="" name="CFA prep, AI & Finance and more" />
-                </div>
-              )}
-            </div>
-            {planning && <Column group={planning} />}
-            <aside className="-my-8 bg-surface-2 p-6">
-              <p className="text-base font-semibold text-heading">Not sure which exam you need?</p>
-              <p className="mt-2 text-sm text-muted-foreground">Answer 3 quick questions.</p>
-              <Link href="/find-my-course" className={cn(buttonVariants({ variant: "secondary" }), "mt-4 w-full")}>
-                Start the finder
-              </Link>
-              <Link href="/courses" className="mt-4 inline-block text-sm font-medium text-link underline underline-offset-3 hover:decoration-2">
-                Browse all courses
-              </Link>
-            </aside>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
@@ -176,7 +188,7 @@ function MenuLink({ href, code, name, stack }: { href: string; code: string; nam
       )}
     >
       {code && (
-        <span className={cn("tabular text-[0.9375rem] font-semibold text-link", !long && "w-14 shrink-0")}>{code}</span>
+        <span aria-hidden={name.toLowerCase().startsWith(code.toLowerCase()) || undefined} className={cn("tabular text-[0.9375rem] font-semibold text-link", !long && "w-14 shrink-0")}>{code}</span>
       )}
       <span className={cn("leading-snug", long ? "text-sm text-muted-foreground" : "text-[0.9375rem] text-foreground")}>
         {name}

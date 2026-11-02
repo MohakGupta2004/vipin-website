@@ -12,10 +12,11 @@ import { buttonVariants } from "@/components/ui/button"
 import type { ExternalLink, MegaMenuGroup, NavLink } from "@/lib/data/navigation"
 import { cn } from "@/lib/utils"
 
-type Props = { groups: MegaMenuGroup[]; links: NavLink[]; cta: NavLink; login: ExternalLink }
+type Props = { groups: MegaMenuGroup[]; links: NavLink[]; signup: ExternalLink; login: ExternalLink }
 
-export function MobileNav({ groups, links, cta, login }: Props) {
+export function MobileNav({ groups, links, signup, login }: Props) {
   const [open, setOpen] = React.useState(false)
+  const closeRef = React.useRef<HTMLButtonElement>(null)
   const pathname = usePathname()
   const [lastPath, setLastPath] = React.useState(pathname)
   if (lastPath !== pathname) {
@@ -25,19 +26,21 @@ export function MobileNav({ groups, links, cta, login }: Props) {
 
   const close = () => setOpen(false)
   const rowLink =
-    "flex min-h-12 items-center text-base font-medium text-foreground outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
+    "flex min-h-12 items-center text-base font-medium text-foreground outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
 
   return (
-    <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+    <DialogPrimitive.Root open={open} onOpenChange={setOpen} modal>
       <DialogPrimitive.Trigger
         aria-label="Open menu"
-        className="inline-flex size-11 items-center justify-center rounded-md text-foreground outline-none hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring lg:hidden"
+        className="inline-flex size-11 items-center justify-center rounded-md text-foreground outline-hidden hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring lg:hidden"
       >
         <Menu aria-hidden="true" strokeWidth={1.75} className="size-6" />
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Popup
-          className="fixed inset-0 z-50 flex flex-col bg-surface text-foreground outline-none transition-[opacity,translate] duration-[180ms] ease-out data-[ending-style]:translate-x-2 data-[ending-style]:opacity-0 data-[starting-style]:translate-x-2 data-[starting-style]:opacity-0 motion-reduce:transition-opacity motion-reduce:data-[starting-style]:translate-x-0"
+          initialFocus={closeRef}
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex flex-col bg-surface text-foreground outline-hidden transition-[opacity,translate] duration-[180ms] ease-out data-[ending-style]:translate-x-2 data-[ending-style]:opacity-0 data-[starting-style]:translate-x-2 data-[starting-style]:opacity-0 motion-reduce:transition-opacity motion-reduce:data-[starting-style]:translate-x-0"
         >
           <DialogPrimitive.Title className="sr-only">Site menu</DialogPrimitive.Title>
           <div className="flex h-15 shrink-0 items-center justify-between border-b border-border px-5">
@@ -45,6 +48,7 @@ export function MobileNav({ groups, links, cta, login }: Props) {
             <div className="-mr-2 flex items-center">
               <ThemeToggle />
               <DialogPrimitive.Close
+                ref={closeRef}
                 aria-label="Close menu"
                 className="inline-flex size-11 items-center justify-center rounded-md hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
@@ -61,7 +65,7 @@ export function MobileNav({ groups, links, cta, login }: Props) {
               {groups.map((g) => (
                 <AccordionPrimitive.Item key={g.id} value={g.id} className="border-t border-border">
                   <AccordionPrimitive.Header className="m-0">
-                    <AccordionPrimitive.Trigger className="group/t flex min-h-14 w-full items-center justify-between text-left text-base font-semibold text-heading outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
+                    <AccordionPrimitive.Trigger className="group/t flex min-h-14 w-full items-center justify-between text-left text-base font-semibold text-heading outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
                       {g.label}
                       <ChevronDown
                         aria-hidden="true"
@@ -121,9 +125,9 @@ export function MobileNav({ groups, links, cta, login }: Props) {
           </div>
 
           <div className="shrink-0 border-t border-border bg-surface p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-            <Link href={cta.href} onClick={close} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
-              {cta.label}
-            </Link>
+            <a href={signup.href} rel="noopener" className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+              {signup.label}
+            </a>
           </div>
         </DialogPrimitive.Popup>
       </DialogPrimitive.Portal>

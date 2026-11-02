@@ -34,7 +34,7 @@ export function CourseCard({ course }: { course: Course }) {
       <h3 className="mt-3 font-sans text-xl">
         <Link
           href={course.route}
-          className="underline-offset-4 outline-none group-hover:underline after:absolute after:inset-0"
+          className="underline-offset-4 outline-hidden group-hover:underline after:absolute after:inset-0"
         >
           {course.name}
         </Link>
@@ -73,7 +73,7 @@ export function UpcomingCard({ program }: { program: UpcomingProgram }) {
       <h3 className="mt-3 font-sans text-xl">
         <Link
           href="/upcoming"
-          className={cn("underline-offset-4 outline-none group-hover:underline after:absolute after:inset-0", focusRing)}
+          className={cn("underline-offset-4 outline-hidden group-hover:underline after:absolute after:inset-0", focusRing)}
         >
           {program.name}
         </Link>

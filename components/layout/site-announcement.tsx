@@ -1,20 +1,10 @@
-import { siteConfig } from "@/lib/site-config"
+import { getAnnouncement } from "@/lib/feature-flags"
 
 import { AnnouncementBar } from "./announcement-bar"
-import type { Announcement } from "./announcement-state"
 
-const isExpired = (iso: string) => new Date(iso).getTime() < Date.now()
-
-/** Server wrapper: maps siteConfig.announcement, hides it once expired. */
+/** Server wrapper. Reads only config/feature-flags.json; renders nothing when off or invalid. */
 export function SiteAnnouncement() {
-  const a = siteConfig.announcement
+  const a = getAnnouncement()
   if (!a) return null
-  if (a.expiresOn && isExpired(a.expiresOn)) return null
-  const announcement: Announcement = {
-    id: `${a.text}|${a.href}`,
-    message: a.text,
-    href: a.href,
-    linkLabel: a.linkLabel,
-  }
-  return <AnnouncementBar announcement={announcement} />
+  return <AnnouncementBar announcement={{ id: a.id, message: a.message, href: a.href, linkLabel: a.linkLabel, dismissible: a.dismissible }} />
 }

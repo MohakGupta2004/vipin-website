@@ -17,7 +17,7 @@ function InfoTooltip({ label, className }: { label: string; className?: string }
       <TooltipPrimitive.Trigger
         aria-label={label}
         className={cn(
-          "inline-flex size-6 items-center justify-center rounded-sm text-muted-foreground outline-none hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+          "inline-flex size-6 items-center justify-center rounded-sm text-muted-foreground outline-hidden hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           className
         )}
       >

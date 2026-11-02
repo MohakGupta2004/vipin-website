@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Check, CircleAlert } from "lucide-react";
+import { Check, ChevronDown, CircleAlert } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { siteConfig } from "@/lib/site-config";
@@ -180,12 +180,13 @@ export function SelectField({
       className={className}
     >
       {(aria) => (
+        <div className="relative">
         <select
           {...aria}
           name={name}
           required={required}
           defaultValue={defaultValue}
-          className={cn(controlBase, controlHeight)}
+          className={cn(controlBase, controlHeight, "appearance-none pr-10")}
         >
           <option value="">{placeholder}</option>
           {options.map((o) => (
@@ -194,6 +195,8 @@ export function SelectField({
             </option>
           ))}
         </select>
+          <ChevronDown aria-hidden="true" strokeWidth={1.75} className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" />
+        </div>
       )}
     </FieldShell>
   );
@@ -258,6 +261,7 @@ export function Checkbox({
   defaultChecked,
   checked,
   onChange,
+  ...aria
 }: {
   id: string;
   name: string;
@@ -265,6 +269,9 @@ export function Checkbox({
   defaultChecked?: boolean;
   checked?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  "aria-invalid"?: boolean;
+  "aria-required"?: boolean;
+  "aria-describedby"?: string;
 }) {
   return (
     <span className="relative inline-flex size-5 shrink-0">
@@ -273,6 +280,7 @@ export function Checkbox({
         type="checkbox"
         name={name}
         value={value}
+        {...aria}
         {...(checked !== undefined ? { checked, onChange } : { defaultChecked })}
         className="peer size-5 appearance-none rounded-xs border border-border-strong bg-surface checked:border-primary checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       />
@@ -289,27 +297,41 @@ export function Checkbox({
 export function ConsentCheckbox({
   name = "caslConsent",
   privacyHref = "/privacy",
+  required = false,
+  error,
 }: {
   name?: string;
   privacyHref?: string;
+  /** True only for forms whose sole purpose is email (newsletter). Others keep it optional. */
+  required?: boolean;
+  error?: string;
 }) {
   const uid = React.useId();
   const id = `${uid}-consent`;
+  const errorId = error ? `${id}-error` : undefined;
   return (
-    <div className="flex items-start gap-3">
+    <div className="flex flex-col gap-2">
       <label htmlFor={id} className="-m-3 flex min-h-11 cursor-pointer items-start gap-3 p-3">
         <span className="mt-0.5">
-          <Checkbox id={id} name={name} defaultChecked={false} />
+          <Checkbox
+            id={id}
+            name={name}
+            defaultChecked={false}
+            aria-required={required ? true : undefined}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={errorId}
+          />
         </span>
         <span className="text-sm text-muted-foreground">
           Yes, email me class dates, masterclass invitations and exam tips from{" "}
-          {siteConfig.legalName}. This is optional. You can unsubscribe at any time.
+          {siteConfig.legalName}. {required ? "" : "This is optional. "}You can unsubscribe at any time.
           Contact: {siteConfig.contact.email}.{" "}
           <a href={privacyHref} className="font-medium text-link underline underline-offset-4">
             Privacy policy
           </a>
         </span>
       </label>
+      {error ? <FieldError id={errorId!}>{error}</FieldError> : null}
     </div>
   );
 }
