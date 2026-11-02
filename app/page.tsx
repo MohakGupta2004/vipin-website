@@ -8,7 +8,6 @@ import { HowYouPass } from "@/components/home/how-you-pass"
 import { MasterclassBand } from "@/components/home/masterclass-band"
 import { MeetVipin } from "@/components/home/meet-vipin"
 import { Programmes } from "@/components/home/programmes"
-import { TrustStrip } from "@/components/home/trust-strip"
 import { isEnabled } from "@/lib/feature-flags"
 import { buildMetadata } from "@/lib/seo"
 
@@ -24,7 +23,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustStrip />
       {isEnabled("examFinder") && <FinderSection />}
       {isEnabled("homeCourseSearch") && <Programmes />}
       <HowYouPass />
