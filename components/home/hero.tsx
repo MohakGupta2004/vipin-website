@@ -45,7 +45,7 @@ export function Hero() {
     { value: String(liveGroupCourses.length), label: "live group programmes" },
     { value: String(offered), label: "exams covered" },
     { value: "Live", label: "online classes, Canada-wide" },
-    { value: intake ? intake.course.code : "Soon", label: intake ? `next cohort, ${cohortDate}` : "next cohort, dates announced" },
+    { value: "Free", label: "account in the learning app" },
   ]
 
   return (
@@ -135,17 +135,19 @@ export function Hero() {
             </div>
             {/* Cards sit on the lower third of the frame so the face stays clear. */}
             <div className="absolute -bottom-5 left-4 rounded-xl bg-surface px-4 py-3 shadow-float lg:-left-6">
-              <span className="block text-[0.8125rem] text-muted-foreground">Next live cohort</span>
-              <span className="mt-0.5 flex items-center gap-2 font-heading text-sm font-bold text-heading tabular">
-                <span aria-hidden="true" className="size-2 rounded-full bg-success" />
-                {intake ? `${intake.course.code} · ${cohortDate}` : "Dates announced soon"}
-              </span>
-            </div>
-            <div className="absolute top-[64%] -right-5 hidden rounded-xl bg-surface px-4 py-3 shadow-float lg:block">
               <span className="block text-[0.8125rem] text-muted-foreground">Your instructor</span>
               <span className="mt-0.5 block font-heading text-sm font-bold text-heading">{name}</span>
               <span className="block text-[0.8125rem] text-heading">{credentials[0] ?? role}</span>
             </div>
+            {intake && (
+              <div className="absolute top-[64%] -right-5 hidden rounded-xl bg-surface px-4 py-3 shadow-float lg:block">
+                <span className="block text-[0.8125rem] text-muted-foreground">Next live cohort</span>
+                <span className="mt-0.5 flex items-center gap-2 font-heading text-sm font-bold text-heading tabular">
+                  <span aria-hidden="true" className="size-2 rounded-full bg-success" />
+                  {intake.course.code} · {cohortDate}
+                </span>
+              </div>
+            )}
           </figure>
         </div>
       </div>
