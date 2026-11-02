@@ -1,18 +1,38 @@
-import ChooseSuccessPath from "@/components/landing/find-course";
-import Header from "@/components/landing/header";
-import LearnMore from "@/components/landing/learn-more";
-import Testimonials from "@/components/landing/testimonial";
-import WhyChooseUs from "@/components/landing/why-choose";
-import PopularCourses from "@/components/landing/popular-course";
-export default function Page() {
+import { CareerPathways } from "@/components/home/career-pathways"
+import { FinderSection } from "@/components/home/finder-section"
+import { FirmsTeaser } from "@/components/home/firms-teaser"
+import { GuaranteeTeaser } from "@/components/home/guarantee-teaser"
+import { Hero } from "@/components/home/hero"
+import { HomeFaq } from "@/components/home/home-faq"
+import { HowYouPass } from "@/components/home/how-you-pass"
+import { MasterclassBand } from "@/components/home/masterclass-band"
+import { MeetVipin } from "@/components/home/meet-vipin"
+import { Programmes } from "@/components/home/programmes"
+import { TrustStrip } from "@/components/home/trust-strip"
+import { buildMetadata } from "@/lib/seo"
+
+export const metadata = buildMetadata({
+  title: "Live Canadian finance exam prep",
+  description:
+    "Live online exam prep for IFC, CSC, CIRE, RSE and LLQP in Canada, taught by Vipin Garg. Practise between classes and check your readiness before you book.",
+  path: "/",
+})
+
+// Reviews / pass wall (PLAN §5 #9) is intentionally not rendered until real reviews exist.
+export default function HomePage() {
   return (
     <>
-      <Header/>
-      <PopularCourses/>
-      <ChooseSuccessPath/>
-      <WhyChooseUs/>
-      <Testimonials/>
-      <LearnMore/>
+      <Hero />
+      <TrustStrip />
+      <FinderSection />
+      <Programmes />
+      <HowYouPass />
+      <MeetVipin />
+      <GuaranteeTeaser />
+      <CareerPathways />
+      <MasterclassBand />
+      <HomeFaq />
+      <FirmsTeaser />
     </>
   )
 }
