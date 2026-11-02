@@ -222,7 +222,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
       className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-6 sm:p-8", className)}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-        {heading ? <h2 className="text-xl font-semibold text-heading">{heading}</h2> : null}
+        {heading ? <h3 className="font-sans text-xl font-semibold text-heading">{heading}</h3> : null}
         <div className="flex items-center gap-3">
           <p className="text-sm text-muted-foreground" aria-live="polite">
             Step {step + 1} of {TOTAL}
@@ -250,7 +250,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
           {question.prompt}
         </legend>
         {/* Native radios with one name: Tab enters the group, arrow keys move and select. */}
-        <div role="radiogroup" aria-labelledby={legendId} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {question.options.map((o) => {
             const id = `${uid}-${question.id}-${o.value}`;
             return (
@@ -283,8 +283,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         ) : null}
         <Button
           type="submit"
-          className={primaryButton}
-          disabled={!current}
+          className={cn(primaryButton, "aria-disabled:cursor-not-allowed aria-disabled:opacity-50")}
           aria-disabled={!current}
           aria-describedby={!current ? helpId : undefined}
         >

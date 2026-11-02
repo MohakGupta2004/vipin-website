@@ -19,9 +19,7 @@ export function PageShell({
 }) {
   return (
     <div>
-      <div className="container-site pt-6 text-sm">
-        <Breadcrumbs items={crumbs} />
-      </div>
+      <Breadcrumbs items={crumbs} />
       <header className="container-site py-10 lg:py-14">
         <div className="max-w-(--container-prose)">
           <h1>{title}</h1>

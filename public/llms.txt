@@ -30,6 +30,9 @@ Financial planning (https://vipingarg.com/financial-planning)
 - All courses: https://vipingarg.com/courses
 - Find my course (3-question finder): https://vipingarg.com/find-my-course
 - Licensing pathways: https://vipingarg.com/licensing-pathways
+- Class schedule: https://vipingarg.com/schedule
+- Upcoming programmes (CFA, AI & Finance, recorded courses): https://vipingarg.com/upcoming
+- About Vipin Garg: https://vipingarg.com/about
 - How it works: https://vipingarg.com/how-it-works
 - Free monthly masterclass: https://vipingarg.com/masterclass
 - Free diagnostic test: https://vipingarg.com/free-diagnostic
@@ -37,6 +40,9 @@ Financial planning (https://vipingarg.com/financial-planning)
 - Guarantee: https://vipingarg.com/guarantee
 - FAQ: https://vipingarg.com/faq
 - Contact: https://vipingarg.com/contact
+- Terms: https://vipingarg.com/terms
+- Privacy: https://vipingarg.com/privacy
+- Refund policy: https://vipingarg.com/refund-policy
 
 ## Facts not yet published
 - # PLACEHOLDER: fees, intake dates, pass rates and contact details. None are stated until the client confirms them.

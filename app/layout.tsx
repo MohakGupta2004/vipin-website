@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import { SiteAnnouncement } from "@/components/layout/site-announcement";
+import { OverlayHost } from "@/components/overlays/overlay-host";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -84,6 +85,7 @@ export default function RootLayout({
             <SiteAnnouncement />
             <Header />
             <main id="main">{children}</main>
+            <OverlayHost />
           </TooltipProvider>
           <Footer />
         </ThemeProvider>

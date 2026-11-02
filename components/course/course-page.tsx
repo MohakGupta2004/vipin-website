@@ -148,9 +148,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
         })}
       />
 
-      <div className="container-site pt-6 text-sm">
-        <Breadcrumbs items={breadcrumbItems} />
-      </div>
+      <Breadcrumbs items={breadcrumbItems} />
 
       <div className="container-site grid gap-x-8 gap-y-12 py-8 lg:grid-cols-12 lg:py-12 xl:gap-x-12">
         {/* Hero */}

@@ -127,9 +127,7 @@ export type HubPageProps = {
 export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, footerLink }: HubPageProps) {
   return (
     <div>
-      <div className="container-site pt-6 text-sm">
-        <Breadcrumbs items={[crumb]} />
-      </div>
+      <Breadcrumbs items={[crumb]} />
 
       <header className="container-site py-10 lg:py-14">
         <div className="max-w-(--container-prose)">

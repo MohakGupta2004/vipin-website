@@ -157,7 +157,7 @@ export const siteConfig = {
 
   /** Sent with every footer. Wording follows the reference site. */
   disclaimer:
-    "Independent examination preparation. Official course registration, examinations, licensing and designations are administered by their respective organizations. Course names and trademarks belong to their owners; no affiliation or endorsement is implied.",
+    "Independent examination preparation. Official course registration, examinations, licensing and designations are administered by their respective organizations.",
   // PLACEHOLDER: lawyer-approved trademark notice — "CSI, CSC®, IFC® and CPH are trademarks of CSI Global Education Inc. CIRO and CIRE are marks of CIRO. This site is not affiliated with CSI or CIRO."
   trademarkNotice:
     "CSC, IFC, CPH and other course names are trademarks of their owners. CIRO exam names belong to CIRO. This site is not affiliated with or endorsed by CSI or CIRO.",

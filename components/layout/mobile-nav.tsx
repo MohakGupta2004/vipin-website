@@ -41,7 +41,7 @@ export function MobileNav({ groups, links, cta, login }: Props) {
         >
           <DialogPrimitive.Title className="sr-only">Site menu</DialogPrimitive.Title>
           <div className="flex h-15 shrink-0 items-center justify-between border-b border-border px-5">
-            <span className="font-serif text-xl font-semibold text-heading">Vipin Garg</span>
+            <span className="font-heading text-xl font-semibold text-heading">Vipin Garg</span>
             <div className="-mr-2 flex items-center">
               <ThemeToggle />
               <DialogPrimitive.Close
@@ -54,6 +54,9 @@ export function MobileNav({ groups, links, cta, login }: Props) {
           </div>
 
           <div className="flex-1 overflow-y-auto px-5 pb-6">
+            <Link href="/courses" onClick={close} className={cn(buttonVariants({ variant: "secondary" }), "my-4 w-full")}>
+              Browse all courses
+            </Link>
             <AccordionPrimitive.Root className="border-b border-border">
               {groups.map((g) => (
                 <AccordionPrimitive.Item key={g.id} value={g.id} className="border-t border-border">
@@ -71,11 +74,21 @@ export function MobileNav({ groups, links, cta, login }: Props) {
                     <ul className="pb-3">
                       {g.sections.flatMap((s) => s.links).map((l) => (
                         <li key={l.href}>
-                          <Link href={l.href} onClick={close} className={cn(rowLink, "gap-3 text-[0.9375rem] font-normal")}>
-                            {l.label !== "See what is coming" && (
-                              <span className="tabular w-14 shrink-0 font-semibold text-link">{l.label}</span>
+                          <Link
+                            href={l.href}
+                            onClick={close}
+                            className={cn(
+                              rowLink,
+                              "gap-x-3 text-[0.9375rem] font-normal",
+                              l.label.length > 6 && l.label !== "See what is coming" ? "flex-col items-start justify-center py-2" : ""
                             )}
-                            <span>{l.label === "See what is coming" ? "Upcoming programmes" : l.description}</span>
+                          >
+                            {l.label !== "See what is coming" && (
+                              <span className={cn("tabular font-semibold text-link", l.label.length <= 6 && "w-14 shrink-0")}>{l.label}</span>
+                            )}
+                            <span className={l.label.length > 6 && l.label !== "See what is coming" ? "text-sm text-muted-foreground" : ""}>
+                              {l.label === "See what is coming" ? "Upcoming programmes" : l.description}
+                            </span>
                           </Link>
                         </li>
                       ))}

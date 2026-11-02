@@ -18,7 +18,7 @@ export function ExitIntentModal({ enabled = true }: { enabled?: boolean }) {
   return (
     <Dialog open={gate.isOpen} onOpenChange={(open) => !open && gate.close()}>
       <DialogContent>
-        <DialogTitle className="pr-8 font-serif text-2xl leading-tight font-semibold text-heading">Before you go</DialogTitle>
+        <DialogTitle className="pr-8 font-heading text-2xl leading-tight font-semibold text-heading">Before you go</DialogTitle>
         <DialogDescription className="mt-2 mb-6 text-[0.9375rem] text-muted-foreground">
           Save a seat at the next free masterclass with Vipin.
         </DialogDescription>

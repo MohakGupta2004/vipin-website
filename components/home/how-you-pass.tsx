@@ -25,7 +25,7 @@ export function HowYouPass() {
         <ol className="mt-10 grid gap-8 md:grid-cols-4 md:gap-6">
           {steps.map((s, i) => (
             <li key={s.title} className="relative flex gap-4 md:block">
-              <span className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-teal bg-surface-2 font-serif text-base font-semibold text-heading">
+              <span className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-teal bg-surface-2 font-heading text-base font-semibold text-heading">
                 {i + 1}
               </span>
               {i < steps.length - 1 && (

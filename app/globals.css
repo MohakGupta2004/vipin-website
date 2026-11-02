@@ -154,6 +154,12 @@
   --header-h: 3.75rem;
 }
 
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 4.5rem;
+  }
+}
+
 .dark {
   --background: #07141c;
   --foreground: #e6eef2;
@@ -246,7 +252,7 @@
     text-wrap: balance;
   }
   h1, h2 {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     font-weight: 600;
   }
   h1 {
@@ -288,11 +294,6 @@
       touch-action: manipulation;
     }
   }
-  @media (min-width: 1024px) {
-    :root {
-      --header-h: 4.5rem;
-    }
-  }
 }
 
 @layer components {
@@ -321,7 +322,7 @@
   }
 
   .text-display {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: clamp(2.5rem, 1.75rem + 3vw, 4rem);
     line-height: 1.05;
@@ -343,7 +344,7 @@
     color: var(--link);
   }
   .text-price {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: clamp(2rem, 1.8rem + 0.8vw, 2.5rem);
     line-height: 1;

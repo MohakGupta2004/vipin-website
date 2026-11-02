@@ -45,9 +45,7 @@ const items: CatalogueItem[] = [
 export default function CoursesPage() {
   return (
     <div>
-      <div className="container-site pt-6 text-sm">
-        <Breadcrumbs items={[{ name: "Courses", href: "/courses" }]} />
-      </div>
+      <Breadcrumbs items={[{ name: "Courses", href: "/courses" }]} />
       <header className="container-site py-10 lg:py-14">
         <div className="max-w-(--container-prose)">
           <h1>Canadian finance exam courses</h1>

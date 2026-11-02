@@ -14,7 +14,7 @@ export function Header() {
     <header className="sticky top-0 z-20 border-b border-transparent bg-surface data-[scrolled=true]:border-border" id="site-header">
       <div className="container-wide flex h-(--header-h) items-center justify-between gap-6">
         <Link href="/" className="group flex flex-col leading-none" aria-label={`${siteConfig.shortName}, home`}>
-          <span className="font-serif text-xl font-semibold text-heading">{siteConfig.shortName}</span>
+          <span className="font-heading text-xl font-semibold text-heading">{siteConfig.shortName}</span>
           <span className="mt-1 hidden text-xs font-medium text-muted-foreground lg:block">Exam coaching</span>
         </Link>
 

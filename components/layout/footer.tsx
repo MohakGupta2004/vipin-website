@@ -6,7 +6,7 @@ import { footerColumns } from "@/lib/data/navigation"
 import { siteConfig } from "@/lib/site-config"
 
 const linkClass =
-  "-mx-1 inline-flex min-h-9 items-center px-1 text-sm text-inverse-muted hover:text-inverse-fg hover:underline underline-offset-3 focus-visible:outline-2 focus-visible:outline-inverse-link"
+  "-mx-1 inline-flex min-h-11 items-center lg:min-h-9 px-1 text-sm text-inverse-muted hover:text-inverse-fg hover:underline underline-offset-3 focus-visible:outline-2 focus-visible:outline-inverse-link"
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -16,7 +16,7 @@ export function Footer() {
       <div className="container-wide pt-16 pb-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_28rem] lg:gap-16">
           <div>
-            <p className="font-serif text-2xl font-semibold text-inverse-fg">{siteConfig.shortName}</p>
+            <p className="font-heading text-2xl font-semibold text-inverse-fg">{siteConfig.shortName}</p>
             <p className="mt-2 max-w-sm text-sm text-inverse-muted">
               Live exam coaching for Canadian finance licences.
             </p>

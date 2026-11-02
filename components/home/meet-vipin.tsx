@@ -21,7 +21,7 @@ export function MeetVipin() {
           aria-label={portrait ? `Portrait of ${name}` : "Photo of Vipin Garg coming soon"}
           className="flex aspect-[4/5] max-h-[420px] w-full flex-col items-center justify-center rounded-lg border border-border bg-surface-2 lg:max-h-none"
         >
-          <span aria-hidden="true" className="font-serif text-[6rem] leading-none font-semibold text-border-strong">VG</span>
+          <span aria-hidden="true" className="font-heading text-[6rem] leading-none font-semibold text-border-strong">VG</span>
           <span className="mt-3 text-sm text-muted-foreground">Photo coming soon</span>
         </div>
       </div>

@@ -111,7 +111,7 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
           id="mega-menu"
           className="vg-enter-up absolute inset-x-0 top-full z-30 border-b border-border bg-surface shadow-float"
         >
-          <div className="container-wide grid grid-cols-[2.4fr_1fr_1.15fr_14rem] gap-8 py-8">
+          <div className="container-wide grid grid-cols-[2.2fr_1.2fr_1.2fr_14rem] gap-8 py-8">
             {securities && <Column group={securities} wide />}
             <div className="flex flex-col gap-8">
               {insurance && <Column group={insurance} />}
@@ -126,8 +126,8 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
             <aside className="-my-8 bg-surface-2 p-6">
               <p className="text-base font-semibold text-heading">Not sure which exam you need?</p>
               <p className="mt-2 text-sm text-muted-foreground">Answer 3 quick questions.</p>
-              <Link href="/find-my-course" className={cn(buttonVariants(), "mt-4 w-full")}>
-                Find my course
+              <Link href="/find-my-course" className={cn(buttonVariants({ variant: "secondary" }), "mt-4 w-full")}>
+                Start the finder
               </Link>
               <Link href="/courses" className="mt-4 inline-block text-sm font-medium text-link underline underline-offset-3 hover:decoration-2">
                 Browse all courses
@@ -148,11 +148,11 @@ function Column({ group, wide }: { group: MegaMenuGroup; wide?: boolean }) {
         {group.sections.map((s) => (
           <ul key={s.title} className="flex flex-col">
             {group.sections.length > 1 && (
-              <li className="pb-1 text-xs font-medium text-muted-foreground">{s.title}</li>
+              <li className="pb-1 text-[0.8125rem] font-medium text-muted-foreground">{s.title}</li>
             )}
             {s.links.map((l) => (
               <li key={l.href}>
-                <MenuLink href={l.href} code={l.label} name={l.description ?? ""} />
+                <MenuLink href={l.href} code={l.label} name={l.description ?? ""} stack={s.title === "Oversight & leadership"} />
               </li>
             ))}
           </ul>
@@ -165,8 +165,8 @@ function Column({ group, wide }: { group: MegaMenuGroup; wide?: boolean }) {
   )
 }
 
-function MenuLink({ href, code, name }: { href: string; code: string; name: string }) {
-  const long = code.length > 6
+function MenuLink({ href, code, name, stack }: { href: string; code: string; name: string; stack?: boolean }) {
+  const long = stack || code.length > 6
   return (
     <Link
       href={href}
