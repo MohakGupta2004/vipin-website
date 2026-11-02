@@ -5,29 +5,34 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ChevronDown } from "lucide-react"
 
-import { buttonVariants } from "@/components/ui/button"
 import type { MegaMenuGroup, NavLink } from "@/lib/data/navigation"
 import { cn } from "@/lib/utils"
 
 const navItem =
-  "relative inline-flex h-11 items-center gap-1 px-3 text-[0.9375rem] font-medium text-foreground hover:text-link outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
+  "relative inline-flex h-11 items-center gap-1 rounded-md px-2.5 text-[0.9375rem] font-semibold text-heading hover:text-link outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring xl:px-3"
 
-function ActiveBar({ active }: { active: boolean }) {
-  return active ? <span aria-hidden="true" className="absolute inset-x-3 -bottom-px h-0.5 bg-brand-teal" /> : null
+/** Short trigger labels, BCC-style ("Securities", not "Securities & CIRO"). */
+const shortLabel: Record<string, string> = {
+  securities: "Securities",
+  insurance: "Insurance",
+  "financial-planning": "Financial Planning",
 }
 
-type Mode = "closed" | "hover" | "pinned"
+function ActiveBar({ active }: { active: boolean }) {
+  return active ? <span aria-hidden="true" className="absolute inset-x-2.5 -bottom-px h-0.5 rounded-full bg-primary" /> : null
+}
 
+/**
+ * Desktop navigation: one small dropdown per course area (Securities, Insurance, Financial Planning),
+ * a divider, then plain links. Only one dropdown is open at a time. A dropdown closes on outside press,
+ * Escape (focus returns to its trigger), focus leaving it, clicking a link, or a route change.
+ */
 export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: NavLink[] }) {
   const pathname = usePathname()
-  // hover = opened by pointer hover (closes when the pointer leaves); pinned = opened by click/keyboard
-  // (stays until outside press, Esc, focus-out, link click or a second click).
-  const [mode, setMode] = React.useState<Mode>("closed")
-  const open = mode !== "closed"
-  const rootRef = React.useRef<HTMLDivElement>(null)
-  const triggerRef = React.useRef<HTMLButtonElement>(null)
-  const panelRef = React.useRef<HTMLDivElement>(null)
+  const [openId, setOpenId] = React.useState<string | null>(null)
+  const rootRef = React.useRef<HTMLElement>(null)
   const hoverTimer = React.useRef<number | undefined>(undefined)
+  const pinned = React.useRef(false)
 
   // Border appears after 8px scroll.
   React.useEffect(() => {
@@ -42,145 +47,101 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
   const [lastPath, setLastPath] = React.useState(pathname)
   if (lastPath !== pathname) {
     setLastPath(pathname)
-    setMode("closed")
+    setOpenId(null)
   }
 
+  const close = React.useCallback(() => {
+    window.clearTimeout(hoverTimer.current)
+    pinned.current = false
+    setOpenId(null)
+  }, [])
+
   React.useEffect(() => {
-    if (!open) return
-    const close = () => {
-      window.clearTimeout(hoverTimer.current)
-      setMode("closed")
-    }
-    // Any press outside the nav + panel closes it (capture: page code cannot swallow it).
+    if (!openId) return
     const onDown = (e: Event) => {
       if (!rootRef.current?.contains(e.target as Node)) close()
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        close()
-        triggerRef.current?.focus()
-      }
+      if (e.key !== "Escape") return
+      const trigger = document.getElementById(`nav-trigger-${openId}`)
+      close()
+      trigger?.focus()
     }
     document.addEventListener("pointerdown", onDown, true)
-    document.addEventListener("mousedown", onDown, true)
-    document.addEventListener("touchstart", onDown, true)
     document.addEventListener("keydown", onKey)
     window.addEventListener("blur", close)
     window.addEventListener("resize", close)
     return () => {
       document.removeEventListener("pointerdown", onDown, true)
-      document.removeEventListener("mousedown", onDown, true)
-      document.removeEventListener("touchstart", onDown, true)
       document.removeEventListener("keydown", onKey)
       window.removeEventListener("blur", close)
       window.removeEventListener("resize", close)
     }
-  }, [open])
+  }, [openId, close])
 
-  // Keep the panel inside the viewport: max height = space below the header's actual bottom edge.
-  React.useEffect(() => {
-    if (!open) return
-    const fit = () => {
-      const header = document.getElementById("site-header")
-      const panel = panelRef.current
-      if (!header || !panel) return
-      panel.style.maxHeight = `${Math.max(240, window.innerHeight - header.getBoundingClientRect().bottom)}px`
-    }
-    fit()
-    window.addEventListener("scroll", fit, { passive: true })
-    return () => window.removeEventListener("scroll", fit)
-  }, [open])
-
-  const hoverOpen = (e: React.PointerEvent) => {
-    if (e.pointerType !== "mouse") return
+  const hoverOpen = (id: string) => (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse" || pinned.current) return
     window.clearTimeout(hoverTimer.current)
-    if (mode === "closed") hoverTimer.current = window.setTimeout(() => setMode("hover"), 150)
+    hoverTimer.current = window.setTimeout(() => setOpenId(id), openId ? 0 : 120)
   }
   const hoverClose = (e: React.PointerEvent) => {
-    if (e.pointerType !== "mouse") return
+    if (e.pointerType !== "mouse" || pinned.current) return
     window.clearTimeout(hoverTimer.current)
-    hoverTimer.current = window.setTimeout(() => setMode((m) => (m === "hover" ? "closed" : m)), 200)
+    hoverTimer.current = window.setTimeout(() => setOpenId(null), 200)
   }
-  const toggle = () => {
+  const toggle = (id: string) => {
     window.clearTimeout(hoverTimer.current)
-    setMode((m) => (m === "pinned" ? "closed" : "pinned"))
+    if (openId === id && pinned.current) {
+      close()
+    } else {
+      pinned.current = true
+      setOpenId(id)
+    }
   }
 
-  const inCourses = groups.some((g) => pathname === g.href || pathname.startsWith(g.href + "/")) || pathname === "/courses"
-  const allLinks: NavLink[] = [...links, { label: "For firms", href: "/for-firms" }]
-  const securities = groups.find((g) => g.id === "securities")
-  const insurance = groups.find((g) => g.id === "insurance")
-  const planning = groups.find((g) => g.id === "financial-planning")
-  const upcoming = groups.find((g) => g.id === "upcoming")
+  const courseGroups = groups.filter((g) => g.id in shortLabel)
+  const allLinks: NavLink[] = [{ label: "For Firms", href: "/for-firms" }, ...links]
 
   return (
-    <div className="hidden flex-1 lg:block">
-    <div
-      ref={rootRef}
-      className="inline-block"
-      onBlur={(e) => {
-        // Close when focus leaves the trigger and the panel (keyboard users tabbing away).
-        const next = e.relatedTarget as Node | null
-        if (open && next && !panelRef.current?.contains(next) && next !== triggerRef.current) setMode("closed")
-      }}
-    >
-      <nav aria-label="Main" className="flex items-center">
-        <button
-          ref={triggerRef}
-          type="button"
-          aria-expanded={open}
-          aria-controls="mega-menu"
-          onClick={toggle}
-          onPointerEnter={hoverOpen}
-          onPointerLeave={hoverClose}
-          className={navItem}
-        >
-          Courses
-          <ChevronDown
-            aria-hidden="true"
-            strokeWidth={1.75}
-            className={cn("size-4 transition-transform duration-150 motion-reduce:transition-none", open && "rotate-180")}
-          />
-          <ActiveBar active={inCourses} />
-        </button>
-      {open && (
-          <div
-            ref={panelRef}
-            id="mega-menu"
-            onPointerEnter={(e) => {
-              if (e.pointerType === "mouse") window.clearTimeout(hoverTimer.current)
-            }}
-            onPointerLeave={hoverClose}
-            onClick={(e) => {
-              if ((e.target as HTMLElement).closest("a")) setMode("closed")
-            }}
-            className="vg-enter-up absolute inset-x-0 top-full z-30 max-h-[calc(100dvh-var(--header-h))] overflow-y-auto overscroll-contain border-b border-border bg-surface shadow-float"
-          >
-            <div className="container-wide grid grid-cols-[2.2fr_1.2fr_1.2fr_14rem] gap-8 py-8">
-              {securities && <Column group={securities} wide />}
-              <div className="flex flex-col gap-8">
-                {insurance && <Column group={insurance} />}
-                {upcoming && (
-                  <div>
-                    <p className="text-eyebrow mb-3">Upcoming</p>
-                    <MenuLink href="/upcoming" code="" name="CFA prep, AI & Finance and more" />
-                  </div>
-                )}
-              </div>
-              {planning && <Column group={planning} />}
-              <aside className="-my-8 bg-surface-2 p-6">
-                <p className="text-base font-semibold text-heading">Not sure which exam you need?</p>
-                <p className="mt-2 text-sm text-muted-foreground">Answer 3 quick questions.</p>
-                <Link href="/find-my-course" className={cn(buttonVariants({ variant: "secondary" }), "mt-4 w-full")}>
-                  Start the finder
-                </Link>
-                <Link href="/courses" className="mt-4 inline-block text-sm font-medium text-link underline underline-offset-3 hover:decoration-2">
-                  Browse all courses
-                </Link>
-              </aside>
+    <div className="hidden flex-1 justify-end lg:flex">
+      <nav ref={rootRef} aria-label="Main" className="flex items-center gap-0.5">
+        {courseGroups.map((g) => {
+          const isOpen = openId === g.id
+          const active = pathname === g.href || pathname.startsWith(g.href + "/")
+          const panelId = `nav-panel-${g.id}`
+          return (
+            <div
+              key={g.id}
+              className="relative"
+              onPointerEnter={hoverOpen(g.id)}
+              onPointerLeave={hoverClose}
+              onBlur={(e) => {
+                if (isOpen && !e.currentTarget.contains(e.relatedTarget as Node | null)) close()
+              }}
+            >
+              <button
+                id={`nav-trigger-${g.id}`}
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+                onClick={() => toggle(g.id)}
+                className={navItem}
+              >
+                {shortLabel[g.id]}
+                <ChevronDown
+                  aria-hidden="true"
+                  strokeWidth={2}
+                  className={cn("size-4 text-muted-foreground transition-transform duration-150 motion-reduce:transition-none", isOpen && "rotate-180")}
+                />
+                <ActiveBar active={active} />
+              </button>
+              {isOpen && <Dropdown id={panelId} group={g} onNavigate={close} />}
             </div>
-          </div>
-        )}
+          )
+        })}
+
+        <span aria-hidden="true" className="mx-2 h-6 w-px bg-border-strong/60 xl:mx-3" />
+
         {allLinks.map((l) => {
           const active = pathname === l.href
           return (
@@ -191,53 +152,52 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
           )
         })}
       </nav>
-
-    </div>
     </div>
   )
 }
 
-function Column({ group, wide }: { group: MegaMenuGroup; wide?: boolean }) {
+function Dropdown({ id, group, onNavigate }: { id: string; group: MegaMenuGroup; onNavigate: () => void }) {
+  const links = group.sections.flatMap((s) => s.links)
+  const wide = links.length > 6
   return (
-    <div>
-      <p className="text-eyebrow mb-3">{group.label}</p>
-      <div className={cn("flex flex-col gap-4", wide && "grid grid-cols-2 gap-x-8")}>
-        {group.sections.map((s) => (
-          <ul key={s.title} className="flex flex-col">
-            {group.sections.length > 1 && (
-              <li className="pb-1 text-[0.8125rem] font-medium text-muted-foreground">{s.title}</li>
-            )}
-            {s.links.map((l) => (
-              <li key={l.href}>
-                <MenuLink href={l.href} code={l.label} name={l.description ?? ""} stack={s.title === "Oversight & leadership"} />
-              </li>
-            ))}
-          </ul>
-        ))}
-      </div>
-      <Link href={group.href} className="mt-3 inline-block text-sm font-medium text-link underline underline-offset-3 hover:decoration-2">
-        View all in {group.label}
-      </Link>
-    </div>
-  )
-}
-
-function MenuLink({ href, code, name, stack }: { href: string; code: string; name: string; stack?: boolean }) {
-  const long = stack || code.length > 6
-  return (
-    <Link
-      href={href}
+    <div
+      id={id}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest("a")) onNavigate()
+      }}
       className={cn(
-        "-mx-2 flex min-h-9 gap-x-3 rounded-sm px-2 py-1.5 hover:bg-accent",
-        long ? "flex-col" : "items-baseline"
+        "vg-enter-up absolute top-full left-0 z-30 mt-2 max-h-[calc(100dvh-var(--header-h)-1.5rem)] overflow-y-auto overscroll-contain rounded-xl border border-border bg-surface p-2 shadow-float",
+        wide ? "w-[40rem]" : "w-[20rem]"
       )}
     >
-      {code && (
-        <span aria-hidden={name.toLowerCase().startsWith(code.toLowerCase()) || undefined} className={cn("tabular text-[0.9375rem] font-semibold text-link", !long && "w-14 shrink-0")}>{code}</span>
-      )}
-      <span className={cn("leading-snug", long ? "text-sm text-muted-foreground" : "text-[0.9375rem] text-foreground")}>
-        {name}
-      </span>
-    </Link>
+      <p className="px-3 pt-2 pb-1 text-sm text-muted-foreground">{group.description}</p>
+      <ul className={cn("grid", wide && "grid-cols-2")}>
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              title={l.description}
+              className={cn(
+                "flex min-h-11 rounded-lg px-3 outline-hidden hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring",
+                wide ? "items-center gap-2" : "flex-col justify-center py-2"
+              )}
+            >
+              <span className={cn("font-semibold text-heading", wide ? "shrink-0 text-[0.9375rem]" : "text-[0.9375rem]")}>{l.label}</span>
+              {l.description && (
+                <span className={cn("text-sm text-muted-foreground", wide ? "truncate" : "leading-snug")}>{l.description}</span>
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-1 flex items-center justify-between gap-4 border-t border-border px-3 pt-3 pb-2 text-sm font-semibold">
+        <Link href={group.href} className="text-link hover:underline">
+          View all {shortLabel[group.id] ?? group.label}
+        </Link>
+        <Link href="/find-my-course" className="text-muted-foreground hover:text-link">
+          Not sure? Take the quiz
+        </Link>
+      </div>
+    </div>
   )
 }
