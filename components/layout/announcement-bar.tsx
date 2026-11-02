@@ -11,13 +11,13 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
   if (!announcement || !visible) return null
   return (
     <div className="bg-surface-inverse text-inverse-fg" role="region" aria-label="Announcement">
-      <div className="container-wide flex min-h-10 items-center justify-between gap-3">
+      <div className="container-wide flex min-h-11 items-center justify-between gap-3">
         <p className="flex min-w-0 items-center gap-x-4 text-sm leading-5">
           <span className="truncate">{announcement.message}</span>
           {announcement.href && (
             <Link
               href={announcement.href}
-              className="shrink-0 font-medium text-inverse-link underline underline-offset-3 hover:decoration-2"
+              className="inline-flex min-h-11 shrink-0 items-center font-medium text-inverse-link underline underline-offset-3 hover:decoration-2"
             >
               {announcement.linkLabel ?? "Learn more"}
             </Link>

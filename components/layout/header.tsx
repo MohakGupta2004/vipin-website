@@ -16,7 +16,7 @@ export function Header() {
       <div className="container-wide flex h-(--header-h) items-center justify-between gap-6">
         <Link href="/" className="group flex min-h-11 flex-col justify-center leading-none" aria-label={`${siteConfig.shortName}, home`}>
           <span className="font-heading text-xl font-semibold text-heading">{siteConfig.shortName}</span>
-          <span className="mt-1 hidden text-xs font-medium text-muted-foreground lg:block">Exam coaching</span>
+          <span className="mt-1 hidden text-[0.8125rem] font-medium text-muted-foreground lg:block">Exam coaching</span>
         </Link>
 
         <HeaderNav groups={megaMenu} links={primaryLinks} />

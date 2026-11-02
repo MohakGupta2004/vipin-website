@@ -45,26 +45,26 @@ export function Hero() {
 
   return (
     <section aria-labelledby="hero-heading">
-      <div className="relative isolate overflow-hidden bg-surface-2 md:flex md:min-h-[clamp(560px,78vh,760px)] md:items-center">
+      <div className="relative isolate overflow-hidden bg-surface-2 lg:flex lg:min-h-[clamp(560px,78vh,760px)] lg:items-center">
         {/* Photo: top band on mobile, full-bleed background from md up. */}
-        <div className="relative h-72 w-full md:absolute md:inset-0 md:-z-10 md:h-auto">
+        <div className="relative h-72 w-full md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:left-[28%] lg:-z-10 lg:h-auto lg:w-auto">
           <Image
             src="/images/hero-bg.jpg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[72%_20%] md:object-[70%_18%]"
+            className="object-cover object-[72%_20%] lg:object-[60%_18%]"
           />
         </div>
         {/* Left-to-right wash keeps the headline readable and the subject on the right clear. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 hidden bg-linear-to-r from-surface-2/95 from-0% via-surface-2/75 via-40% to-transparent to-75% md:block"
+          className="absolute inset-0 -z-10 hidden bg-linear-to-r from-surface-2 from-28% via-surface-2/60 via-40% to-transparent to-62% lg:block"
         />
 
-        <div className="container-site relative py-10 pb-24 md:py-20 md:pb-28 xl:pb-32">
-          <div className="max-w-[46rem]">
+        <div className="container-site relative py-10 pb-24 md:py-14 lg:py-20 lg:pb-28 xl:pb-32">
+          <div className="max-w-[46rem] lg:max-w-[36rem] xl:max-w-[40rem]">
             <p className="text-[0.9375rem] font-semibold text-link">Live online exam coaching with {name}</p>
             <h1
               id="hero-heading"
@@ -88,7 +88,7 @@ export function Hero() {
                     )}
                   >
                     <span>
-                      <span className="block text-xs font-semibold tracking-wider uppercase opacity-90">{c.label}</span>
+                      <span className="block text-[0.8125rem] font-semibold tracking-wider uppercase opacity-90">{c.label}</span>
                       <span className="block text-[1.0625rem] leading-snug font-bold">{c.exams}</span>
                     </span>
                     <ArrowRight
