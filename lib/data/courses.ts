@@ -29,7 +29,7 @@ export type ExamFormat = {
 };
 
 export type PriceTier = {
-  id: "live" | "live-recordings" | "on-demand";
+  id: "live" | "on-demand";
   label: string;
   description: string;
   /** CAD, whole dollars. Null = not announced. */
@@ -129,7 +129,7 @@ const ciro2026: Ciro2026Note = {
 };
 
 function pricing(): Course["pricing"] {
-  // PLACEHOLDER: coaching fee per tier in CAD — Live 595, Live + recordings 745 (client sets real prices)
+  // PLACEHOLDER: coaching fee per tier in CAD — Live and On-demand fees (client sets real prices)
   return {
     currency: "CAD",
     tiers: [
@@ -141,20 +141,12 @@ function pricing(): Course["pricing"] {
         available: true,
       },
       {
-        id: "live-recordings",
-        label: "Live + recordings",
-        description:
-          "Live classes plus recordings to revisit. Recorded courses are planned; availability is confirmed in your offer.",
-        price: null,
-        available: true,
-      },
-      {
         id: "on-demand",
         label: "On-demand",
         description:
-          "Study on your own schedule from recorded lessons. Planned, not yet available.",
+          "Study on your own schedule with on-demand lessons. Your offer confirms what is included.",
         price: null,
-        available: false,
+        available: true,
       },
     ],
   };
@@ -172,7 +164,7 @@ const registrationFaq = (code: string): CourseFaq =>
   faq(`Is official ${code} registration included in the coaching fee?`, REGISTRATION_ANSWER);
 
 const PRACTICE_ANSWER =
-  "Recorded courses are planned. Dedicated practice tests and simulations are being developed first for IFC, CSC Exam 1, CSC Exam 2 and CIRE. They are not yet included across all programmes.";
+  "Dedicated practice tests and simulations are being developed first for IFC, CSC Exam 1, CSC Exam 2 and CIRE. They are not yet included across all programmes.";
 
 const INCLUDES_ANSWER =
   "Your coaching offer will confirm the teaching sessions, schedule, available materials, support period and total fee. Resources vary by programme.";
@@ -181,7 +173,7 @@ const includesFaq = (code: string): CourseFaq =>
   faq(`What does ${code} coaching include?`, INCLUDES_ANSWER);
 
 const practiceFaq = (code: string): CourseFaq =>
-  faq(`Are practice tests and recordings included with ${code} coaching?`, PRACTICE_ANSWER);
+  faq(`Are practice tests included with ${code} coaching?`, PRACTICE_ANSWER);
 
 /** Generated FAQs for coaching-only courses (facts come from the course itself). */
 function coachingFaqs(
@@ -1273,21 +1265,6 @@ export const upcomingPrograms: UpcomingProgram[] = [
       title: "Practice Tests for Canadian Finance Exams",
       description:
         "Original practice tests and timed exam simulations are planned for IFC, CSC and CIRE. Register your interest to hear when they launch and what they include.",
-    },
-  },
-  {
-    slug: "recorded-courses",
-    name: "Recorded courses",
-    kind: "recorded",
-    status: "upcoming",
-    summary:
-      "Structured video explanations for learners who want to revisit a topic or study on their own schedule. Course coverage, access periods and release dates will be announced when available.",
-    relatedCourses: [],
-    launch: null,
-    seo: {
-      title: "Recorded Finance Exam Courses",
-      description:
-        "Recorded courses for Canadian finance exams are planned. Register your interest to hear about coverage, access periods and release dates as they are set.",
     },
   },
   {

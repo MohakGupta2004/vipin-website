@@ -4,7 +4,6 @@ import { FirmsTeaser } from "@/components/home/firms-teaser"
 import { GuaranteeTeaser } from "@/components/home/guarantee-teaser"
 import { Hero } from "@/components/home/hero"
 import { HomeFaq } from "@/components/home/home-faq"
-import { HowYouPass } from "@/components/home/how-you-pass"
 import { MasterclassBand } from "@/components/home/masterclass-band"
 import { MeetVipin } from "@/components/home/meet-vipin"
 import { Programmes } from "@/components/home/programmes"
@@ -25,7 +24,6 @@ export default function HomePage() {
       <Hero />
       {isEnabled("examFinder") && <FinderSection />}
       {isEnabled("homeCourseSearch") && <Programmes />}
-      <HowYouPass />
       <MeetVipin />
       <GuaranteeTeaser />
       <CareerPathways />

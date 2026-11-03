@@ -28,10 +28,13 @@ export default function FindMyCoursePage() {
             <ExamFinder heading="Find the right exam in three questions" />
           ) : (
             <p className="max-w-[60ch] text-[17px]">
-              The course finder is not available right now.{" "}
+              The course finder is not available right now.
+              {/* hidden until courses live in app
+              {" "}
               <Link href="/courses" className={cn(textLink, "underline")}>
                 Browse all courses
               </Link>
+              */}
             </p>
           )}
           <p className="mt-8 text-[17px]">

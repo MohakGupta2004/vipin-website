@@ -72,9 +72,9 @@ export const siteFaqs: SiteFaq[] = [
   {
     id: "recordings-practice",
     topic: "learning",
-    question: "Are recordings and practice tests included?",
+    question: "Are practice tests and on-demand study included?",
     answer:
-      "Recorded courses are planned. Original practice tests and exam simulations are in development, starting with IFC, CSC Exam 1, CSC Exam 2 and CIRE. They are not yet included across all programmes. Your coaching offer lists exactly what you receive.",
+      "Live and on-demand coaching are both available. Original practice tests and exam simulations are in development, starting with IFC, CSC Exam 1, CSC Exam 2 and CIRE. They are not yet included across all programmes. Your coaching offer lists exactly what you receive.",
     link: { label: "See what is coming", href: "/upcoming" },
     home: true,
   },

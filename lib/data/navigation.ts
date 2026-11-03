@@ -129,7 +129,7 @@ export const megaMenu: MegaMenuGroup[] = [
     id: "upcoming",
     label: "Upcoming",
     href: "/upcoming",
-    description: "Practice tests, recorded courses, AI & Finance, CFA and more.",
+    description: "Practice tests, AI & Finance, CFA and more.",
     sections: [
       {
         title: "In development",

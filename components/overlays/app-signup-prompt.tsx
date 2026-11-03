@@ -131,7 +131,7 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
   if (mode === "closed") return null
   const signup = appUrl("signup", { campaign: "app-prompt", content: mode })
   const login = appUrl("login", { campaign: "app-prompt", content: mode })
-  const browse = appUrl("courses", { campaign: "app-prompt", content: mode })
+  // hidden until courses live in app: const browse = appUrl("courses", { campaign: "app-prompt", content: mode })
 
   const actions = (
     <div className={cn("flex flex-col gap-3", mode === "bar" && "sm:flex-row sm:items-center")}>
@@ -189,6 +189,7 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
           </DialogPrimitive.Description>
           <div className="mt-6">{actions}</div>
           <div className="mt-4 flex items-center justify-between gap-4">
+            {/* hidden until courses live in app
             <a
               href={browse}
               onClick={markVisited}
@@ -196,6 +197,7 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
             >
               Browse courses
             </a>
+            */}
             {!blocking && (
               <DialogPrimitive.Close className="inline-flex min-h-11 items-center px-1 text-[0.9375rem] font-medium text-foreground underline underline-offset-3 hover:decoration-2">
                 Not now

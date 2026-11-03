@@ -87,8 +87,7 @@ export const siteConfig = {
     email: "info@vipingarg.com",
     // PLACEHOLDER: public phone number — "+1 604 555 0123"
     phone: null as string | null,
-    // PLACEHOLDER: WhatsApp number or wa.me link — "https://wa.me/16045550123"
-    whatsapp: null as string | null,
+    whatsapp: "https://wa.me/17787922220" as string | null,
     // PLACEHOLDER: reply-time promise the client can keep — "We reply within one business day."
     responseTime: null as string | null,
   },

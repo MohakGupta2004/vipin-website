@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 import { LeadForm } from "@/components/forms/lead-form"
@@ -16,7 +17,10 @@ export function Footer() {
       <div className="container-wide pt-16 pb-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_28rem] lg:gap-16">
           <div>
-            <p className="font-heading text-2xl font-semibold text-inverse-fg">{siteConfig.shortName}</p>
+            <p className="flex items-center gap-3 font-heading text-2xl font-semibold text-inverse-fg">
+              <Image src="/logo.png" alt="" width={44} height={44} className="size-11" />
+              {siteConfig.shortName}
+            </p>
             <p className="mt-2 max-w-sm text-sm text-inverse-muted">
               Live exam coaching for Canadian finance licences.
             </p>

@@ -107,9 +107,8 @@ export function CoursePage({ course, extras }: CoursePageProps) {
     ...(cohort ? [{ label: "Schedule", value: cohort.schedule }] : []),
     { label: "Fee", value: feeLabel, muted: price === null },
     {
-      label: "Recordings",
-      value: "Planned. Your offer confirms what is included.",
-      muted: true,
+      label: "Study formats",
+      value: "Live and on-demand. Your offer confirms what is included.",
     },
     {
       label: "Official registration",
@@ -132,12 +131,6 @@ export function CoursePage({ course, extras }: CoursePageProps) {
       label: `Preparation shaped around the ${c.code}`,
       detail:
         "Time goes to the topics that need attention for the exam you are taking.",
-    },
-    {
-      label: "Class recordings",
-      detail:
-        "Recorded courses are planned. Your coaching offer states what you receive.",
-      planned: true,
     },
     ...(c.practiceTests === "in-development"
       ? [

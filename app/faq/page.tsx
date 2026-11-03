@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "FAQ: Live Finance Exam Coaching in Canada",
   description:
-    "Answers about live classes, exam registration, recordings, practice tests, enrollment and licensing for IFC, CSC, CIRE, RSE and LLQP coaching with Vipin Garg.",
+    "Answers about live classes, exam registration, on-demand study, practice tests, enrollment and licensing for IFC, CSC, CIRE, RSE and LLQP coaching with Vipin Garg.",
   path: "/faq",
 });
 

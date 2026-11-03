@@ -2,12 +2,14 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, Search } from "lucide-react";
+// hidden until courses live in app: ExternalLink (only used by the browse-all link)
+import { ArrowRight, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { controlBase, controlHeight, focusRing, secondaryButton } from "@/components/forms/styles";
-import { appUrl } from "@/lib/app-links";
+// hidden until courses live in app: appUrl (only used by the browse-all link)
+// import { appUrl } from "@/lib/app-links";
 import { cn } from "@/lib/utils";
 
 import { catalogueItems, type CatalogueItem } from "./catalogue-items";
@@ -248,6 +250,8 @@ export function CourseCatalogue({
       ) : null}
 
       <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
+        {/* hidden until courses live in app */}
+        {/*
         <a
           href={appUrl("courses", { campaign: "catalogue" })}
           rel="noopener"
@@ -255,6 +259,7 @@ export function CourseCatalogue({
         >
           Browse all courses in the app <ExternalLink className="size-4" aria-hidden="true" />
         </a>
+        */}
         {filtered && shown.length > 0 ? (
           <button
             type="button"

@@ -8,6 +8,7 @@ import { SiteAnnouncement } from "@/components/layout/site-announcement";
 import { OverlayHost } from "@/components/overlays/overlay-host";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { JsonLd, organizationLd, personLd, websiteLd } from "@/components/seo/json-ld";
 import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/seo";
@@ -89,6 +90,7 @@ export default function RootLayout({
             <OverlayHost />
           </TooltipProvider>
           <Footer />
+          <WhatsAppButton />
         </ThemeProvider>
       </body>
     </html>

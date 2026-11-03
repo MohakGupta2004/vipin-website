@@ -48,17 +48,16 @@ export function PathwayExplainer({ flows }: { flows: PathwayFlow[] }) {
   );
 }
 
-const TIER_ROWS: { label: string; cells: ("yes" | "planned" | "coming" | "fee")[] }[] = [
-  { label: "Live online classes with Vipin Garg", cells: ["yes", "yes", "coming"] },
-  { label: "Guided examples and live discussion", cells: ["yes", "yes", "coming"] },
-  { label: "Class recordings", cells: ["coming", "planned", "coming"] },
-  { label: "Study on your own schedule", cells: ["coming", "coming", "planned"] },
-  { label: "Fee", cells: ["fee", "fee", "fee"] },
+const TIER_ROWS: { label: string; cells: ("yes" | "planned" | "coming" | "none" | "fee")[] }[] = [
+  { label: "Live online classes with Vipin Garg", cells: ["yes", "none"] },
+  { label: "Guided examples and live discussion", cells: ["yes", "none"] },
+  { label: "Study on your own schedule", cells: ["none", "yes"] },
+  { label: "Fee", cells: ["fee", "fee"] },
 ];
 
 /** Tier comparison table: rows = inclusions, columns = study formats. Honest about what is not live yet. */
 export function TierTable() {
-  const cols = ["Live", "Live + recordings", "On-demand"];
+  const cols = ["Live", "On-demand"];
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[34rem] border-collapse text-[15px]">
@@ -90,7 +89,7 @@ export function TierTable() {
                     </span>
                   ) : cell === "planned" ? (
                     <span className="text-muted-foreground">Planned</span>
-                  ) : cell === "coming" ? (
+                  ) : cell === "coming" || cell === "none" ? (
                     <span className="text-muted-foreground">
                       <span aria-hidden="true">—</span>
                       <span className="sr-only">Not available</span>
@@ -105,7 +104,7 @@ export function TierTable() {
         </tbody>
       </table>
       <p className="mt-3 text-sm text-muted-foreground">
-        Recordings and on-demand lessons are planned. Your coaching offer confirms what is included and the fee.
+        Live and on-demand are both available. Your coaching offer confirms what is included and the fee.
       </p>
     </div>
   );

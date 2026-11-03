@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
@@ -44,7 +45,10 @@ export function MobileNav({ groups, links, signup, login }: Props) {
         >
           <DialogPrimitive.Title className="sr-only">Site menu</DialogPrimitive.Title>
           <div className="flex h-15 shrink-0 items-center justify-between border-b border-border px-5">
-            <span className="font-heading text-xl font-semibold text-heading">Vipin Garg</span>
+            <Link href="/" onClick={close} aria-label="Vipin Garg, home" className="flex items-center gap-2.5">
+              <Image src="/logo.png" alt="" width={36} height={36} className="size-9" />
+              <span className="font-heading text-xl font-semibold text-heading">Vipin Garg</span>
+            </Link>
             <div className="-mr-2 flex items-center">
               <ThemeToggle />
               <DialogPrimitive.Close
@@ -58,9 +62,10 @@ export function MobileNav({ groups, links, signup, login }: Props) {
           </div>
 
           <div className="flex-1 overflow-y-auto px-5 pb-6">
+            {/* hidden until courses live in app
             <Link href="/courses" onClick={close} className={cn(buttonVariants({ variant: "secondary" }), "my-4 w-full")}>
               Browse all courses
-            </Link>
+            </Link> */}
             <AccordionPrimitive.Root className="border-b border-border">
               {groups.map((g) => (
                 <AccordionPrimitive.Item key={g.id} value={g.id} className="border-t border-border">

@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Upcoming Programmes: CFA, AI & Finance, More",
   description:
-    "Practice tests, recorded courses, AI & Finance, CFA preparation and British Columbia licensing programmes are planned. Join the list to hear first when each opens.",
+    "Practice tests, AI & Finance, CFA preparation and British Columbia licensing programmes are planned. Join the list to hear first when each opens.",
   path: "/upcoming",
 });
 
