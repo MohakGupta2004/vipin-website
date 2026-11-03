@@ -30,11 +30,11 @@ export function FaqList({
               focusRing,
             )}
           >
-            <h3 className="font-sans text-lg">{f.question}</h3>
+            <h3 className="font-sans text-lg max-sm:text-base max-sm:leading-snug">{f.question}</h3>
             <Plus className="size-5 shrink-0 text-muted-foreground group-open:hidden" aria-hidden="true" />
             <Minus className="hidden size-5 shrink-0 text-muted-foreground group-open:block" aria-hidden="true" />
           </summary>
-          <p className="max-w-[68ch] pb-5 text-[17px] text-foreground">{f.answer}</p>
+          <p className="max-w-[68ch] pb-5 text-[17px] text-foreground max-sm:text-base max-sm:text-muted-foreground">{f.answer}</p>
         </details>
       ))}
       {schema ? <JsonLd data={faqLd(items)} /> : null}

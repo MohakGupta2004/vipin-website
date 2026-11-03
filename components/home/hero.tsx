@@ -46,8 +46,8 @@ export function Hero() {
   return (
     <section aria-labelledby="hero-heading">
       <div className="relative isolate overflow-hidden bg-surface-2 lg:flex lg:min-h-[clamp(560px,78vh,760px)] lg:items-center">
-        {/* Photo: top band on mobile, full-bleed background from md up. */}
-        <div className="relative h-72 w-full md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:left-[28%] lg:-z-10 lg:h-auto lg:w-auto">
+        {/* Photo: background behind the top of the hero below lg, full-bleed on the right from lg up. */}
+        <div className="absolute inset-x-0 top-0 -z-10 h-[25rem] md:h-[32rem] lg:inset-y-0 lg:right-0 lg:left-[28%] lg:h-auto lg:w-auto">
           <Image
             src="/images/hero-bg.jpg"
             alt=""
@@ -57,13 +57,18 @@ export function Hero() {
             className="object-cover object-[72%_20%] lg:object-[60%_18%]"
           />
         </div>
+        {/* Top-to-bottom wash below lg: the headline sits on the lower part of the photo, as on desktop. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 -z-10 h-[25rem] bg-linear-to-b from-transparent from-25% via-surface-2/85 via-60% to-surface-2 to-95% md:h-[32rem] lg:hidden"
+        />
         {/* Left-to-right wash keeps the headline readable and the subject on the right clear. */}
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-10 hidden bg-linear-to-r from-surface-2 from-28% via-surface-2/60 via-40% to-transparent to-62% lg:block"
         />
 
-        <div className="container-site relative py-10 pb-24 md:py-14 lg:py-20 lg:pb-28 xl:pb-32">
+        <div className="container-site relative pt-[15rem] pb-20 md:pt-[21rem] md:pb-24 lg:py-20 lg:pb-28 xl:pb-32">
           <div className="max-w-[46rem] lg:max-w-[36rem] xl:max-w-[40rem]">
             <p className="text-[0.9375rem] font-semibold text-link">Live online exam coaching with {name}</p>
             <h1
@@ -72,18 +77,18 @@ export function Hero() {
             >
               Live classes and exam prep for Canada&apos;s finance licences
             </h1>
-            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-foreground xl:text-xl">
+            <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-foreground md:mt-6 md:text-lg xl:text-xl">
               Live online classes for IFC, CSC, CIRE, RSE and LLQP, with practice in the learning app between sessions,
               taught by {name}.
             </p>
 
-            <ul className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-stretch">
+            <ul className="mt-7 flex flex-col gap-2.5 sm:mt-8 sm:gap-3 sm:flex-row sm:flex-wrap sm:items-stretch">
               {categories.map((c) => (
                 <li key={c.label} className="flex">
                   <Link
                     href={c.href}
                     className={cn(
-                      "group flex min-h-16 w-full items-center justify-between gap-4 rounded-lg bg-primary px-5 py-3 whitespace-nowrap sm:w-auto text-primary-foreground transition-colors duration-150 hover:bg-cta-hover motion-reduce:transition-none",
+                      "group flex min-h-14 w-full items-center justify-between gap-4 rounded-lg bg-primary px-4 py-2.5 shadow-sm max-sm:rounded-xl max-sm:transition-[transform,background-color] max-sm:active:scale-[0.98] sm:min-h-16 sm:px-5 sm:py-3 sm:shadow-none whitespace-nowrap sm:w-auto text-primary-foreground transition-colors duration-150 hover:bg-cta-hover motion-reduce:transition-none",
                       focusRing
                     )}
                   >
@@ -101,7 +106,7 @@ export function Hero() {
               ))}
             </ul>
 
-            <div className="mt-6 flex flex-col gap-x-8 gap-y-1 sm:flex-row sm:items-center">
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-0 sm:mt-6 sm:flex-nowrap sm:gap-x-8 sm:gap-y-1">
               <a
                 href={appUrl("signup", { campaign: "home-hero" })}
                 rel="noopener"
@@ -120,8 +125,8 @@ export function Hero() {
 
       {/* Facts card overlaps the bottom of the photo. Every figure comes from the course data. */}
       <div className="container-site relative z-10 -mt-12">
-        <div className="grid items-stretch rounded-xl border border-border bg-surface shadow-float lg:grid-cols-[auto_1fr]">
-          <div className="flex items-center gap-3 border-b border-border px-5 py-4 lg:border-r lg:border-b-0 lg:px-8">
+        <div className="grid items-stretch rounded-xl border border-border bg-surface shadow-float max-sm:rounded-2xl lg:grid-cols-[auto_1fr]">
+          <div className="flex items-center gap-3 border-b border-border px-4 py-3 sm:px-5 sm:py-4 lg:border-r lg:border-b-0 lg:px-8">
             <span className="relative size-10 shrink-0 overflow-hidden rounded-full bg-surface-2">
               <Image src={portrait ?? "/images/vipin-garg.jpg"} alt="" fill sizes="40px" className="object-cover object-[50%_20%]" />
             </span>
@@ -135,14 +140,14 @@ export function Hero() {
               <div
                 key={f.label}
                 className={cn(
-                  "flex flex-col-reverse justify-end px-5 py-4 lg:px-8",
+                  "flex flex-col-reverse justify-end px-4 py-3.5 sm:px-5 sm:py-4 lg:px-8",
                   i % 2 === 1 && "border-l border-border",
                   i > 1 && "border-t border-border lg:border-t-0",
                   i > 0 && "lg:border-l"
                 )}
               >
                 <dt className="mt-0.5 text-sm text-muted-foreground">{f.label}</dt>
-                <dd className="font-heading text-2xl font-extrabold text-heading">{f.value}</dd>
+                <dd className="font-heading text-xl font-extrabold text-heading sm:text-2xl">{f.value}</dd>
               </div>
             ))}
           </dl>

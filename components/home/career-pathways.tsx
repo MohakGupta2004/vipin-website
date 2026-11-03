@@ -20,10 +20,10 @@ export function CareerPathways() {
           </Link>
         </div>
       </div>
-      <ul className="mt-10 border-t border-border">
+      <ul className="mt-6 border-t border-border sm:mt-10">
         {careerPathways.map((p) => (
-          <li key={p.id} className="grid gap-3 border-b border-border py-6 lg:grid-cols-12 lg:gap-8">
-            <h3 className="lg:col-span-4">{p.title}</h3>
+          <li key={p.id} className="grid gap-2 border-b border-border py-5 sm:gap-3 sm:py-6 lg:grid-cols-12 lg:gap-8">
+            <h3 className="max-sm:text-lg lg:col-span-4">{p.title}</h3>
             <div className="lg:col-span-6">
               <p className="tabular text-sm font-semibold text-link">{p.courseCodes.join(" · ")}</p>
               <p className="mt-2 text-[0.9375rem] text-muted-foreground">{p.summary}</p>

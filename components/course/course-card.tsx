@@ -22,7 +22,7 @@ export function CourseCard({ course }: { course: Course }) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring lg:p-8",
+        "group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring max-sm:rounded-2xl max-sm:p-5 max-sm:shadow-xs lg:p-8",
       )}
     >
       <div className="flex items-baseline justify-between gap-3">
@@ -64,7 +64,7 @@ export function CourseCard({ course }: { course: Course }) {
 /** Upcoming programme card (§5.16): no fee/date rows, one honest line. */
 export function UpcomingCard({ program }: { program: UpcomingProgram }) {
   return (
-    <article className="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring lg:p-8">
+    <article className="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring max-sm:rounded-2xl max-sm:p-5 max-sm:shadow-xs lg:p-8">
       <div className="flex items-baseline justify-between gap-3">
         <p className="rounded-xs bg-surface-2 px-2 py-0.5 text-[13px] font-medium text-muted-foreground">
           Upcoming
@@ -89,6 +89,6 @@ export function UpcomingCard({ program }: { program: UpcomingProgram }) {
 
 export function CourseGrid({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8", className)}>{children}</div>
+    <div className={cn("grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:gap-8", className)}>{children}</div>
   );
 }

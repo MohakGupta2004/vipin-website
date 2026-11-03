@@ -12,9 +12,9 @@ export function DiagnosticCta({ courseSlug, code, sourcePath }: { courseSlug: st
   const panelId = React.useId();
 
   return (
-    <div className="rounded-lg border border-border bg-teal-tint p-6 lg:p-8">
+    <div className="rounded-lg border border-border bg-teal-tint p-6 max-sm:rounded-2xl max-sm:border-transparent max-sm:p-5 lg:p-8">
       <h3 className="font-sans">Check where you stand on the {code}</h3>
-      <p className="mt-2 max-w-[60ch] text-[17px] text-foreground">
+      <p className="mt-2 max-w-[60ch] text-[17px] text-foreground max-sm:text-base">
         The free diagnostic is not ready yet. Join the waitlist and we will email you when it opens.
       </p>
       {open ? (
@@ -23,14 +23,14 @@ export function DiagnosticCta({ courseSlug, code, sourcePath }: { courseSlug: st
             kind="diagnostic"
             courseSlug={courseSlug}
             sourcePath={sourcePath}
-            className="max-w-120"
+            className="max-w-120 max-sm:max-w-none"
           />
         </div>
       ) : (
         <Button
           type="button"
           variant="outline"
-          className={`${secondaryButton} mt-5`}
+          className={`${secondaryButton} mt-5 max-sm:w-full max-sm:rounded-xl`}
           aria-expanded={false}
           aria-controls={panelId}
           onClick={() => setOpen(true)}

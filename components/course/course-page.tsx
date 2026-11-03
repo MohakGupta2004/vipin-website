@@ -50,7 +50,7 @@ function Section({
   return (
     <section id={id} aria-labelledby={`${id}-h`} className="scroll-mt-28">
       <h2 id={`${id}-h`}>{title}</h2>
-      <div className="mt-6 lg:mt-8">{children}</div>
+      <div className="mt-5 sm:mt-6 lg:mt-8">{children}</div>
     </section>
   )
 }
@@ -167,13 +167,13 @@ export function CoursePage({ course, extras }: CoursePageProps) {
 
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="container-site grid gap-x-8 gap-y-12 py-8 lg:grid-cols-12 lg:py-12 xl:gap-x-12">
+      <div className="container-site grid gap-x-8 gap-y-10 py-6 sm:gap-y-12 sm:py-8 lg:grid-cols-12 lg:py-12 xl:gap-x-12">
         {/* Hero */}
         <header className="lg:col-span-8">
           <p className="text-eyebrow">{eyebrow(c)}</p>
           <h1 className="mt-3">{courseH1(c)}</h1>
-          <p className="mt-2 text-lg text-muted-foreground">{c.name}</p>
-          <p className="text-lead mt-6 max-w-[60ch]">{c.summary}</p>
+          <p className="mt-2 text-lg text-muted-foreground max-sm:text-base">{c.name}</p>
+          <p className="text-lead mt-6 max-w-[60ch] max-sm:mt-4 max-sm:text-[1.0625rem] max-sm:leading-relaxed">{c.summary}</p>
           <p className="mt-5 text-[15px] font-medium text-foreground">
             {formatLabel(c)} · Online · {siteConfig.instructor.name}
           </p>
@@ -212,11 +212,11 @@ export function CoursePage({ course, extras }: CoursePageProps) {
         </aside>
 
         {/* Body */}
-        <div className="space-y-16 lg:col-span-8 lg:space-y-20">
+        <div className="space-y-12 sm:space-y-16 lg:col-span-8 lg:space-y-20">
           <Section id="who-for" title={`Who is the ${c.code} for?`}>
             <ul className="max-w-[68ch] space-y-3">
               {c.whoFor.map((w) => (
-                <li key={w} className="flex gap-3 text-[17px]">
+                <li key={w} className="flex gap-3 text-[17px] max-sm:text-base">
                   <Check
                     className="mt-1.5 size-4 shrink-0 text-success"
                     aria-hidden="true"
@@ -230,13 +230,13 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           <Section id="learn" title={`What does the ${c.code} cover?`}>
             {c.topics.length > 0 ? (
               <>
-                <ol className="grid gap-x-8 sm:grid-cols-2">
+                <ol className="grid gap-x-8 max-sm:rounded-2xl max-sm:bg-surface-2 max-sm:px-4 sm:grid-cols-2">
                   {c.topics.map((t, i) => (
                     <li
                       key={t}
-                      className="flex gap-3 border-b border-border py-3 text-[17px]"
+                      className="flex gap-3 border-b border-border py-3 text-[17px] max-sm:py-3.5 max-sm:text-base max-sm:last:border-b-0"
                     >
-                      <span className="w-6 shrink-0 text-muted-foreground tabular-nums">
+                      <span className="w-6 shrink-0 text-muted-foreground tabular-nums max-sm:font-semibold max-sm:text-link">
                         {i + 1}
                       </span>
                       <span>{t}</span>
@@ -349,7 +349,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             )}
             <div
               id="register-interest"
-              className="mt-10 scroll-mt-28 border-t border-border pt-8"
+              className="mt-10 scroll-mt-28 border-t border-border pt-8 max-sm:mt-8 max-sm:rounded-2xl max-sm:border-t-0 max-sm:bg-surface-2 max-sm:p-5"
             >
               <h3 className="font-sans text-lg">
                 {c.offerConfirmed
@@ -360,7 +360,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
                 kind="interest"
                 courseSlug={c.slug}
                 sourcePath={c.route}
-                className="mt-5"
+                className="mt-5 max-sm:max-w-none"
                 successTitle="Interest registered"
                 successMessage={`Thank you. We will email you about the ${c.code} when there is news.`}
               />
@@ -416,7 +416,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             </section>
           ) : null}
 
-          <aside className="rounded-lg border border-border p-5 text-[15px]">
+          <aside className="rounded-lg border border-border p-5 text-[15px] max-sm:rounded-2xl">
             Studying through your employer?{" "}
             <Link
               href="/for-firms"

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 export function FirmsTeaser() {
   return (
     <section className="container-site pb-16 md:pb-20 lg:pb-24">
-      <div className="grid gap-6 rounded-lg border border-border p-6 sm:p-8 lg:grid-cols-12 lg:items-center lg:gap-12">
+      <div className="grid gap-5 rounded-lg border border-border p-5 max-sm:rounded-2xl max-sm:bg-surface-2 max-sm:border-transparent sm:gap-6 sm:p-8 lg:grid-cols-12 lg:items-center lg:gap-12">
         <div className="lg:col-span-8">
           <h3>Training a team?</h3>
           <p className="mt-3 max-w-[60ch] text-muted-foreground">
@@ -14,7 +14,7 @@ export function FirmsTeaser() {
           </p>
         </div>
         <div className="lg:col-span-4 lg:text-right">
-          <Link href="/for-firms" className={cn(buttonVariants({ variant: "secondary" }))}>
+          <Link href="/for-firms" className={cn(buttonVariants({ variant: "secondary" }), "max-sm:w-full")}>
             Ask about group cohorts
           </Link>
         </div>

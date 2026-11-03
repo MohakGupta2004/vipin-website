@@ -14,7 +14,7 @@ export function MeetVipin() {
   const { bio } = siteConfig.instructor
   const video = siteConfig.founderVideo
   return (
-    <section className="container-site grid items-center gap-10 py-16 md:py-20 lg:grid-cols-12 lg:gap-14 lg:py-24 xl:py-28">
+    <section className="container-site grid items-center gap-8 pt-8 pb-16 sm:gap-10 sm:pt-16 md:py-20 lg:grid-cols-12 lg:gap-14 lg:py-24 xl:py-28">
       <div className="lg:col-span-5">
         <h2>Meet your instructor</h2>
         <p className="text-lead mt-4 max-w-[52ch]">
@@ -43,7 +43,7 @@ export function MeetVipin() {
             controls
             preload="none"
             poster={video.poster}
-            className="aspect-video w-full rounded-2xl bg-surface-inverse shadow-float"
+            className="aspect-video w-full rounded-2xl max-sm:rounded-xl bg-surface-inverse shadow-float"
           >
             <source src={video.src} />
             {video.captionsUrl && <track kind="captions" src={video.captionsUrl} default />}

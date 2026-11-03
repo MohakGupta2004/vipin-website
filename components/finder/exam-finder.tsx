@@ -98,7 +98,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
     return (
       <section
         aria-labelledby={`${uid}-result`}
-        className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-6 sm:p-8", className)}
+        className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-5 max-sm:rounded-2xl sm:p-8", className)}
       >
         <div>
           <p className="text-sm text-muted-foreground">We recommend</p>
@@ -225,7 +225,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         e.preventDefault();
         next();
       }}
-      className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-6 sm:p-8", className)}
+      className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-5 max-sm:rounded-2xl sm:p-8", className)}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
         {heading ? <h3 className="font-sans text-xl font-semibold text-heading">{heading}</h3> : null}
@@ -256,14 +256,14 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
           {question.prompt}
         </legend>
         {/* Native radios with one name: Tab enters the group, arrow keys move and select. */}
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-2 sm:grid-cols-2 sm:gap-3">
           {question.options.map((o) => {
             const id = `${uid}-${question.id}-${o.value}`;
             return (
               <label
                 key={o.value}
                 htmlFor={id}
-                className="flex min-h-16 cursor-pointer items-center gap-3 rounded-md border border-border-strong bg-surface px-4 py-3 text-[15px] text-foreground hover:bg-accent has-checked:border-primary has-checked:bg-teal-tint has-checked:shadow-[inset_0_0_0_1px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+                className="flex min-h-14 cursor-pointer items-center gap-3 rounded-md border border-border-strong bg-surface px-4 py-3 text-[15px] max-sm:rounded-xl max-sm:border-border max-sm:py-2.5 max-sm:transition-transform max-sm:duration-100 max-sm:active:scale-[0.985] motion-reduce:transform-none sm:min-h-16 text-foreground hover:bg-accent has-checked:border-primary has-checked:bg-teal-tint has-checked:shadow-[inset_0_0_0_1px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
               >
                 <input
                   id={id}
@@ -281,7 +281,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         </div>
       </fieldset>
 
-      <div className="flex flex-wrap items-center gap-3 max-sm:sticky max-sm:bottom-0 max-sm:-mx-6 max-sm:bg-surface-2 max-sm:px-6 max-sm:py-3">
+      <div className="flex flex-wrap items-center gap-3 max-sm:sticky max-sm:bottom-0 max-sm:-mx-5 max-sm:bg-surface-2 max-sm:px-5 max-sm:py-3">
         {step > 0 ? (
           <Button type="button" variant="outline" className={secondaryButton} onClick={back}>
             Back

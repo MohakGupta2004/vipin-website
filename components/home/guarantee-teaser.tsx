@@ -9,7 +9,7 @@ export function GuaranteeTeaser() {
   if (!g) return null
   return (
     <section className="container-site pb-16 md:pb-20">
-      <div className="grid gap-6 rounded-lg border border-border p-6 sm:p-8 lg:grid-cols-12 lg:items-center lg:gap-12">
+      <div className="grid gap-5 rounded-lg border border-border p-5 max-sm:rounded-2xl sm:gap-6 sm:p-8 lg:grid-cols-12 lg:items-center lg:gap-12">
         <div className="lg:col-span-8">
           <h3>{g.headline}</h3>
           <p className="mt-3 max-w-[60ch] text-muted-foreground">{g.summary}</p>

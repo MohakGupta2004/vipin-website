@@ -10,6 +10,8 @@ export type Announcement = {
   /** Changes whenever the message changes, so a new announcement shows again. */
   id: string
   message: string
+  /** Short tag before the message, e.g. "New". */
+  badge?: string
   href?: string
   linkLabel?: string
   /** false = no close button. */

@@ -34,7 +34,7 @@ export function MobileCourseBar({ code, feeLabel, signupHref }: { code: string; 
         <a
           href={signupHref}
           rel="noopener"
-          className={cn(buttonVariants(), ctaButton, "shrink-0 px-4")}
+          className={cn(buttonVariants(), ctaButton, "shrink-0 px-4 max-sm:rounded-xl")}
         >
           Sign up free
         </a>

@@ -20,10 +20,10 @@ export function PageShell({
   return (
     <div>
       <Breadcrumbs items={crumbs} />
-      <header className="container-site py-10 lg:py-14">
+      <header className="container-site py-10 max-sm:pt-4 max-sm:pb-8 lg:py-14">
         <div className="max-w-(--container-prose)">
           <h1>{title}</h1>
-          {lead ? <p className="mt-6 text-lead">{lead}</p> : null}
+          {lead ? <p className="mt-6 text-lead max-sm:mt-4">{lead}</p> : null}
         </div>
       </header>
       <div className={cn(prose ? "container-site max-w-(--container-prose) lg:max-w-(--container-prose)" : "")}>
@@ -52,11 +52,11 @@ export function PageSection({
     <section
       id={id}
       aria-labelledby={title ? hid : undefined}
-      className={cn("scroll-mt-28 py-12 lg:py-16", tone === "band" && "bg-surface-2", className)}
+      className={cn("scroll-mt-28 py-12 max-sm:py-10 lg:py-16", tone === "band" && "bg-surface-2", className)}
     >
       <div className="container-site">
         {title ? (
-          <h2 id={hid} className="mb-8">
+          <h2 id={hid} className="mb-8 max-sm:mb-6">
             {title}
           </h2>
         ) : null}
@@ -72,7 +72,7 @@ export function MediaSlot({ label }: { label: string }) {
     <div
       role="img"
       aria-label={label}
-      className="flex aspect-video w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-6 text-center text-[15px] text-muted-foreground"
+      className="flex aspect-video w-full items-center justify-center rounded-lg max-sm:rounded-2xl border border-border bg-surface-2 px-6 text-center text-[15px] text-muted-foreground"
     >
       {label}
     </div>
@@ -83,7 +83,7 @@ export function Notice({ children, tone = "info" }: { children: React.ReactNode;
   return (
     <div
       className={cn(
-        "max-w-[68ch] rounded-md p-4 text-[15px] text-foreground",
+        "max-w-[68ch] rounded-md p-4 text-[15px] text-foreground max-sm:rounded-xl",
         tone === "warning" ? "bg-warning-bg" : "bg-teal-tint",
       )}
     >

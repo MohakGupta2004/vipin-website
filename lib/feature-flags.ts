@@ -19,6 +19,8 @@ export type AnnouncementBarFlag = {
   /** Visitors who dismissed a bar with this id do not see it again. Change the id to show it to everyone. */
   id: string;
   message: string;
+  /** Optional short tag shown before the message, e.g. "New". */
+  badge?: string;
   linkLabel?: string;
   /** Internal path starting with "/" or a full https:// URL. */
   linkHref?: string;
@@ -110,6 +112,11 @@ function parseFlags(input: unknown): { flags: FeatureFlags; warnings: string[] }
         else warn(`"announcementBar.linkHref" must start with "/" or "https://". The link is dropped.`);
       }
       const linkLabel = typeof a.linkLabel === "string" && a.linkLabel.trim() ? a.linkLabel.trim() : undefined;
+      let badge: string | undefined;
+      if (typeof a.badge === "string" && a.badge.trim()) {
+        if (a.badge.trim().length <= 12) badge = a.badge.trim();
+        else warn(`"announcementBar.badge" must be 12 characters or fewer. The badge is dropped.`);
+      }
       if (linkHref && !linkLabel) warn(`"announcementBar.linkLabel" is missing. The link will read "Learn more".`);
       if (a.dismissible !== undefined && typeof a.dismissible !== "boolean")
         warn(`"announcementBar.dismissible" must be true or false. Using true.`);
@@ -117,6 +124,7 @@ function parseFlags(input: unknown): { flags: FeatureFlags; warnings: string[] }
         enabled: true,
         id,
         message,
+        badge,
         linkLabel,
         linkHref,
         dismissible: typeof a.dismissible === "boolean" ? a.dismissible : true,
@@ -190,6 +198,7 @@ export function isEnabled(name: ToggleName): boolean {
 export type AnnouncementData = {
   id: string;
   message: string;
+  badge?: string;
   href?: string;
   linkLabel?: string;
   dismissible: boolean;
@@ -199,7 +208,7 @@ export type AnnouncementData = {
 export function getAnnouncement(): AnnouncementData | null {
   const b = parsed.flags.announcementBar;
   if (!b.enabled) return null;
-  return { id: b.id, message: b.message, href: b.linkHref, linkLabel: b.linkLabel, dismissible: b.dismissible };
+  return { id: b.id, message: b.message, badge: b.badge, href: b.linkHref, linkLabel: b.linkLabel, dismissible: b.dismissible };
 }
 
 /** The app signup prompt settings, or null when it is off. */

@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Light only. The variant stays bound to a class that is never set, so no dark styles can apply. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -86,6 +87,7 @@
 }
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #48566a;
   --surface: #ffffff;
@@ -160,66 +162,7 @@
   }
 }
 
-.dark {
-  --background: #0b1622;
-  --foreground: #e3e9f0;
-  --surface: #111f2e;
-  --surface-2: #172838;
-  --surface-inverse: #1a3550;
-  --heading: #f5f8fb;
-  --placeholder: #9aa9ba;
 
-  --primary: #7aa5ff;
-  --primary-foreground: #0b1622;
-  --secondary: var(--surface-2);
-  --secondary-foreground: #e3e9f0;
-  --muted-foreground: #9aa9ba;
-  --accent: #172838;
-  --accent-foreground: #e3e9f0;
-
-  --border: #223447;
-  --border-strong: #6b809a;
-  --input: #6b809a;
-  --ring: #7aa5ff;
-
-  --link: #7aa5ff;
-  --brand-teal: #80b79c;
-  --teal-tint: #15302a;
-
-  --cta: #2463eb;
-  --cta-foreground: #ffffff;
-  --cta-hover: #1d4fd7;
-
-  --success: #80b79c;
-  --success-bg: #15302a;
-  --warning: #f2b35a;
-  --warning-bg: #3a2a12;
-  --destructive: #f28b82;
-  --destructive-bg: #3a1414;
-
-  --inverse-fg: #e3e9f0;
-  --inverse-muted: #b8c7d9;
-  --inverse-link: #9cc0ff;
-
-  --chart-1: #7aa5ff;
-  --chart-2: #80b79c;
-  --chart-3: #e3e9f0;
-  --chart-4: #9aa9ba;
-  --chart-5: #2f7f7f;
-
-  --sidebar: #1a3550;
-  --sidebar-foreground: #e6eef2;
-  --sidebar-primary: #7aa5ff;
-  --sidebar-primary-foreground: #0b1622;
-  --sidebar-accent: #172838;
-  --sidebar-accent-foreground: #e6eef2;
-  --sidebar-border: #223447;
-  --sidebar-ring: #7aa5ff;
-
-  /* Dark: no visible shadows. Separation comes from borders and lighter surfaces. */
-  --shadow-float: 0 0 0 1px var(--border-strong);
-  --shadow-modal: 0 0 0 1px var(--border-strong);
-}
 
 @layer base {
   * {
@@ -394,4 +337,24 @@
     animation-duration: 0.12ms !important;
   }
   .vg-enter-up, .vg-enter-left { animation-name: vg-fade; animation-duration: 120ms !important; }
+}
+
+/* Phones only: size-specific tracking and a calmer lead (Apple-style type). Wider screens unchanged. */
+@layer base {
+  @media (max-width: 639.98px) {
+    h1 { letter-spacing: -0.025em; line-height: 1.08; }
+    h2 { letter-spacing: -0.02em; line-height: 1.12; }
+    h3 { letter-spacing: -0.01em; }
+  }
+}
+@layer components {
+  @media (max-width: 639.98px) {
+    .text-lead { font-size: 1.0625rem; line-height: 1.6; }
+    .text-eyebrow { font-size: 0.75rem; letter-spacing: 0.1em; }
+  }
+}
+/* Phones: the sign-up prompt is a bottom sheet, so it rises from (and returns to) the bottom edge. */
+@keyframes vg-sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@media (max-width: 639.98px) {
+  .vg-sheet { animation: vg-sheet-up 360ms cubic-bezier(0.32, 0.72, 0, 1) both; }
 }

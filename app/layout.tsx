@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next"
 import { Arimo, Manrope } from "next/font/google"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import { SiteAnnouncement } from "@/components/layout/site-announcement";
 import { OverlayHost } from "@/components/overlays/overlay-host";
@@ -56,10 +55,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1622" },
-  ],
+  themeColor: "#ffffff",
+  colorScheme: "light",
 }
 
 export default function RootLayout({
@@ -70,28 +67,25 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={cn("antialiased font-sans", bodyFont.variable, displayFont.variable)}
     >
       <body className="min-h-dvh overflow-x-clip">
-        <ThemeProvider>
-          <JsonLd data={[organizationLd(), personLd(), websiteLd()]} />
-          <TooltipProvider>
-            <a
-              href="#main"
-              className="sr-only z-60 rounded-md bg-primary px-4 py-3 text-primary-foreground focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
-            >
-              Skip to content
-            </a>
-            <SiteAnnouncement />
-            <Header />
-            <main id="main" tabIndex={-1} className="outline-hidden">{children}</main>
-            <OverlayHost />
-          </TooltipProvider>
-          <Footer />
-          <WhatsAppButton />
-        </ThemeProvider>
+        <JsonLd data={[organizationLd(), personLd(), websiteLd()]} />
+        <TooltipProvider>
+          <a
+            href="#main"
+            className="sr-only z-60 rounded-md bg-primary px-4 py-3 text-primary-foreground focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
+          >
+            Skip to content
+          </a>
+          <SiteAnnouncement />
+          <Header />
+          <main id="main" tabIndex={-1} className="outline-hidden">{children}</main>
+          <OverlayHost />
+        </TooltipProvider>
+        <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   )

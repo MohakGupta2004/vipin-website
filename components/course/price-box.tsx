@@ -25,7 +25,7 @@ export function PriceBox({ course }: { course: Course }) {
   return (
     <div
       id="price-box"
-      className="rounded-2xl border border-border bg-surface p-6 text-foreground shadow-float"
+      className="rounded-2xl border border-border bg-surface p-6 text-foreground shadow-float max-sm:p-5"
     >
       <h2 className="text-lg font-bold">Choose how you study</h2>
 
@@ -41,7 +41,7 @@ export function PriceBox({ course }: { course: Course }) {
               key={t.id}
               htmlFor={id}
               className={cn(
-                "flex min-h-11 items-center gap-3 rounded-lg border px-3 py-2 text-[0.9375rem] font-semibold transition-colors motion-reduce:transition-none",
+                "flex min-h-11 items-center gap-3 rounded-lg border px-3 py-2 max-sm:min-h-12 max-sm:rounded-xl max-sm:px-3.5 text-[0.9375rem] font-semibold transition-colors motion-reduce:transition-none",
                 t.available ? "cursor-pointer" : "cursor-not-allowed text-muted-foreground",
                 tierId === t.id ? "border-primary bg-accent text-heading ring-1 ring-primary" : "border-border bg-surface hover:border-border-strong",
                 "has-focus-visible:outline-2 has-focus-visible:-outline-offset-2 has-focus-visible:outline-ring",

@@ -179,16 +179,18 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
       <DialogPrimitive.Portal>
         <DialogPrimitive.Backdrop className="vg-enter-fade fixed inset-0 z-40 bg-[var(--scrim)]" />
         <DialogPrimitive.Popup
-          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-120 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-modal outline-hidden sm:p-8"
+          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-120 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-modal outline-hidden vg-sheet max-sm:top-auto max-sm:bottom-0 max-sm:left-0 max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-t-[1.75rem] max-sm:rounded-b-none max-sm:border-x-0 max-sm:border-b-0 max-sm:px-5 max-sm:pt-3 max-sm:pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8"
         >
-          <DialogPrimitive.Title className="pr-8 font-heading text-2xl leading-tight font-semibold text-heading">
+          {/* Grabber: reads as a sheet on phones. */}
+          <div aria-hidden="true" className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-border-strong/60 sm:hidden" />
+          <DialogPrimitive.Title className="pr-8 font-heading text-2xl leading-tight font-semibold text-heading max-sm:pr-10 max-sm:text-[1.375rem] max-sm:tracking-[-0.015em]">
             Create your free account
           </DialogPrimitive.Title>
-          <DialogPrimitive.Description className="mt-3 text-[1.0625rem] text-muted-foreground">
+          <DialogPrimitive.Description className="mt-3 text-[1.0625rem] text-muted-foreground max-sm:mt-2 max-sm:text-base">
             Live classes with Vipin, practice between classes, and all courses in one app.
           </DialogPrimitive.Description>
-          <div className="mt-6">{actions}</div>
-          <div className="mt-4 flex items-center justify-between gap-4">
+          <div className="mt-6 max-sm:mt-5">{actions}</div>
+          <div className="mt-4 flex items-center justify-between gap-4 max-sm:mt-1 max-sm:justify-center">
             {/* hidden until courses live in app
             <a
               href={browse}
@@ -199,7 +201,7 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
             </a>
             */}
             {!blocking && (
-              <DialogPrimitive.Close className="inline-flex min-h-11 items-center px-1 text-[0.9375rem] font-medium text-foreground underline underline-offset-3 hover:decoration-2">
+              <DialogPrimitive.Close className="inline-flex min-h-11 items-center px-1 text-[0.9375rem] font-medium text-foreground underline underline-offset-3 hover:decoration-2 max-sm:text-muted-foreground max-sm:no-underline">
                 Not now
               </DialogPrimitive.Close>
             )}
@@ -207,7 +209,7 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
           {!blocking && (
             <DialogPrimitive.Close
               aria-label="Close"
-              className="absolute top-2 right-2 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+              className="absolute top-2 right-2 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground max-sm:top-4 max-sm:right-3 max-sm:rounded-full"
             >
               <X aria-hidden="true" strokeWidth={1.75} className="size-5" />
             </DialogPrimitive.Close>

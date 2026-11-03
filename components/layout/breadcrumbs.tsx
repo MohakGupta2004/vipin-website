@@ -9,13 +9,13 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
   const parent = all.length > 1 ? all[all.length - 2] : null
   return (
     <>
-      <nav aria-label="Breadcrumb" className="container-site pt-6 text-sm">
+      <nav aria-label="Breadcrumb" className="container-site pt-6 text-sm max-sm:pt-2 max-sm:text-[0.9375rem]">
         {parent && (
           <Link
             href={parent.href}
-            className="inline-flex min-h-11 items-center gap-1 text-muted-foreground hover:underline sm:hidden"
+            className="-ml-1 inline-flex min-h-11 items-center gap-0.5 font-medium text-link sm:hidden"
           >
-            <ChevronRight aria-hidden="true" strokeWidth={1.75} className="size-3.5 rotate-180" />
+            <ChevronRight aria-hidden="true" strokeWidth={2} className="size-5 rotate-180" />
             {parent.name}
           </Link>
         )}

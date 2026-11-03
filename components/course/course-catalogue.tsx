@@ -124,12 +124,12 @@ export function CourseCatalogue({
     <div id={id} className={cn("scroll-mt-28", className)}>
       {showSearch ? (
         <div className="max-w-md">
-          <label htmlFor={`${uid}-search`} className="mb-2 block text-[15px] font-semibold">
+          <label htmlFor={`${uid}-search`} className="mb-2 block text-[15px] font-semibold max-sm:sr-only">
             Search courses
           </label>
           <div className="relative">
             <Search
-              className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute top-1/2 left-3 size-4 max-sm:left-3.5 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
             />
             <Input
@@ -142,13 +142,17 @@ export function CourseCatalogue({
               }}
               placeholder="e.g. CIRE or tax"
               autoComplete="off"
-              className={cn(controlBase, controlHeight, "pl-9")}
+              className={cn(controlBase, controlHeight, "pl-9 max-sm:rounded-xl max-sm:border-border max-sm:bg-surface-2 max-sm:pl-10")}
             />
           </div>
         </div>
       ) : null}
 
-      <div role="group" aria-label="Filter courses by area" className={cn("flex flex-wrap gap-2", showSearch && "mt-5")}>
+      <div role="group" aria-label="Filter courses by area" className={cn(
+          "flex flex-wrap gap-2 max-sm:-mx-5 max-sm:snap-x max-sm:flex-nowrap max-sm:overflow-x-auto max-sm:scroll-px-5 max-sm:px-5 max-sm:pb-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
+          showSearch && "mt-5 max-sm:mt-4",
+        )}
+      >
         {AREAS.map((a) => {
           const pressed = area === a.id;
           return (
@@ -161,10 +165,10 @@ export function CourseCatalogue({
                 setExpanded(false);
               }}
               className={cn(
-                "inline-flex min-h-11 items-center gap-2 rounded-md border px-4 text-[15px] font-medium transition-colors",
+                "inline-flex min-h-11 items-center gap-2 rounded-md border px-4 text-[15px] font-medium transition-colors max-sm:shrink-0 max-sm:snap-start max-sm:rounded-full max-sm:px-3.5 max-sm:whitespace-nowrap max-sm:active:scale-[0.97] max-sm:transition-[transform,background-color,border-color] max-sm:duration-100 motion-reduce:transition-none",
                 pressed
                   ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border-strong bg-surface text-foreground hover:bg-accent",
+                  : "border-border-strong bg-surface text-foreground hover:bg-accent max-sm:border-border max-sm:bg-surface-2",
                 focusRing,
               )}
             >
@@ -186,10 +190,10 @@ export function CourseCatalogue({
       </p>
 
       {shown.length > 0 ? (
-        <ul className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {shown.map((it) => (
             <li key={it.key}>
-              <article className="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring">
+              <article className="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong max-sm:rounded-2xl max-sm:p-5 max-sm:shadow-xs max-sm:transition-transform max-sm:duration-100 max-sm:active:scale-[0.985] motion-reduce:transform-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring">
                 <div className="flex items-baseline justify-between gap-3">
                   <p className="text-[15px] font-semibold tabular-nums text-link">{it.code}</p>
                   <p className="text-sm text-muted-foreground">
@@ -202,7 +206,7 @@ export function CourseCatalogue({
                           : "Exam coaching"}
                   </p>
                 </div>
-                <Heading className="mt-3 font-sans text-xl">
+                <Heading className="mt-2 font-sans text-xl max-sm:text-lg max-sm:leading-snug sm:mt-3">
                   <Link
                     href={it.href}
                     className="underline-offset-4 outline-hidden group-hover:underline after:absolute after:inset-0"
@@ -242,14 +246,14 @@ export function CourseCatalogue({
         <Button
           type="button"
           variant="outline"
-          className={cn(secondaryButton, "mt-8")}
+          className={cn(secondaryButton, "mt-8 max-sm:mt-5 max-sm:w-full max-sm:rounded-xl")}
           onClick={() => setExpanded(true)}
         >
           Show all {results.length} courses
         </Button>
       ) : null}
 
-      <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
+      <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 max-sm:mt-3">
         {/* hidden until courses live in app */}
         {/*
         <a

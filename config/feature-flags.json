@@ -2,7 +2,8 @@
   "announcementBar": {
     "enabled": true,
     "id": "cfa-launch-2026-11",
-    "message": "New course launching soon: CFA exam preparation with Vipin.",
+    "badge": "New",
+    "message": "CFA exam preparation with Vipin is launching soon.",
     "linkLabel": "Join the waitlist",
     "linkHref": "/upcoming",
     "dismissible": true
