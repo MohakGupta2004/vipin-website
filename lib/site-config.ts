@@ -88,6 +88,7 @@ export const siteConfig = {
     // PLACEHOLDER: public phone number — "+1 604 555 0123"
     phone: null as string | null,
     whatsapp: "https://wa.me/17787922220" as string | null,
+    scheduleUrl: "https://cal.com/vipin-garg-fin-coach/strategy" as string | null,
     // PLACEHOLDER: reply-time promise the client can keep — "We reply within one business day."
     responseTime: null as string | null,
   },

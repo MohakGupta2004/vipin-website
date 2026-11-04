@@ -4,9 +4,9 @@ import { ArrowRight, Check, Play } from "lucide-react"
 import { siteConfig } from "@/lib/site-config"
 
 const points = [
-  "Clear explanations of complex material",
-  "Live discussion and guided examples",
-  "Preparation shaped around your exam",
+  "Understand Better Complex concepts made simple",
+  "Learn Practically Connect theory with real-world examples",
+  "Prepare Smarter Focus on what matters for your exam",
 ]
 
 /** Meet Vipin: founder introduction video beside a short intro. Video only (no portrait here). */
@@ -18,7 +18,7 @@ export function MeetVipin() {
       <div className="lg:col-span-5">
         <h2>Meet your instructor</h2>
         <p className="text-lead mt-4 max-w-[52ch]">
-          {bio ?? "Work through financial ideas with Vipin Garg, from the underlying principles to their application in exam scenarios."}
+          {bio ?? "Gain a deeper understanding of financial concepts and develop the skills to approach your exams with confidence."}
         </p>
         <ul className="mt-6 flex flex-col gap-3">
           {points.map((p) => (

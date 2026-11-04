@@ -19,8 +19,9 @@ export type { CatalogueItem } from "./catalogue-items";
 /** Filter chips. One is active at a time. `id` is also the `?area=` URL value. */
 const AREAS: { id: string; label: string; test: (i: CatalogueItem) => boolean }[] = [
   { id: "all", label: "All", test: () => true },
-  { id: "live-group", label: "Live group", test: (i) => i.type === "live-group" },
-  { id: "securities", label: "Securities & CIRO", test: (i) => i.category === "Securities" || i.category === "CIRO" },
+  { id: "live-group", label: "Instructor Led", test: (i) => i.type === "live-group" },
+  { id: "securities", label: "Securities", test: (i) => i.category === "Securities"},
+  { id: "ciro", label: "CIRO", test: (i) => i.category === "CIRO" },
   { id: "mutual-funds", label: "Mutual funds", test: (i) => i.category === "Mutual funds" },
   { id: "insurance", label: "Insurance", test: (i) => i.category === "Insurance" },
   { id: "planning", label: "Wealth & planning", test: (i) => i.category === "Planning & wealth" },

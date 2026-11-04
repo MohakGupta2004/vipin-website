@@ -28,7 +28,7 @@ export function Hero() {
 
   const categories = [
     { label: "Securities", href: "/securities", exams: "IFC, CSC & CIRE" },
-    { label: "Insurance", href: "/insurance", exams: "LLQP" },
+    // { label: "Insurance", href: "/insurance", exams: "LLQP" },
     {
       label: "Financial planning",
       href: "/financial-planning",
@@ -37,10 +37,10 @@ export function Hero() {
   ]
 
   const facts = [
-    { value: String(liveGroupCourses.length), label: "live group programmes" },
-    { value: String(offered), label: "exams covered" },
-    { value: "Live", label: "online, Canada-wide" },
-    { value: "Free", label: "account in the learning app" },
+    { value: "10+", label: "Years of Teaching Experience" },
+    { value: "300+", label: "Students & Professionals Trained" },
+    { value: "2000+", label: "Hours of Content Delivered" },
+    { value: "CFA Charterholder", label: "Since 2014" },
   ]
 
   return (
@@ -70,16 +70,18 @@ export function Hero() {
 
         <div className="container-site relative pt-[15rem] pb-20 md:pt-[21rem] md:pb-24 lg:py-20 lg:pb-28 xl:pb-32">
           <div className="max-w-[46rem] lg:max-w-[36rem] xl:max-w-[40rem]">
-            <p className="text-[0.9375rem] font-semibold text-link">Live online exam coaching with {name}</p>
+            <p className="text-[0.9375rem] font-semibold text-link">CANADIAN FINANCIAL LICENSING & CERTIFICATION</p>
             <h1
               id="hero-heading"
-              className="mt-4 max-w-[20ch] font-heading text-[clamp(2.25rem,1.6rem+2.4vw,4rem)] leading-[1.08] font-bold tracking-[-0.02em] text-heading"
+              className="mt-4 max-w-[20ch] font-heading leading-[1.08] font-bold tracking-[-0.02em] text-heading"
             >
-              Live classes and exam prep for Canada&apos;s finance licences
+              {/* Live classes and exam prep for Canada&apos;s finance licences */}
+              Pass Your Next Financial Exam with Confidence
             </h1>
             <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-foreground md:mt-6 md:text-lg xl:text-xl">
-              Live online classes for IFC, CSC, CIRE, RSE and LLQP, with practice in the learning app between sessions,
-              taught by {name}.
+              {/* Live online classes for IFC, CSC, CIRE, RSE and LLQP, with practice in the learning app between sessions, */}
+              {/* taught by {name}. */}
+              Master the concepts with structured learning, clear instruction, and targeted practice for Canada's financial licensing and certification exams
             </p>
 
             <ul className="mt-7 flex flex-col gap-2.5 sm:mt-8 sm:gap-3 sm:flex-row sm:flex-wrap sm:items-stretch">
@@ -112,7 +114,9 @@ export function Hero() {
                 rel="noopener"
                 className={cn("group inline-flex min-h-11 items-center gap-1.5 text-base font-semibold text-link", focusRing)}
               >
-                Create free account in the app
+                {/* Create free account in the app
+                 */}
+                 Explore Learning Platform
                 <ArrowRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none" />
               </a>
               <Link href={findHref} className={cn("inline-flex min-h-11 items-center text-base font-semibold text-heading underline-offset-4 hover:underline", focusRing)}>
@@ -125,16 +129,16 @@ export function Hero() {
 
       {/* Facts card overlaps the bottom of the photo. Every figure comes from the course data. */}
       <div className="container-site relative z-10 -mt-12">
-        <div className="grid items-stretch rounded-xl border border-border bg-surface shadow-float max-sm:rounded-2xl lg:grid-cols-[auto_1fr]">
-          <div className="flex items-center gap-3 border-b border-border px-4 py-3 sm:px-5 sm:py-4 lg:border-r lg:border-b-0 lg:px-8">
-            <span className="relative size-10 shrink-0 overflow-hidden rounded-full bg-surface-2">
+        <div className="rounded-xl border border-border bg-surface shadow-float max-sm:rounded-2xl">
+          {/* <div className="flex items-center gap-3 border-b border-border px-4 py-3 sm:px-5 sm:py-4 lg:border-r lg:border-b-0 lg:px-8"> */}
+            {/* <span className="relative size-10 shrink-0 overflow-hidden rounded-full bg-surface-2">
               <Image src={portrait ?? "/images/vipin-garg.jpg"} alt="" fill sizes="40px" className="object-cover object-[50%_20%]" />
-            </span>
-            <span className="text-sm text-muted-foreground">
+            </span> */}
+            {/* <span className="text-sm text-muted-foreground">
               Taught by
               <span className="block font-heading text-base font-bold text-heading">{name}</span>
-            </span>
-          </div>
+            </span> */}
+          {/* </div> */}
           <dl className="grid grid-cols-2 lg:grid-cols-4">
             {facts.map((f, i) => (
               <div

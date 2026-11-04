@@ -26,7 +26,7 @@ export default function HomePage() {
       {isEnabled("homeCourseSearch") && <Programmes />}
       <MeetVipin />
       <GuaranteeTeaser />
-      <CareerPathways />
+      {/* <CareerPathways /> */}
       {isEnabled("masterclassSignup") && <MasterclassBand />}
       <HomeFaq />
       <FirmsTeaser />
