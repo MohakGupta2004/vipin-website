@@ -84,7 +84,7 @@ export const siteConfig = {
 
   contact: {
     // PLACEHOLDER: public enquiries email — "hello@vipingarg.com"
-    email: "info@vipingarg.com",
+    email: "contact@vipingarg.com",
     // PLACEHOLDER: public phone number — "+1 604 555 0123"
     phone: null as string | null,
     whatsapp: "https://wa.me/17787922220" as string | null,
