@@ -7,6 +7,8 @@ import { courses } from "@/lib/data/courses"
 import { isEnabled } from "@/lib/feature-flags"
 import { cn } from "@/lib/utils"
 
+import { CountUp } from "./count-up"
+
 /*
  * Photo: public/images/hero-bg.jpg
  * Source: https://www.pexels.com/photo/3756679/ (Pexels licence, free for commercial use, no attribution required)
@@ -218,7 +220,7 @@ export function Hero() {
                         : "text-base sm:text-[1.5rem] lg:text-[1.625rem]"
                     }
                   >
-                    {f.value}
+                    <CountUp value={f.value} />
                   </span>
                 </dd>
               </div>
