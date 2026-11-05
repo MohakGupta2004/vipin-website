@@ -29,7 +29,7 @@ export function RoleSelector() {
               <label
                 key={r.id}
                 htmlFor={id}
-                className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md border border-border-strong bg-surface px-4 py-2 text-[15px] hover:bg-accent has-checked:border-primary has-checked:bg-teal-tint has-checked:shadow-[inset_0_0_0_1px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+                className="flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl bg-surface px-4 py-2.5 text-[15px] text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.1)] transition-[box-shadow,background-color,transform] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.22)] active:scale-[0.985] motion-reduce:transition-none has-checked:bg-accent/50 has-checked:shadow-[0_0_0_2px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
               >
                 <input
                   id={id}
@@ -48,8 +48,8 @@ export function RoleSelector() {
 
       <div className="lg:col-span-6" aria-live="polite">
         {role && primary ? (
-          <div className="rounded-lg border border-border bg-surface p-6">
-            <h3 className="font-sans">Start with the {primary.code}</h3>
+          <div className="rounded-[1.75rem] bg-white p-7 shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
+            <h3>Start with the {primary.code}</h3>
             <p className="mt-2 text-[17px]">{role.explanation}</p>
             <p className="mt-3 text-sm text-muted-foreground">{role.caveat}</p>
             {others.length > 0 ? (
@@ -76,7 +76,7 @@ export function RoleSelector() {
             </div>
           </div>
         ) : (
-          <p className="rounded-lg border border-dashed border-border-strong p-6 text-[15px] text-muted-foreground">
+          <p className="rounded-[1.75rem] bg-[#f5f5f7] p-7 text-[15px] text-muted-foreground">
             Choose a role to see which exam to start with.
           </p>
         )}

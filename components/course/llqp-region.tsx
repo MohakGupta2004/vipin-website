@@ -66,7 +66,7 @@ export function LlqpRegionMatrix() {
       <table className="mt-6 w-full border-collapse text-[15px]">
         <caption className="sr-only">LLQP modules and whether live preparation covers them for {region.label}</caption>
         <thead>
-          <tr className="bg-surface-2 text-left">
+          <tr className="bg-[#f5f5f7] text-left">
             <th scope="col" className="px-3 py-3 font-semibold">Module</th>
             <th scope="col" className="hidden px-3 py-3 font-semibold sm:table-cell">What it covers</th>
             <th scope="col" className="px-3 py-3 font-semibold">Live preparation</th>

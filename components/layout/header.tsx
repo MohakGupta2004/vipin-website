@@ -1,49 +1,60 @@
 import Image from "next/image"
 import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 
-import { buttonVariants } from "@/components/ui/button"
 import { megaMenu, primaryLinks } from "@/lib/data/navigation"
 import { siteConfig } from "@/lib/site-config"
-import { cn } from "@/lib/utils"
 
-import { appUrl } from "./app-links"
+import { appUrl } from "@/lib/app-links"
 import { HeaderNav } from "./header-nav"
 import { MobileNav } from "./mobile-nav"
 
+/**
+ * Site header, apple.com style: a compact full-width bar.
+ * At the top of the page it sits flush on the page colour with no edge. Once scrolled
+ * (data-scrolled, set by HeaderNav) it becomes a dense frosted material with a hairline,
+ * dense enough that large type scrolling underneath never ghosts through.
+ */
 export function Header() {
   return (
-    <header className="sticky top-0 z-20 border-b border-transparent bg-surface data-[scrolled=true]:border-border" id="site-header">
-      <div className="container-wide flex h-(--header-h) items-center justify-between gap-6">
-        <Link href="/" className="group flex min-h-11 items-center gap-3 leading-none" aria-label={`${siteConfig.shortName}, home`}>
-          <Image src="/logo.png" alt="" width={44} height={44} priority className="size-11 max-sm:size-10" />
+    <header
+      id="site-header"
+      className="sticky top-0 z-20 border-b border-[rgb(0_0_0/0.06)] bg-[#fbfbfd] shadow-[0_1px_0_rgb(255_255_255/0.9),0_8px_20px_-16px_rgb(16_42_66/0.25)] transition-[background-color,border-color,box-shadow] duration-300 ease-out data-[scrolled=true]:border-[rgb(0_0_0/0.08)] data-[scrolled=true]:bg-[#fbfbfd]/[0.86] data-[scrolled=true]:backdrop-blur-[20px] data-[scrolled=true]:backdrop-saturate-[1.8] supports-[not(backdrop-filter:blur(0))]:data-[scrolled=true]:bg-[#fbfbfd] motion-reduce:transition-none [@media(prefers-reduced-transparency:reduce)]:data-[scrolled=true]:bg-[#fbfbfd]"
+    >
+      <div className="container-wide flex h-(--header-h) items-center justify-between gap-6 xl:gap-10">
+        <Link
+          href="/"
+          aria-label={`${siteConfig.shortName}, home`}
+          className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-md leading-none whitespace-nowrap outline-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+        >
+          <Image src="/logo.png" alt="" width={36} height={36} priority className="size-8 rounded-full lg:size-9" />
           <span className="flex flex-col justify-center">
-            <span className="font-heading text-xl font-semibold text-heading max-sm:text-[1.1875rem] max-sm:tracking-tight">{siteConfig.shortName}</span>
-            <span className="mt-1 hidden text-[0.8125rem] font-medium text-muted-foreground lg:block">Finance coach</span>
+            <span className="font-heading text-[1.0625rem] font-semibold tracking-[-0.02em] text-heading lg:text-lg">
+              {siteConfig.shortName}
+            </span>
+            <span className="mt-0.5 hidden text-xs text-muted-foreground lg:block">Finance coach</span>
           </span>
         </Link>
 
         <HeaderNav groups={megaMenu} links={primaryLinks} />
 
-        <div className="flex items-center gap-1 lg:gap-2">
+        <div className="flex shrink-0 items-center gap-1 lg:gap-5">
           <a
-            href={appUrl("login", { campaign: "header" })}
+            href={appUrl("base", { campaign: "header" })}
             rel="noopener"
-            className="hidden h-11 items-center px-3 text-[0.9375rem] font-medium text-foreground hover:text-link lg:inline-flex"
+            className="group/app hidden h-9 items-center gap-1 rounded-full bg-primary px-4 text-sm font-medium whitespace-nowrap text-primary-foreground outline-hidden transition-[background-color,transform] duration-150 ease-out hover:bg-cta-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring active:scale-[0.97] motion-reduce:transition-none lg:inline-flex"
           >
-            Log in
-          </a>
-          <a
-            href={appUrl("signup", { campaign: "header" })}
-            rel="noopener"
-            className={cn(buttonVariants(), "hidden lg:inline-flex")}
-          >
-            Sign up free
+            Learning App
+            <ArrowUpRight
+              aria-hidden="true"
+              strokeWidth={2.25}
+              className="size-3.5 transition-transform duration-200 ease-out group-hover/app:translate-x-0.5 group-hover/app:-translate-y-0.5 motion-reduce:transition-none"
+            />
           </a>
           <MobileNav
             groups={megaMenu}
             links={primaryLinks}
-            signup={{ label: "Sign up free", href: appUrl("signup", { campaign: "mobile-menu" }) }}
-            login={{ label: "Log in", href: appUrl("login", { campaign: "mobile-menu" }) }}
+            app={{ label: "Learning App", href: appUrl("base", { campaign: "mobile-menu" }) }}
           />
         </div>
       </div>

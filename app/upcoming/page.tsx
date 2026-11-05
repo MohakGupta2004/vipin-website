@@ -22,18 +22,18 @@ export default function UpcomingPage() {
       <PageSection>
         <ul className="grid gap-6 md:grid-cols-2">
           {upcomingPrograms.map((u) => (
-            <li key={u.slug} className="rounded-lg border border-border bg-surface p-6 lg:p-8">
-              <p className="inline-block rounded-xs bg-surface-2 px-2 py-0.5 text-[13px] font-medium text-muted-foreground">
+            <li key={u.slug} className="rounded-[1.75rem] bg-[#f5f5f7] p-7 lg:p-9">
+              <p className="inline-block rounded-full bg-white px-2.5 py-1 text-xs font-medium text-muted-foreground">
                 Coming soon
               </p>
-              <h2 className="mt-3 font-sans text-xl">{u.name}</h2>
+              <h2 className="mt-3 text-[1.375rem]">{u.name}</h2>
               <p className="mt-2 text-[17px] text-muted-foreground">{u.summary}</p>
               <p className="mt-4 text-sm text-muted-foreground">Planned. Join the list to hear first.</p>
             </li>
           ))}
         </ul>
         <div id="notify" className="mt-12 scroll-mt-28 border-t border-border pt-8">
-          <h2 className="font-sans text-2xl">Notify me</h2>
+          <h2 className="text-[1.75rem] sm:text-[2rem]">Notify me</h2>
           <LeadForm kind="interest" sourcePath="/upcoming" className="mt-5" />
         </div>
       </PageSection>

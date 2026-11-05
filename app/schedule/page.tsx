@@ -32,7 +32,7 @@ export default function SchedulePage() {
             <table className="w-full min-w-[34rem] border-collapse text-[15px]">
               <caption className="sr-only">Upcoming cohorts</caption>
               <thead>
-                <tr className="bg-surface-2 text-left">
+                <tr className="bg-[#f5f5f7] text-left">
                   <th scope="col" className="px-3 py-3 font-semibold">Course</th>
                   <th scope="col" className="px-3 py-3 font-semibold">Start</th>
                   <th scope="col" className="px-3 py-3 font-semibold">Schedule</th>
@@ -59,15 +59,22 @@ export default function SchedulePage() {
           </div>
         ) : (
           <div className="max-w-[68ch]">
-            <h2 className="font-sans text-2xl">No cohorts are scheduled right now</h2>
+            <h2 className="text-[1.75rem] sm:text-[2rem]">No cohorts are scheduled right now</h2>
             <p className="mt-3 text-[17px]">
               Class dates are announced soon. Register your interest and we will email you when a class opens for the
               exam you are preparing for.
             </p>
           </div>
         )}
+        <p className="mt-8 text-[17px]">
+          Looking for group cohorts?{" "}
+          <Link href="/upcoming-batches" className="font-semibold text-link underline underline-offset-4">
+            See upcoming batches
+          </Link>
+          .
+        </p>
         <div className="mt-10 border-t border-border pt-8">
-          <h2 className="font-sans text-xl">Register interest</h2>
+          <h2 className="text-[1.375rem]">Register interest</h2>
           <LeadForm kind="interest" sourcePath="/schedule" className="mt-5" />
         </div>
       </PageSection>

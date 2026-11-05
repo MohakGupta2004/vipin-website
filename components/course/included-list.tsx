@@ -16,15 +16,15 @@ type Item = { label: string; detail: string; planned?: boolean };
 export function IncludedList({ items }: { items: Item[] }) {
   return (
     <Tooltip.Provider delay={600} closeDelay={0}>
-      <ul className="divide-y divide-border border-y border-border">
+      <ul className="divide-y divide-black/[0.08] border-y border-black/[0.08]">
         {items.map((it) => (
-          <li key={it.label} className="flex min-h-12 items-start gap-3 py-3">
+          <li key={it.label} className="flex min-h-14 items-start gap-3 py-4">
             <Check
-              className={cn("mt-1 size-4 shrink-0", it.planned ? "text-muted-foreground" : "text-success")}
+              className={cn("mt-1 size-4 shrink-0", it.planned ? "text-muted-foreground" : "text-primary")}
               aria-hidden="true"
             />
             <div className="min-w-0 flex-1">
-              <p className={cn("text-[17px]", it.planned && "text-muted-foreground")}>
+              <p className={cn("text-[17px] text-heading/90", it.planned && "text-muted-foreground")}>
                 {it.label}
                 {it.planned ? <span className="text-sm"> (planned, not yet included)</span> : null}
               </p>
@@ -43,7 +43,7 @@ export function IncludedList({ items }: { items: Item[] }) {
               </Tooltip.Trigger>
               <Tooltip.Portal>
                 <Tooltip.Positioner sideOffset={6} className="z-50">
-                  <Tooltip.Popup className="max-w-72 rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground shadow-float">
+                  <Tooltip.Popup className="max-w-72 origin-(--transform-origin) rounded-xl bg-surface px-3.5 py-2.5 text-sm text-foreground shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_12px_32px_-12px_rgb(16_42_66/0.3)] transition-[opacity,scale] duration-150 ease-out data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0">
                     {it.detail}
                   </Tooltip.Popup>
                 </Tooltip.Positioner>

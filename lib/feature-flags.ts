@@ -16,11 +16,19 @@ import raw from "@/config/feature-flags.json";
 
 export type AnnouncementBarFlag = {
   enabled: boolean;
+  /**
+   * "manual" (default): show the text below as written.
+   * "cohorts": build the bar from lib/data/batches.ts. It names a cohort only when it is published, open and
+   * starts in the future; otherwise it shows the neutral "Upcoming Batches · Explore Group Classes & Start Dates".
+   */
+  source: "manual" | "cohorts";
   /** Visitors who dismissed a bar with this id do not see it again. Change the id to show it to everyone. */
   id: string;
   message: string;
   /** Optional short tag shown before the message, e.g. "New". */
   badge?: string;
+  /** Optional bold lead-in before the message, e.g. "IFC Group Class". */
+  title?: string;
   linkLabel?: string;
   /** Internal path starting with "/" or a full https:// URL. */
   linkHref?: string;
@@ -92,14 +100,26 @@ function parseFlags(input: unknown): { flags: FeatureFlags; warnings: string[] }
   }
 
   // Announcement bar: default OFF.
-  const off: AnnouncementBarFlag = { enabled: false, id: "", message: "", dismissible: true };
+  const off: AnnouncementBarFlag = { enabled: false, source: "manual", id: "", message: "", dismissible: true };
   let bar = off;
   const a = root.announcementBar;
   if (!isRecord(a)) {
     warn(`"announcementBar" is missing or not an object. The bar is hidden.`);
   } else if (a.enabled !== true) {
     if (typeof a.enabled !== "boolean") warn(`"announcementBar.enabled" must be true or false. The bar is hidden.`);
+  } else if (a.source === "cohorts") {
+    if (a.dismissible !== undefined && typeof a.dismissible !== "boolean")
+      warn(`"announcementBar.dismissible" must be true or false. Using true.`);
+    bar = {
+      enabled: true,
+      source: "cohorts",
+      id: "",
+      message: "",
+      dismissible: typeof a.dismissible === "boolean" ? a.dismissible : true,
+    };
   } else {
+    if (a.source !== undefined && a.source !== "manual")
+      warn(`"announcementBar.source" must be "manual" or "cohorts". Using "manual".`);
     const id = typeof a.id === "string" ? a.id.trim() : "";
     const message = typeof a.message === "string" ? a.message.trim() : "";
     if (!id) warn(`"announcementBar.id" is required when the bar is on. The bar is hidden.`);
@@ -114,17 +134,24 @@ function parseFlags(input: unknown): { flags: FeatureFlags; warnings: string[] }
       const linkLabel = typeof a.linkLabel === "string" && a.linkLabel.trim() ? a.linkLabel.trim() : undefined;
       let badge: string | undefined;
       if (typeof a.badge === "string" && a.badge.trim()) {
-        if (a.badge.trim().length <= 12) badge = a.badge.trim();
-        else warn(`"announcementBar.badge" must be 12 characters or fewer. The badge is dropped.`);
+        if (a.badge.trim().length <= 28) badge = a.badge.trim();
+        else warn(`"announcementBar.badge" must be 28 characters or fewer. The badge is dropped.`);
+      }
+      let title: string | undefined;
+      if (typeof a.title === "string" && a.title.trim()) {
+        if (a.title.trim().length <= 40) title = a.title.trim();
+        else warn(`"announcementBar.title" must be 40 characters or fewer. The title is dropped.`);
       }
       if (linkHref && !linkLabel) warn(`"announcementBar.linkLabel" is missing. The link will read "Learn more".`);
       if (a.dismissible !== undefined && typeof a.dismissible !== "boolean")
         warn(`"announcementBar.dismissible" must be true or false. Using true.`);
       bar = {
         enabled: true,
+        source: "manual",
         id,
         message,
         badge,
+        title,
         linkLabel,
         linkHref,
         dismissible: typeof a.dismissible === "boolean" ? a.dismissible : true,
@@ -196,9 +223,11 @@ export function isEnabled(name: ToggleName): boolean {
 }
 
 export type AnnouncementData = {
+  source: "manual" | "cohorts";
   id: string;
   message: string;
   badge?: string;
+  title?: string;
   href?: string;
   linkLabel?: string;
   dismissible: boolean;
@@ -208,7 +237,16 @@ export type AnnouncementData = {
 export function getAnnouncement(): AnnouncementData | null {
   const b = parsed.flags.announcementBar;
   if (!b.enabled) return null;
-  return { id: b.id, message: b.message, badge: b.badge, href: b.linkHref, linkLabel: b.linkLabel, dismissible: b.dismissible };
+  return {
+    source: b.source,
+    id: b.id,
+    message: b.message,
+    badge: b.badge,
+    title: b.title,
+    href: b.linkHref,
+    linkLabel: b.linkLabel,
+    dismissible: b.dismissible,
+  };
 }
 
 /** The app signup prompt settings, or null when it is off. */

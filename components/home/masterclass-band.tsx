@@ -1,5 +1,8 @@
 import { LeadForm } from "@/components/forms/lead-form"
+import { Reveal } from "@/components/motion/reveal"
 import { hasUpcomingMasterclass, siteConfig } from "@/lib/site-config"
+
+import { SectionIntro } from "./section-intro"
 
 const fmt = new Intl.DateTimeFormat("en-CA", { dateStyle: "long", timeStyle: "short", timeZone: siteConfig.timezone })
 
@@ -8,22 +11,34 @@ export function MasterclassBand() {
   const m = siteConfig.masterclass
   const upcoming = hasUpcomingMasterclass() && m
   return (
-    <section id="masterclass" className="scroll-mt-24 bg-surface-inverse py-16 text-inverse-fg md:py-20">
-      <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-7">
-          <h2 className="text-inverse-fg">Join the free monthly masterclass</h2>
-          <p className="mt-4 max-w-[52ch] text-inverse-muted">
-            A live session with Vipin on one exam topic. Ask questions and see how the classes work before you enrol.
-          </p>
-          <p className="tabular mt-4 text-inverse-muted">
-            {upcoming ? `Next session: ${m.title}, ${fmt.format(new Date(m.startsAt))}` : "Next session: announced soon."}
-          </p>
-        </div>
-        <div className="lg:col-span-5">
-          <div className="rounded-lg bg-surface p-5 text-foreground max-sm:rounded-2xl sm:p-6">
+    <section
+      id="masterclass"
+      aria-labelledby="masterclass-heading"
+      className="scroll-mt-20 bg-surface-inverse py-20 text-inverse-fg sm:py-28"
+    >
+      <div className="container-site grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <Reveal className="lg:col-span-6">
+          <SectionIntro
+            id="masterclass-heading"
+            size="md"
+            tone="dark"
+            title="Join the free monthly masterclass"
+            lead="A live session with Vipin on one exam topic. Ask questions and see how the classes work before you enrol."
+          >
+            <p className="tabular mt-8 inline-flex items-center gap-2.5 rounded-full bg-white/[0.07] py-2 pr-4 pl-3 text-sm text-inverse-fg/85 ring-1 ring-white/10">
+              <span
+                aria-hidden="true"
+                className={upcoming ? "size-2 rounded-full bg-[#4ade80]" : "size-2 rounded-full bg-inverse-muted/70"}
+              />
+              {upcoming ? `Next session: ${m.title}, ${fmt.format(new Date(m.startsAt))}` : "Next session: announced soon."}
+            </p>
+          </SectionIntro>
+        </Reveal>
+        <Reveal className="lg:col-span-6" delay={80}>
+          <div className="rounded-[1.75rem] bg-surface p-6 text-foreground shadow-[0_40px_80px_-40px_rgb(0_0_0/0.5)] sm:p-9">
             <LeadForm kind="masterclass" sourcePath="/" />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

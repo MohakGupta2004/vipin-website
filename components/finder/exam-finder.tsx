@@ -98,7 +98,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
     return (
       <section
         aria-labelledby={`${uid}-result`}
-        className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-5 max-sm:rounded-2xl sm:p-8", className)}
+        className={cn("vg-rise flex flex-col gap-5 rounded-[1.75rem] bg-surface-2 p-5 sm:p-8", className)}
       >
         <div>
           <p className="text-sm text-muted-foreground">We recommend</p>
@@ -108,7 +108,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
               focusRef.current = el;
             }}
             tabIndex={-1}
-            className="mt-1 text-xl font-semibold text-heading outline-hidden"
+            className="mt-1 font-heading text-[1.625rem] leading-tight font-semibold tracking-[-0.03em] text-heading outline-hidden"
           >
             {rec.headline}
           </h3>
@@ -128,7 +128,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         ) : null}
 
         {primary ? (
-          <div className="rounded-lg border border-border bg-surface p-4 text-card-foreground">
+          <div className="rounded-2xl bg-surface p-5 text-card-foreground shadow-[0_0_0_1px_rgb(0_0_0/0.08)]">
             <p className="text-lg font-semibold text-heading">
               <span className="font-semibold tabular-nums text-link">{primary.code}</span>{" "}
               {primary.name}
@@ -203,7 +203,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
             ))}
         </div>
 
-        <div className="flex items-center gap-4 border-t border-border pt-4">
+        <div className="flex items-center gap-4 border-t border-black/[0.06] pt-5">
           <Button type="button" variant="outline" className={secondaryButton} onClick={back}>
             Back
           </Button>
@@ -225,7 +225,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         e.preventDefault();
         next();
       }}
-      className={cn("flex flex-col gap-5 rounded-lg bg-surface-2 p-5 max-sm:rounded-2xl sm:p-8", className)}
+      className={cn("flex flex-col gap-6 rounded-[1.75rem] bg-surface-2 p-5 sm:p-8", className)}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
         {heading ? <h3 className="font-sans text-xl font-semibold text-heading">{heading}</h3> : null}
@@ -237,21 +237,21 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
             {finderQuestions.map((q, i) => (
               <span
                 key={q.id}
-                className={cn("h-1.5 w-6 rounded-xs", i <= step ? "bg-brand-teal" : "bg-border")}
+                className={cn("h-1 w-8 rounded-full transition-colors duration-500 ease-out", i <= step ? "bg-primary" : "bg-black/10")}
               />
             ))}
           </div>
         </div>
       </div>
 
-      <fieldset className="flex min-w-0 flex-col gap-3" key={question.id}>
+      <fieldset className="vg-rise flex min-w-0 flex-col gap-3" key={question.id}>
         <legend
           id={legendId}
           ref={(el) => {
             focusRef.current = el;
           }}
           tabIndex={-1}
-          className="mb-3 text-lg font-medium text-heading outline-hidden"
+          className="mb-4 font-heading text-[1.375rem] leading-snug font-semibold tracking-[-0.02em] text-heading outline-hidden"
         >
           {question.prompt}
         </legend>
@@ -263,7 +263,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
               <label
                 key={o.value}
                 htmlFor={id}
-                className="flex min-h-14 cursor-pointer items-center gap-3 rounded-md border border-border-strong bg-surface px-4 py-3 text-[15px] max-sm:rounded-xl max-sm:border-border max-sm:py-2.5 max-sm:transition-transform max-sm:duration-100 max-sm:active:scale-[0.985] motion-reduce:transform-none sm:min-h-16 text-foreground hover:bg-accent has-checked:border-primary has-checked:bg-teal-tint has-checked:shadow-[inset_0_0_0_1px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+                className="flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl bg-surface px-4 py-3 text-[15px] text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.1)] transition-[box-shadow,background-color,transform] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.22)] active:scale-[0.985] motion-reduce:transition-none sm:min-h-16 has-checked:bg-accent/50 has-checked:shadow-[0_0_0_2px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
               >
                 <input
                   id={id}
@@ -272,7 +272,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
                   value={o.value}
                   checked={current === o.value}
                   onChange={() => choose(o.value)}
-                  className="size-5 shrink-0 appearance-none rounded-full border border-border-strong bg-surface checked:border-primary checked:bg-primary checked:shadow-[inset_0_0_0_4px_var(--surface)]"
+                  className="size-5 shrink-0 appearance-none rounded-full border border-border-strong bg-surface transition-[background-color,border-color,box-shadow] duration-200 checked:border-primary checked:bg-primary checked:shadow-[inset_0_0_0_4px_var(--surface)]"
                 />
                 <span>{o.label}</span>
               </label>
@@ -281,7 +281,7 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         </div>
       </fieldset>
 
-      <div className="flex flex-wrap items-center gap-3 max-sm:sticky max-sm:bottom-0 max-sm:-mx-5 max-sm:bg-surface-2 max-sm:px-5 max-sm:py-3">
+      <div className="flex flex-wrap items-center gap-3 max-sm:sticky max-sm:bottom-0 max-sm:-mx-5 max-sm:bg-inherit max-sm:px-5 max-sm:py-3">
         {step > 0 ? (
           <Button type="button" variant="outline" className={secondaryButton} onClick={back}>
             Back

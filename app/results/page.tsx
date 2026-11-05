@@ -31,7 +31,7 @@ export default function ResultsPage() {
       <PageSection>
         {/* PLACEHOLDER: real reviews, pass wall and Trustpilot profile — render reviews here when supplied */}
         <div className="max-w-[68ch]">
-          <h2 className="font-sans text-2xl">Independent feedback. A transparent source.</h2>
+          <h2 className="text-[1.75rem] sm:text-[2rem]">Independent feedback. A transparent source.</h2>
           <p className="mt-3 text-[17px]">
             {tp
               ? "Read our reviews on Trustpilot."
@@ -42,7 +42,7 @@ export default function ResultsPage() {
               Trustpilot profile
             </a>
           ) : null}
-          <h3 className="mt-10 font-sans text-lg">How feedback will be collected</h3>
+          <h3 className="mt-10 text-[1.1875rem]">How feedback will be collected</h3>
           <ul className="mt-3 list-disc space-y-2 pl-6 text-[17px]">
             {how.map((h) => (
               <li key={h}>{h}</li>

@@ -56,7 +56,7 @@ export default function LicensingPathwaysPage() {
       </PageSection>
 
       <PageSection id="llqp-steps" title="What are the steps to an LLQP licence?">
-        <ol className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-5">
+        <ol className="grid gap-px overflow-hidden rounded-[1.75rem] bg-black/[0.06] shadow-[0_0_0_1px_rgb(0_0_0/0.06)] md:grid-cols-5">
           {llqpSteps.map((s) => (
             <li key={s.step} className="bg-surface p-5">
               <span
@@ -65,7 +65,7 @@ export default function LicensingPathwaysPage() {
               >
                 {s.step}
               </span>
-              <h3 className="mt-3 font-sans text-lg">{s.title}</h3>
+              <h3 className="mt-3 text-[1.1875rem]">{s.title}</h3>
               <p className="mt-2 text-[15px] text-muted-foreground">{s.description}</p>
               {s.coachingHelps ? (
                 <p className="mt-3 text-sm font-medium text-link">Where LLQP coaching helps</p>

@@ -15,7 +15,7 @@ export default function NotFound() {
       <p className="text-lead mx-auto mt-4 max-w-[52ch]">
         The link may be old or mistyped. Try the course finder, or open one of the live programmes.
       </p>
-      <div className="mx-auto mt-10 max-w-3xl rounded-lg bg-surface-2 p-6 text-left sm:p-8">
+      <div className="mx-auto mt-10 max-w-3xl rounded-[1.75rem] bg-[#f5f5f7] p-7 text-left sm:p-10">
         <ExamFinder heading="Find the right exam in three questions" />
       </div>
       <h2 className="mt-14 text-[1.5rem]!">Popular courses</h2>

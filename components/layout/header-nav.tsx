@@ -8,8 +8,9 @@ import { ChevronDown } from "lucide-react"
 import type { MegaMenuGroup, NavLink } from "@/lib/data/navigation"
 import { cn } from "@/lib/utils"
 
+// Plain text links, apple.com style: quiet at rest, full ink on hover, open or current. No fills, no pills.
 const navItem =
-  "relative inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-md px-2.5 text-[0.9375rem] font-semibold text-heading hover:text-link outline-hidden focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring xl:px-3"
+  "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-md px-2 text-sm text-heading/70 outline-hidden transition-colors duration-150 ease-out hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring aria-expanded:text-heading aria-[current=page]:font-medium aria-[current=page]:text-heading data-[active=true]:font-medium data-[active=true]:text-heading xl:px-3"
 
 /** Short trigger labels, BCC-style ("Securities", not "Securities & CIRO"). */
 const shortLabel: Record<string, string> = {
@@ -18,8 +19,9 @@ const shortLabel: Record<string, string> = {
   "financial-planning": "Financial Planning",
 }
 
-function ActiveBar({ active }: { active: boolean }) {
-  return active ? <span aria-hidden="true" className="absolute inset-x-2.5 -bottom-px h-0.5 rounded-full bg-primary" /> : null
+/** Shorter link text between lg and xl, where the full bar would squeeze the logo. */
+const compactLabel: Partial<Record<string, string>> = {
+  "/upcoming-batches": "Batches",
 }
 
 /**
@@ -37,7 +39,7 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
   // Border appears after 8px scroll.
   React.useEffect(() => {
     const header = document.getElementById("site-header")
-    const onScroll = () => header?.setAttribute("data-scrolled", String(window.scrollY > 8))
+    const onScroll = () => header?.setAttribute("data-scrolled", String(window.scrollY > 16))
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -104,7 +106,7 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
 
   return (
     <div className="hidden flex-1 justify-end lg:flex">
-      <nav ref={rootRef} aria-label="Main" className="flex items-center gap-0.5">
+      <nav ref={rootRef} aria-label="Main" className="flex items-center gap-1 xl:gap-2">
         {courseGroups.map((g) => {
           const isOpen = openId === g.id
           const active = pathname === g.href || pathname.startsWith(g.href + "/")
@@ -125,29 +127,37 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(g.id)}
+                data-active={active}
                 className={navItem}
               >
                 {shortLabel[g.id]}
                 <ChevronDown
                   aria-hidden="true"
                   strokeWidth={2}
-                  className={cn("size-4 text-muted-foreground transition-transform duration-150 motion-reduce:transition-none", isOpen && "rotate-180")}
+                  className={cn(
+                    "-mr-0.5 size-3 opacity-50 transition-transform duration-200 ease-out motion-reduce:transition-none",
+                    isOpen && "rotate-180 opacity-100"
+                  )}
                 />
-                <ActiveBar active={active} />
               </button>
               {isOpen && <Dropdown id={panelId} group={g} onNavigate={close} />}
             </div>
           )
         })}
 
-        <span aria-hidden="true" className="mx-2 h-6 w-px bg-border-strong/60 xl:mx-3" />
 
         {allLinks.map((l) => {
           const active = pathname === l.href
           return (
             <Link key={l.href} href={l.href} aria-current={active ? "page" : undefined} className={navItem}>
-              {l.label}
-              <ActiveBar active={active} />
+              {compactLabel[l.href] ? (
+                <>
+                  <span className="xl:hidden">{compactLabel[l.href]}</span>
+                  <span className="hidden xl:inline">{l.label}</span>
+                </>
+              ) : (
+                l.label
+              )}
             </Link>
           )
         })}
@@ -165,38 +175,47 @@ function Dropdown({ id, group, onNavigate }: { id: string; group: MegaMenuGroup;
       onClick={(e) => {
         if ((e.target as HTMLElement).closest("a")) onNavigate()
       }}
-      className={cn(
-        "vg-enter-up absolute top-full left-0 z-30 mt-2 max-h-[calc(100dvh-var(--header-h)-1.5rem)] overflow-y-auto overscroll-contain rounded-xl border border-border bg-surface p-2 shadow-float",
-        wide ? "w-[40rem]" : "w-[20rem]"
-      )}
+      // pt-3 is an invisible hover bridge from the trigger, so the panel never closes on the way down.
+      className={cn("vg-pop absolute top-full -left-2 z-30 pt-3", wide ? "w-[42rem]" : "w-[22rem]")}
     >
-      <p className="px-3 pt-2 pb-1 text-sm text-muted-foreground">{group.description}</p>
-      <ul className={cn("grid", wide && "grid-cols-2")}>
-        {links.map((l) => (
-          <li key={l.href}>
-            <Link
-              href={l.href}
-              title={l.description}
-              className={cn(
-                "flex min-h-11 rounded-lg px-3 outline-hidden hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring",
-                wide ? "items-center gap-2" : "flex-col justify-center py-2"
-              )}
-            >
-              <span className={cn("font-semibold text-heading", wide ? "shrink-0 text-[0.9375rem]" : "text-[0.9375rem]")}>{l.label}</span>
-              {l.description && (
-                <span className={cn("text-sm text-muted-foreground", wide ? "truncate" : "leading-snug")}>{l.description}</span>
-              )}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-1 flex items-center justify-between gap-4 border-t border-border px-3 pt-3 pb-2 text-sm font-semibold">
-        <Link href={group.href} className="text-link hover:underline">
-          View all {shortLabel[group.id] ?? group.label}
-        </Link>
-        <Link href="/find-my-course" className="text-muted-foreground hover:text-link">
-          Not sure? Take the quiz
-        </Link>
+      <div className="max-h-[calc(100dvh-var(--header-h)-2rem)] overflow-y-auto overscroll-contain rounded-xl border border-[rgb(0_0_0/0.08)] bg-surface shadow-[0_10px_30px_-12px_rgb(16_42_66/0.18)]">
+        <p className="px-5 pt-4 pb-2 text-[0.6875rem] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
+          {group.description}
+        </p>
+        <ul className={cn("grid gap-0.5 px-2 pb-2", wide && "grid-cols-2")}>
+          {links.map((l) => (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                title={l.description}
+                className="group/item flex min-h-12 items-center gap-3 rounded-xl px-3 py-2 outline-hidden transition-colors duration-150 ease-out hover:bg-surface-2 focus-visible:bg-surface-2 focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="text-[0.9375rem] leading-tight font-semibold text-heading">
+                    {l.label}
+                  </span>
+                  {l.description && (
+                    <span className="mt-0.5 truncate text-[0.8125rem] leading-snug text-muted-foreground">{l.description}</span>
+                  )}
+                </span>
+                <ChevronDown
+                  aria-hidden="true"
+                  strokeWidth={2.25}
+                  className="size-3.5 shrink-0 -rotate-90 text-link opacity-0 transition-[opacity,transform] duration-150 ease-out group-hover/item:translate-x-0.5 group-hover/item:opacity-100 group-focus-visible/item:opacity-100 motion-reduce:transition-none"
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center justify-between gap-4 border-t border-border/70 bg-surface-2/70 px-5 py-3 text-[0.8125rem] font-semibold">
+          <Link href={group.href} className="group/all inline-flex items-center gap-1 text-link">
+            View all {shortLabel[group.id] ?? group.label}
+            <ChevronDown aria-hidden="true" strokeWidth={2.25} className="size-3.5 -rotate-90 transition-transform duration-200 ease-out group-hover/all:translate-x-0.5" />
+          </Link>
+          <Link href="/find-my-course" className="text-muted-foreground transition-colors hover:text-heading">
+            Not sure? Take the quiz
+          </Link>
+        </div>
       </div>
     </div>
   )

@@ -12,6 +12,8 @@ export type Announcement = {
   message: string
   /** Short tag before the message, e.g. "New". */
   badge?: string
+  /** Bold lead-in before the message, e.g. "IFC Group Class". */
+  title?: string
   href?: string
   linkLabel?: string
   /** false = no close button. */

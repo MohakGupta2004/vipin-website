@@ -33,7 +33,7 @@ export default function ForFirmsPage() {
           </aside>
           <div className="lg:col-span-7">
             {/* PLACEHOLDER: confirm group offering — group size minimum, pricing model, manager progress reports */}
-            <h2 className="font-sans text-2xl">Tell us about your team</h2>
+            <h2 className="text-[1.75rem] sm:text-[2rem]">Tell us about your team</h2>
             <p className="mt-3 max-w-[60ch] text-[17px] text-muted-foreground">
               Scope, schedule and pricing are confirmed for each request. Sending this form does not commit you to
               anything.

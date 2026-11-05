@@ -22,25 +22,25 @@ export function CourseCard({ course }: { course: Course }) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring max-sm:rounded-2xl max-sm:p-5 max-sm:shadow-xs lg:p-8",
+        "group relative flex h-full flex-col rounded-[1.75rem] bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[translate,scale,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7",
       )}
     >
       <div className="flex items-baseline justify-between gap-3">
-        <p className="text-[15px] font-semibold tabular-nums text-link">{course.code}</p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-[0.8125rem] font-semibold tracking-wide tabular-nums text-primary">{course.code}</p>
+        <p className="text-xs text-muted-foreground">
           {comingSoon ? "Register interest" : areaLabel(course.area)}
         </p>
       </div>
-      <h3 className="mt-3 font-sans text-xl">
+      <h3 className="mt-3 text-[1.3125rem] leading-snug tracking-[-0.02em]">
         <Link
           href={course.route}
-          className="underline-offset-4 outline-hidden group-hover:underline after:absolute after:inset-0"
+          className="outline-hidden after:absolute after:inset-0 after:rounded-[1.75rem]"
         >
           {course.name}
         </Link>
       </h3>
-      <p className="mt-2 line-clamp-2 text-[15px] text-muted-foreground">{course.blurb ?? course.tagline}</p>
-      <dl className="mt-auto grid grid-cols-[5rem_1fr] gap-x-3 gap-y-1.5 border-t border-border pt-4 text-sm">
+      <p className="mt-2 mb-6 line-clamp-2 text-[0.9375rem] leading-relaxed text-muted-foreground">{course.blurb ?? course.tagline}</p>
+      <dl className="mt-auto grid grid-cols-[4.5rem_1fr] gap-x-3 gap-y-1.5 border-t border-black/[0.06] pt-4 text-[0.8125rem]">
         <dt className="text-muted-foreground">Exam</dt>
         <dd className="tabular-nums">{exam ?? <Muted>Announced soon</Muted>}</dd>
         <dt className="text-muted-foreground">Class</dt>
@@ -55,7 +55,11 @@ export function CourseCard({ course }: { course: Course }) {
         </dd>
       </dl>
       <p className="mt-4 inline-flex items-center gap-1 text-[15px] font-medium text-link">
-        View course <ArrowRight className="size-4" aria-hidden="true" />
+        View course{" "}
+        <ArrowRight
+          className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none"
+          aria-hidden="true"
+        />
       </p>
     </article>
   );
@@ -64,16 +68,16 @@ export function CourseCard({ course }: { course: Course }) {
 /** Upcoming programme card (§5.16): no fee/date rows, one honest line. */
 export function UpcomingCard({ program }: { program: UpcomingProgram }) {
   return (
-    <article className="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring max-sm:rounded-2xl max-sm:p-5 max-sm:shadow-xs lg:p-8">
+    <article className="group relative flex h-full flex-col rounded-[1.75rem] bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[translate,scale,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
       <div className="flex items-baseline justify-between gap-3">
         <p className="rounded-xs bg-surface-2 px-2 py-0.5 text-[13px] font-medium text-muted-foreground">
           Upcoming
         </p>
       </div>
-      <h3 className="mt-3 font-sans text-xl">
+      <h3 className="mt-3 text-[1.3125rem] leading-snug tracking-[-0.02em]">
         <Link
           href="/upcoming"
-          className={cn("underline-offset-4 outline-hidden group-hover:underline after:absolute after:inset-0", focusRing)}
+          className={cn("outline-hidden after:absolute after:inset-0 after:rounded-[1.75rem]", focusRing)}
         >
           {program.name}
         </Link>
@@ -81,7 +85,11 @@ export function UpcomingCard({ program }: { program: UpcomingProgram }) {
       <p className="mt-2 line-clamp-3 text-[15px] text-muted-foreground">{program.summary}</p>
       <p className="mt-auto pt-4 text-sm text-muted-foreground">Planned. Join the list to hear first.</p>
       <p className="mt-2 inline-flex items-center gap-1 text-[15px] font-medium text-link">
-        Notify me <ArrowRight className="size-4" aria-hidden="true" />
+        Notify me{" "}
+        <ArrowRight
+          className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none"
+          aria-hidden="true"
+        />
       </p>
     </article>
   );
@@ -89,6 +97,6 @@ export function UpcomingCard({ program }: { program: UpcomingProgram }) {
 
 export function CourseGrid({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:gap-8", className)}>{children}</div>
+    <div className={cn("grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6", className)}>{children}</div>
   );
 }

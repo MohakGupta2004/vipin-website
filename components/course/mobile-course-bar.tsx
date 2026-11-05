@@ -24,7 +24,7 @@ export function MobileCourseBar({ code, feeLabel, signupHref }: { code: string; 
   return (
     <div
       hidden={boxVisible}
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-surface px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-float lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-black/[0.08] bg-white/85 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl backdrop-saturate-[1.8] lg:hidden [@media(prefers-reduced-transparency:reduce)]:bg-white"
     >
       <div className="mx-auto flex max-w-(--container-site) items-center justify-between gap-3">
         <p className="min-w-0 text-sm">
@@ -34,7 +34,7 @@ export function MobileCourseBar({ code, feeLabel, signupHref }: { code: string; 
         <a
           href={signupHref}
           rel="noopener"
-          className={cn(buttonVariants(), ctaButton, "shrink-0 px-4 max-sm:rounded-xl")}
+          className={cn(buttonVariants(), ctaButton, "shrink-0 px-5")}
         >
           Sign up free
         </a>

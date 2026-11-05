@@ -50,7 +50,7 @@ function Section({
   return (
     <section id={id} aria-labelledby={`${id}-h`} className="scroll-mt-28">
       <h2 id={`${id}-h`}>{title}</h2>
-      <div className="mt-5 sm:mt-6 lg:mt-8">{children}</div>
+      <div className="mt-6 sm:mt-8">{children}</div>
     </section>
   )
 }
@@ -167,14 +167,18 @@ export function CoursePage({ course, extras }: CoursePageProps) {
 
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="container-site grid gap-x-8 gap-y-10 py-6 sm:gap-y-12 sm:py-8 lg:grid-cols-12 lg:py-12 xl:gap-x-12">
+      <div className="container-site grid gap-x-8 gap-y-12 pt-6 pb-16 sm:gap-y-14 sm:pt-8 lg:grid-cols-12 lg:pt-14 lg:pb-24 xl:gap-x-16">
         {/* Hero */}
         <header className="lg:col-span-8">
-          <p className="text-eyebrow">{eyebrow(c)}</p>
-          <h1 className="mt-3">{courseH1(c)}</h1>
-          <p className="mt-2 text-lg text-muted-foreground max-sm:text-base">{c.name}</p>
-          <p className="text-lead mt-6 max-w-[60ch] max-sm:mt-4 max-sm:text-[1.0625rem] max-sm:leading-relaxed">{c.summary}</p>
-          <p className="mt-5 text-[15px] font-medium text-foreground">
+          <p className="vg-rise text-eyebrow">{eyebrow(c)}</p>
+          <h1 className="vg-rise mt-3" style={{ animationDelay: "50ms" }}>{courseH1(c)}</h1>
+          <p className="vg-rise mt-3 text-xl tracking-[-0.01em] text-heading/70 max-sm:text-lg" style={{ animationDelay: "100ms" }}>
+            {c.name}
+          </p>
+          <p className="vg-rise text-lead mt-8 max-w-[58ch] max-sm:mt-5" style={{ animationDelay: "150ms" }}>
+            {c.summary}
+          </p>
+          <p className="mt-6 text-[15px] font-medium text-heading">
             {formatLabel(c)} · Online · {siteConfig.instructor.name}
           </p>
           <p className="mt-3 flex items-center gap-3 text-sm text-muted-foreground">
@@ -188,7 +192,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             </span>
           </p>
           {c.ciro2026Note ? (
-            <div className="mt-6 flex max-w-[68ch] items-start gap-3 rounded-md bg-warning-bg p-4 text-[15px] text-foreground">
+            <div className="mt-8 flex max-w-[68ch] items-start gap-3 rounded-2xl bg-warning-bg p-5 text-[15px] leading-relaxed text-foreground">
               <TriangleAlert
                 className="mt-0.5 size-4 shrink-0 text-warning"
                 aria-hidden="true"
@@ -206,19 +210,19 @@ export function CoursePage({ course, extras }: CoursePageProps) {
         {/* Price rail (inline on mobile, sticky on desktop) */}
         <aside
           aria-label="Fees and registration"
-          className="lg:sticky lg:top-24 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:self-start"
+          className="vg-rise lg:sticky lg:top-24 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:self-start"
         >
           <PriceBox course={c} />
         </aside>
 
         {/* Body */}
-        <div className="space-y-12 sm:space-y-16 lg:col-span-8 lg:space-y-20">
+        <div className="space-y-16 sm:space-y-20 lg:col-span-8 lg:space-y-24">
           <Section id="who-for" title={`Who is the ${c.code} for?`}>
             <ul className="max-w-[68ch] space-y-3">
               {c.whoFor.map((w) => (
-                <li key={w} className="flex gap-3 text-[17px] max-sm:text-base">
+                <li key={w} className="flex gap-3 text-[17px] leading-relaxed text-heading/85 max-sm:text-base">
                   <Check
-                    className="mt-1.5 size-4 shrink-0 text-success"
+                    className="mt-1.5 size-4 shrink-0 text-primary"
                     aria-hidden="true"
                   />
                   <span>{w}</span>
@@ -230,13 +234,13 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           <Section id="learn" title={`What does the ${c.code} cover?`}>
             {c.topics.length > 0 ? (
               <>
-                <ol className="grid gap-x-8 max-sm:rounded-2xl max-sm:bg-surface-2 max-sm:px-4 sm:grid-cols-2">
+                <ol className="grid gap-x-10 border-t border-black/[0.08] max-sm:rounded-2xl max-sm:border-t-0 max-sm:bg-[#f5f5f7] max-sm:px-4 sm:grid-cols-2">
                   {c.topics.map((t, i) => (
                     <li
                       key={t}
-                      className="flex gap-3 border-b border-border py-3 text-[17px] max-sm:py-3.5 max-sm:text-base max-sm:last:border-b-0"
+                      className="flex gap-4 border-b border-black/[0.08] py-4 text-[17px] text-heading/85 max-sm:py-3.5 max-sm:text-base max-sm:last:border-b-0"
                     >
-                      <span className="w-6 shrink-0 text-muted-foreground tabular-nums max-sm:font-semibold max-sm:text-link">
+                      <span className="w-6 shrink-0 font-semibold text-primary tabular-nums">
                         {i + 1}
                       </span>
                       <span>{t}</span>
@@ -294,7 +298,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
               caption={`${c.code} coaching details`}
               rows={coachingRows}
             />
-            <h3 className="mt-10 mb-4 font-sans text-lg">What’s included</h3>
+            <h3 className="mt-12 mb-4 text-[1.375rem]">What’s included</h3>
             <IncludedList items={included} />
             <p className="mt-3 max-w-[68ch] text-sm text-muted-foreground">
               Resources vary by programme. Your coaching offer lists exactly
@@ -307,7 +311,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[28rem] border-collapse text-[15px]">
                   <thead>
-                    <tr className="bg-surface-2 text-left">
+                    <tr className="bg-[#f5f5f7] text-left">
                       <th scope="col" className="px-3 py-3 font-semibold">
                         Start
                       </th>
@@ -321,7 +325,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
                   </thead>
                   <tbody>
                     {c.cohorts.map((x) => (
-                      <tr key={x.id} className="border-b border-border">
+                      <tr key={x.id} className="border-b border-black/[0.06]">
                         <td className="px-3 py-3 tabular-nums">
                           {formatDate(x.startDate)}
                         </td>
@@ -338,7 +342,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
               </div>
             ) : (
               <div className="max-w-[68ch]">
-                <h3 className="font-sans">
+                <h3>
                   No cohorts are scheduled right now
                 </h3>
                 <p className="mt-2 text-[17px]">
@@ -349,9 +353,9 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             )}
             <div
               id="register-interest"
-              className="mt-10 scroll-mt-28 border-t border-border pt-8 max-sm:mt-8 max-sm:rounded-2xl max-sm:border-t-0 max-sm:bg-surface-2 max-sm:p-5"
+              className="mt-10 scroll-mt-24 rounded-[1.75rem] bg-[#f5f5f7] p-6 sm:p-9"
             >
-              <h3 className="font-sans text-lg">
+              <h3 className="text-[1.375rem]">
                 {c.offerConfirmed
                   ? `Register interest in the ${c.code}`
                   : `Tell me when ${c.code} coaching is confirmed`}
@@ -377,7 +381,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             <div className="flex max-w-[68ch] flex-col gap-5 sm:flex-row">
               <VipinPhoto size={120} />
               <div>
-                <p className="text-lg font-semibold text-heading">
+                <p className="font-heading text-xl font-semibold tracking-[-0.02em] text-heading">
                   {siteConfig.instructor.name}
                 </p>
                 <p className="text-sm text-muted-foreground">
@@ -416,7 +420,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             </section>
           ) : null}
 
-          <aside className="rounded-lg border border-border p-5 text-[15px] max-sm:rounded-2xl">
+          <aside className="rounded-[1.5rem] bg-[#f5f5f7] p-6 text-[15px] text-heading/85">
             Studying through your employer?{" "}
             <Link
               href="/for-firms"

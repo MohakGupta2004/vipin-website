@@ -20,7 +20,7 @@ export function PathwayExplainer({ flows }: { flows: PathwayFlow[] }) {
     <div className="space-y-10">
       {flows.map((f) => (
         <div key={f.title}>
-          <h3 className="font-sans">{f.title}</h3>
+          <h3>{f.title}</h3>
           {f.summary ? <p className="mt-2 max-w-[68ch] text-[17px] text-muted-foreground">{f.summary}</p> : null}
           <ol className="mt-5 flex flex-col gap-0 md:flex-row md:items-stretch">
             {f.steps.map((s, i) => (
@@ -29,16 +29,16 @@ export function PathwayExplainer({ flows }: { flows: PathwayFlow[] }) {
                 <div className="flex flex-col items-center md:w-full md:flex-row">
                   <span
                     aria-hidden="true"
-                    className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-teal font-heading text-base font-semibold tabular-nums text-heading max-sm:bg-teal-tint max-sm:text-[0.9375rem]"
+                    className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary font-heading text-[0.875rem] font-semibold tabular-nums text-white"
                   >
                     {i + 1}
                   </span>
                   {i < f.steps.length - 1 ? (
-                    <span aria-hidden="true" className="my-1 w-px flex-1 bg-brand-teal/50 md:my-0 md:h-px md:w-auto md:bg-brand-teal" />
+                    <span aria-hidden="true" className="my-1 w-px flex-1 bg-primary/25 md:my-0 md:h-px md:w-auto md:bg-primary/25" />
                   ) : null}
                 </div>
                 <div className={cn("relative pt-1 md:mt-3 md:pt-0 md:pb-0 md:pr-4", i < f.steps.length - 1 && "pb-7")}>
-                  <p className="text-[15px] max-md:leading-snug">{s}</p>
+                  <p className="text-[0.9375rem] leading-snug text-heading/85">{s}</p>
                 </div>
               </li>
             ))}
@@ -60,16 +60,16 @@ const TIER_ROWS: { label: string; cells: ("yes" | "planned" | "coming" | "none" 
 export function TierTable() {
   const cols = ["Live", "On-demand"];
   return (
-    <div className="overflow-x-auto max-sm:overflow-hidden max-sm:rounded-2xl max-sm:border max-sm:border-border">
+    <div className="overflow-x-auto rounded-[1.5rem] shadow-[0_0_0_1px_rgb(0_0_0/0.06)] max-sm:overflow-hidden">
       <table className="w-full min-w-[34rem] border-collapse text-[15px] max-sm:min-w-0 max-sm:text-sm">
         <caption className="sr-only">Compare study formats</caption>
         <thead>
-          <tr className="bg-surface-2 text-left">
-            <th scope="col" className="px-3 py-3 font-semibold max-sm:px-4">
+          <tr className="bg-[#f5f5f7] text-left">
+            <th scope="col" className="px-5 py-4 font-semibold text-heading max-sm:px-4">
               What you get
             </th>
             {cols.map((c) => (
-              <th key={c} scope="col" className="px-3 py-3 font-semibold">
+              <th key={c} scope="col" className="px-5 py-4 font-semibold text-heading max-sm:px-3">
                 {c}
               </th>
             ))}
@@ -77,12 +77,12 @@ export function TierTable() {
         </thead>
         <tbody>
           {TIER_ROWS.map((r) => (
-            <tr key={r.label} className="border-b border-border max-sm:last:border-b-0">
-              <th scope="row" className="px-3 py-3 text-left align-top font-medium max-sm:px-4">
+            <tr key={r.label} className="border-b border-black/[0.06] last:border-b-0">
+              <th scope="row" className="px-5 py-4 text-left align-top font-medium text-heading max-sm:px-4">
                 {r.label}
               </th>
               {r.cells.map((cell, i) => (
-                <td key={i} className="px-3 py-3 align-top max-sm:px-2">
+                <td key={i} className="px-5 py-4 align-top max-sm:px-3">
                   {cell === "yes" ? (
                     <span className="inline-flex items-center gap-1.5">
                       <Check className="size-4 text-success" aria-hidden="true" />
@@ -104,7 +104,7 @@ export function TierTable() {
           ))}
         </tbody>
       </table>
-      <p className="mt-3 text-sm text-muted-foreground">
+      <p className="border-t border-black/[0.06] bg-white px-5 py-4 text-sm text-muted-foreground max-sm:px-4">
         Live and on-demand are both available. Your coaching offer confirms what is included and the fee.
       </p>
     </div>
@@ -129,14 +129,16 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
     <div>
       <Breadcrumbs items={[crumb]} />
 
-      <header className="container-site py-10 max-sm:pt-4 max-sm:pb-8 lg:py-14">
-        <div className="max-w-(--container-prose)">
-          <h1>{h1}</h1>
-          <p className="mt-6 text-lead max-sm:mt-4">{intro}</p>
+      <header className="container-site pt-10 pb-12 max-sm:pt-4 max-sm:pb-10 lg:pt-16 lg:pb-20">
+        <div className="max-w-3xl">
+          <h1 className="vg-rise">{h1}</h1>
+          <p className="vg-rise mt-6 max-w-[52ch] text-lead max-sm:mt-4" style={{ animationDelay: "80ms" }}>
+            {intro}
+          </p>
         </div>
       </header>
 
-      <section aria-labelledby="pathway-h" className="container-site py-10 max-sm:pt-2 lg:py-14">
+      <section aria-labelledby="pathway-h" className="container-site pb-16 max-sm:pt-2 lg:pb-24">
         <h2 id="pathway-h">How do these exams fit together?</h2>
         <div className="mt-8 max-sm:mt-6">
           <PathwayExplainer flows={flows} />
@@ -148,13 +150,13 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
         ) : null}
       </section>
 
-      <section aria-labelledby="courses-h" className="bg-surface-2 py-12 lg:py-16">
+      <section aria-labelledby="courses-h" className="bg-[#f5f5f7] py-16 lg:py-24">
         <div className="container-site">
           <h2 id="courses-h">Which course do you need?</h2>
           <div className="mt-8 space-y-12 max-sm:mt-6 max-sm:space-y-10">
             {groups.map((g) => (
               <div key={g.title}>
-                <h3 className="font-sans">{g.title}</h3>
+                <h3>{g.title}</h3>
                 {g.description ? (
                   <p className="mt-2 max-w-[68ch] text-[17px] text-muted-foreground">{g.description}</p>
                 ) : null}
@@ -169,7 +171,7 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
         </div>
       </section>
 
-      <section aria-labelledby="tiers-h" className="container-site py-12 lg:py-16">
+      <section aria-labelledby="tiers-h" className="container-site py-16 lg:py-24">
         <h2 id="tiers-h">How can you study?</h2>
         <div className="mt-8">
           <TierTable />
@@ -177,7 +179,7 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
       </section>
 
       {faqs.length > 0 ? (
-        <section aria-labelledby="hub-faq-h" className="container-site pt-4 pb-16 lg:pb-24">
+        <section aria-labelledby="hub-faq-h" className="container-site pt-4 pb-20 lg:pb-28">
           <h2 id="hub-faq-h">{faqTitle}</h2>
           <FaqList className="mt-8" items={faqs.map((f) => ({ question: f.question, answer: f.answer }))} />
         </section>

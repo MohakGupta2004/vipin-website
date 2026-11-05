@@ -46,7 +46,7 @@ export default function GuaranteePage() {
           </ol>
         ) : (
           <div className="max-w-[68ch]">
-            <h2 className="font-sans text-xl">Confirm these details before payment</h2>
+            <h2 className="text-[1.375rem]">Confirm these details before payment</h2>
             <ul className="mt-4 divide-y divide-border border-y border-border">
               {confirm.map((c) => (
                 <li key={c} className="py-3 text-[17px]">

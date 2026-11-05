@@ -15,6 +15,7 @@ export type StaticRoute =
   | "/insurance/llqp"
   | "/financial-planning"
   | "/upcoming"
+  | "/upcoming-batches"
   | "/find-my-course"
   | "/licensing-pathways"
   | "/schedule"
@@ -135,6 +136,11 @@ export const megaMenu: MegaMenuGroup[] = [
         title: "In development",
         links: [
           {
+            label: "Upcoming batches",
+            href: "/upcoming-batches",
+            description: "Live group cohorts and how to join.",
+          },
+          {
             label: "See what is coming",
             href: "/upcoming",
             description: "Planned programmes and how to hear first.",
@@ -147,6 +153,7 @@ export const megaMenu: MegaMenuGroup[] = [
 
 /** Simple top-level links beside the mega menu. */
 export const primaryLinks: NavLink[] = [
+  { label: "Upcoming Batches", href: "/upcoming-batches" },
   { label: "About", href: "/about" },
 ];
 
@@ -194,7 +201,8 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: "Find my course", href: "/find-my-course" },
       { label: "Licensing pathways", href: "/licensing-pathways" },
-          { label: "Schedule", href: "/schedule" },
+      { label: "Upcoming batches", href: "/upcoming-batches" },
+      { label: "Schedule", href: "/schedule" },
       { label: "Free masterclass", href: "/masterclass" },
       { label: "Free diagnostic", href: "/free-diagnostic" },
       { label: "Upcoming programmes", href: "/upcoming" },

@@ -7,7 +7,7 @@ import { ArrowRight, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { controlBase, controlHeight, focusRing, secondaryButton } from "@/components/forms/styles";
+import { focusRing, secondaryButton } from "@/components/forms/styles";
 // hidden until courses live in app: appUrl (only used by the browse-all link)
 // import { appUrl } from "@/lib/app-links";
 import { cn } from "@/lib/utils";
@@ -125,12 +125,12 @@ export function CourseCatalogue({
     <div id={id} className={cn("scroll-mt-28", className)}>
       {showSearch ? (
         <div className="max-w-md">
-          <label htmlFor={`${uid}-search`} className="mb-2 block text-[15px] font-semibold max-sm:sr-only">
+          <label htmlFor={`${uid}-search`} className="sr-only">
             Search courses
           </label>
           <div className="relative">
             <Search
-              className="pointer-events-none absolute top-1/2 left-3 size-4 max-sm:left-3.5 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
             />
             <Input
@@ -143,14 +143,14 @@ export function CourseCatalogue({
               }}
               placeholder="e.g. CIRE or tax"
               autoComplete="off"
-              className={cn(controlBase, controlHeight, "pl-9 max-sm:rounded-xl max-sm:border-border max-sm:bg-surface-2 max-sm:pl-10")}
+              className="h-11 rounded-full border-0 bg-surface-2 pr-4 pl-10 text-[0.9375rem] text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-shadow duration-200 hover:shadow-[0_0_0_1px_rgb(0_0_0/0.14)] focus-visible:shadow-[0_0_0_1px_var(--primary),0_0_0_4px_rgb(36_99_235/0.15)] focus-visible:outline-none"
             />
           </div>
         </div>
       ) : null}
 
       <div role="group" aria-label="Filter courses by area" className={cn(
-          "flex flex-wrap gap-2 max-sm:-mx-5 max-sm:snap-x max-sm:flex-nowrap max-sm:overflow-x-auto max-sm:scroll-px-5 max-sm:px-5 max-sm:pb-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
+          "flex flex-wrap gap-2 max-sm:-mx-5 max-sm:snap-x max-sm:flex-nowrap max-sm:overflow-x-auto max-sm:scroll-px-5 max-sm:px-5 max-sm:py-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
           showSearch && "mt-5 max-sm:mt-4",
         )}
       >
@@ -166,15 +166,15 @@ export function CourseCatalogue({
                 setExpanded(false);
               }}
               className={cn(
-                "inline-flex min-h-11 items-center gap-2 rounded-md border px-4 text-[15px] font-medium transition-colors max-sm:shrink-0 max-sm:snap-start max-sm:rounded-full max-sm:px-3.5 max-sm:whitespace-nowrap max-sm:active:scale-[0.97] max-sm:transition-[transform,background-color,border-color] max-sm:duration-100 motion-reduce:transition-none",
+                "inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-[background-color,color,transform] duration-200 ease-out active:scale-[0.96] max-sm:shrink-0 max-sm:snap-start motion-reduce:transition-none",
                 pressed
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border-strong bg-surface text-foreground hover:bg-accent max-sm:border-border max-sm:bg-surface-2",
+                  ? "bg-heading text-white"
+                  : "bg-surface-2 text-heading/75 hover:bg-black/[0.07] hover:text-heading",
                 focusRing,
               )}
             >
               {a.label}
-              <span className={cn("text-sm tabular-nums", pressed ? "text-primary-foreground" : "text-muted-foreground")}>
+              <span className={cn("text-xs tabular-nums", pressed ? "text-white/60" : "text-muted-foreground")}>
                 {chipCount(a.test)}
               </span>
             </button>
@@ -191,13 +191,14 @@ export function CourseCatalogue({
       </p>
 
       {shown.length > 0 ? (
-        <ul className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-          {shown.map((it) => (
-            <li key={it.key}>
-              <article className="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong max-sm:rounded-2xl max-sm:p-5 max-sm:shadow-xs max-sm:transition-transform max-sm:duration-100 max-sm:active:scale-[0.985] motion-reduce:transform-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring">
+        <ul className="mt-3 grid gap-4 sm:mt-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+          {shown.map((it, i) => (
+            <li key={it.key} className="vg-rise" style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}>
+              {/* Soft tile: lifts a touch on hover (pointer only), presses down on tap. */}
+              <article className="group relative flex h-full flex-col rounded-[1.75rem] bg-surface-2 p-6 transition-[translate,scale,background-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#eef0f3] hover:shadow-[0_18px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
                 <div className="flex items-baseline justify-between gap-3">
-                  <p className="text-[15px] font-semibold tabular-nums text-link">{it.code}</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-[0.8125rem] font-semibold tracking-wide tabular-nums text-primary">{it.code}</p>
+                  <p className="text-xs text-muted-foreground">
                     {it.type === "upcoming"
                       ? "Upcoming"
                       : !it.confirmed
@@ -207,33 +208,33 @@ export function CourseCatalogue({
                           : "Exam coaching"}
                   </p>
                 </div>
-                <Heading className="mt-2 font-sans text-xl max-sm:text-lg max-sm:leading-snug sm:mt-3">
-                  <Link
-                    href={it.href}
-                    className="underline-offset-4 outline-hidden group-hover:underline after:absolute after:inset-0"
-                  >
+                <Heading className="mt-3 font-heading text-[1.3125rem] leading-snug font-semibold tracking-[-0.02em] text-heading">
+                  <Link href={it.href} className="outline-hidden after:absolute after:inset-0 after:rounded-[1.75rem]">
                     {it.name}
                   </Link>
                 </Heading>
-                <p className="mt-2 line-clamp-2 text-[15px] text-muted-foreground">{it.blurb}</p>
-                <p className="mt-auto pt-4 text-sm tabular-nums">
+                <p className="mt-2 line-clamp-2 text-[0.9375rem] leading-relaxed text-muted-foreground">{it.blurb}</p>
+                <p className="mt-auto pt-6 text-sm text-heading/80 tabular-nums">
                   {it.exam ?? (
                     <span className="text-muted-foreground">
                       {it.type === "upcoming" ? "Planned. Join the list to hear first." : "Format announced soon"}
                     </span>
                   )}
                 </p>
-                <p className="mt-3 inline-flex items-center gap-1 text-[15px] font-medium text-link">
+                <p className="mt-3 inline-flex items-center gap-1 text-[0.9375rem] font-medium text-link">
                   {it.type === "upcoming" ? "Notify me" : "View course"}{" "}
-                  <ArrowRight className="size-4" aria-hidden="true" />
+                  <ArrowRight
+                    className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none"
+                    aria-hidden="true"
+                  />
                 </p>
               </article>
             </li>
           ))}
         </ul>
       ) : (
-        <div className="mt-6 max-w-[60ch] rounded-lg border border-border p-6">
-          <Heading className="font-sans text-xl">No courses match your search.</Heading>
+        <div className="vg-rise mt-6 max-w-[60ch] rounded-[1.75rem] bg-surface-2 p-8">
+          <Heading className="font-heading text-xl font-semibold tracking-[-0.02em]">No courses match your search.</Heading>
           <p className="mt-2 text-[17px] text-muted-foreground">
             Try a different exam code or topic, or reset the search and filters.
           </p>
@@ -247,7 +248,7 @@ export function CourseCatalogue({
         <Button
           type="button"
           variant="outline"
-          className={cn(secondaryButton, "mt-8 max-sm:mt-5 max-sm:w-full max-sm:rounded-xl")}
+          className={cn(secondaryButton, "mt-8 max-sm:mt-6 max-sm:w-full")}
           onClick={() => setExpanded(true)}
         >
           Show all {results.length} courses

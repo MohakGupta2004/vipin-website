@@ -1,17 +1,23 @@
 import { CourseCatalogue } from "@/components/course/course-catalogue"
+import { Reveal } from "@/components/motion/reveal"
+
+import { SectionIntro } from "./section-intro"
 
 /** Home course search + filter. Section heading is owned here; cards use h3. */
 export function Programmes() {
   return (
-    <section className="container-site pb-16 md:pb-20 lg:pb-24">
-      <div className="max-w-[56ch]">
-        <h2>Explore Courses</h2>
-        <p className="mt-3 text-muted-foreground sm:mt-4">
-          Explore exam preparation courses tailored to your professional goals.
-        </p>
-      </div>
-      <div className="mt-6 sm:mt-8 lg:mt-10">
-        <CourseCatalogue id="courses" defaultArea="live-group" initialLimit={6} showSearch headingLevel="h3" />
+    <section aria-labelledby="courses-heading" className="bg-white py-20 sm:py-28">
+      <div className="container-site">
+        <Reveal>
+          <SectionIntro
+            id="courses-heading"
+            title="Explore Courses"
+            lead="Explore exam preparation courses tailored to your professional goals."
+          />
+        </Reveal>
+        <Reveal className="mt-10 sm:mt-12" delay={60}>
+          <CourseCatalogue id="courses" defaultArea="live-group" initialLimit={6} showSearch headingLevel="h3" />
+        </Reveal>
       </div>
     </section>
   )

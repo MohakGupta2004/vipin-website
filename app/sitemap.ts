@@ -12,6 +12,7 @@ const staticRoutes = [
   "/insurance",
   "/financial-planning",
   "/upcoming",
+  "/upcoming-batches",
   "/find-my-course",
   "/licensing-pathways",
   "/schedule",

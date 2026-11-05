@@ -44,7 +44,7 @@ export default function MasterclassPage() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
             {/* PLACEHOLDER: confirm the masterclass is free, and how often it runs — "Free, monthly, 45 minutes" */}
-            <h2 className="font-sans text-2xl">Reserve your seat</h2>
+            <h2 className="text-[1.75rem] sm:text-[2rem]">Reserve your seat</h2>
             {hasDate && m ? (
               <p className="mt-3 text-[17px]">
                 <span className="font-semibold">{m.title}</span>
@@ -74,11 +74,11 @@ export default function MasterclassPage() {
                 <span className="font-semibold text-heading">Vipin Garg</span>
               </p>
             </div>
-            <h2 className="font-sans text-2xl">Topics in development</h2>
+            <h2 className="text-[1.75rem] sm:text-[2rem]">Topics in development</h2>
             <ul className="mt-4 divide-y divide-border border-y border-border">
               {sessions.map((s) => (
                 <li key={s.title} className="py-4">
-                  <h3 className="font-sans text-lg">{s.title}</h3>
+                  <h3 className="text-[1.1875rem]">{s.title}</h3>
                   <p className="mt-1 text-[17px] text-muted-foreground">{s.text}</p>
                 </li>
               ))}

@@ -11,30 +11,40 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
   if (!announcement || !visible) return null
 
   const closable = announcement.dismissible !== false
+  const { badge, title, message, href, linkLabel } = announcement
+  // One line at every width. Phones drop the pill and keep [title · message ›]; the link label
+  // ("View Upcoming Batches") returns as soon as there is room for it, and the arrow always stays.
   const content = (
     <>
-      {announcement.badge ? (
-        <span className="shrink-0 rounded-full bg-white/12 px-2 py-0.5 text-[0.6875rem] leading-4 font-semibold tracking-wide text-inverse-fg uppercase ring-1 ring-white/20 ring-inset">
-          {announcement.badge}
+      {badge || title ? (
+        <span className="inline-flex min-w-0 shrink-0 items-center gap-x-2.5 sm:gap-x-3">
+          {badge ? (
+            <span className="hidden shrink-0 rounded-full bg-white/10 px-2.5 py-0.5 text-[0.625rem] leading-4 font-semibold tracking-[0.08em] text-inverse-fg/85 uppercase ring-1 ring-white/25 ring-inset sm:inline sm:text-[0.6875rem]">
+              {badge}
+            </span>
+          ) : null}
+          {title ? <span className="truncate font-semibold text-inverse-fg">{title}</span> : null}
         </span>
       ) : null}
-      <span className="min-w-0 text-inverse-fg/90 max-sm:line-clamp-2">{announcement.message}</span>
-      {announcement.href ? (
-        <span className="inline-flex shrink-0 items-center font-semibold text-inverse-link">
-          <span className="hidden underline-offset-3 group-hover:underline sm:inline">
-            {announcement.linkLabel ?? "Learn more"}
+      {title ? <span aria-hidden="true" className="h-3 w-px shrink-0 bg-white/30 sm:h-4" /> : null}
+      <span className="inline-flex max-w-full min-w-0 items-center gap-x-2 sm:gap-x-3">
+        <span className="min-w-0 truncate text-inverse-fg/85">{message}</span>
+        {href ? (
+          <span className="inline-flex shrink-0 items-center gap-0.5 font-semibold text-inverse-link">
+            <span className="hidden underline-offset-3 group-hover:underline min-[560px]:inline">{linkLabel ?? "Learn more"}</span>
+            <ChevronRight
+              aria-hidden="true"
+              strokeWidth={2}
+              className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none"
+            />
           </span>
-          <ChevronRight
-            aria-hidden="true"
-            strokeWidth={2}
-            className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none"
-          />
-        </span>
-      ) : null}
+        ) : null}
+      </span>
     </>
   )
 
-  const row = "flex min-h-11 items-center justify-center gap-x-2.5 py-2 text-center text-[0.8125rem] leading-snug sm:gap-x-3 sm:text-sm"
+  const row =
+    "flex min-h-10 flex-nowrap items-center justify-center gap-x-2.5 py-2 text-center text-[0.75rem] leading-snug whitespace-nowrap sm:min-h-11 sm:gap-x-3 sm:text-[0.8125rem] lg:text-sm"
 
   return (
     <div className="bg-surface-inverse text-inverse-fg" role="region" aria-label="Announcement">
@@ -44,7 +54,7 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
             // The whole message is the link: one large, obvious target on phones.
             <Link
               href={announcement.href}
-              aria-label={`${announcement.message} ${announcement.linkLabel ?? "Learn more"}`}
+              aria-label={[title, message, linkLabel ?? "Learn more"].filter(Boolean).join(". ")}
               className={`group ${row} rounded-sm transition-opacity outline-hidden focus-visible:outline-2 focus-visible:outline-inverse-link pointer-coarse:active:opacity-70`}
             >
               {content}

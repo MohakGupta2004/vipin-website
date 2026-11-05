@@ -9,7 +9,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
   const parent = all.length > 1 ? all[all.length - 2] : null
   return (
     <>
-      <nav aria-label="Breadcrumb" className="container-site pt-6 text-sm max-sm:pt-2 max-sm:text-[0.9375rem]">
+      <nav aria-label="Breadcrumb" className="container-site pt-6 text-[0.8125rem] max-sm:pt-2 max-sm:text-[0.9375rem] lg:pt-8">
         {parent && (
           <Link
             href={parent.href}
@@ -25,15 +25,15 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
             return (
               <li key={item.href} className="flex items-center gap-2">
                 {last ? (
-                  <span aria-current="page" className="text-foreground">
+                  <span aria-current="page" className="text-heading">
                     {item.name}
                   </span>
                 ) : (
                   <>
-                    <Link href={item.href} className="text-muted-foreground hover:underline underline-offset-3">
+                    <Link href={item.href} className="text-muted-foreground transition-colors hover:text-heading">
                       {item.name}
                     </Link>
-                    <ChevronRight aria-hidden="true" strokeWidth={1.75} className="size-3.5 text-muted-foreground" />
+                    <ChevronRight aria-hidden="true" strokeWidth={2} className="size-3 text-muted-foreground/70" />
                   </>
                 )}
               </li>

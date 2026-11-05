@@ -89,7 +89,7 @@ export default function AboutPage() {
               >
                 {i + 1}
               </span>
-              <h3 className="mt-3 font-sans text-lg">{a.title}</h3>
+              <h3 className="mt-3 text-[1.1875rem]">{a.title}</h3>
               <p className="mt-2 text-[17px] text-muted-foreground">{a.text}</p>
             </li>
           ))}

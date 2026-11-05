@@ -8,8 +8,9 @@
 export const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0";
 
+// Pills that press down slightly (feedback on press, not on release).
 const btn =
-  "h-11 rounded-md px-5 text-[15px] font-semibold active:translate-y-px max-sm:rounded-xl disabled:cursor-not-allowed";
+  "h-11 rounded-full px-6 text-[15px] font-medium transition-[background-color,box-shadow,transform] duration-150 ease-out active:scale-[0.97] motion-reduce:transition-none disabled:cursor-not-allowed";
 
 /** The one orange conversion button per view. */
 export const ctaButton = `${btn} bg-cta text-cta-foreground hover:bg-cta-hover ${focusRing}`;
@@ -19,5 +20,5 @@ export const textLink = `inline-flex min-h-11 items-center gap-1 rounded-sm font
 
 /** Text input, select and textarea. 48px tall, 16px text. */
 export const controlBase =
-  "w-full min-w-0 rounded-sm border border-border-strong max-sm:rounded-xl bg-surface px-3 text-base md:text-base text-foreground placeholder:text-placeholder outline-hidden transition-colors focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:opacity-50";
+  "w-full min-w-0 rounded-xl border border-border-strong bg-surface px-3 text-base md:text-base text-foreground placeholder:text-placeholder outline-hidden transition-colors focus-visible:border-ring focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:opacity-50";
 export const controlHeight = "h-12";

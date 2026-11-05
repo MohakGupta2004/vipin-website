@@ -21,7 +21,7 @@ export default function FreeDiagnosticPage() {
       <PageSection>
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <h2 className="font-sans text-2xl">Launching soon</h2>
+            <h2 className="text-[1.75rem] sm:text-[2rem]">Launching soon</h2>
             <p className="mt-3 max-w-[60ch] text-[17px]">
               The diagnostic is not ready yet. These will be independently developed learning tools, separate from
               official examinations. Availability and inclusions will be announced before launch.

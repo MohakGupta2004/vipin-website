@@ -17,14 +17,14 @@ export function FactsTable({ caption, rows }: { caption: string; rows: FactRow[]
       <caption className="sr-only">{caption}</caption>
       <tbody>
         {rows.map((r) => (
-          <tr key={r.label} className="border-b border-border first:border-t">
+          <tr key={r.label} className="border-b border-black/[0.08] first:border-t">
             <th
               scope="row"
-              className="w-2/5 py-3 pr-4 text-left align-top font-medium text-muted-foreground sm:w-[35%]"
+              className="w-2/5 py-4 pr-4 text-left align-top font-normal text-muted-foreground sm:w-[35%]"
             >
               {r.label}
             </th>
-            <td className={cn("py-3 align-top tabular-nums", r.muted ? "text-muted-foreground" : "text-foreground")}>
+            <td className={cn("py-4 align-top tabular-nums", r.muted ? "text-muted-foreground" : "text-heading")}>
               {r.value}
             </td>
           </tr>

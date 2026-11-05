@@ -14,9 +14,11 @@ This file turns parts of the website on and off and sets the banner text at the 
 | Setting | What it does |
 |---|---|
 | `enabled` | `true` shows the banner, `false` hides it. |
+| `source` | `"manual"` (the default) shows the text you write below. `"cohorts"` builds the banner from the upcoming-batches data instead: it names a batch, for example **Next Group Batch · IFC · Wednesday, 18 November 2026 · View Upcoming Batches**, only when that batch is published, its status is `open` and its start date is still ahead. Otherwise it shows **Upcoming Batches · Explore Group Classes & Start Dates**, so the site never shows a date that is not confirmed. With `"cohorts"` you can leave out `id`, `badge`, `title`, `message`, `linkLabel` and `linkHref`. |
 | `id` | A label for this message, for example `cfa-launch-2026-11`. **Change the `id` whenever you write a new message.** Visitors who closed the old banner will then see the new one. If you keep the same `id`, people who closed it do not see it again. |
 | `message` | The text in the banner. Keep it to one short sentence. |
-| `badge` | Optional. A short tag shown in a small pill before the message, for example `New`. 12 characters or fewer. Leave it out for no pill. |
+| `badge` | Optional. A short tag shown in a small pill before the message, for example `New` or `Next Group Batch`. 28 characters or fewer. Leave it out for no pill. |
+| `title` | Optional. Bold words shown before the message, for example `IFC Group Class`. A thin divider separates it from the message. 40 characters or fewer. |
 | `linkLabel` | The words on the link, for example `Join the waitlist`. |
 | `linkHref` | Where the link goes. Use a page on this site, like `/upcoming`, or a full address starting with `https://`. |
 | `dismissible` | `true` lets visitors close the banner. `false` keeps it on screen. |

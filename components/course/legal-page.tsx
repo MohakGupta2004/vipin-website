@@ -28,11 +28,11 @@ export function LegalPage({
             </Notice>
           </div>
         ) : null}
-        <div className="space-y-10">
+        <div className="space-y-12 border-t border-black/[0.08] pt-10">
           {sections.map((s) => (
             <section key={s.heading}>
-              <h2 className="font-sans text-xl">{s.heading}</h2>
-              <div className="mt-3 space-y-3 text-[17px]">{s.body}</div>
+              <h2 className="text-[1.375rem] leading-snug tracking-[-0.02em]">{s.heading}</h2>
+              <div className="mt-3 space-y-3 text-[17px] leading-relaxed">{s.body}</div>
             </section>
           ))}
         </div>

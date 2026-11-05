@@ -158,7 +158,7 @@
 
 @media (min-width: 64rem) {
   :root {
-    --header-h: 4.5rem;
+    --header-h: 4rem;
   }
 }
 
@@ -195,34 +195,30 @@
     color: var(--heading);
     text-wrap: balance;
   }
-  h1, h2 {
+  /* Apple-style: semibold display type, tracking tightens as size grows (size-specific, never one value). */
+  h1, h2, h3, h4 {
     font-family: var(--font-heading);
-    font-weight: 800;
-  }
-  h3, h4 {
-    font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 600;
   }
   h1 {
-    font-size: clamp(2.125rem, 1.7rem + 1.7vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.015em;
+    font-size: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
   }
   h2 {
-    font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.875rem, 1.45rem + 1.7vw, 2.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
   }
   h3 {
-    font-weight: 600;
     font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
     line-height: 1.25;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.02em;
   }
   h4 {
-    font-weight: 600;
     font-size: 1.125rem;
     line-height: 1.35;
+    letter-spacing: -0.01em;
   }
   p {
     text-wrap: pretty;
@@ -288,21 +284,23 @@
     text-wrap: balance;
   }
   .text-lead {
-    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
+    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
     line-height: 1.55;
     color: var(--muted-foreground);
+    text-wrap: pretty;
   }
+  /* Sentence-case grey label above a title (Apple style), not spaced-out blue capitals. */
   .text-eyebrow {
-    font-size: 0.8125rem;
+    font-size: 1.0625rem;
     line-height: 1.3;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--link);
+    letter-spacing: -0.005em;
+    color: var(--muted-foreground);
   }
+  .text-eyebrow::first-letter { text-transform: uppercase; }
   .text-price {
     font-family: var(--font-heading);
-    font-weight: 800;
+    font-weight: 600;
     font-size: clamp(2rem, 1.8rem + 0.8vw, 2.5rem);
     line-height: 1;
     letter-spacing: -0.01em;
@@ -330,27 +328,115 @@
 .vg-enter-up { animation: vg-in-up 180ms cubic-bezier(0.2, 0, 0, 1) both; }
 .vg-enter-left { animation: vg-in-left 180ms cubic-bezier(0.2, 0, 0, 1) both; }
 .vg-enter-fade { animation: vg-fade 150ms cubic-bezier(0.2, 0, 0, 1) both; }
+/* Home hero: copy rises in, staggered; the photo settles from a slight zoom. Strong ease-out, no overshoot. */
+/* Copy: a short 8px rise. Photo: visible almost at once (300ms fade), then a slow, barely-there settle from 1.03.
+   The photo's container clips, so the zoom never shows an edge. */
+@keyframes vg-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes vg-settle-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes vg-settle-zoom { from { transform: scale(1.03); } to { transform: none; } }
+.vg-rise { animation: vg-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.vg-settle {
+  animation: vg-settle-in 300ms ease-out both, vg-settle-zoom 1400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Announcement bar: a soft band of light sweeps across three times after load, then the bar rests.
+   Finite on purpose (endless loops become noise); none with reduced motion. */
+.vg-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 35%, rgb(255 255 255 / 0.1) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: vg-sheen 2.4s cubic-bezier(0.45, 0, 0.25, 1) 1.2s 3 both;
+}
+@keyframes vg-sheen {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vg-sheen::after { display: none; }
+}
+
+/* Home hero depth (scroll-driven, no JS). As the page scrolls, the photo drifts inside its frame (it reads as
+   further away). .vg-recede is available for copy that should ease back. Only where supported, never with reduced motion. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .vg-parallax {
+      animation: vg-parallax linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100svh;
+    }
+    /* Desktop only: on phones the copy is below the photo and is read while scrolling. */
+    @media (min-width: 64rem) {
+      .vg-recede {
+        animation: vg-recede linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 90svh;
+      }
+    }
+  }
+}
+/* The photo sits in a rounded frame, so it starts enlarged (1.12) and drifts within the overflow: no edge ever shows. */
+@keyframes vg-parallax {
+  from { transform: translate3d(0, -4%, 0) scale(1.12); }
+  to { transform: translate3d(0, 4%, 0) scale(1.12); }
+}
+@keyframes vg-recede { to { opacity: 0.5; transform: translate3d(0, -20px, 0); } }
+
+/* Count-up for hero stats, CSS only: a registered integer animates from 0 to --vg-to and is printed with a
+   CSS counter, so there is no hydration flash. Screen readers get the real value from sr-only text. */
+@property --vg-n { syntax: "<integer>"; inherits: false; initial-value: 0; }
+.vg-count {
+  counter-reset: vg-n var(--vg-n);
+  font-variant-numeric: tabular-nums lining-nums;
+  animation: vg-count 1800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.vg-count::before { content: counter(vg-n); }
+@keyframes vg-count { from { --vg-n: 0; } to { --vg-n: var(--vg-to); } }
+
+/* Scroll reveal (components/motion/reveal.tsx): content below the fold rises in once, when it scrolls into view.
+   Server-rendered content is visible; only off-screen blocks are hidden after hydration, so nothing ever flashes. */
+.vg-reveal { transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+.vg-reveal[data-reveal="hidden"] { opacity: 0; transform: translateY(18px); }
+
+/* FAQ answers open with a smooth height animation where supported (Chrome/Edge 131+, Safari 18.4+);
+   other browsers simply open instantly. */
+:root { interpolate-size: allow-keywords; }
+.vg-details::details-content {
+  height: 0;
+  overflow: clip;
+  opacity: 0;
+  transition: height 380ms cubic-bezier(0.32, 0.72, 0, 1), opacity 260ms ease-out, content-visibility 380ms allow-discrete;
+}
+.vg-details[open]::details-content { height: auto; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .vg-details::details-content { transition: none; }
+}
+
+/* Header dropdowns: scale in from the trigger (top-left), strong ease-out. */
+@keyframes vg-pop { from { opacity: 0; transform: translateY(-4px) scale(0.97); } to { opacity: 1; transform: none; } }
+.vg-pop { transform-origin: top left; animation: vg-pop 180ms cubic-bezier(0.23, 1, 0.32, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: 0.12ms !important;
     animation-duration: 0.12ms !important;
   }
-  .vg-enter-up, .vg-enter-left { animation-name: vg-fade; animation-duration: 120ms !important; }
+  .vg-enter-up, .vg-enter-left, .vg-pop, .vg-rise, .vg-settle { animation-name: vg-fade; animation-duration: 120ms !important; }
 }
 
 /* Phones only: size-specific tracking and a calmer lead (Apple-style type). Wider screens unchanged. */
 @layer base {
   @media (max-width: 639.98px) {
-    h1 { letter-spacing: -0.025em; line-height: 1.08; }
-    h2 { letter-spacing: -0.02em; line-height: 1.12; }
-    h3 { letter-spacing: -0.01em; }
+    h1 { letter-spacing: -0.035em; line-height: 1.06; }
+    h2 { letter-spacing: -0.03em; line-height: 1.1; }
+    h3 { letter-spacing: -0.015em; }
   }
 }
 @layer components {
   @media (max-width: 639.98px) {
     .text-lead { font-size: 1.0625rem; line-height: 1.6; }
-    .text-eyebrow { font-size: 0.75rem; letter-spacing: 0.1em; }
+    .text-eyebrow { font-size: 0.9375rem; }
   }
 }
 /* Phones: the sign-up prompt is a bottom sheet, so it rises from (and returns to) the bottom edge. */
