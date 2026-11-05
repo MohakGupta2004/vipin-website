@@ -25,7 +25,7 @@ import { siteConfig } from "@/lib/site-config"
 import { getCourse } from "./courses"
 
 export const batchesConfig = {
-  guidanceEmail: "info@vipingarg.com",
+  guidanceEmail: "contact@vipingarg.com",
   appUrl: appUrl("signup", { campaign: "upcoming-batches" }),
 } as const
 
