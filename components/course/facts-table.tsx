@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { focusRing } from "@/components/forms/styles";
 import { cn } from "@/lib/utils";
@@ -10,27 +10,22 @@ export type FactRow = {
   muted?: boolean;
 };
 
-/** Semantic fact table (DESIGN-DIRECTION §5.8): th scope=row, horizontal rules only. */
+/** Fact list: label above value on phones, two columns from sm. Horizontal rules only. */
 export function FactsTable({ caption, rows }: { caption: string; rows: FactRow[] }) {
   return (
-    <table className="w-full border-collapse text-[15px]">
-      <caption className="sr-only">{caption}</caption>
-      <tbody>
-        {rows.map((r) => (
-          <tr key={r.label} className="border-b border-black/[0.08] first:border-t">
-            <th
-              scope="row"
-              className="w-2/5 py-4 pr-4 text-left align-top font-normal text-muted-foreground sm:w-[35%]"
-            >
-              {r.label}
-            </th>
-            <td className={cn("py-4 align-top tabular-nums", r.muted ? "text-muted-foreground" : "text-heading")}>
-              {r.value}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <dl aria-label={caption} className="border-t border-black/[0.08] text-[15px]">
+      {rows.map((r) => (
+        <div
+          key={r.label}
+          className="grid gap-1 border-b border-black/[0.08] py-4 sm:grid-cols-[35%_1fr] sm:gap-4"
+        >
+          <dt className="text-muted-foreground">{r.label}</dt>
+          <dd className={cn("min-w-0 text-pretty tabular-nums", r.muted ? "text-muted-foreground" : "text-heading")}>
+            {r.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 
@@ -43,7 +38,7 @@ export function ExternalLinkText({ href, children }: { href: string; children: R
       className={cn("inline-flex items-center gap-1 rounded-sm text-link underline underline-offset-4 hover:decoration-2", focusRing)}
     >
       {children}
-      <ExternalLink className="size-3.5" aria-hidden="true" />
+      <ArrowUpRight className="size-3.5" aria-hidden="true" />
       <span className="sr-only">(opens in a new tab)</span>
     </a>
   );

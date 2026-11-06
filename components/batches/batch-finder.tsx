@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import Link from "next/link"
-import { ArrowRight, ChevronRight, Search, X } from "lucide-react"
+import { ArrowUpRight, Search, X } from "lucide-react"
 
 import {
   cohortActionHref,
@@ -74,13 +74,13 @@ function Segmented<T extends string>({
       role="radiogroup"
       aria-label={label}
       onKeyDown={onKeyDown}
-      className={cn("relative grid h-10 rounded-full bg-black/[0.05] p-1", className)}
+      className={cn("relative grid h-10 rounded-full bg-[#e8e8ed]/70 p-1", className)}
       style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}
     >
       <span
         aria-hidden="true"
         className={cn(
-          "absolute inset-y-1 left-1 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.08),0_2px_8px_-2px_rgb(0_0_0/0.1)] transition-transform",
+          "absolute inset-y-1 left-1 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.08),inset_0_0_0_0.5px_rgb(0_0_0/0.06)] transition-transform",
           slide
         )}
         style={{ width: `calc((100% - 0.5rem) / ${options.length})`, transform: `translateX(${index * 100}%)` }}
@@ -137,7 +137,7 @@ function Chips({
       role="radiogroup"
       aria-label={label}
       onKeyDown={onKeyDown}
-      className="-mx-5 flex gap-2 overflow-x-auto px-5 py-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden"
+      className="flex w-fit max-w-full snap-x gap-1 overflow-x-auto rounded-full bg-[#e8e8ed]/70 p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {options.map((o, i) => {
         const on = o.value === value
@@ -153,10 +153,10 @@ function Chips({
             tabIndex={on ? 0 : -1}
             onClick={() => onChange(o.value)}
             className={cn(
-              "h-9 shrink-0 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow,transform] duration-200 ease-out active:scale-[0.96] motion-reduce:transition-none",
+              "h-10 shrink-0 snap-start rounded-full px-4 text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow] duration-200 ease-out motion-reduce:transition-none",
               on
-                ? "bg-heading text-white shadow-[0_1px_2px_rgb(16_42_66/0.25)]"
-                : "bg-white text-heading/75 shadow-[0_0_0_1px_rgb(0_0_0/0.08)] hover:text-heading hover:shadow-[0_0_0_1px_rgb(0_0_0/0.16)]",
+                ? "bg-white text-heading shadow-[0_1px_2px_rgb(0_0_0/0.08),inset_0_0_0_0.5px_rgb(0_0_0/0.06)]"
+                : "text-heading/65 hover:text-heading",
               focusRing
             )}
           >
@@ -187,7 +187,7 @@ function BatchRow({ cohort, index }: { cohort: Cohort; index: number }) {
     >
       <article
         aria-labelledby={`cohort-${cohort.id}`}
-        className="grid gap-x-10 gap-y-5 px-6 py-7 sm:px-8 sm:py-9 xl:grid-cols-[7.5rem_minmax(0,1fr)_auto] xl:items-start"
+        className="grid gap-x-10 gap-y-5 px-5 py-6 sm:px-8 sm:py-9 xl:grid-cols-[7.5rem_minmax(0,1fr)_auto] xl:items-start"
       >
         <div className="flex items-start justify-between gap-4 xl:block">
           <div>
@@ -220,6 +220,7 @@ function BatchRow({ cohort, index }: { cohort: Cohort; index: number }) {
                 <dd
                   className={cn(
                     "mt-1 text-[0.9375rem] leading-snug",
+                    "tabular-nums",
                     sp.strong ? "font-semibold text-heading" : "text-heading/85"
                   )}
                 >
@@ -236,11 +237,11 @@ function BatchRow({ cohort, index }: { cohort: Cohort; index: number }) {
           <StatusPill cohort={cohort} className="hidden xl:inline-flex" />
           <Link href={cohortActionHref(cohort)} className={primaryPill("max-sm:w-full xl:mt-3")}>
             {s.action}
-            <ArrowRight aria-hidden="true" strokeWidth={2} className={cn("size-4", nudge)} />
+            <ArrowUpRight aria-hidden="true" strokeWidth={2} className={cn("size-4", nudge)} />
           </Link>
           <Link href={cohortCourseHref(cohort)} className={cn(textLink, "max-sm:w-full max-sm:justify-center")}>
             Course Details
-            <ChevronRight aria-hidden="true" strokeWidth={2} className={cn("size-4", nudge)} />
+            <ArrowUpRight aria-hidden="true" strokeWidth={2} className={cn("size-4", nudge)} />
           </Link>
         </div>
       </article>
@@ -405,13 +406,13 @@ export function BatchFinder({ cohorts }: { cohorts: Cohort[] }) {
       </div>
 
       {shown.length > 0 ? (
-        <ul className="divide-y divide-black/[0.06] overflow-hidden rounded-[1.75rem] bg-white shadow-[0_0_0_1px_rgb(0_0_0/0.05),0_20px_40px_-32px_rgb(16_42_66/0.3)]">
+        <ul className="divide-y divide-black/[0.06] overflow-hidden rounded-panel sm:rounded-section bg-white shadow-[0_0_0_1px_rgb(0_0_0/0.05),0_20px_40px_-32px_rgb(16_42_66/0.3)]">
           {shown.map((c, i) => (
             <BatchRow key={c.id} cohort={c} index={i} />
           ))}
         </ul>
       ) : (
-        <div className="vg-rise rounded-[1.75rem] bg-white px-6 py-16 text-center shadow-[0_0_0_1px_rgb(0_0_0/0.05)]">
+        <div className="vg-rise rounded-panel sm:rounded-section bg-white px-6 py-16 text-center shadow-[0_0_0_1px_rgb(0_0_0/0.05)]">
           <p className="font-heading text-xl font-semibold tracking-[-0.02em] text-heading">No batches match these filters</p>
           <p className="mx-auto mt-2 max-w-[44ch] text-[0.9375rem] text-muted-foreground">
             Don&apos;t see your preferred batch? Join the interest list and we will email you when one opens.
@@ -419,7 +420,7 @@ export function BatchFinder({ cohorts }: { cohorts: Cohort[] }) {
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
             <Link href="/contact" className={primaryPill()}>
               Join Interest List
-              <ArrowRight aria-hidden="true" strokeWidth={2} className={cn("size-4", nudge)} />
+              <ArrowUpRight aria-hidden="true" strokeWidth={2} className={cn("size-4", nudge)} />
             </Link>
             <button type="button" onClick={reset} className={textLink}>
               Reset Filters

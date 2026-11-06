@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ChevronRight, X } from "lucide-react"
+import { ArrowUpRight, X } from "lucide-react"
 
 import { useAnnouncementDismiss, type Announcement } from "./announcement-state"
 
@@ -12,14 +12,14 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
 
   const closable = announcement.dismissible !== false
   const { badge, title, message, href, linkLabel } = announcement
-  // One line at every width. Phones drop the pill and keep [title · message ›]; the link label
+  // One line at every width. Phones drop the pill and keep [title · message ↗]; the link label
   // ("View Upcoming Batches") returns as soon as there is room for it, and the arrow always stays.
   const content = (
     <>
       {badge || title ? (
         <span className="inline-flex min-w-0 shrink-0 items-center gap-x-2.5 sm:gap-x-3">
           {badge ? (
-            <span className="hidden shrink-0 rounded-full bg-white/10 px-2.5 py-0.5 text-[0.625rem] leading-4 font-semibold tracking-[0.08em] text-inverse-fg/85 uppercase ring-1 ring-white/25 ring-inset sm:inline sm:text-[0.6875rem]">
+            <span className="hidden shrink-0 rounded-full bg-white/10 px-2.5 py-0.5 text-xs leading-4 font-semibold text-inverse-fg/85 ring-1 ring-white/25 ring-inset sm:inline">
               {badge}
             </span>
           ) : null}
@@ -32,10 +32,10 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
         {href ? (
           <span className="inline-flex shrink-0 items-center gap-0.5 font-semibold text-inverse-link">
             <span className="hidden underline-offset-3 group-hover:underline min-[560px]:inline">{linkLabel ?? "Learn more"}</span>
-            <ChevronRight
+            <ArrowUpRight
               aria-hidden="true"
-              strokeWidth={2}
-              className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none"
+              strokeWidth={2.25}
+              className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
             />
           </span>
         ) : null}
@@ -44,7 +44,7 @@ export function AnnouncementBar({ announcement }: { announcement: Announcement |
   )
 
   const row =
-    "flex min-h-10 flex-nowrap items-center justify-center gap-x-2.5 py-2 text-center text-[0.75rem] leading-snug whitespace-nowrap sm:min-h-11 sm:gap-x-3 sm:text-[0.8125rem] lg:text-sm"
+    "flex min-h-11 flex-nowrap items-center justify-center gap-x-2.5 py-2 text-center text-[0.8125rem] leading-snug whitespace-nowrap sm:gap-x-3 lg:text-sm"
 
   return (
     <div className="bg-surface-inverse text-inverse-fg" role="region" aria-label="Announcement">

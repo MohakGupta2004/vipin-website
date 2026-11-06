@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 /** Status badges. Only these four exist (DESIGN-DIRECTION §5.5). */
 const badgeVariants = cva(
-  "inline-flex items-center rounded-xs px-2 py-1 text-[0.8125rem] leading-none font-medium tracking-[0.01em] whitespace-nowrap",
+  "inline-flex items-center rounded-full px-2.5 py-1 text-[0.8125rem] leading-none font-medium tracking-[0.01em] whitespace-nowrap",
   {
     variants: {
       variant: {

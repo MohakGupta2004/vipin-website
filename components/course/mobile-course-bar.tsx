@@ -24,21 +24,19 @@ export function MobileCourseBar({ code, feeLabel, signupHref }: { code: string; 
   return (
     <div
       hidden={boxVisible}
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-black/[0.08] bg-white/85 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl backdrop-saturate-[1.8] lg:hidden [@media(prefers-reduced-transparency:reduce)]:bg-white"
+      className="vg-enter-up glass-capsule fixed inset-x-0 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-20 mx-3 flex h-14 items-center justify-between gap-3 rounded-full py-2 pr-2 pl-5 lg:hidden"
     >
-      <div className="mx-auto flex max-w-(--container-site) items-center justify-between gap-3">
-        <p className="min-w-0 text-sm">
-          <span className="font-semibold tabular-nums text-heading">{code}</span>
-          <span className="text-muted-foreground"> · {feeLabel}</span>
-        </p>
-        <a
-          href={signupHref}
-          rel="noopener"
-          className={cn(buttonVariants(), ctaButton, "shrink-0 px-5")}
-        >
-          Sign up free
-        </a>
-      </div>
+      <p className="min-w-0 truncate text-[0.9375rem] tabular-nums">
+        <span className="font-semibold text-heading">{code}</span>
+        <span className="text-muted-foreground"> · {feeLabel}</span>
+      </p>
+      <a
+        href={signupHref}
+        rel="noopener"
+        className={cn(buttonVariants(), ctaButton, "h-11 shrink-0 px-5")}
+      >
+        Sign up free
+      </a>
     </div>
   );
 }

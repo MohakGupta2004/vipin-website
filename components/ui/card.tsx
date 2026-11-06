@@ -12,7 +12,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "flex flex-col gap-(--card-spacing) rounded-lg border border-border bg-card p-(--card-spacing) text-card-foreground [--card-spacing:--spacing(6)] sm:[--card-spacing:--spacing(8)] data-[size=sm]:[--card-spacing:--spacing(4)]",
+        "flex flex-col gap-(--card-spacing) rounded-2xl border border-border bg-card p-(--card-spacing) text-card-foreground [--card-spacing:--spacing(6)] sm:[--card-spacing:--spacing(8)] data-[size=sm]:[--card-spacing:--spacing(4)]",
         className
       )}
       {...props}

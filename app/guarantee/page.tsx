@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-
 import { PageSection, PageShell } from "@/components/course/page-shell";
-import { buttonVariants } from "@/components/ui/button";
-import { primaryButton } from "@/components/forms/styles";
+import { ArrowUpRight } from "lucide-react";
+
+import { ctaButton } from "@/components/forms/styles";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -47,9 +47,9 @@ export default function GuaranteePage() {
         ) : (
           <div className="max-w-[68ch]">
             <h2 className="text-[1.375rem]">Confirm these details before payment</h2>
-            <ul className="mt-4 divide-y divide-border border-y border-border">
+            <ul className="mt-4 divide-y divide-black/[0.06] overflow-hidden rounded-panel shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
               {confirm.map((c) => (
-                <li key={c} className="py-3 text-[17px]">
+                <li key={c} className="px-5 py-4 text-[17px]">
                   {c}
                 </li>
               ))}
@@ -57,8 +57,13 @@ export default function GuaranteePage() {
             <p className="mt-6 text-sm text-muted-foreground">
               Browsing this website does not enroll you or create a payment obligation.
             </p>
-            <Link href="/contact" className={cn(buttonVariants(), primaryButton, "mt-6")}>
+            <Link href="/contact" className={cn(ctaButton, "group mt-6 inline-flex items-center justify-center gap-1.5 max-sm:w-full")}>
               Ask Vipin a question
+              <ArrowUpRight
+                aria-hidden="true"
+                strokeWidth={2}
+                className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+              />
             </Link>
           </div>
         )}

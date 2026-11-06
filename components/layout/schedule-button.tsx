@@ -1,9 +1,10 @@
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
+import { floatingButton, floatingGlass } from "./floating-control"
 
 /**
  * Floating "book a call" button, fixed bottom-right, stacked just above the WhatsApp button.
- * Same safe-area offsets as WhatsAppButton, plus one button height + gap.
+ * Shown on every screen size; the mobile menu also has a "Book a call" row.
  */
 export function ScheduleButton() {
   const { scheduleUrl } = siteConfig.contact
@@ -16,9 +17,10 @@ export function ScheduleButton() {
       rel="noopener noreferrer"
       aria-label="Book a strategy call"
       className={cn(
-        "fixed right-3 z-20 inline-flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-float transition-transform hover:scale-105 active:scale-95 motion-reduce:transition-none max-sm:size-11",
-        "bottom-[calc(env(safe-area-inset-bottom)_+_8.75rem)] sm:bottom-[calc(env(safe-area-inset-bottom)_+_9.5rem)] lg:right-6 lg:bottom-24",
-        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0",
+        floatingButton,
+        floatingGlass,
+        "right-4 size-12 sm:size-14",
+        "bottom-[calc(env(safe-area-inset-bottom)_+_9.25rem)] sm:bottom-[calc(env(safe-area-inset-bottom)_+_9.5rem)] lg:right-6 lg:bottom-24",
       )}
     >
       <svg
@@ -29,7 +31,7 @@ export function ScheduleButton() {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="size-6 max-sm:size-[1.125rem]"
+        className="size-6 text-primary"
       >
         <rect x="3" y="4" width="18" height="18" rx="2" />
         <path d="M16 2v4M8 2v4M3 10h18" />

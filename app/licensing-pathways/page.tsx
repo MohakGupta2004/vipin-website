@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
 
 import { PathwayExplainer } from "@/components/course/hub-page";
 import { PageSection, PageShell } from "@/components/course/page-shell";
 import { RoleSelector } from "@/components/finder/role-selector";
-import { textLink } from "@/components/forms/styles";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { CIRO_EXAM_HUB } from "@/lib/data/courses";
 import { careerPathways, designationPathways, llqpSteps } from "@/lib/data/pathways";
 import { buildMetadata } from "@/lib/seo";
-import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
   title: "Licensing Pathways: CIRO, LLQP, PFP, CFP, CFA",
@@ -37,26 +34,19 @@ export default function LicensingPathwaysPage() {
         />
         <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-1">
           <li>
-            <Link href="/securities/ifc" className={textLink}>
-              Explore IFC coaching <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
+            <ArrowLink href="/securities/ifc">Explore IFC coaching</ArrowLink>
           </li>
           <li>
-            <a href={CIRO_EXAM_HUB} target="_blank" rel="noopener" className={textLink}>
-              Explore official CIRO pathways <ExternalLink className="size-4" aria-hidden="true" />
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
+            <ArrowLink href={CIRO_EXAM_HUB}>Explore official CIRO pathways</ArrowLink>
           </li>
           <li>
-            <Link href="/insurance/llqp" className={textLink}>
-              Explore LLQP coaching <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
+            <ArrowLink href="/insurance/llqp">Explore LLQP coaching</ArrowLink>
           </li>
         </ul>
       </PageSection>
 
       <PageSection id="llqp-steps" title="What are the steps to an LLQP licence?">
-        <ol className="grid gap-px overflow-hidden rounded-[1.75rem] bg-black/[0.06] shadow-[0_0_0_1px_rgb(0_0_0/0.06)] md:grid-cols-5">
+        <ol className="grid gap-px overflow-hidden rounded-panel bg-black/[0.06] sm:rounded-section shadow-[0_0_0_1px_rgb(0_0_0/0.06)] md:grid-cols-5">
           {llqpSteps.map((s) => (
             <li key={s.step} className="bg-surface p-5">
               <span
@@ -78,9 +68,9 @@ export default function LicensingPathwaysPage() {
           Becoming licensed involves approved education, provider certification, applicable provincial examinations and
           the requirements of the provincial insurance regulator.
         </p>
-        <Link href="/insurance/llqp" className={cn(textLink, "mt-2")}>
-          See LLQP coaching <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
+        <ArrowLink href="/insurance/llqp" className="mt-2">
+          See LLQP coaching
+        </ArrowLink>
       </PageSection>
 
       <PageSection tone="band" id="designations" title="What about designations such as PFP, CFP and CFA?">
@@ -90,10 +80,7 @@ export default function LicensingPathwaysPage() {
         <ul className="mt-8 grid gap-1 sm:grid-cols-2">
           {designationPathways.map((d) => (
             <li key={d.id}>
-              <a href={d.officialUrl} target="_blank" rel="noopener" className={textLink}>
-                {d.officialLabel} <ExternalLink className="size-4" aria-hidden="true" />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
+              <ArrowLink href={d.officialUrl}>{d.officialLabel}</ArrowLink>
             </li>
           ))}
         </ul>

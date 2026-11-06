@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronDown } from "lucide-react"
 
 import { LeadForm } from "@/components/forms/lead-form"
 import { footerColumns, type FooterColumn } from "@/lib/data/navigation"
@@ -8,12 +7,12 @@ import { siteConfig } from "@/lib/site-config"
 
 /**
  * Footer, apple.com style: light grey ground, hairlines, small dense type.
- * Brand + newsletter on top, four link columns (fold-out sections on phones), then the small print.
+ * Brand + newsletter on top, four link columns (two across on phones), then the small print.
  */
 
 // 13px links: quiet at rest, full ink on hover (hover is pointer-only in Tailwind v4).
 const linkClass =
-  "inline-flex min-h-10 items-center rounded-sm text-[0.8125rem] leading-snug text-heading/75 transition-colors duration-150 hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:min-h-8"
+  "inline-flex min-h-9 items-center rounded-sm text-[0.8125rem] leading-snug text-heading/75 transition-colors duration-150 hover:text-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring pointer-coarse:min-h-11"
 
 function FooterLink({ link }: { link: FooterColumn["links"][number] }) {
   return "external" in link ? (
@@ -59,35 +58,12 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Phones: one fold-out section per column, so the footer stays short. */}
-        <nav aria-label="Footer" className="mt-14 border-t border-black/[0.08] sm:hidden">
-          {footerColumns.map((col) => (
-            <details key={col.title} className="vg-details group border-b border-black/[0.08]">
-              <summary className="flex min-h-13 cursor-pointer list-none items-center justify-between gap-4 rounded-sm text-[0.9375rem] font-semibold text-heading focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
-                {col.title}
-                <ChevronDown
-                  aria-hidden="true"
-                  strokeWidth={2}
-                  className="size-4 shrink-0 text-heading/50 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-open:rotate-180 motion-reduce:transition-none"
-                />
-              </summary>
-              <ul className="flex flex-col pb-4">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <FooterLink link={l} />
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ))}
-        </nav>
-
         <nav
           aria-label="Footer"
-          className="mt-16 hidden grid-cols-2 gap-x-8 gap-y-10 border-t border-black/[0.08] pt-10 sm:grid md:grid-cols-4"
+          className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-black/[0.08] pt-10 sm:mt-16 sm:gap-x-8 md:grid-cols-4"
         >
           {footerColumns.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className="min-w-0">
               <h3 className="font-sans text-[0.8125rem]! leading-snug font-semibold text-heading">{col.title}</h3>
               <ul className="mt-3 flex flex-col">
                 {col.links.map((l) => (
@@ -101,7 +77,7 @@ export function Footer() {
         </nav>
 
         {social.length > 0 && (
-          <ul className="mt-8 flex flex-wrap gap-x-6">
+          <ul className="mt-8 flex flex-wrap gap-x-6 border-t border-black/[0.08] pt-4">
             {social.map(([name, url]) => (
               <li key={name}>
                 <a href={url} rel="noopener" className={linkClass}>
@@ -113,8 +89,8 @@ export function Footer() {
         )}
 
         {/* Small print */}
-        <div className="mt-10 border-t border-black/[0.08] pt-6 max-sm:mt-8 max-sm:border-t-0 max-sm:pt-0">
-          <p className="max-w-[110ch] text-xs leading-relaxed text-heading/70">
+        <div className="mt-10 border-t border-black/[0.08] pt-6">
+          <p className="max-w-[110ch] text-xs leading-relaxed text-pretty text-heading/70">
             {siteConfig.trademarkNotice} {siteConfig.disclaimer}
           </p>
           <p className="mt-4 text-xs text-heading/70">

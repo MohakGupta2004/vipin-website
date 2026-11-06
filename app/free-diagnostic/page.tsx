@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageSection, PageShell } from "@/components/course/page-shell";
+import { FormCard } from "@/components/course/form-card";
 import { LeadForm } from "@/components/forms/lead-form";
 import { buildMetadata } from "@/lib/seo";
 
@@ -18,15 +19,17 @@ export default function FreeDiagnosticPage() {
       title="Check where you stand before you book."
       lead="Original practice tests, mock examinations and timed simulations are planned first for IFC, CSC Exam 1, CSC Exam 2 and CIRE."
     >
-      <PageSection>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-6">
+      <PageSection tone="band">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-6">
             <h2 className="text-[1.75rem] sm:text-[2rem]">Launching soon</h2>
             <p className="mt-3 max-w-[60ch] text-[17px]">
               The diagnostic is not ready yet. These will be independently developed learning tools, separate from
               official examinations. Availability and inclusions will be announced before launch.
             </p>
-            <LeadForm kind="diagnostic" sourcePath="/free-diagnostic" className="mt-8" />
+            <FormCard className="mt-6">
+              <LeadForm kind="diagnostic" sourcePath="/free-diagnostic" />
+            </FormCard>
           </div>
         </div>
       </PageSection>

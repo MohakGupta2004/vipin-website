@@ -1,29 +1,19 @@
-import Link from "next/link"
-import { ChevronRight } from "lucide-react"
-
 import { FaqList } from "@/components/course/faq-list"
 import { Reveal } from "@/components/motion/reveal"
+import { ArrowLink } from "@/components/ui/arrow-link"
 import { homeFaqs } from "@/lib/data/faqs"
 
 import { SectionIntro } from "./section-intro"
 
 export function HomeFaq() {
   return (
-    <section aria-labelledby="faq-heading" className="bg-white py-20 sm:py-28">
+    <section aria-labelledby="faq-heading" className="bg-white pt-20 pb-12 sm:pt-28 sm:pb-16">
       <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-4">
           <SectionIntro id="faq-heading" size="md" title="FAQs" lead="Still unsure which course fits you?">
-            <Link
-              href="/contact"
-              className="group/link mt-3 inline-flex min-h-11 items-center gap-0.5 text-[1.0625rem] font-medium text-link transition-opacity hover:opacity-75"
-            >
+            <ArrowLink href="/contact" className="mt-3">
               Talk to Vipin
-              <ChevronRight
-                aria-hidden="true"
-                strokeWidth={2}
-                className="size-4 transition-transform duration-200 ease-out group-hover/link:translate-x-0.5 motion-reduce:transition-none"
-              />
-            </Link>
+            </ArrowLink>
           </SectionIntro>
         </Reveal>
         <Reveal className="lg:col-span-8" delay={60}>

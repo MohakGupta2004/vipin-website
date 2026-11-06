@@ -3,10 +3,12 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { ArrowRight, TriangleAlert } from "lucide-react";
+import { TriangleAlert } from "lucide-react";
 
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { focusRing, primaryButton, secondaryButton, textLink } from "@/components/forms/styles";
+import { focusRing, primaryButton, textLink } from "@/components/forms/styles";
+import { OptionList, OptionRow } from "@/components/finder/option-list";
 import { getCourse, nextCohort } from "@/lib/data/courses";
 import { VipinPhoto } from "@/components/course/vipin-photo";
 import { isEnabled } from "@/lib/feature-flags";
@@ -29,6 +31,16 @@ export type ExamFinderProps = {
 };
 
 const TOTAL = finderQuestions.length;
+
+/** White card surface for the finder on a grey section or a plain page. */
+export const finderCard =
+  "rounded-panel bg-white p-5 shadow-[0_0_0_1px_rgb(0_0_0/0.04),0_30px_60px_-40px_rgb(16_42_66/0.35)] sm:rounded-section sm:p-8 lg:p-10";
+
+/** Quiet text-style button for Back. */
+const backButton = cn(
+  "inline-flex h-12 items-center justify-center rounded-full px-5 text-[15px] font-semibold text-muted-foreground transition-colors duration-150 hover:text-heading motion-reduce:transition-none",
+  focusRing,
+);
 
 function formatDate(iso: string): string {
   try {
@@ -98,45 +110,44 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
     return (
       <section
         aria-labelledby={`${uid}-result`}
-        className={cn("vg-rise flex flex-col gap-5 rounded-[1.75rem] bg-surface-2 p-5 sm:p-8", className)}
+        className={cn("vg-rise flex flex-col gap-6", className)}
       >
         <div>
-          <p className="text-sm text-muted-foreground">We recommend</p>
+          <p className="text-[0.9375rem] text-muted-foreground">We recommend</p>
           <h3
             id={`${uid}-result`}
             ref={(el) => {
               focusRef.current = el;
             }}
             tabIndex={-1}
-            className="mt-1 font-heading text-[1.625rem] leading-tight font-semibold tracking-[-0.03em] text-heading outline-hidden"
+            className="mt-1 font-heading text-[1.5rem] leading-tight font-semibold tracking-[-0.03em] text-balance text-heading outline-hidden sm:text-[1.75rem]"
           >
             {rec.headline}
           </h3>
-          <p className="mt-2 text-base text-foreground">{rec.reason}</p>
+          <p className="mt-3 text-[1.0625rem] text-pretty text-foreground">{rec.reason}</p>
         </div>
 
         {rec.status === "unavailable" ? (
-          <div className="rounded-md bg-warning-bg p-4 text-sm text-foreground">
+          <div className="rounded-2xl bg-warning-bg p-4 text-sm text-foreground">
             <p className="flex items-start gap-2 font-medium">
               <TriangleAlert className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden="true" />
               We don’t offer the Quebec (Civil Code) LLQP yet.
             </p>
-            <Link href="/insurance/llqp" onClick={onNavigate} className={cn(textLink, "mt-1")}>
-              Tell me when it’s available <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
+            <ArrowLink href="/insurance/llqp" onClick={onNavigate} className="mt-1">
+              Tell me when it’s available
+            </ArrowLink>
           </div>
         ) : null}
 
         {primary ? (
-          <div className="rounded-2xl bg-surface p-5 text-card-foreground shadow-[0_0_0_1px_rgb(0_0_0/0.08)]">
-            <p className="text-lg font-semibold text-heading">
-              <span className="font-semibold tabular-nums text-link">{primary.code}</span>{" "}
-              {primary.name}
+          <div className="divide-y divide-black/[0.06] overflow-clip rounded-2xl bg-white text-card-foreground shadow-[0_0_0_1px_rgb(0_0_0/0.08)]">
+            <p className="p-4 text-lg leading-snug font-semibold text-heading sm:px-5">
+              <span className="tabular-nums">{primary.code}</span> {primary.name}
             </p>
-            <dl className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+            <dl className="grid gap-4 p-4 text-[0.9375rem] sm:grid-cols-2 sm:px-5">
               <div>
                 <dt className="text-muted-foreground">Exam format</dt>
-                <dd className="font-medium">
+                <dd className="mt-0.5 font-medium text-heading">
                   {primary.examFormat.questions && primary.examFormat.duration
                     ? `${primary.examFormat.questions}, ${primary.examFormat.duration}`
                     : "Announced soon"}
@@ -144,13 +155,13 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
               </div>
               <div>
                 <dt className="text-muted-foreground">Next cohort</dt>
-                <dd className={cohort ? "font-medium" : "text-muted-foreground"}>
+                <dd className={cohort ? "mt-0.5 font-medium text-heading" : "mt-0.5 text-muted-foreground"}>
                   {cohort ? formatDate(cohort.startDate) : "Announced soon"}
                 </dd>
               </div>
             </dl>
             {others.length > 0 ? (
-              <p className="mt-3 text-sm text-muted-foreground">
+              <p className="p-4 text-[0.9375rem] text-muted-foreground sm:px-5">
                 Also consider:{" "}
                 {others.map((c, i) => (
                   <React.Fragment key={c.slug}>
@@ -177,19 +188,25 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
           </ul>
         ) : null}
 
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+        <div className="flex flex-col gap-x-6 gap-y-1 sm:flex-row sm:flex-wrap sm:items-center">
           {primary ? (
             <>
-              <Link href={primary.route} onClick={onNavigate} className={cn(buttonVariants(), primaryButton)}>
+              <Link
+                href={primary.route}
+                onClick={onNavigate}
+                className={cn(buttonVariants(), primaryButton, "max-sm:w-full")}
+              >
                 See {primary.code} course
               </Link>
-              <Link href={`/contact?course=${primary.slug}`} onClick={onNavigate} className={textLink}>
-                <VipinPhoto size={28} round />
-                Talk to Vipin <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
+              <ArrowLink href={`/contact?course=${primary.slug}`} onClick={onNavigate} className="max-sm:mt-2">
+                <span className="inline-flex items-center gap-2">
+                  <VipinPhoto size={28} round />
+                  Talk to Vipin
+                </span>
+              </ArrowLink>
             </>
           ) : rec.status !== "unavailable" && cta ? (
-            <Link href={cta.href} onClick={onNavigate} className={cn(buttonVariants(), primaryButton)}>
+            <Link href={cta.href} onClick={onNavigate} className={cn(buttonVariants(), primaryButton, "max-sm:w-full")}>
               {cta.label}
             </Link>
           ) : null}
@@ -197,14 +214,14 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
             .filter((l) => !(primary && l.href === primary.route))
             .slice(0, 2)
             .map((l) => (
-              <Link key={l.href} href={l.href} onClick={onNavigate} className={textLink}>
+              <ArrowLink key={l.href} href={l.href} onClick={onNavigate}>
                 {l.label}
-              </Link>
+              </ArrowLink>
             ))}
         </div>
 
-        <div className="flex items-center gap-4 border-t border-black/[0.06] pt-5">
-          <Button type="button" variant="outline" className={secondaryButton} onClick={back}>
+        <div className="flex items-center gap-2 border-t border-black/[0.06] pt-5">
+          <Button type="button" variant="ghost" className={cn(backButton, "-ml-5")} onClick={back}>
             Back
           </Button>
           <button type="button" onClick={restart} className={textLink}>
@@ -225,82 +242,71 @@ export function ExamFinder({ className, heading = "Find the right exam in three 
         e.preventDefault();
         next();
       }}
-      className={cn("flex flex-col gap-6 rounded-[1.75rem] bg-surface-2 p-5 sm:p-8", className)}
+      className={cn("flex flex-col gap-6", className)}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-        {heading ? <h3 className="font-sans text-xl font-semibold text-heading">{heading}</h3> : null}
+        {heading ? <h3 className="font-heading text-xl font-semibold tracking-[-0.02em] text-heading">{heading}</h3> : null}
         <div className="flex items-center gap-3">
-          <p className="text-sm text-muted-foreground" aria-live="polite">
+          <p className="font-mono text-sm text-muted-foreground tracking-normal tabular-nums" aria-live="polite">
             Step {step + 1} of {TOTAL}
           </p>
           <div className="flex gap-1" aria-hidden="true">
             {finderQuestions.map((q, i) => (
               <span
                 key={q.id}
-                className={cn("h-1 w-8 rounded-full transition-colors duration-500 ease-out", i <= step ? "bg-primary" : "bg-black/10")}
+                className={cn("h-1 w-8 rounded-full transition-colors duration-300 ease-out motion-reduce:transition-none", i <= step ? "bg-primary" : "bg-black/10")}
               />
             ))}
           </div>
         </div>
       </div>
 
-      <fieldset className="vg-rise flex min-w-0 flex-col gap-3" key={question.id}>
+      <fieldset className="vg-rise flex min-w-0 flex-col" key={question.id}>
         <legend
           id={legendId}
           ref={(el) => {
             focusRef.current = el;
           }}
           tabIndex={-1}
-          className="mb-4 font-heading text-[1.375rem] leading-snug font-semibold tracking-[-0.02em] text-heading outline-hidden"
+          className="mb-5 font-heading text-[1.375rem] leading-snug font-semibold tracking-[-0.02em] text-balance text-heading outline-hidden sm:text-[1.5rem]"
         >
           {question.prompt}
         </legend>
         {/* Native radios with one name: Tab enters the group, arrow keys move and select. */}
-        <div className="grid gap-2 sm:grid-cols-2 sm:gap-3">
-          {question.options.map((o) => {
-            const id = `${uid}-${question.id}-${o.value}`;
-            return (
-              <label
-                key={o.value}
-                htmlFor={id}
-                className="flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl bg-surface px-4 py-3 text-[15px] text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.1)] transition-[box-shadow,background-color,transform] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.22)] active:scale-[0.985] motion-reduce:transition-none sm:min-h-16 has-checked:bg-accent/50 has-checked:shadow-[0_0_0_2px_var(--primary)] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
-              >
-                <input
-                  id={id}
-                  type="radio"
-                  name={`${uid}-${question.id}`}
-                  value={o.value}
-                  checked={current === o.value}
-                  onChange={() => choose(o.value)}
-                  className="size-5 shrink-0 appearance-none rounded-full border border-border-strong bg-surface transition-[background-color,border-color,box-shadow] duration-200 checked:border-primary checked:bg-primary checked:shadow-[inset_0_0_0_4px_var(--surface)]"
-                />
-                <span>{o.label}</span>
-              </label>
-            );
-          })}
-        </div>
+        <OptionList>
+          {question.options.map((o) => (
+            <OptionRow
+              key={o.value}
+              id={`${uid}-${question.id}-${o.value}`}
+              name={`${uid}-${question.id}`}
+              value={o.value}
+              label={o.label}
+              checked={current === o.value}
+              onChange={() => choose(o.value)}
+            />
+          ))}
+        </OptionList>
       </fieldset>
 
-      <div className="flex flex-wrap items-center gap-3 max-sm:sticky max-sm:bottom-0 max-sm:-mx-5 max-sm:bg-inherit max-sm:px-5 max-sm:py-3">
-        {step > 0 ? (
-          <Button type="button" variant="outline" className={secondaryButton} onClick={back}>
-            Back
+      <div className="flex flex-col gap-3">
+        <p id={helpId} className="min-h-5 text-sm text-muted-foreground">
+          {!current ? "Choose an answer to continue." : null}
+        </p>
+        <div className="flex flex-col-reverse items-stretch gap-1 sm:flex-row sm:items-center sm:gap-3">
+          {step > 0 ? (
+            <Button type="button" variant="ghost" className={backButton} onClick={back}>
+              Back
+            </Button>
+          ) : null}
+          <Button
+            type="submit"
+            className={cn(primaryButton, "aria-disabled:cursor-not-allowed aria-disabled:opacity-50 max-sm:w-full")}
+            aria-disabled={!current}
+            aria-describedby={!current ? helpId : undefined}
+          >
+            {step === TOTAL - 1 ? "See my recommendation" : "Next"}
           </Button>
-        ) : null}
-        <Button
-          type="submit"
-          className={cn(primaryButton, "aria-disabled:cursor-not-allowed aria-disabled:opacity-50")}
-          aria-disabled={!current}
-          aria-describedby={!current ? helpId : undefined}
-        >
-          {step === TOTAL - 1 ? "See my recommendation" : "Next"}
-          <ArrowRight className="size-4" aria-hidden="true" />
-        </Button>
-        {!current ? (
-          <p id={helpId} className="text-sm text-muted-foreground">
-            Choose an answer to continue.
-          </p>
-        ) : null}
+        </div>
       </div>
     </form>
   );

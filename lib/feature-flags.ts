@@ -9,6 +9,7 @@
  * - announcementBar: hidden (a half-filled bar must not show).
  * - appSignupPrompt: OFF when missing or not an object. Individual bad numbers use the defaults below.
  *   `afterMaxDismissals` defaults to "sticky-bar" (never "block") so a typo cannot lock visitors out.
+ * - fontPlayground: OFF when missing or invalid (it is a testing tool; it always shows in development).
  * - every other flag: enabled (a missing flag keeps the site working as designed).
  */
 
@@ -65,6 +66,7 @@ export type FeatureFlags = {
   exitIntentPopup: { enabled: boolean };
   diagnosticSlideIn: { enabled: boolean };
   masterclassSignup: { enabled: boolean };
+  fontPlayground: { enabled: boolean };
 };
 
 const TOGGLES: ToggleName[] = [
@@ -97,6 +99,15 @@ function parseFlags(input: unknown): { flags: FeatureFlags; warnings: string[] }
       else warn(`"${name}" is missing. Using ON.`);
       toggles[name] = { enabled: true };
     }
+  }
+
+  // Font playground: default OFF.
+  let fontPlayground = { enabled: false };
+  const f = root.fontPlayground;
+  if (isRecord(f) && typeof f.enabled === "boolean") {
+    fontPlayground = { enabled: f.enabled };
+  } else {
+    warn(`"fontPlayground" must look like { "enabled": false } (or true). Using OFF.`);
   }
 
   // Announcement bar: default OFF.
@@ -201,7 +212,7 @@ function parseFlags(input: unknown): { flags: FeatureFlags; warnings: string[] }
     };
   }
 
-  return { flags: { announcementBar: bar, appSignupPrompt: prompt, ...toggles }, warnings };
+  return { flags: { announcementBar: bar, appSignupPrompt: prompt, fontPlayground, ...toggles }, warnings };
 }
 
 const parsed = parseFlags(raw);

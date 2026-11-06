@@ -25,7 +25,7 @@ export function MasterclassBand() {
             title="Join the free monthly masterclass"
             lead="A live session with Vipin on one exam topic. Ask questions and see how the classes work before you enrol."
           >
-            <p className="tabular mt-8 inline-flex items-center gap-2.5 rounded-full bg-white/[0.07] py-2 pr-4 pl-3 text-sm text-inverse-fg/85 ring-1 ring-white/10">
+            <p className="tabular mt-8 inline-flex items-center gap-2.5 rounded-full bg-white/10 py-2 pr-4 pl-3 text-sm text-inverse-fg/85 ring-1 ring-white/20">
               <span
                 aria-hidden="true"
                 className={upcoming ? "size-2 rounded-full bg-[#4ade80]" : "size-2 rounded-full bg-inverse-muted/70"}
@@ -35,7 +35,7 @@ export function MasterclassBand() {
           </SectionIntro>
         </Reveal>
         <Reveal className="lg:col-span-6" delay={80}>
-          <div className="rounded-[1.75rem] bg-surface p-6 text-foreground shadow-[0_40px_80px_-40px_rgb(0_0_0/0.5)] sm:p-9">
+          <div className="rounded-section bg-surface p-5 text-foreground shadow-[0_40px_80px_-40px_rgb(0_0_0/0.5)] max-sm:rounded-panel sm:p-9">
             <LeadForm kind="masterclass" sourcePath="/" />
           </div>
         </Reveal>

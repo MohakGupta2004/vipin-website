@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { ArrowUpRight } from "lucide-react";
 
 import { VipinPhoto } from "@/components/course/vipin-photo";
 import { PageSection, PageShell } from "@/components/course/page-shell";
+import { FormCard } from "@/components/course/form-card";
 import { LeadForm } from "@/components/forms/lead-form";
 import { findCohort } from "@/lib/data/batches";
 import { getCourse } from "@/lib/data/courses";
@@ -33,20 +35,22 @@ export default async function ContactPage({ searchParams }: Props) {
       title={course ? `Talk to Vipin about the ${course.code}` : "Talk to Vipin"}
       lead="Explore your course, understand the requirements and confirm your coaching arrangements before you enroll."
     >
-      <PageSection>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7">
+      <PageSection tone="band">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-7">
             {cohort ? (
-              <p className="mb-4 inline-flex rounded-full bg-[#f5f5f7] px-3.5 py-1.5 text-sm text-heading">
+              <p className="mb-4 inline-flex rounded-full bg-white px-3.5 py-1.5 text-sm text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
                 About: <span className="ml-1 font-semibold">{cohort.title}</span>
               </p>
             ) : null}
             <p className="mb-6 max-w-[60ch] text-[17px] text-muted-foreground">
               Have your examination name, target exam date and availability ready when discussing coaching.
             </p>
-            <LeadForm kind="contact" courseSlug={course?.slug} sourcePath={sourcePath} />
+            <FormCard>
+              <LeadForm kind="contact" courseSlug={course?.slug} sourcePath={sourcePath} />
+            </FormCard>
           </div>
-          <aside className="lg:col-span-4 lg:col-start-9" aria-label="Contact details">
+          <aside className="min-w-0 lg:col-span-4 lg:col-start-9" aria-label="Contact details">
             <div className="mb-6 flex items-center gap-4">
               <VipinPhoto size={72} />
               <p className="text-[15px]">
@@ -56,37 +60,12 @@ export default async function ContactPage({ searchParams }: Props) {
             </div>
             <h2 className="text-[1.375rem]">Contact details</h2>
             {/* PLACEHOLDER: confirmed contact details shown here — see lib/site-config.ts contact */}
-            <dl className="mt-4 space-y-3 text-[15px]">
-              <div>
-                <dt className="text-muted-foreground">Email</dt>
-                <dd>
-                  <a href={`mailto:${email}`} className="text-link underline underline-offset-4">
-                    {email}
-                  </a>
-                </dd>
-              </div>
-              {phone ? (
-                <div>
-                  <dt className="text-muted-foreground">Phone</dt>
-                  <dd>
-                    <a href={`tel:${phone.replace(/\s/g, "")}`} className="text-link underline underline-offset-4">
-                      {phone}
-                    </a>
-                  </dd>
-                </div>
-              ) : null}
-              {whatsapp ? (
-                <div>
-                  <dt className="text-muted-foreground">WhatsApp</dt>
-                  <dd>
-                    <a href={whatsapp} className="text-link underline underline-offset-4">
-                      Message on WhatsApp
-                    </a>
-                  </dd>
-                </div>
-              ) : null}
-              {responseTime ? <p className="text-muted-foreground">{responseTime}</p> : null}
-            </dl>
+            <ul className="mt-4 divide-y divide-black/[0.06] overflow-hidden rounded-panel bg-white shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
+              <ContactRow label="Email" value={email} href={`mailto:${email}`} />
+              {phone ? <ContactRow label="Phone" value={phone} href={`tel:${phone.replace(/\s/g, "")}`} /> : null}
+              {whatsapp ? <ContactRow label="WhatsApp" value="Message on WhatsApp" href={whatsapp} external /> : null}
+            </ul>
+            {responseTime ? <p className="mt-3 px-1 text-[15px] text-muted-foreground">{responseTime}</p> : null}
             <p className="mt-6 text-sm text-muted-foreground">
               Already a student?{" "}
               <a href={appUrl("login", { campaign: "contact" })} className="text-link underline underline-offset-4">
@@ -98,5 +77,44 @@ export default async function ContactPage({ searchParams }: Props) {
         </div>
       </PageSection>
     </PageShell>
+  );
+}
+
+/** One row of the grouped contact list: 52px tall, label left, value right, arrow when it leaves the site. */
+function ContactRow({
+  label,
+  value,
+  href,
+  external,
+}: {
+  label: string;
+  value: string;
+  href: string;
+  external?: boolean;
+}) {
+  return (
+    <li>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener" : undefined}
+        className="group flex min-h-[3.25rem] items-center justify-between gap-4 px-4 py-2 text-[15px] outline-hidden hover:bg-[#fbfbfd] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+      >
+        <span className="shrink-0 text-muted-foreground">{label}</span>
+        <span className="flex min-w-0 items-center gap-1 font-medium break-words text-link">
+          <span className="min-w-0 break-all text-right">{value}</span>
+          {external ? (
+            <>
+              <ArrowUpRight
+                aria-hidden="true"
+                strokeWidth={2}
+                className="size-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+              />
+              <span className="sr-only">(opens in a new tab)</span>
+            </>
+          ) : null}
+        </span>
+      </a>
+    </li>
   );
 }

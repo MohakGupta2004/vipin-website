@@ -12,7 +12,7 @@ export function DiagnosticCta({ courseSlug, code, sourcePath }: { courseSlug: st
   const panelId = React.useId();
 
   return (
-    <div className="rounded-[1.75rem] bg-[#f5f5f7] p-7 sm:p-10">
+    <div className="rounded-panel bg-[#f5f5f7] p-6 sm:rounded-section sm:p-10">
       <h3 className="text-[1.5rem] sm:text-[1.75rem]">Check where you stand on the {code}</h3>
       <p className="mt-3 max-w-[56ch] text-[17px] leading-relaxed text-muted-foreground max-sm:text-base">
         The free diagnostic is not ready yet. Join the waitlist and we will email you when it opens.

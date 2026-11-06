@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { VipinPhoto } from "@/components/course/vipin-photo";
 import { PageSection, PageShell } from "@/components/course/page-shell";
+import { FormCard } from "@/components/course/form-card";
 import { LeadForm } from "@/components/forms/lead-form";
 import { buildMetadata } from "@/lib/seo";
 
@@ -19,8 +20,8 @@ export default function ForFirmsPage() {
       title="Group exam training for your team."
       lead="Studying through your employer? Tell us which exams your team is preparing for, how many people are involved and when the exams are."
     >
-      <PageSection>
-        <div className="grid gap-12 lg:grid-cols-12">
+      <PageSection tone="band">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <aside className="flex items-center gap-4 lg:order-last lg:col-span-4 lg:col-start-9 lg:items-start">
             <VipinPhoto size={96} />
             <p className="text-[15px]">
@@ -31,14 +32,16 @@ export default function ForFirmsPage() {
               </span>
             </p>
           </aside>
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             {/* PLACEHOLDER: confirm group offering — group size minimum, pricing model, manager progress reports */}
             <h2 className="text-[1.75rem] sm:text-[2rem]">Tell us about your team</h2>
             <p className="mt-3 max-w-[60ch] text-[17px] text-muted-foreground">
               Scope, schedule and pricing are confirmed for each request. Sending this form does not commit you to
               anything.
             </p>
-            <LeadForm kind="firms" sourcePath="/for-firms" className="mt-8" />
+            <FormCard className="mt-6">
+              <LeadForm kind="firms" sourcePath="/for-firms" />
+            </FormCard>
           </div>
         </div>
       </PageSection>

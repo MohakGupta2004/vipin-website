@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 // hidden until courses live in app: ExternalLink (only used by the browse-all link)
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -130,7 +130,7 @@ export function CourseCatalogue({
           </label>
           <div className="relative">
             <Search
-              className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
             />
             <Input
@@ -143,43 +143,48 @@ export function CourseCatalogue({
               }}
               placeholder="e.g. CIRE or tax"
               autoComplete="off"
-              className="h-11 rounded-full border-0 bg-surface-2 pr-4 pl-10 text-[0.9375rem] text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-shadow duration-200 hover:shadow-[0_0_0_1px_rgb(0_0_0/0.14)] focus-visible:shadow-[0_0_0_1px_var(--primary),0_0_0_4px_rgb(36_99_235/0.15)] focus-visible:outline-none"
+              className="h-12 rounded-full border-0 bg-[#e8e8ed]/60 pr-4 pl-11 text-base text-heading transition-[background-color,box-shadow] duration-200 hover:bg-[#e8e8ed]/80 focus-visible:bg-white focus-visible:shadow-[0_0_0_1px_var(--primary),0_0_0_4px_rgb(36_99_235/0.15)] focus-visible:outline-none"
             />
           </div>
         </div>
       ) : null}
 
-      <div role="group" aria-label="Filter courses by area" className={cn(
-          "flex flex-wrap gap-2 max-sm:-mx-5 max-sm:snap-x max-sm:flex-nowrap max-sm:overflow-x-auto max-sm:scroll-px-5 max-sm:px-5 max-sm:py-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
+      <div
+        className={cn(
+          "sm:sticky sm:top-[calc(var(--header-h)+0.5rem)] sm:z-10 sm:w-fit sm:max-w-full sm:rounded-full sm:glass-control",
           showSearch && "mt-5 max-sm:mt-4",
         )}
       >
-        {AREAS.map((a) => {
-          const pressed = area === a.id;
-          return (
-            <button
-              key={a.id}
-              type="button"
-              aria-pressed={pressed}
-              onClick={() => {
-                setArea(a.id);
-                setExpanded(false);
-              }}
-              className={cn(
-                "inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-[background-color,color,transform] duration-200 ease-out active:scale-[0.96] max-sm:shrink-0 max-sm:snap-start motion-reduce:transition-none",
-                pressed
-                  ? "bg-heading text-white"
-                  : "bg-surface-2 text-heading/75 hover:bg-black/[0.07] hover:text-heading",
-                focusRing,
-              )}
-            >
-              {a.label}
-              <span className={cn("text-xs tabular-nums", pressed ? "text-white/60" : "text-muted-foreground")}>
-                {chipCount(a.test)}
-              </span>
-            </button>
-          );
-        })}
+        <div
+          role="group"
+          aria-label="Filter courses by area"
+          className="flex gap-1 rounded-full bg-[#e8e8ed]/70 p-1 snap-x overflow-x-auto scroll-px-1 [scrollbar-width:none] sm:bg-transparent [&::-webkit-scrollbar]:hidden"
+        >
+          {AREAS.map((a) => {
+            const pressed = area === a.id;
+            return (
+              <button
+                key={a.id}
+                type="button"
+                aria-pressed={pressed}
+                onClick={() => {
+                  setArea(a.id);
+                  setExpanded(false);
+                }}
+                className={cn(
+                  "inline-flex h-10 shrink-0 snap-start items-center gap-2 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow] duration-200 ease-out motion-reduce:transition-none",
+                  pressed
+                    ? "bg-white text-heading shadow-[0_1px_2px_rgb(0_0_0/0.08),inset_0_0_0_0.5px_rgb(0_0_0/0.06)]"
+                    : "text-heading/65 hover:text-heading",
+                  focusRing,
+                )}
+              >
+                {a.label}
+                <span className="text-xs tabular-nums text-muted-foreground">{chipCount(a.test)}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <p className="mt-5 text-sm text-muted-foreground" role="status" aria-live="polite">
@@ -193,11 +198,11 @@ export function CourseCatalogue({
       {shown.length > 0 ? (
         <ul className="mt-3 grid gap-4 sm:mt-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
           {shown.map((it, i) => (
-            <li key={it.key} className="vg-rise" style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}>
+            <li key={it.key} className="vg-rise h-full" style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}>
               {/* Soft tile: lifts a touch on hover (pointer only), presses down on tap. */}
-              <article className="group relative flex h-full flex-col rounded-[1.75rem] bg-surface-2 p-6 transition-[translate,scale,background-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#eef0f3] hover:shadow-[0_18px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
+              <article className="group relative flex h-full flex-col rounded-panel bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[scale,box-shadow] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
                 <div className="flex items-baseline justify-between gap-3">
-                  <p className="text-[0.8125rem] font-semibold tracking-wide tabular-nums text-primary">{it.code}</p>
+                  <p className="font-mono text-xs font-semibold tracking-normal tabular-nums text-heading">{it.code}</p>
                   <p className="text-xs text-muted-foreground">
                     {it.type === "upcoming"
                       ? "Upcoming"
@@ -209,7 +214,7 @@ export function CourseCatalogue({
                   </p>
                 </div>
                 <Heading className="mt-3 font-heading text-[1.3125rem] leading-snug font-semibold tracking-[-0.02em] text-heading">
-                  <Link href={it.href} className="outline-hidden after:absolute after:inset-0 after:rounded-[1.75rem]">
+                  <Link href={it.href} className="outline-hidden after:absolute after:inset-0 after:rounded-panel">
                     {it.name}
                   </Link>
                 </Heading>
@@ -223,8 +228,8 @@ export function CourseCatalogue({
                 </p>
                 <p className="mt-3 inline-flex items-center gap-1 text-[0.9375rem] font-medium text-link">
                   {it.type === "upcoming" ? "Notify me" : "View course"}{" "}
-                  <ArrowRight
-                    className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none"
+                  <ArrowUpRight
+                    className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
                     aria-hidden="true"
                   />
                 </p>
@@ -233,7 +238,7 @@ export function CourseCatalogue({
           ))}
         </ul>
       ) : (
-        <div className="vg-rise mt-6 max-w-[60ch] rounded-[1.75rem] bg-surface-2 p-8">
+        <div className="vg-rise mt-6 max-w-[60ch] rounded-panel bg-surface-2 p-8">
           <Heading className="font-heading text-xl font-semibold tracking-[-0.02em]">No courses match your search.</Heading>
           <p className="mt-2 text-[17px] text-muted-foreground">
             Try a different exam code or topic, or reset the search and filters.
@@ -255,7 +260,7 @@ export function CourseCatalogue({
         </Button>
       ) : null}
 
-      <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 max-sm:mt-3">
+      <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-2 empty:hidden">
         {/* hidden until courses live in app */}
         {/*
         <a

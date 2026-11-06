@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { ChevronRight, Play } from "lucide-react"
+import { Play } from "lucide-react"
 
+import { ArrowLink } from "@/components/ui/arrow-link"
 import { Reveal } from "@/components/motion/reveal"
 import { siteConfig } from "@/lib/site-config"
 
@@ -40,17 +40,9 @@ export function MeetVipin() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/about"
-            className="group/link mt-6 inline-flex min-h-11 items-center gap-0.5 text-[1.0625rem] font-medium text-link transition-opacity hover:opacity-75"
-          >
+          <ArrowLink href="/about" className="mt-6">
             About Vipin
-            <ChevronRight
-              aria-hidden="true"
-              strokeWidth={2}
-              className="size-4 transition-transform duration-200 ease-out group-hover/link:translate-x-0.5 motion-reduce:transition-none"
-            />
-          </Link>
+          </ArrowLink>
         </Reveal>
 
         <Reveal className="lg:col-span-7" delay={80}>
@@ -59,14 +51,14 @@ export function MeetVipin() {
               controls
               preload="none"
               poster={video.poster}
-              className="aspect-video w-full rounded-[2rem] bg-surface-inverse shadow-[0_40px_80px_-48px_rgb(16_42_66/0.6)] max-sm:rounded-2xl"
+              className="aspect-video w-full rounded-section bg-surface-inverse shadow-[0_40px_80px_-48px_rgb(16_42_66/0.6)] max-sm:rounded-panel"
             >
               <source src={video.src} />
               {video.captionsUrl && <track kind="captions" src={video.captionsUrl} default />}
             </video>
           ) : (
             // PLACEHOLDER: founder introduction video — set siteConfig.founderVideo { src: "/media/vipin-intro.mp4", poster, captionsUrl }
-            <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-5 overflow-hidden rounded-[2rem] bg-[radial-gradient(120%_90%_at_25%_0%,#1f3d5c_0%,#102a42_55%)] text-center shadow-[0_40px_80px_-48px_rgb(16_42_66/0.6)] max-sm:rounded-2xl">
+            <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-5 overflow-hidden rounded-section bg-[radial-gradient(120%_90%_at_25%_0%,#1f3d5c_0%,#102a42_55%)] text-center shadow-[0_40px_80px_-48px_rgb(16_42_66/0.6)] max-sm:rounded-panel">
               <span
                 aria-hidden="true"
                 className="flex size-16 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur-md sm:size-20"

@@ -22,7 +22,7 @@ export default function UpcomingPage() {
       <PageSection>
         <ul className="grid gap-6 md:grid-cols-2">
           {upcomingPrograms.map((u) => (
-            <li key={u.slug} className="rounded-[1.75rem] bg-[#f5f5f7] p-7 lg:p-9">
+            <li key={u.slug} className="rounded-panel bg-[#f5f5f7] p-6 sm:rounded-section sm:p-7 lg:p-9">
               <p className="inline-block rounded-full bg-white px-2.5 py-1 text-xs font-medium text-muted-foreground">
                 Coming soon
               </p>

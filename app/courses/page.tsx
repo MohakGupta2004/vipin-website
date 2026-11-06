@@ -15,17 +15,17 @@ export default function CoursesPage() {
   return (
     <div>
       <Breadcrumbs items={[{ name: "Courses", href: "/courses" }]} />
-      <header className="container-site py-10 lg:py-14">
+      <header className="container-site pt-8 pb-12 sm:pt-10 lg:pt-14 lg:pb-16">
         <div className="max-w-(--container-prose)">
-          <h1>Canadian finance exam courses</h1>
-          <p className="mt-6 text-lead">
+          <h1 className="text-balance">Canadian finance exam courses</h1>
+          <p className="mt-6 max-w-[52ch] text-lead text-pretty">
             Vipin Garg teaches IFC, CSC Exam 1, CSC Exam 2, CIRE, RSE and LLQP live online. Exam coaching also
             covers other CIRO, planning and professional exams. Filter by study area and format, or search by exam
             code.
           </p>
         </div>
       </header>
-      <section aria-label="Course catalogue" className="container-site pb-16 lg:pb-24">
+      <section aria-label="Course catalogue" className="container-site pb-20 sm:pb-28">
         <CourseCatalogue headingLevel="h2" id="catalogue" />
       </section>
     </div>
