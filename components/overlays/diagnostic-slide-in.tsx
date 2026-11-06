@@ -3,7 +3,9 @@
 import Link from "next/link"
 import { X } from "lucide-react"
 
+import { primaryButton } from "@/components/forms/styles"
 import { buttonVariants } from "@/components/ui/button"
+import { closeButtonClass } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
 
 import { useOverlayGate } from "./use-overlay-gate"
@@ -28,13 +30,13 @@ export function DiagnosticSlideIn({
   return (
     <aside
       aria-label="Free diagnostic"
-      className="vg-enter-left fixed right-0 bottom-0 z-50 max-h-[70vh] w-full overflow-y-auto rounded-t-xl border border-border bg-surface p-6 text-foreground shadow-modal sm:right-6 sm:bottom-6 sm:w-90 sm:rounded-xl"
+      className="vg-enter-left fixed right-0 bottom-0 z-50 max-h-[70dvh] w-full overflow-y-auto rounded-t-panel border border-border bg-surface p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-foreground shadow-modal sm:right-6 sm:bottom-6 sm:w-90 sm:rounded-panel sm:pb-6"
     >
       <button
         type="button"
         onClick={gate.close}
         aria-label="Close"
-        className="absolute top-1 right-1 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+        className={cn(closeButtonClass, "absolute top-2 right-2")}
       >
         <X aria-hidden="true" strokeWidth={1.75} className="size-5" />
       </button>
@@ -44,7 +46,7 @@ export function DiagnosticSlideIn({
         A free practice diagnostic is on the way. Join the waitlist to get it first.
       </p>
       <div className="mt-4 flex flex-col items-start gap-1">
-        <Link href="/free-diagnostic" onClick={gate.close} className={cn(buttonVariants(), "w-full")}>
+        <Link href="/free-diagnostic" onClick={gate.close} className={cn(buttonVariants(), primaryButton, "w-full")}>
           Join the diagnostic waitlist
         </Link>
         <button

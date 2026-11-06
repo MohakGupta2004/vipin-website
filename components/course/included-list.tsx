@@ -20,7 +20,7 @@ export function IncludedList({ items }: { items: Item[] }) {
         {items.map((it) => (
           <li key={it.label} className="flex min-h-14 items-start gap-3 py-4">
             <Check
-              className={cn("mt-1 size-4 shrink-0", it.planned ? "text-muted-foreground" : "text-primary")}
+              className={cn("mt-1 size-4 shrink-0", "text-muted-foreground")}
               aria-hidden="true"
             />
             <div className="min-w-0 flex-1">

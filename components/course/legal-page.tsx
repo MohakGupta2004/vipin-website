@@ -20,7 +20,7 @@ export function LegalPage({
 }) {
   return (
     <PageShell crumbs={[{ name: title, href: path }]} title={title} lead={lead} prose>
-      <div className="pb-16 lg:pb-24">
+      <div className="max-w-[68ch] pb-20 sm:pb-28">
         {!siteConfig.legalReviewed ? (
           <div className="mb-10">
             <Notice tone="warning">
@@ -28,11 +28,11 @@ export function LegalPage({
             </Notice>
           </div>
         ) : null}
-        <div className="space-y-12 border-t border-black/[0.08] pt-10">
+        <div className="space-y-12 border-t border-black/[0.08] pt-10 sm:space-y-14">
           {sections.map((s) => (
             <section key={s.heading}>
-              <h2 className="text-[1.375rem] leading-snug tracking-[-0.02em]">{s.heading}</h2>
-              <div className="mt-3 space-y-3 text-[17px] leading-relaxed">{s.body}</div>
+              <h2 className="text-[1.5rem] leading-[1.2] tracking-[-0.02em] text-balance sm:text-[1.75rem]">{s.heading}</h2>
+              <div className="mt-4 space-y-4 text-[17px] leading-[1.65]">{s.body}</div>
             </section>
           ))}
         </div>

@@ -3,6 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { createPortal } from "react-dom"
 import { ChevronDown } from "lucide-react"
 
 import type { MegaMenuGroup, NavLink } from "@/lib/data/navigation"
@@ -36,14 +37,20 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
   const hoverTimer = React.useRef<number | undefined>(undefined)
   const pinned = React.useRef(false)
 
-  // Border appears after 8px scroll.
+  // The curtain lives in a portal on <body> (a blurred surface nested inside the glass header would
+  // not blur the page). Portals only exist in the browser, so wait until mounted.
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
+
+  // Tell the floating buttons to step aside while a dropdown (and its curtain) is open.
   React.useEffect(() => {
-    const header = document.getElementById("site-header")
-    const onScroll = () => header?.setAttribute("data-scrolled", String(window.scrollY > 16))
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    if (!openId) return
+    document.documentElement.setAttribute("data-nav-open", "")
+    return () => document.documentElement.removeAttribute("data-nav-open")
+  }, [openId])
 
   // Close on route change.
   const [lastPath, setLastPath] = React.useState(pathname)
@@ -106,6 +113,19 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
 
   return (
     <div className="hidden flex-1 justify-end lg:flex">
+      {mounted &&
+        createPortal(
+          // Opacity + visibility only. The blur itself never animates. Clicking it closes the menu
+          // (the outside-press listener above does the closing).
+          <div
+            aria-hidden="true"
+            className={cn(
+              "curtain fixed inset-x-0 top-(--header-h) bottom-0 z-19 transition-[opacity,visibility] ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+              openId ? "visible opacity-100 duration-200" : "invisible opacity-0 duration-150"
+            )}
+          />,
+          document.body
+        )}
       <nav ref={rootRef} aria-label="Main" className="flex items-center gap-1 xl:gap-2">
         {courseGroups.map((g) => {
           const isOpen = openId === g.id
@@ -169,6 +189,8 @@ export function HeaderNav({ groups, links }: { groups: MegaMenuGroup[]; links: N
 function Dropdown({ id, group, onNavigate }: { id: string; group: MegaMenuGroup; onNavigate: () => void }) {
   const links = group.sections.flatMap((s) => s.links)
   const wide = links.length > 6
+  // The card is content, not glass: solid white, soft shadow, and a hairline drawn on top by ::after
+  // so the footer fill never hides it.
   return (
     <div
       id={id}
@@ -178,8 +200,9 @@ function Dropdown({ id, group, onNavigate }: { id: string; group: MegaMenuGroup;
       // pt-3 is an invisible hover bridge from the trigger, so the panel never closes on the way down.
       className={cn("vg-pop absolute top-full -left-2 z-30 pt-3", wide ? "w-[42rem]" : "w-[22rem]")}
     >
-      <div className="max-h-[calc(100dvh-var(--header-h)-2rem)] overflow-y-auto overscroll-contain rounded-xl border border-[rgb(0_0_0/0.08)] bg-surface shadow-[0_10px_30px_-12px_rgb(16_42_66/0.18)]">
-        <p className="px-5 pt-4 pb-2 text-[0.6875rem] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
+      <div className="relative rounded-panel bg-white shadow-[0_4px_8px_rgb(0_0_0/0.05)] after:pointer-events-none after:absolute after:inset-0 after:rounded-panel after:shadow-[inset_0_0_0_1px_#eee]">
+      <div className="max-h-[calc(100dvh-var(--header-h)-2rem)] overflow-y-auto overscroll-contain rounded-panel">
+        <p className="px-5 pt-4 pb-2 text-xs font-semibold text-muted-foreground">
           {group.description}
         </p>
         <ul className={cn("grid gap-0.5 px-2 pb-2", wide && "grid-cols-2")}>
@@ -216,6 +239,7 @@ function Dropdown({ id, group, onNavigate }: { id: string; group: MegaMenuGroup;
             Not sure? Take the quiz
           </Link>
         </div>
+      </div>
       </div>
     </div>
   )

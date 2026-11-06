@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { buttonVariants } from "@/components/ui/button";
 import { ctaButton } from "@/components/forms/styles";
 import { nextCohort, type Course } from "@/lib/data/courses";
@@ -15,7 +15,6 @@ import { formatCad, formatDate } from "./format";
 
 const quietLink =
   "group/link inline-flex min-h-11 items-center justify-center gap-0.5 rounded-md text-[0.9375rem] font-medium text-link transition-opacity hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
-const nudge = "size-4 transition-transform duration-200 ease-out group-hover/link:translate-x-0.5 motion-reduce:transition-none";
 
 /**
  * Sticky price panel, Apple "buy" style. The study format is an iOS-style segmented control
@@ -33,20 +32,20 @@ export function PriceBox({ course }: { course: Course }) {
   return (
     <div
       id="price-box"
-      className="rounded-[1.75rem] bg-white p-6 text-foreground shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_30px_60px_-40px_rgb(16_42_66/0.45)] sm:p-8"
+      className="rounded-panel bg-white p-6 text-foreground shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_30px_60px_-40px_rgb(16_42_66/0.45)] sm:rounded-section sm:p-8"
     >
       <h2 className="text-[1.375rem] leading-snug tracking-[-0.025em]">Choose how you study</h2>
 
       <div
         role="radiogroup"
         aria-label="Study format"
-        className="relative mt-5 grid h-11 rounded-full bg-black/[0.05] p-1"
+        className="relative mt-5 grid h-11 rounded-full bg-[#e8e8ed] p-1"
         style={{ gridTemplateColumns: `repeat(${tiers.length}, minmax(0, 1fr))` }}
       >
         {/* Sliding thumb */}
         <span
           aria-hidden="true"
-          className="absolute inset-y-1 left-1 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.08),0_2px_8px_-2px_rgb(0_0_0/0.1)] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
+          className="absolute inset-y-1 left-1 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.08),inset_0_0_0_0.5px_rgb(0_0_0/0.06)] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
           style={{ width: `calc((100% - 0.5rem) / ${tiers.length})`, transform: `translateX(${index * 100}%)` }}
         />
         {tiers.map((t) => {
@@ -120,15 +119,12 @@ export function PriceBox({ course }: { course: Course }) {
       </dl>
 
       <div className="mt-6 flex flex-col">
-        <a href={signupHref} rel="noopener" className={cn(buttonVariants(), ctaButton, "h-12 w-full justify-center px-6")}>
+        <a href={signupHref} rel="noopener" className={cn(buttonVariants(), ctaButton, "w-full justify-center px-6")}>
           Sign up free
         </a>
         <p className="mt-2 text-center text-[0.8125rem] text-muted-foreground">Create your account in the learning app.</p>
         <div className="mt-3 flex flex-col items-center border-t border-black/[0.06] pt-2">
-          <Link href={`/contact?course=${course.slug}`} className={quietLink}>
-            Ask Vipin a question
-            <ChevronRight aria-hidden="true" strokeWidth={2} className={nudge} />
-          </Link>
+          <ArrowLink href={`/contact?course=${course.slug}`}>Ask Vipin a question</ArrowLink>
           <a href="#register-interest" className={cn(quietLink, "min-h-9 text-sm text-muted-foreground hover:text-heading hover:opacity-100")}>
             Or register interest in the {course.code}
           </a>

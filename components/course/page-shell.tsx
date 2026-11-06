@@ -9,9 +9,15 @@ export function PageShell({
   lead,
   children,
   prose,
+  eyebrow,
+  tail,
 }: {
   crumbs: Crumb[];
   title: string;
+  /** Small grey line above the title. */
+  eyebrow?: React.ReactNode;
+  /** Grey second half of the headline, shown after the title. */
+  tail?: React.ReactNode;
   lead?: React.ReactNode;
   children?: React.ReactNode;
   /** Narrow reading column (legal text). */
@@ -22,9 +28,13 @@ export function PageShell({
       <Breadcrumbs items={crumbs} />
       <header className="container-site pt-10 pb-12 max-sm:pt-4 max-sm:pb-10 lg:pt-16 lg:pb-20">
         <div className="max-w-3xl">
-          <h1 className="vg-rise">{title}</h1>
+          {eyebrow ? <p className="vg-rise mb-3 text-eyebrow">{eyebrow}</p> : null}
+          <h1 className="vg-rise text-balance">
+            {title}
+            {tail ? <span className="text-[#86868b]"> {tail}</span> : null}
+          </h1>
           {lead ? (
-            <p className="vg-rise mt-6 max-w-[46ch] text-lead max-sm:mt-4" style={{ animationDelay: "80ms" }}>
+            <p className="vg-rise mt-6 max-w-[46ch] text-lead text-pretty max-sm:mt-4" style={{ animationDelay: "80ms" }}>
               {lead}
             </p>
           ) : null}
@@ -56,7 +66,7 @@ export function PageSection({
     <section
       id={id}
       aria-labelledby={title ? hid : undefined}
-      className={cn("scroll-mt-24 py-14 max-sm:py-12 lg:py-20", tone === "band" && "bg-[#f5f5f7]", className)}
+      className={cn("scroll-mt-24 py-16 sm:py-20 lg:py-24", tone === "band" && "bg-[#f5f5f7]", className)}
     >
       <div className="container-site">
         {title ? (
@@ -76,7 +86,7 @@ export function MediaSlot({ label }: { label: string }) {
     <div
       role="img"
       aria-label={label}
-      className="flex aspect-video w-full items-center justify-center rounded-[1.75rem] bg-[#f5f5f7] px-6 text-center text-[15px] text-muted-foreground max-sm:rounded-2xl"
+      className="flex aspect-video w-full items-center justify-center rounded-section bg-[#f5f5f7] px-6 text-center text-[15px] text-muted-foreground max-sm:rounded-panel"
     >
       {label}
     </div>

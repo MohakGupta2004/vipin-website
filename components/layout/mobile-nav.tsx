@@ -8,8 +8,10 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from "lucide-react"
 
+import { ctaButton } from "@/components/forms/styles"
 import { buttonVariants } from "@/components/ui/button"
 import type { ExternalLink, MegaMenuGroup, NavLink } from "@/lib/data/navigation"
+import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
 type Props = { groups: MegaMenuGroup[]; links: NavLink[]; app: ExternalLink }
@@ -33,6 +35,7 @@ export function MobileNav({ groups, links, app }: Props) {
   const rowIcon =
     "inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-2 text-muted-foreground transition-[transform,background-color,color] duration-200 ease-out motion-reduce:transition-none"
   // Staggered entrance; reduced motion falls back to a plain fade (globals.css).
+  const scheduleUrl = siteConfig.contact.scheduleUrl
   const enter = (i: number) => ({ className: "vg-enter-up", style: { animationDelay: `${40 + i * 35}ms` } })
 
   return (
@@ -41,14 +44,16 @@ export function MobileNav({ groups, links, app }: Props) {
         <Menu aria-hidden="true" strokeWidth={2} className="size-[1.125rem]" />
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
+        {/* Curtain: opacity-only fade (200ms in, 150ms out). The sheet below is solid white. */}
+        <DialogPrimitive.Backdrop className="curtain fixed inset-0 z-40 transition-opacity duration-200 ease-[cubic-bezier(0.2,0,0,1)] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:opacity-0 motion-reduce:transition-none" />
         <DialogPrimitive.Popup
           initialFocus={closeRef}
           aria-modal="true"
-          className="fixed inset-0 z-50 flex flex-col bg-surface text-foreground outline-hidden transition-opacity duration-200 ease-out data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
+          className="fixed inset-x-0 top-0 z-50 flex max-h-[calc(100dvh-4rem)] flex-col rounded-b-section bg-white text-foreground shadow-[0_4px_8px_rgb(0_0_0/0.05),inset_0_0_0_1px_#eee] outline-hidden transition-opacity duration-200 ease-[cubic-bezier(0.2,0,0,1)] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:opacity-0 motion-reduce:transition-none"
         >
           <DialogPrimitive.Title className="sr-only">Site menu</DialogPrimitive.Title>
           <div className="flex h-(--header-h) shrink-0 items-center justify-between border-b border-border/70 px-4 sm:px-8">
-            <Link href="/" onClick={close} aria-label="Vipin Garg, home" className="flex items-center gap-2.5">
+            <Link href="/" onClick={close} aria-label="Vipin Garg, home" className="flex min-h-11 items-center gap-2.5 rounded-md outline-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
               <Image
                 src="/logo.png"
                 alt=""
@@ -63,7 +68,7 @@ export function MobileNav({ groups, links, app }: Props) {
             </DialogPrimitive.Close>
           </div>
 
-          <div className="flex-1 overflow-y-auto overscroll-contain px-4 pt-2 pb-8 sm:px-8">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pt-2 pb-8 sm:px-8">
             {/* hidden until courses live in app
             <Link href="/courses" onClick={close} className={cn(buttonVariants({ variant: "secondary" }), "my-4 w-full")}>
               Browse all courses
@@ -141,11 +146,28 @@ export function MobileNav({ groups, links, app }: Props) {
                   </li>
                 )
               })}
+              {scheduleUrl ? (
+                <li {...enter(groups.length + links.length + 1)}>
+                  <a
+                    href={scheduleUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(bigRow, "border-b border-border/70")}
+                  >
+                    <span>
+                      Book a call<span className="sr-only"> (opens in a new tab)</span>
+                    </span>
+                    <span aria-hidden="true" className={rowIcon}>
+                      <ArrowUpRight strokeWidth={2.25} className="size-4" />
+                    </span>
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </div>
 
-          <div className="shrink-0 border-t border-border/70 bg-surface px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-8px_24px_-16px_rgb(16_42_66/0.2)] sm:px-8">
-            <a href={app.href} rel="noopener" className={cn(buttonVariants({ size: "lg" }), "w-full gap-1.5 rounded-full")}>
+          <div className="shrink-0 rounded-b-section border-t border-border/70 bg-white px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-8">
+            <a href={app.href} rel="noopener" className={cn(buttonVariants({ variant: "cta", size: "lg" }), ctaButton, "w-full gap-1.5")}>
               {app.label}
               <ArrowUpRight aria-hidden="true" strokeWidth={2.25} className="size-4" />
             </a>

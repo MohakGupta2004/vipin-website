@@ -7,7 +7,7 @@ import type { Announcement } from "./announcement-state"
 /**
  * Server wrapper. Reads config/feature-flags.json; renders nothing when off or invalid.
  * With `"source": "cohorts"` the bar follows the client rule: it names a cohort only when it is
- * published, open and starts in the future ("NEXT GROUP BATCH · IFC · [date] · View Upcoming Batches");
+ * published, open and starts in the future ("Next group batch · IFC · [date] · View Upcoming Batches");
  * otherwise it shows the neutral all-batches message. It never makes up a date.
  */
 export function SiteAnnouncement() {
@@ -20,7 +20,7 @@ export function SiteAnnouncement() {
     announcement = c
       ? {
           id: `cohort-${c.id}-${c.start}`,
-          badge: "Next Group Batch",
+          badge: "Next group batch",
           title: c.course,
           message: c.startTime ? `${cohortDateLabel(c)} · ${cohortTimingLabel(c).split("·").pop()?.trim()}` : cohortDateLabel(c),
           href: GENERIC_BANNER.href,

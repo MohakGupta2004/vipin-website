@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { PageSection, PageShell } from "@/components/course/page-shell";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
@@ -38,9 +39,9 @@ export default function ResultsPage() {
               : "Our Trustpilot profile and review collection have not yet been connected. When available, this page will link to the original review source and display feedback through the official integration."}
           </p>
           {tp ? (
-            <a href={tp} target="_blank" rel="noopener" className="mt-3 inline-block text-link underline underline-offset-4">
+            <ArrowLink href={tp} className="mt-1">
               Trustpilot profile
-            </a>
+            </ArrowLink>
           ) : null}
           <h3 className="mt-10 text-[1.1875rem]">How feedback will be collected</h3>
           <ul className="mt-3 list-disc space-y-2 pl-6 text-[17px]">

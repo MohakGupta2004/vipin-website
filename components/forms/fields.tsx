@@ -49,7 +49,7 @@ function FieldShell({
   const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
 
   return (
-    <div className={cn("flex flex-col gap-1.5", className)}>
+    <div className={cn("flex flex-col gap-2", className)}>
       <label htmlFor={id} className="text-[15px] font-medium text-foreground">
         {label}{" "}
         <span className="font-normal text-muted-foreground">
@@ -282,7 +282,7 @@ export function Checkbox({
         value={value}
         {...aria}
         {...(checked !== undefined ? { checked, onChange } : { defaultChecked })}
-        className="peer size-5 appearance-none rounded-xs border border-border-strong bg-surface checked:border-primary checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="peer size-5 appearance-none rounded-xs border border-border-strong bg-surface checked:border-primary checked:bg-primary aria-invalid:border-destructive focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       />
       <Check
         className="pointer-events-none absolute inset-0 m-auto hidden size-3.5 text-primary-foreground peer-checked:block"

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-import { focusRing } from "@/components/forms/styles";
 import type { Course, UpcomingProgram } from "@/lib/data/courses";
 import { nextCohort } from "@/lib/data/courses";
 import { cn } from "@/lib/utils";
@@ -22,11 +21,11 @@ export function CourseCard({ course }: { course: Course }) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-[1.75rem] bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[translate,scale,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7",
+        "group relative flex h-full flex-col rounded-panel bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[scale,box-shadow] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7",
       )}
     >
       <div className="flex items-baseline justify-between gap-3">
-        <p className="text-[0.8125rem] font-semibold tracking-wide tabular-nums text-primary">{course.code}</p>
+        <p className="font-mono text-xs font-semibold tracking-normal tabular-nums text-heading">{course.code}</p>
         <p className="text-xs text-muted-foreground">
           {comingSoon ? "Register interest" : areaLabel(course.area)}
         </p>
@@ -34,7 +33,7 @@ export function CourseCard({ course }: { course: Course }) {
       <h3 className="mt-3 text-[1.3125rem] leading-snug tracking-[-0.02em]">
         <Link
           href={course.route}
-          className="outline-hidden after:absolute after:inset-0 after:rounded-[1.75rem]"
+          className="outline-hidden after:absolute after:inset-0 after:rounded-panel"
         >
           {course.name}
         </Link>
@@ -56,8 +55,8 @@ export function CourseCard({ course }: { course: Course }) {
       </dl>
       <p className="mt-4 inline-flex items-center gap-1 text-[15px] font-medium text-link">
         View course{" "}
-        <ArrowRight
-          className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none"
+        <ArrowUpRight
+          className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
           aria-hidden="true"
         />
       </p>
@@ -68,7 +67,7 @@ export function CourseCard({ course }: { course: Course }) {
 /** Upcoming programme card (§5.16): no fee/date rows, one honest line. */
 export function UpcomingCard({ program }: { program: UpcomingProgram }) {
   return (
-    <article className="group relative flex h-full flex-col rounded-[1.75rem] bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[translate,scale,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
+    <article className="group relative flex h-full flex-col rounded-panel bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[scale,box-shadow] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
       <div className="flex items-baseline justify-between gap-3">
         <p className="rounded-xs bg-surface-2 px-2 py-0.5 text-[13px] font-medium text-muted-foreground">
           Upcoming
@@ -77,7 +76,7 @@ export function UpcomingCard({ program }: { program: UpcomingProgram }) {
       <h3 className="mt-3 text-[1.3125rem] leading-snug tracking-[-0.02em]">
         <Link
           href="/upcoming"
-          className={cn("outline-hidden after:absolute after:inset-0 after:rounded-[1.75rem]", focusRing)}
+          className="outline-hidden after:absolute after:inset-0 after:rounded-panel"
         >
           {program.name}
         </Link>
@@ -86,8 +85,8 @@ export function UpcomingCard({ program }: { program: UpcomingProgram }) {
       <p className="mt-auto pt-4 text-sm text-muted-foreground">Planned. Join the list to hear first.</p>
       <p className="mt-2 inline-flex items-center gap-1 text-[15px] font-medium text-link">
         Notify me{" "}
-        <ArrowRight
-          className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none"
+        <ArrowUpRight
+          className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
           aria-hidden="true"
         />
       </p>

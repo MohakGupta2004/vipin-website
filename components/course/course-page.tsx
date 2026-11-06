@@ -1,14 +1,12 @@
-import Link from "next/link"
-import { ArrowRight, Check, TriangleAlert } from "lucide-react"
+import { Check, TriangleAlert } from "lucide-react"
 
 import { Breadcrumbs } from "@/components/layout/breadcrumbs"
 import { JsonLd, courseLd } from "@/components/seo/json-ld"
+import { ArrowLink } from "@/components/ui/arrow-link"
 import { LeadForm } from "@/components/forms/lead-form"
-import { focusRing, textLink } from "@/components/forms/styles"
 import { getSiblings, nextCohort, type Course } from "@/lib/data/courses"
 import { appUrl } from "@/lib/app-links"
 import { siteConfig } from "@/lib/site-config"
-import { cn } from "@/lib/utils"
 
 import { CourseCard, CourseGrid } from "./course-card"
 import { DiagnosticCta } from "./diagnostic-cta"
@@ -175,7 +173,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
           <p className="vg-rise mt-3 text-xl tracking-[-0.01em] text-heading/70 max-sm:text-lg" style={{ animationDelay: "100ms" }}>
             {c.name}
           </p>
-          <p className="vg-rise text-lead mt-8 max-w-[58ch] max-sm:mt-5" style={{ animationDelay: "150ms" }}>
+          <p className="vg-rise text-lead text-pretty mt-8 max-w-[58ch] max-sm:mt-5" style={{ animationDelay: "150ms" }}>
             {c.summary}
           </p>
           <p className="mt-6 text-[15px] font-medium text-heading">
@@ -210,7 +208,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
         {/* Price rail (inline on mobile, sticky on desktop) */}
         <aside
           aria-label="Fees and registration"
-          className="vg-rise lg:sticky lg:top-24 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:self-start"
+          className="vg-rise lg:sticky lg:top-28 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1 lg:self-start"
         >
           <PriceBox course={c} />
         </aside>
@@ -218,11 +216,11 @@ export function CoursePage({ course, extras }: CoursePageProps) {
         {/* Body */}
         <div className="space-y-16 sm:space-y-20 lg:col-span-8 lg:space-y-24">
           <Section id="who-for" title={`Who is the ${c.code} for?`}>
-            <ul className="max-w-[68ch] space-y-3">
+            <ul className="max-w-[68ch] space-y-4">
               {c.whoFor.map((w) => (
                 <li key={w} className="flex gap-3 text-[17px] leading-relaxed text-heading/85 max-sm:text-base">
                   <Check
-                    className="mt-1.5 size-4 shrink-0 text-primary"
+                    className="mt-1.5 size-4 shrink-0 text-heading/50"
                     aria-hidden="true"
                   />
                   <span>{w}</span>
@@ -240,7 +238,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
                       key={t}
                       className="flex gap-4 border-b border-black/[0.08] py-4 text-[17px] text-heading/85 max-sm:py-3.5 max-sm:text-base max-sm:last:border-b-0"
                     >
-                      <span className="w-6 shrink-0 font-semibold text-primary tabular-nums">
+                      <span className="w-6 shrink-0 font-semibold text-heading/50 tabular-nums">
                         {i + 1}
                       </span>
                       <span>{t}</span>
@@ -269,10 +267,9 @@ export function CoursePage({ course, extras }: CoursePageProps) {
               Registration, experience, education and employer requirements may
               also apply.
             </p>
-            <Link href="/licensing-pathways" className={cn(textLink, "mt-2")}>
-              Explore career &amp; designation pathways{" "}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
+            <ArrowLink href="/licensing-pathways" className="mt-2">
+              Explore career &amp; designation pathways
+            </ArrowLink>
           </Section>
 
           <Section id="exam" title={`How does the ${c.code} exam work?`}>
@@ -353,7 +350,7 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             )}
             <div
               id="register-interest"
-              className="mt-10 scroll-mt-24 rounded-[1.75rem] bg-[#f5f5f7] p-6 sm:p-9"
+              className="mt-10 scroll-mt-24 rounded-panel bg-[#f5f5f7] p-6 sm:rounded-section sm:p-9"
             >
               <h3 className="text-[1.375rem]">
                 {c.offerConfirmed
@@ -391,10 +388,9 @@ export function CoursePage({ course, extras }: CoursePageProps) {
                   {siteConfig.instructor.bio ??
                     `${siteConfig.name} brings live instruction to Canadian financial exam preparation, with an emphasis on understanding concepts and how they apply.`}
                 </p>
-                <Link href="/about" className={cn(textLink, "mt-1")}>
-                  About Vipin{" "}
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
+                <ArrowLink href="/about" className="mt-1">
+                  About Vipin
+                </ArrowLink>
               </div>
             </div>
           </Section>
@@ -420,17 +416,11 @@ export function CoursePage({ course, extras }: CoursePageProps) {
             </section>
           ) : null}
 
-          <aside className="rounded-[1.5rem] bg-[#f5f5f7] p-6 text-[15px] text-heading/85">
+          <aside className="rounded-panel bg-[#f5f5f7] p-6 text-[15px] text-heading/85">
             Studying through your employer?{" "}
-            <Link
-              href="/for-firms"
-              className={cn(
-                "font-medium text-link underline underline-offset-4",
-                focusRing
-              )}
-            >
-              Ask about group cohorts →
-            </Link>
+            <ArrowLink href="/for-firms" className="text-[15px]">
+              Ask about group cohorts
+            </ArrowLink>
           </aside>
         </div>
       </div>

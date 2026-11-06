@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { formatDate } from "@/components/course/format";
 import { VipinPhoto } from "@/components/course/vipin-photo";
 import { PageSection, PageShell } from "@/components/course/page-shell";
+import { FormCard } from "@/components/course/form-card";
 import { MasterclassSignup } from "@/components/forms/masterclass-signup";
 import { isEnabled } from "@/lib/feature-flags";
 import { buildMetadata } from "@/lib/seo";
@@ -40,9 +41,9 @@ export default function MasterclassPage() {
       title="A closer look at the subjects that matter."
       lead="Planned masterclasses explore financial concepts, examination preparation and career pathways, with room for questions and discussion."
     >
-      <PageSection>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-6">
+      <PageSection tone="band">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-6">
             {/* PLACEHOLDER: confirm the masterclass is free, and how often it runs — "Free, monthly, 45 minutes" */}
             <h2 className="text-[1.75rem] sm:text-[2rem]">Reserve your seat</h2>
             {hasDate && m ? (
@@ -59,14 +60,16 @@ export default function MasterclassPage() {
               </p>
             )}
             {isEnabled("masterclassSignup") ? (
-              <MasterclassSignup sourcePath="/masterclass" className="mt-6" />
+              <FormCard className="mt-6">
+                <MasterclassSignup sourcePath="/masterclass" />
+              </FormCard>
             ) : (
               <p className="mt-6 max-w-[60ch] text-[17px] text-muted-foreground">
                 Masterclass registration is closed right now.
               </p>
             )}
           </div>
-          <div className="lg:col-span-5 lg:col-start-8">
+          <div className="min-w-0 lg:col-span-5 lg:col-start-8">
             <div className="mb-8 flex items-center gap-4">
               <VipinPhoto size={72} />
               <p className="text-[15px]">
@@ -75,9 +78,9 @@ export default function MasterclassPage() {
               </p>
             </div>
             <h2 className="text-[1.75rem] sm:text-[2rem]">Topics in development</h2>
-            <ul className="mt-4 divide-y divide-border border-y border-border">
+            <ul className="mt-4 divide-y divide-black/[0.06] overflow-hidden rounded-panel bg-white shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
               {sessions.map((s) => (
-                <li key={s.title} className="py-4">
+                <li key={s.title} className="px-5 py-4">
                   <h3 className="text-[1.1875rem]">{s.title}</h3>
                   <p className="mt-1 text-[17px] text-muted-foreground">{s.text}</p>
                 </li>

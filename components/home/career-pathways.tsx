@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 import { careerPathways } from "@/lib/data/pathways"
 
@@ -16,7 +16,7 @@ export function CareerPathways() {
         <div className="lg:col-span-5 lg:self-end lg:text-right">
           <Link href="/licensing-pathways" className="group inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold text-link">
             Explore licensing pathways
-            <ArrowRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
+            <ArrowUpRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
           </Link>
         </div>
       </div>
@@ -25,13 +25,13 @@ export function CareerPathways() {
           <li key={p.id} className="grid gap-2 border-b border-border py-5 sm:gap-3 sm:py-6 lg:grid-cols-12 lg:gap-8">
             <h3 className="max-sm:text-lg lg:col-span-4">{p.title}</h3>
             <div className="lg:col-span-6">
-              <p className="tabular text-sm font-semibold text-link">{p.courseCodes.join(" · ")}</p>
+              <p className="tabular text-sm font-semibold text-heading">{p.courseCodes.join(" · ")}</p>
               <p className="mt-2 text-[0.9375rem] text-muted-foreground">{p.summary}</p>
             </div>
             <p className="lg:col-span-2 lg:text-right">
               <Link href={p.href} className="group inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold text-link">
                 Explore
-                <ArrowRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
+                <ArrowUpRight aria-hidden="true" strokeWidth={1.75} className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
                 <span className="sr-only"> {p.title}</span>
               </Link>
             </p>

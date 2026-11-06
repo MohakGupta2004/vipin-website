@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { CircleAlert, CircleCheck } from "lucide-react";
+import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { courses, upcomingPrograms } from "@/lib/data/courses";
@@ -24,7 +24,7 @@ import {
   TextField,
   type SelectOption,
 } from "./fields";
-import { ctaButton } from "./styles";
+import { ctaButton, primaryButton } from "./styles";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -86,6 +86,10 @@ const DEFAULT_SUCCESS: Record<LeadKind, { title: string; message: string }> = {
     title: "Interest registered",
     message: "Thank you. We will email you when there is news.",
   },
+};
+
+const SUBMITTING_LABELS: Partial<Record<LeadKind, string>> = {
+  newsletter: "Subscribing…",
 };
 
 const str = (fd: FormData, key: string): string => {
@@ -219,7 +223,7 @@ export function LeadForm<K extends LeadKind>({
         role="status"
         aria-live="polite"
         className={cn(
-          "flex max-w-120 items-start gap-3 rounded-lg border border-success/30 bg-success-bg p-5 text-foreground outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+          "flex max-w-120 items-start gap-3 rounded-panel border border-success/30 bg-success-bg p-5 text-foreground outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           className,
         )}
       >
@@ -346,7 +350,7 @@ export function LeadForm<K extends LeadKind>({
         className={errorList.length > 0 || status === "error" ? "" : "sr-only"}
       >
         {errorList.length > 1 ? (
-          <div className="rounded-md border border-destructive/40 bg-destructive-bg p-4">
+          <div className="rounded-xl border border-destructive/40 bg-destructive-bg p-4">
             <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
               <CircleAlert className="size-4 shrink-0" aria-hidden="true" />
               Fix {errorList.length} things to continue:
@@ -371,9 +375,17 @@ export function LeadForm<K extends LeadKind>({
         type="submit"
         disabled={submitting}
         aria-disabled={submitting}
-        className={cn(ctaButton, "w-full sm:w-auto sm:min-w-48")}
+        aria-busy={submitting}
+        className={cn(kind === "newsletter" ? primaryButton : ctaButton, "w-full gap-2 sm:w-auto sm:min-w-48")}
       >
-        {submitting ? "Sending…" : (submitLabel ?? DEFAULT_LABELS[kind])}
+        {submitting ? (
+          <>
+            <LoaderCircle aria-hidden="true" className="size-4 animate-spin motion-reduce:animate-none" />
+            {SUBMITTING_LABELS[kind] ?? "Sending…"}
+          </>
+        ) : (
+          (submitLabel ?? DEFAULT_LABELS[kind])
+        )}
       </Button>
     </form>
   );

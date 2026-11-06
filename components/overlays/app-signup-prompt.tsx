@@ -6,7 +6,9 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { X } from "lucide-react"
 
 import { appUrl } from "@/components/layout/app-links"
+import { ctaButton, secondaryButton } from "@/components/forms/styles"
 import { buttonVariants } from "@/components/ui/button"
+import { closeButtonClass } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
 
 import { DAY_MS, readStorage, writeStorage } from "./storage"
@@ -135,10 +137,10 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
 
   const actions = (
     <div className={cn("flex flex-col gap-3", mode === "bar" && "sm:flex-row sm:items-center")}>
-      <a href={signup} onClick={markVisited} className={cn(buttonVariants({ variant: "cta", size: "lg" }))}>
+      <a href={signup} onClick={markVisited} className={cn(buttonVariants({ variant: "cta", size: "lg" }), ctaButton)}>
         Create free account
       </a>
-      <a href={login} onClick={markVisited} className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}>
+      <a href={login} onClick={markVisited} className={cn(buttonVariants({ variant: "secondary", size: "lg" }), secondaryButton)}>
         Log in
       </a>
     </div>
@@ -177,9 +179,9 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
       }}
     >
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Backdrop className="vg-enter-fade fixed inset-0 z-40 bg-[var(--scrim)]" />
+        <DialogPrimitive.Backdrop className="scrim fixed inset-0 z-40 transition-opacity duration-200 ease-[cubic-bezier(0.2,0,0,1)] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:opacity-0 motion-reduce:transition-none" />
         <DialogPrimitive.Popup
-          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-120 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-modal outline-hidden vg-sheet max-sm:top-auto max-sm:bottom-0 max-sm:left-0 max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-t-[1.75rem] max-sm:rounded-b-none max-sm:border-x-0 max-sm:border-b-0 max-sm:px-5 max-sm:pt-3 max-sm:pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8"
+          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-120 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-panel border border-border bg-surface p-6 text-foreground shadow-modal outline-hidden vg-sheet max-sm:top-auto max-sm:bottom-0 max-sm:left-0 max-sm:w-full max-sm:max-w-none max-sm:translate-x-0 max-sm:translate-y-0 max-sm:rounded-t-section max-sm:rounded-b-none max-sm:border-x-0 max-sm:border-b-0 max-sm:px-5 max-sm:pt-3 max-sm:pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8"
         >
           {/* Grabber: reads as a sheet on phones. */}
           <div aria-hidden="true" className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-border-strong/60 sm:hidden" />
@@ -209,7 +211,7 @@ export function AppSignupPrompt({ config }: { config: AppSignupPromptConfig }) {
           {!blocking && (
             <DialogPrimitive.Close
               aria-label="Close"
-              className="absolute top-2 right-2 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground max-sm:top-4 max-sm:right-3 max-sm:rounded-full"
+              className={cn(closeButtonClass, "absolute top-2 right-2 max-sm:top-3 max-sm:right-3")}
             >
               <X aria-hidden="true" strokeWidth={1.75} className="size-5" />
             </DialogPrimitive.Close>

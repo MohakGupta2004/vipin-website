@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { Check } from "lucide-react";
 
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
-import { textLink } from "@/components/forms/styles";
 import type { Course } from "@/lib/data/courses";
 import type { SiteFaq } from "@/lib/data/faqs";
 import { cn } from "@/lib/utils";
@@ -21,7 +20,7 @@ export function PathwayExplainer({ flows }: { flows: PathwayFlow[] }) {
       {flows.map((f) => (
         <div key={f.title}>
           <h3>{f.title}</h3>
-          {f.summary ? <p className="mt-2 max-w-[68ch] text-[17px] text-muted-foreground">{f.summary}</p> : null}
+          {f.summary ? <p className="mt-2 max-w-[60ch] text-pretty text-[17px] text-muted-foreground">{f.summary}</p> : null}
           <ol className="mt-5 flex flex-col gap-0 md:flex-row md:items-stretch">
             {f.steps.map((s, i) => (
               <li key={s} className="flex gap-4 md:flex-1 md:flex-col md:gap-0">
@@ -29,12 +28,12 @@ export function PathwayExplainer({ flows }: { flows: PathwayFlow[] }) {
                 <div className="flex flex-col items-center md:w-full md:flex-row">
                   <span
                     aria-hidden="true"
-                    className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary font-heading text-[0.875rem] font-semibold tabular-nums text-white"
+                    className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#f5f5f7] font-heading text-[0.875rem] font-semibold tabular-nums text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.08)]"
                   >
                     {i + 1}
                   </span>
                   {i < f.steps.length - 1 ? (
-                    <span aria-hidden="true" className="my-1 w-px flex-1 bg-primary/25 md:my-0 md:h-px md:w-auto md:bg-primary/25" />
+                    <span aria-hidden="true" className="my-1 w-px flex-1 bg-black/10 md:my-0 md:h-px md:w-auto" />
                   ) : null}
                 </div>
                 <div className={cn("relative pt-1 md:mt-3 md:pt-0 md:pb-0 md:pr-4", i < f.steps.length - 1 && "pb-7")}>
@@ -60,7 +59,7 @@ const TIER_ROWS: { label: string; cells: ("yes" | "planned" | "coming" | "none" 
 export function TierTable() {
   const cols = ["Live", "On-demand"];
   return (
-    <div className="overflow-x-auto rounded-[1.5rem] shadow-[0_0_0_1px_rgb(0_0_0/0.06)] max-sm:overflow-hidden">
+    <div className="overflow-x-auto rounded-panel shadow-[0_0_0_1px_rgb(0_0_0/0.06)] max-sm:overflow-hidden">
       <table className="w-full min-w-[34rem] border-collapse text-[15px] max-sm:min-w-0 max-sm:text-sm">
         <caption className="sr-only">Compare study formats</caption>
         <thead>
@@ -132,25 +131,25 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
       <header className="container-site pt-10 pb-12 max-sm:pt-4 max-sm:pb-10 lg:pt-16 lg:pb-20">
         <div className="max-w-3xl">
           <h1 className="vg-rise">{h1}</h1>
-          <p className="vg-rise mt-6 max-w-[52ch] text-lead max-sm:mt-4" style={{ animationDelay: "80ms" }}>
+          <p className="vg-rise mt-6 max-w-[52ch] text-lead text-pretty max-sm:mt-4" style={{ animationDelay: "80ms" }}>
             {intro}
           </p>
         </div>
       </header>
 
-      <section aria-labelledby="pathway-h" className="container-site pb-16 max-sm:pt-2 lg:pb-24">
+      <section aria-labelledby="pathway-h" className="container-site pb-20 sm:pb-28">
         <h2 id="pathway-h">How do these exams fit together?</h2>
         <div className="mt-8 max-sm:mt-6">
           <PathwayExplainer flows={flows} />
         </div>
         {footerLink ? (
-          <Link href={footerLink.href} className={cn(textLink, "mt-6")}>
-            {footerLink.label} →
-          </Link>
+          <ArrowLink href={footerLink.href} className="mt-6">
+            {footerLink.label}
+          </ArrowLink>
         ) : null}
       </section>
 
-      <section aria-labelledby="courses-h" className="bg-[#f5f5f7] py-16 lg:py-24">
+      <section aria-labelledby="courses-h" className="bg-[#f5f5f7] py-20 sm:py-28">
         <div className="container-site">
           <h2 id="courses-h">Which course do you need?</h2>
           <div className="mt-8 space-y-12 max-sm:mt-6 max-sm:space-y-10">
@@ -158,7 +157,7 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
               <div key={g.title}>
                 <h3>{g.title}</h3>
                 {g.description ? (
-                  <p className="mt-2 max-w-[68ch] text-[17px] text-muted-foreground">{g.description}</p>
+                  <p className="mt-2 max-w-[60ch] text-pretty text-[17px] text-muted-foreground">{g.description}</p>
                 ) : null}
                 <CourseGrid className="mt-6">
                   {g.courses.map((c) => (
@@ -171,7 +170,7 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
         </div>
       </section>
 
-      <section aria-labelledby="tiers-h" className="container-site py-16 lg:py-24">
+      <section aria-labelledby="tiers-h" className="container-site py-20 sm:py-28">
         <h2 id="tiers-h">How can you study?</h2>
         <div className="mt-8">
           <TierTable />
@@ -179,7 +178,7 @@ export function HubPage({ crumb, h1, intro, flows, groups, faqs, faqTitle, foote
       </section>
 
       {faqs.length > 0 ? (
-        <section aria-labelledby="hub-faq-h" className="container-site pt-4 pb-20 lg:pb-28">
+        <section aria-labelledby="hub-faq-h" className="container-site pt-4 pb-20 sm:pb-28">
           <h2 id="hub-faq-h">{faqTitle}</h2>
           <FaqList className="mt-8" items={faqs.map((f) => ({ question: f.question, answer: f.answer }))} />
         </section>

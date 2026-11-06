@@ -4,6 +4,7 @@ import * as React from "react";
 import { Dialog } from "@base-ui/react/dialog";
 
 import { buttonVariants } from "@/components/ui/button";
+import { closeButtonClass } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 
 import { ctaButton } from "@/components/forms/styles";
@@ -29,15 +30,15 @@ export function ExamFinderDialog({
         {triggerLabel}
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Backdrop className="vg-enter-fade fixed inset-0 z-50 bg-(--scrim)" />
+        <Dialog.Backdrop className="scrim fixed inset-0 z-50 transition-opacity duration-200 ease-[cubic-bezier(0.2,0,0,1)] data-[ending-style]:opacity-0 data-[ending-style]:duration-150 data-[starting-style]:opacity-0 motion-reduce:transition-none" />
         <Dialog.Popup
-          className="vg-enter-up fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-border bg-surface p-6 text-foreground shadow-(--shadow-modal) outline-hidden sm:p-8"
+          className="vg-enter-up vg-sheet fixed inset-x-0 bottom-0 z-50 max-h-[90dvh] w-full overflow-y-auto overscroll-contain rounded-panel bg-surface p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-foreground shadow-(--shadow-modal) outline-hidden max-sm:rounded-b-none sm:inset-x-auto sm:top-1/2 sm:bottom-auto sm:left-1/2 sm:w-[calc(100%-2rem)] sm:max-w-xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:p-8"
         >
           <div className="mb-4 flex items-start justify-between gap-4">
-            <Dialog.Title className="text-xl font-semibold text-heading">Find my course</Dialog.Title>
+            <Dialog.Title className="font-heading text-xl font-semibold tracking-[-0.02em] text-heading">Find my course</Dialog.Title>
             <Dialog.Close
               aria-label="Close"
-              className={cn(buttonVariants({ variant: "ghost" }), "size-11 shrink-0 rounded-md p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:ring-0")}
+              className={closeButtonClass}
             >
               <X aria-hidden="true" strokeWidth={1.75} className="size-5" />
             </Dialog.Close>

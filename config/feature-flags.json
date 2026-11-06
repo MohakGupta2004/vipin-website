@@ -3,7 +3,7 @@
     "enabled": true,
     "source": "manual",
     "id": "ifc-next-group-batch-2026-11-18",
-    "badge": "Next Group Batch",
+    "badge": "Next group batch",
     "title": "IFC Group Class",
     "message": "Wednesday, 18 November 2026",
     "linkLabel": "View Upcoming Batches",
@@ -24,6 +24,9 @@
   },
   "masterclassSignup": {
     "enabled": true
+  },
+  "fontPlayground": {
+    "enabled": false
   },
   "appSignupPrompt": {
     "enabled": true,
