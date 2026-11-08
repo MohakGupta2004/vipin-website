@@ -45,6 +45,8 @@ export type CourseCatalogueProps = {
   syncUrl?: boolean;
   /** Override the item list (defaults to every course and upcoming programme). */
   items?: CatalogueItem[];
+  /** Phones: show the cards as one horizontal swipe row instead of a tall stack. */
+  mobileCarousel?: boolean;
   className?: string;
 };
 
@@ -65,6 +67,7 @@ export function CourseCatalogue({
   id,
   syncUrl = true,
   items = catalogueItems,
+  mobileCarousel = false,
   className,
 }: CourseCatalogueProps) {
   const uid = React.useId();
@@ -193,14 +196,26 @@ export function CourseCatalogue({
           : limited
             ? `Showing ${shown.length} of ${results.length} courses`
             : `${results.length} ${results.length === 1 ? "course" : "courses"}`}
+        {mobileCarousel && shown.length > 1 ? <span className="sm:hidden"> · swipe to see more</span> : null}
       </p>
 
       {shown.length > 0 ? (
-        <ul className="mt-3 grid gap-4 sm:mt-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+        <ul
+          className={cn(
+            "mt-3 grid gap-4 sm:mt-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6",
+            // Phones: one swipeable row; the next card peeks in so the row reads as scrollable.
+            mobileCarousel &&
+              "max-sm:-mx-5 max-sm:flex max-sm:snap-x max-sm:snap-mandatory max-sm:gap-3 max-sm:overflow-x-auto max-sm:scroll-px-5 max-sm:px-5 max-sm:pb-2 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
+          )}
+        >
           {shown.map((it, i) => (
-            <li key={it.key} className="vg-rise h-full" style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}>
+            <li
+              key={it.key}
+              className={cn("vg-rise h-full", mobileCarousel && "max-sm:w-[84%] max-sm:shrink-0 max-sm:snap-start")}
+              style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}
+            >
               {/* Soft tile: lifts a touch on hover (pointer only), presses down on tap. */}
-              <article className="group relative flex h-full flex-col rounded-panel bg-white p-6 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[scale,box-shadow] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
+              <article className="group relative flex h-full flex-col rounded-panel bg-white p-5 shadow-[0_0_0_1px_rgb(0_0_0/0.06)] transition-[scale,box-shadow] duration-200 ease-out hover:shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_20px_40px_-28px_rgb(16_42_66/0.45)] active:scale-[0.985] motion-reduce:transition-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring sm:p-7">
                 <div className="flex items-baseline justify-between gap-3">
                   <p className="font-mono text-xs font-semibold tracking-normal tabular-nums text-heading">{it.code}</p>
                   <p className="text-xs text-muted-foreground">
@@ -213,13 +228,13 @@ export function CourseCatalogue({
                           : "Exam coaching"}
                   </p>
                 </div>
-                <Heading className="mt-3 font-heading text-[1.3125rem] leading-snug font-semibold tracking-[-0.02em] text-heading">
+                <Heading className="mt-2.5 font-heading text-[1.1875rem] leading-snug sm:mt-3 sm:text-[1.3125rem] font-semibold tracking-[-0.02em] text-heading">
                   <Link href={it.href} className="outline-hidden after:absolute after:inset-0 after:rounded-panel">
                     {it.name}
                   </Link>
                 </Heading>
                 <p className="mt-2 line-clamp-2 text-[0.9375rem] leading-relaxed text-muted-foreground">{it.blurb}</p>
-                <p className="mt-auto pt-6 text-sm text-heading/80 tabular-nums">
+                <p className="mt-auto pt-4 text-sm text-heading/80 tabular-nums sm:pt-6">
                   {it.exam ?? (
                     <span className="text-muted-foreground">
                       {it.type === "upcoming" ? "Planned. Join the list to hear first." : "Format announced soon"}

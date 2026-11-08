@@ -22,10 +22,11 @@ const focusRing =
 // Desktop: exactly one screen tall (window minus announcement bar and header).
 const desktopHeight = "min-h-[max(36rem,calc(100svh-var(--header-h)-2.75rem-1px))]"
 
-// Phones/tablets: the desktop hero is drawn at this fixed 16:9 size and scaled down to the screen width,
-// so it looks exactly like desktop and the whole photo is visible.
-const FRAME_WIDTH = 1152
-const FRAME_HEIGHT = 648
+// Phones/tablets: the desktop hero is drawn at this fixed size and scaled down to the screen width,
+// so it looks exactly like desktop. Taller than 16:9 so the hero has room to breathe on a phone;
+// the photo is anchored right so both people stay in frame.
+const FRAME_WIDTH = 1024
+const FRAME_HEIGHT = 900
 
 // Frosted glass used by the eyebrow, the second button and the stat cards.
 const glass = "bg-white/10 ring-1 ring-white/20 backdrop-blur-md"
@@ -95,14 +96,14 @@ function TextLink({ href, children }: { href: string; children: React.ReactNode 
   )
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function Stat({ value, label, compact }: { value: string; label: string; compact: boolean }) {
   const isNumber = /^\d/.test(value)
   return (
     <div className={cn("flex min-w-0 flex-col-reverse justify-end rounded-2xl p-5 ring-white/15 backdrop-blur-xl", glass)}>
       <dt className="mt-1.5 text-sm font-medium text-white/75">{label}</dt>
       {/* Fixed-height row so a word value ("CFA Charterholder") sits on the same baseline as the numbers. */}
       <dd className="flex h-9 items-end font-heading leading-none font-semibold tracking-[-0.035em] whitespace-nowrap text-white tabular-nums">
-        <span className={isNumber ? "text-[2.125rem]" : "text-[1.375rem]"}>
+        <span className={isNumber ? "text-[2.125rem]" : compact ? "text-[1.1875rem]" : "text-[1.375rem]"}>
           <CountUp value={value} />
         </span>
       </dd>
@@ -130,7 +131,7 @@ function HeroScene({ frame, headingId }: { frame: boolean; headingId: string }) 
           fill
           priority
           sizes={frame ? "(max-width: 1023px) 100vw, 1px" : "(min-width: 1024px) 100vw, 1px"}
-          className={cn("object-cover saturate-[.85]", frame ? "object-center" : "object-[70%_50%]")}
+          className={cn("object-cover saturate-[.85]", frame ? "object-[80%_50%]" : "object-[70%_50%]")}
         />
       </div>
 
@@ -139,6 +140,13 @@ function HeroScene({ frame, headingId }: { frame: boolean; headingId: string }) 
         aria-hidden="true"
         className="absolute inset-0 bg-linear-to-r from-[rgb(16_42_66/0.85)] via-[rgb(16_42_66/0.48)] to-transparent"
       />
+      {/* Phones/tablets: deepen the bottom so the stat cards read and the hero settles into the page. */}
+      {frame && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-[rgb(16_42_66/0.9)] via-[rgb(16_42_66/0.45)] to-transparent"
+        />
+      )}
       {/* Soft light behind the headline. */}
       <div
         aria-hidden="true"
@@ -148,7 +156,7 @@ function HeroScene({ frame, headingId }: { frame: boolean; headingId: string }) 
       <div
         className={cn(
           "relative z-10 flex flex-col justify-center",
-          frame ? "h-full px-14 pt-6 pb-[9.5rem]" : cn("container-site pt-14 pb-28", desktopHeight)
+          frame ? "h-full px-14 pt-12 pb-[12.5rem]" : cn("container-site pt-14 pb-28", desktopHeight)
         )}
       >
         <div className="max-w-[40rem]">
@@ -164,7 +172,7 @@ function HeroScene({ frame, headingId }: { frame: boolean; headingId: string }) 
             {...rise(1)}
             className={cn(
               "vg-rise mt-3 font-heading leading-[1.04] font-semibold tracking-[-0.04em] text-balance text-white",
-              frame ? "text-[2.75rem]" : "text-[clamp(2.75rem,4.4vw,4.25rem)]"
+              frame ? "text-[3.5rem]" : "text-[clamp(2.75rem,4.4vw,4.25rem)]"
             )}
           >
             Pass Your Next Financial Exam <span className="text-white/60">with Confidence</span>
@@ -207,13 +215,13 @@ function HeroScene({ frame, headingId }: { frame: boolean; headingId: string }) 
       {/* Stats pinned to the bottom of the hero. */}
       <div
         className={cn(
-          "pointer-events-none absolute right-0 bottom-8 left-0 z-10",
-          frame ? "px-14" : "container-site"
+          "pointer-events-none absolute right-0 left-0 z-10",
+          frame ? "bottom-14 px-14" : "bottom-8 container-site"
         )}
       >
         <dl {...rise(5)} className="vg-rise grid grid-cols-4 gap-4">
           {facts.map((fact) => (
-            <Stat key={fact.label} value={fact.value} label={fact.label} />
+            <Stat key={fact.label} value={fact.value} label={fact.label} compact={frame} />
           ))}
         </dl>
       </div>

@@ -16,7 +16,7 @@ export function Programmes() {
           />
         </Reveal>
         <Reveal className="mt-10 sm:mt-12" delay={60}>
-          <CourseCatalogue id="courses" defaultArea="live-group" initialLimit={6} showSearch headingLevel="h3" />
+          <CourseCatalogue id="courses" defaultArea="live-group" initialLimit={6} showSearch headingLevel="h3" mobileCarousel />
         </Reveal>
       </div>
     </section>
