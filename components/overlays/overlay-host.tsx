@@ -15,11 +15,13 @@ const NO_OVERLAY = ["/contact", "/terms", "/privacy", "/refund-policy", "/master
 const COURSE_ROUTE = /^\/(securities|financial-planning)\/([^/]+)\/?$|^\/(insurance)\/(llqp)\/?$/
 
 // TODO(Builder B): replace with getFlags().appSignupPrompt once lib/feature-flags.ts exposes it (PLAN shape).
+// Shows after a minute on a page; once closed it stays away for an hour. Visitors can close it twice;
+// from the third showing it cannot be closed until they sign up or log in (which stops it for 30 days).
 const APP_PROMPT: AppSignupPromptConfig = {
   enabled: true,
-  delaySeconds: 30,
-  cooldownMinutes: 10,
-  maxDismissals: 3,
+  delaySeconds: 60,
+  cooldownMinutes: 60,
+  maxDismissals: 2,
   afterMaxDismissals: "block",
   excludePaths: ["/contact", "/terms", "/privacy", "/refund-policy"],
 }
