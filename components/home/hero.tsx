@@ -79,10 +79,23 @@ function categoryButtonClass(isFirst: boolean): string {
   )
 }
 
-function TextLink({ href, className, children }: { href: string; className?: string; children: React.ReactNode }) {
+/** `newTab` is for links to the learning app (a separate site), so the visitor keeps this page open. */
+function TextLink({
+  href,
+  newTab,
+  className,
+  children,
+}: {
+  href: string
+  newTab?: boolean
+  className?: string
+  children: React.ReactNode
+}) {
   return (
     <Link
       href={href}
+      target={newTab ? "_blank" : undefined}
+      rel={newTab ? "noopener" : undefined}
       className={cn(
         "group inline-flex min-h-11 items-center gap-0.5 text-[1.0625rem] font-medium text-white transition-opacity duration-150 hover:opacity-75",
         focusRing,
@@ -90,6 +103,7 @@ function TextLink({ href, className, children }: { href: string; className?: str
       )}
     >
       {children}
+      {newTab && <span className="sr-only"> (opens in a new tab)</span>}
       <ArrowUpRight aria-hidden="true" strokeWidth={2} className={arrowIcon} />
     </Link>
   )
@@ -206,7 +220,7 @@ function DesktopHero() {
           </ul>
 
           <div {...rise(4)} className="vg-rise mt-4 flex flex-wrap items-center gap-x-7">
-            <TextLink href={appUrl("signup", { campaign: "home-hero" })}>Explore Learning Platform</TextLink>
+            <TextLink href={appUrl("signup", { campaign: "home-hero" })} newTab>Explore Learning Platform</TextLink>
             <TextLink href={getFindHref()}>Find my course</TextLink>
           </div>
         </div>
@@ -307,7 +321,7 @@ function MobileHero() {
           </ul>
 
           <div {...rise(4)} className="vg-rise mt-1 flex flex-wrap items-center gap-x-4 sm:mt-3 sm:gap-x-5">
-            <TextLink href={appUrl("signup", { campaign: "home-hero" })} className="text-[0.875rem] [@media(max-height:760px)]:min-h-9 sm:text-[1.0625rem]">
+            <TextLink href={appUrl("signup", { campaign: "home-hero" })} newTab className="text-[0.875rem] [@media(max-height:760px)]:min-h-9 sm:text-[1.0625rem]">
               Explore Learning Platform
             </TextLink>
             <TextLink href={getFindHref()} className="text-[0.875rem] [@media(max-height:760px)]:min-h-9 sm:text-[1.0625rem]">

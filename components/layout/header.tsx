@@ -39,10 +39,12 @@ export function Header() {
         <div className="flex shrink-0 items-center gap-1 lg:gap-5">
           <a
             href={appUrl("base", { campaign: "header" })}
+            target="_blank"
             rel="noopener"
             className="group/app hidden h-9 items-center gap-1 rounded-full bg-primary px-4 text-sm font-semibold whitespace-nowrap text-primary-foreground outline-hidden transition-[background-color,transform] duration-150 ease-out hover:bg-cta-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring active:scale-[0.97] motion-reduce:transition-none lg:inline-flex"
           >
             Learning App
+            <span className="sr-only"> (opens in a new tab)</span>
             <ArrowUpRight
               aria-hidden="true"
               strokeWidth={2.25}

@@ -138,10 +138,12 @@ export default function UpcomingBatchesPage() {
                 <div className="mt-auto pt-8">
                   <a
                     href={batchesConfig.appUrl}
+                    target="_blank"
                     rel="noopener"
                     className="group/link inline-flex h-12 items-center gap-1.5 rounded-full px-6 text-[0.9375rem] font-semibold text-heading shadow-[0_0_0_1px_rgb(0_0_0/0.14)] transition-[box-shadow,transform] duration-150 ease-out outline-hidden hover:shadow-[0_0_0_1px_rgb(0_0_0/0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring active:scale-[0.97] motion-reduce:transition-none"
                   >
                     Explore Learning Platform
+                    <span className="sr-only"> (opens in a new tab)</span>
                     <ArrowUpRight
                       aria-hidden="true"
                       strokeWidth={2}

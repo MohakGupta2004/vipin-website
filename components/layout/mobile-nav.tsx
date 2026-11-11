@@ -167,8 +167,9 @@ export function MobileNav({ groups, links, app }: Props) {
           </div>
 
           <div className="shrink-0 rounded-b-section border-t border-border/70 bg-white px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-8">
-            <a href={app.href} rel="noopener" className={cn(buttonVariants({ variant: "cta", size: "lg" }), ctaButton, "w-full gap-1.5")}>
+            <a href={app.href} target="_blank" rel="noopener" className={cn(buttonVariants({ variant: "cta", size: "lg" }), ctaButton, "w-full gap-1.5")}>
               {app.label}
+              <span className="sr-only"> (opens in a new tab)</span>
               <ArrowUpRight aria-hidden="true" strokeWidth={2.25} className="size-4" />
             </a>
           </div>
