@@ -34,7 +34,16 @@ export function organizationLd(): JsonObject {
         availableLanguage: "English",
       },
     }),
-    // PLACEHOLDER: logo URL — add once a logo file exists, e.g. https://vipingarg.com/logo.png
+    logo: { "@type": "ImageObject", url: absoluteUrl("/logo.png") },
+    image: absoluteUrl("/logo.png"),
+    knowsAbout: [
+      "Investment Funds in Canada (IFC)",
+      "Canadian Securities Course (CSC)",
+      "Canadian Investment Regulatory Exam (CIRE)",
+      "Retail Securities Exam (RSE)",
+      "Life License Qualification Program (LLQP)",
+      "Canadian financial planning exams",
+    ],
   }
 }
 

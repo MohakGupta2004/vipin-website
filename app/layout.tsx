@@ -54,7 +54,15 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "text/plain": [{ url: "/llms.txt", title: "LLM-friendly site summary" }] },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+  },
   openGraph: {
     siteName: SITE_NAME,
     locale: "en_CA",
