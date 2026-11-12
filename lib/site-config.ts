@@ -59,8 +59,8 @@ export const siteConfig = {
   // PLACEHOLDER: registered legal name of the business — "Vipin Garg Finance Coaching Inc."
   legalName: "Vipin Garg Finance Coaching",
 
-  // PLACEHOLDER: production domain — "https://vipingarg.com"
-  url: "https://vipingarg.com",
+  // Production domain. Vercel serves www and redirects the bare domain to it, so links must use www.
+  url: "https://www.vipingarg.com",
 
   locale: "en-CA",
   country: "CA",
