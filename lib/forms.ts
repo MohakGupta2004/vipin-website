@@ -7,6 +7,8 @@
  * except `newsletter`, whose only purpose is email and so needs `true`.
  */
 
+import { CONSENT_COOKIE, VISITOR_COOKIE, readCookie } from "@/lib/tracking";
+
 export type LeadKind =
   | "masterclass"
   | "diagnostic"
@@ -20,6 +22,8 @@ type WithConsent = {
   caslConsent: boolean;
   /** Page the form was submitted from, e.g. "/securities/cire". */
   sourcePath?: string;
+  /** Honeypot field. Real users never fill this. */
+  website?: string;
 };
 
 export type MasterclassLead = WithConsent & {
@@ -148,14 +152,36 @@ export function validateLead<K extends LeadKind>(
 /**
  * Single submit entry point for every lead form.
  */
-// PLACEHOLDER: connect email/CRM provider (e.g. ConvertKit, Resend) — POST the payload to a Route Handler or Server Action that forwards it, and store `caslConsent` with the contact record.
 export async function submitLead<K extends LeadKind>(
   kind: K,
   payload: LeadPayloadMap[K],
 ): Promise<SubmitResult> {
-  void kind;
-  void payload;
-  // Short pause so the pending state is visible while there is no backend.
-  await new Promise((resolve) => setTimeout(resolve, 400));
+  const body: Record<string, unknown> = {
+    kind,
+    ...payload,
+  };
+  // Some forms do not pass sourcePath; the admin still needs to know which page a lead came from.
+  if (!payload.sourcePath) {
+    body.sourcePath = window.location.pathname;
+  }
+
+  const consent = readCookie(CONSENT_COOKIE);
+  const visitorId = readCookie(VISITOR_COOKIE);
+  if (consent === "granted" && visitorId) {
+    body.visitorId = visitorId;
+  }
+
+  const response = await fetch("/api/leads", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new Error("Lead submit failed");
+  }
+
   return { ok: true };
 }

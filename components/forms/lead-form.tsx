@@ -109,6 +109,7 @@ function readPayload<K extends LeadKind>(
     // Unchecked checkbox is absent from FormData, so this is always a real boolean.
     caslConsent: fd.get("caslConsent") === "on",
     sourcePath: extra.sourcePath,
+    website: str(fd, "website"),
   };
   const course = opt(fd, "courseSlug") ?? extra.courseSlug;
 
@@ -344,6 +345,13 @@ export function LeadForm<K extends LeadKind>({
       )}
 
       <ConsentCheckbox required={kind === "newsletter"} error={errors.caslConsent} />
+
+      <div aria-hidden="true" className="sr-only">
+        <label>
+          Website
+          <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
 
       <div
         role="alert"

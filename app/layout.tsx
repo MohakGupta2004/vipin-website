@@ -23,6 +23,8 @@ import { getFlags } from "@/lib/feature-flags";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { JsonLd, organizationLd, personLd, websiteLd } from "@/components/seo/json-ld";
 import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/seo";
+import { CookieConsentBanner } from "@/components/site/cookie-consent-banner";
+import { SiteTracker } from "@/components/site/site-tracker";
 
 // Main font candidates. Only Manrope (the default) is preloaded; the others download when picked in the
 // font playground. The body uses the system-ui stack, so it needs no font file.
@@ -120,6 +122,8 @@ export default function RootLayout({
         <Footer />
         <WhatsAppButton />
         <ScheduleButton />
+        <CookieConsentBanner />
+        <SiteTracker />
         {showFontPlayground ? <FontPlayground /> : null}
       </body>
     </html>

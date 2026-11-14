@@ -65,9 +65,14 @@ export default function PrivacyPage() {
           ),
         },
         {
-          // PLACEHOLDER: analytics and cookie disclosure once tools are chosen
           heading: "Cookies and analytics",
-          body: <p>This section will describe any analytics or cookies once they are in use.</p>,
+          body: (
+            <p>
+              If you accept cookies, we store a random visitor ID and collect basic website analytics such as pageviews,
+              button/link clicks, browser and device type, language/timezone, rough location from hosting headers
+              (country/region/city), referrer host and UTM tags. If you decline, we only count anonymous pageviews.
+            </p>
+          ),
         },
       ]}
     />
