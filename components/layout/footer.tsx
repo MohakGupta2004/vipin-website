@@ -50,7 +50,7 @@ export function Footer() {
             </p>
             <address className="mt-5 text-[0.8125rem] leading-relaxed text-heading/75 not-italic">
               <span className="block font-semibold text-heading">{siteConfig.name}</span>
-              <span className="block">Live Online Across Canada · In-Person Sessions in Metro Vancouver, BC</span>
+              <span className="block">Live Online Across Canada · In-Person Sessions in Burnaby, Coquitlam, Metro Vancouver, BC</span>
               <span className="block">
                 {siteConfig.contact.phone && (
                   <>
