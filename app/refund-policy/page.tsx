@@ -45,7 +45,12 @@ export default function RefundPolicyPage() {
         },
         {
           heading: "Contact",
-          body: <p>Questions about a fee or a refund: {siteConfig.contact.email}.</p>,
+          body: (
+            <p>
+              Questions about a fee or a refund: {siteConfig.contact.email}
+              {siteConfig.contact.phone ? ` or ${siteConfig.contact.phone}` : ""}.
+            </p>
+          ),
         },
       ]}
     />

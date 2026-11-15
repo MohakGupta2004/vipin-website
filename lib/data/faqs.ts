@@ -70,6 +70,15 @@ export const siteFaqs: SiteFaq[] = [
     home: true,
   },
   {
+    id: "in-person-coaching",
+    topic: "learning",
+    question: "Do you offer in-person coaching in addition to online classes?",
+    answer:
+      "Yes. While the majority of candidates join our live online cohorts from across Canada, Vipin Garg also offers 1-on-1 in-person exam coaching for students located in Burnaby, Vancouver, and Metro Vancouver, BC.",
+    link: { label: "Ask about in-person coaching", href: "/contact" },
+    home: true,
+  },
+  {
     id: "recordings-practice",
     topic: "learning",
     question: "Are practice tests and on-demand study included?",

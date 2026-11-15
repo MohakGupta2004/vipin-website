@@ -85,8 +85,7 @@ export const siteConfig = {
   contact: {
     // PLACEHOLDER: public enquiries email — "hello@vipingarg.com"
     email: "contact@vipingarg.com",
-    // PLACEHOLDER: public phone number — "+1 604 555 0123"
-    phone: null as string | null,
+    phone: "+1 778 792 2220" as string | null,
     whatsapp: "https://wa.me/17787922220" as string | null,
     scheduleUrl: "https://cal.com/vipin-garg-fin-coach/strategy" as string | null,
     // PLACEHOLDER: reply-time promise the client can keep — "We reply within one business day."

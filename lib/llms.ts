@@ -46,6 +46,7 @@ function header(): string[] {
     "- Format: live online classes (English), serving learners across Canada",
   ]
   if (contact.email) lines.push(`- Email: ${contact.email}`)
+  if (contact.phone) lines.push(`- Phone: ${contact.phone}`)
   if (contact.whatsapp) lines.push(`- WhatsApp: ${contact.whatsapp}`)
   if (contact.scheduleUrl) lines.push(`- Book a call: ${contact.scheduleUrl}`)
   lines.push(`- Learning app: ${siteConfig.app.base}`)

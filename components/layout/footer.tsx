@@ -48,6 +48,25 @@ export function Footer() {
             <p className="mt-4 max-w-[30ch] font-heading text-[1.75rem] leading-[1.15] font-semibold tracking-[-0.03em] text-balance text-heading/90 sm:text-[2rem]">
               Live exam coaching for Canadian finance licences.
             </p>
+            <address className="mt-5 text-[0.8125rem] leading-relaxed text-heading/75 not-italic">
+              <span className="block font-semibold text-heading">{siteConfig.name}</span>
+              <span className="block">Live Online Across Canada · In-Person Sessions in Metro Vancouver, BC</span>
+              <span className="block">
+                {siteConfig.contact.phone && (
+                  <>
+                    Phone:{" "}
+                    <a href={`tel:${siteConfig.contact.phone.replace(/[^+\d]/g, "")}`} className="hover:text-heading">
+                      {siteConfig.contact.phone}
+                    </a>
+                    {" | "}
+                  </>
+                )}
+                Email:{" "}
+                <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-heading">
+                  {siteConfig.contact.email}
+                </a>
+              </span>
+            </address>
           </div>
 
           <div>
