@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site-config"
 
 // Production domain placeholder lives in lib/site-config.ts (siteConfig.url).
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url
-export const SITE_NAME = siteConfig.shortName
+export const SITE_NAME = siteConfig.name
 export const SITE_TAGLINE = "Live exam prep for Canadian finance professionals"
 export const DEFAULT_DESCRIPTION =
   "Live & in person online coaching from Vipin Garg for IFC, CSC, CIRE, RSE, LLQP and financial planning exams in Canada. Practise between classes and know you're ready before you book."
