@@ -63,6 +63,13 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const mapped = mapLead(kind, body);
+  if (mapped.phone.length > 0 && !/^\+[1-9]\d{6,14}$/.test(mapped.phone)) {
+    return Response.json(
+      { ok: false, errors: { phone: "Enter a valid phone number, or leave it blank." } },
+      { status: 400 },
+    );
+  }
+
   const visitorId = toUuidOrEmpty(body.visitorId);
 
   try {

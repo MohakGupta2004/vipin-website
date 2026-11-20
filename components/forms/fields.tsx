@@ -3,8 +3,10 @@
 import * as React from "react";
 
 import { Check, ChevronDown, CircleAlert } from "lucide-react";
+import type { Country } from "react-phone-number-input";
 
 import { Input } from "@/components/ui/input";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -113,6 +115,55 @@ export function TextField({
           required={required}
           className={cn(controlBase, controlHeight)}
         />
+      )}
+    </FieldShell>
+  );
+}
+
+/** Optional phone number with a country picker. Submits an E.164 string or "". */
+export function PhoneField({
+  name,
+  label,
+  required,
+  hint,
+  error,
+  className,
+  defaultCountry = "CA",
+}: BaseProps & { defaultCountry?: Country }) {
+  const uid = React.useId();
+  const id = `${uid}-${name}`;
+  const [value, setValue] = React.useState<string | undefined>(undefined);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+  // Clear the number when the parent form is reset.
+  React.useEffect(() => {
+    const form = wrapperRef.current?.closest("form");
+    if (!form) return;
+
+    const handleReset = () => setValue(undefined);
+    form.addEventListener("reset", handleReset);
+    return () => form.removeEventListener("reset", handleReset);
+  }, []);
+
+  return (
+    <FieldShell
+      id={id}
+      label={label}
+      required={required}
+      hint={hint}
+      error={error}
+      className={className}
+    >
+      {(aria) => (
+        <div ref={wrapperRef}>
+          <PhoneInput
+            {...aria}
+            defaultCountry={defaultCountry}
+            value={value}
+            onChange={setValue}
+          />
+          <input type="hidden" name={name} value={value ?? ""} />
+        </div>
       )}
     </FieldShell>
   );

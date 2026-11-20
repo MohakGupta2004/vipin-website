@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import {
   CheckboxGroupField,
   ConsentCheckbox,
+  PhoneField,
   SelectField,
   TextAreaField,
   TextField,
@@ -116,13 +117,20 @@ function readPayload<K extends LeadKind>(
   let payload: unknown;
   switch (kind) {
     case "masterclass":
-      payload = { ...base, name: str(fd, "name"), email: str(fd, "email"), courseSlug: course };
+      payload = {
+        ...base,
+        name: str(fd, "name"),
+        email: str(fd, "email"),
+        phone: opt(fd, "phone"),
+        courseSlug: course,
+      };
       break;
     case "diagnostic":
       payload = {
         ...base,
         name: str(fd, "name"),
         email: str(fd, "email"),
+        phone: opt(fd, "phone"),
         courseSlug: course ?? "",
         examDate: opt(fd, "examDate"),
       };
@@ -157,6 +165,7 @@ function readPayload<K extends LeadKind>(
         ...base,
         name: opt(fd, "name"),
         email: str(fd, "email"),
+        phone: opt(fd, "phone"),
         programSlug: opt(fd, "programSlug") ?? extra.courseSlug ?? "",
       };
       break;
@@ -252,6 +261,12 @@ export function LeadForm<K extends LeadKind>({
         <>
           <TextField name="name" label="Name" required autoComplete="name" error={errors.name} />
           <TextField name="email" label="Email" type="email" required autoComplete="email" error={errors.email} />
+          <PhoneField
+            name="phone"
+            label="Phone"
+            hint="Only if you'd like a call or WhatsApp update."
+            error={errors.phone}
+          />
           <SelectField
             name="courseSlug"
             label="Which exam are you preparing for?"
@@ -266,6 +281,12 @@ export function LeadForm<K extends LeadKind>({
         <>
           <TextField name="name" label="Name" required autoComplete="name" error={errors.name} />
           <TextField name="email" label="Email" type="email" required autoComplete="email" error={errors.email} />
+          <PhoneField
+            name="phone"
+            label="Phone"
+            hint="Only if you'd like a call or WhatsApp update."
+            error={errors.phone}
+          />
           <SelectField
             name="courseSlug"
             label="Which exam are you preparing for?"
@@ -287,7 +308,12 @@ export function LeadForm<K extends LeadKind>({
         <>
           <TextField name="name" label="Name" required autoComplete="name" error={errors.name} />
           <TextField name="email" label="Email" type="email" required autoComplete="email" error={errors.email} />
-          <TextField name="phone" label="Phone" type="tel" autoComplete="tel" error={errors.phone} />
+          <PhoneField
+            name="phone"
+            label="Phone"
+            hint="Only if you'd like a call or WhatsApp update."
+            error={errors.phone}
+          />
           <SelectField
             name="courseSlug"
             label="Course you are asking about"
@@ -304,7 +330,12 @@ export function LeadForm<K extends LeadKind>({
           <TextField name="companyName" label="Company" required autoComplete="organization" error={errors.companyName} />
           <TextField name="contactName" label="Your name" required autoComplete="name" error={errors.contactName} />
           <TextField name="email" label="Work email" type="email" required autoComplete="email" error={errors.email} />
-          <TextField name="phone" label="Phone" type="tel" autoComplete="tel" error={errors.phone} />
+          <PhoneField
+            name="phone"
+            label="Phone"
+            hint="Only if you'd like a call or WhatsApp update."
+            error={errors.phone}
+          />
           <TextField
             name="teamSize"
             label="Number of people to train"
@@ -330,6 +361,12 @@ export function LeadForm<K extends LeadKind>({
         <>
           <TextField name="name" label="Name" autoComplete="name" error={errors.name} />
           <TextField name="email" label="Email" type="email" required autoComplete="email" error={errors.email} />
+          <PhoneField
+            name="phone"
+            label="Phone"
+            hint="Only if you'd like a call or WhatsApp update."
+            error={errors.phone}
+          />
           {showCourseHidden ? (
             <input type="hidden" name="programSlug" value={courseSlug} />
           ) : (

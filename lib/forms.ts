@@ -7,6 +7,8 @@
  * except `newsletter`, whose only purpose is email and so needs `true`.
  */
 
+import { isValidPhoneNumber } from "libphonenumber-js";
+
 import { CONSENT_COOKIE, VISITOR_COOKIE, readCookie } from "@/lib/tracking";
 
 export type LeadKind =
@@ -29,6 +31,8 @@ type WithConsent = {
 export type MasterclassLead = WithConsent & {
   name: string;
   email: string;
+  /** E.164 phone number, e.g. "+14165550123". */
+  phone?: string;
   /** Course slug the person cares about most. */
   courseSlug?: string;
 };
@@ -36,6 +40,8 @@ export type MasterclassLead = WithConsent & {
 export type DiagnosticLead = WithConsent & {
   name: string;
   email: string;
+  /** E.164 phone number, e.g. "+14165550123". */
+  phone?: string;
   courseSlug: string;
   /** Free text or ISO date. */
   examDate?: string;
@@ -66,6 +72,8 @@ export type NewsletterLead = WithConsent & {
 export type InterestLead = WithConsent & {
   name?: string;
   email: string;
+  /** E.164 phone number, e.g. "+14165550123". */
+  phone?: string;
   /** Course or upcoming-programme slug. */
   programSlug: string;
 };
@@ -144,6 +152,11 @@ export function validateLead<K extends LeadKind>(
       requireEmail();
       requireText("programSlug", "the programme you are interested in");
       break;
+  }
+
+  // Phone is optional on every form, but a value the person did give must be real.
+  if (!isBlank(p.phone) && !isValidPhoneNumber(String(p.phone))) {
+    errors.phone = "Enter a valid phone number, or leave it blank.";
   }
 
   return errors;
